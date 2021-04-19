@@ -15,7 +15,7 @@ class CreatePenilaianTable extends Migration
     {
         Schema::create('penilaian', function (Blueprint $table) {
             $table->bigIncrements('id_penilaian');
-            $table->unsignedBigInteger('id_reviewer');
+            $table->string('id_reviewer', 64);
             $table->unsignedBigInteger('id_usulan_pengabdian');
             $table->string('file_penilaian', 255);
             $table->float('nilai_1')->nullable();

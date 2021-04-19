@@ -15,7 +15,7 @@ class CreateUsulanPengabdianTable extends Migration
     {
         Schema::create('usulan_pengabdian', function (Blueprint $table) {
             $table->bigIncrements('id_usulan_pengabdian');
-            $table->bigIncrements('id_skema_pengabdian');
+            $table->unsignedBigInteger('id_skema_pengabdian');
             $table->string('id_ketua', 64);
             $table->string('judul', 255);
             $table->year('tahun_usulan');
