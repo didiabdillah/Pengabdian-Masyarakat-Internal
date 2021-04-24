@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 use App\Models\User;
+use App\Models\Forgot_token;
 
 class AuthController extends Controller
 {
@@ -119,146 +120,146 @@ class AuthController extends Controller
         return view('auth.forgot_password');
     }
 
-    // public function forgot_password_process(Request $request)
-    // {
-    //     //Validation Form
-    //     $request->validate(
-    //         [
-    //             'email'  => 'required|email:rfc,dns|max:255',
-    //         ],
-    //         [
-    //             'email.required' => 'The email field is required.',
-    //             'email.email' => 'The email field is wrong format.'
-    //         ]
-    //     );
+    public function forgot_password_process(Request $request)
+    {
+        //Validation Form
+        $request->validate(
+            [
+                'email'  => 'required|email:rfc,dns|max:255',
+            ],
+            [
+                'email.required' => 'The email field is required.',
+                'email.email' => 'The email field is wrong format.'
+            ]
+        );
 
-    //     $email = htmlspecialchars($request->email);
+        $email = htmlspecialchars($request->email);
 
-    //     $user = User::where('user_email', $email)->first();
+        $user = User::where('user_email', $email)->first();
 
-    //     // Check is email exist
-    //     if (!$user) {
-    //         //Flash Message
-    //         flash_alert(
-    //             __('alert.icon_error'), //Icon
-    //             'Failed', //Alert Message 
-    //             'Email Not Found' //Sub Alert Message
-    //         );
+        // Check is email exist
+        if (!$user) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Failed', //Alert Message 
+                'Email Not Found' //Sub Alert Message
+            );
 
-    //         return redirect()->back();
-    //     }
+            return redirect()->back();
+        }
 
-    //     $token = Str::uuid();
-    //     $data = $user->toArray();
-    //     $data["token"] = ['token' => $token];
+        $token = Str::uuid();
+        $data = $user->toArray();
+        $data["token"] = ['token' => $token];
 
-    //     //Send Email
-    //     Mail::send(
-    //         'email.forgot_password',
-    //         $data,
-    //         function ($message) use ($user) {
-    //             $message->to($user->user_email, $user->user_name)
-    //                 ->subject('Forgot Password');
-    //         }
-    //     );
+        //Send Email
+        Mail::send(
+            'email.forgot_password',
+            $data,
+            function ($message) use ($user) {
+                $message->to($user->user_email, $user->user_name)
+                    ->subject('Forgot Password');
+            }
+        );
 
-    //     Forgot_token::create([
-    //         'forgot_token_user_id' => $user->user_id,
-    //         'forgot_token_user_email' => $user->user_email,
-    //         'forgot_token' => $token,
-    //         'forgot_token_due_time' => strtotime(date('Y-m-d H:i:s')) + 3600 * 24,
-    //     ]);
+        Forgot_token::create([
+            'forgot_token_user_id' => $user->user_id,
+            'forgot_token_user_email' => $user->user_email,
+            'forgot_token' => $token,
+            'forgot_token_due_time' => strtotime(date('Y-m-d H:i:s')) + 3600 * 24,
+        ]);
 
-    //     //Flash Message
-    //     flash_alert(
-    //         __('alert.icon_success'), //Icon
-    //         'Email Sent', //Alert Message 
-    //         'Please Check Your Email For Confirmation' //Sub Alert Message
-    //     );
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Email Sent', //Alert Message 
+            'Please Check Your Email For Confirmation' //Sub Alert Message
+        );
 
-    //     return redirect()->back();
-    // }
+        return redirect()->back();
+    }
 
     public function change_password($email, $token)
     {
-        //Check Token 
-        // $row = Forgot_token::where('forgot_token_user_email', $email)->where('forgot_token', $token)->first();
-        // if (!$row) {
-        //     flash_alert(
-        //         __('alert.icon_error'), //Icon
-        //         'Failed', //Alert Message 
-        //         'Email or Token Not Found' //Sub Alert Message
-        //     );
+        // Check Token 
+        $row = Forgot_token::where('forgot_token_user_email', $email)->where('forgot_token', $token)->first();
+        if (!$row) {
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Failed', //Alert Message 
+                'Email or Token Not Found' //Sub Alert Message
+            );
 
-        //     return redirect()->route('forgot_password');
-        // }
+            return redirect()->route('forgot_password');
+        }
 
         // Check Token Expired
-        // if (strtotime(date('Y-m-d H:i:s')) > intval($row->forgot_token_due_time)) {
+        if (strtotime(date('Y-m-d H:i:s')) > intval($row->forgot_token_due_time)) {
 
-        //     Forgot_token::where('forgot_token_user_email', $email)->delete();
+            Forgot_token::where('forgot_token_user_email', $email)->delete();
 
-        //     flash_alert(
-        //         __('alert.icon_error'), //Icon
-        //         'Failed', //Alert Message 
-        //         'Token Expired' //Sub Alert Message
-        //     );
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Failed', //Alert Message 
+                'Token Expired' //Sub Alert Message
+            );
 
-        //     return redirect()->route('forgot_password');
-        // }
+            return redirect()->route('forgot_password');
+        }
 
         return view('auth.change_password', ['token' => $token, 'email' => $email]);
     }
 
-    // public function change_password_process(Request $request, $email, $token)
-    // {
-    //     //Check Token 
-    //     $row = Forgot_token::where('forgot_token_user_email', $email)->where('forgot_token', $token)->first();
-    //     if (!$row) {
-    //         flash_alert(
-    //             __('alert.icon_error'), //Icon
-    //             'Failed', //Alert Message 
-    //             'Email or Token Not Found' //Sub Alert Message
-    //         );
+    public function change_password_process(Request $request, $email, $token)
+    {
+        //Check Token 
+        $row = Forgot_token::where('forgot_token_user_email', $email)->where('forgot_token', $token)->first();
+        if (!$row) {
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Failed', //Alert Message 
+                'Email or Token Not Found' //Sub Alert Message
+            );
 
-    //         return redirect()->route('forgot_password');
-    //     }
+            return redirect()->route('forgot_password');
+        }
 
-    //     // Check Token Expired
-    //     if (strtotime(date('Y-m-d H:i:s')) > intval($row->forgot_token_due_time)) {
+        // Check Token Expired
+        if (strtotime(date('Y-m-d H:i:s')) > intval($row->forgot_token_due_time)) {
 
-    //         Forgot_token::where('forgot_token_user_email', $email)->delete();
+            Forgot_token::where('forgot_token_user_email', $email)->delete();
 
-    //         flash_alert(
-    //             __('alert.icon_error'), //Icon
-    //             'Failed', //Alert Message 
-    //             'Token Expired' //Sub Alert Message
-    //         );
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Failed', //Alert Message 
+                'Token Expired' //Sub Alert Message
+            );
 
-    //         return redirect()->route('forgot_password');
-    //     }
+            return redirect()->route('forgot_password');
+        }
 
-    //     //Validation Form
-    //     $request->validate(
-    //         [
-    //             'new_password'  => 'required|max:100',
-    //             'retype_password'  => 'required|max:100|same:new_password',
-    //         ]
-    //     );
+        //Validation Form
+        $request->validate(
+            [
+                'new_password'  => 'required|max:100',
+                'retype_password'  => 'required|max:100|same:new_password',
+            ]
+        );
 
-    //     $password = htmlspecialchars($request->new_password);
+        $password = htmlspecialchars($request->new_password);
 
-    //     User::where('user_email', $email)->update(['user_password' => Hash::make($password)]);
+        User::where('user_email', $email)->update(['user_password' => Hash::make($password)]);
 
-    //     Forgot_token::where('forgot_token_user_email', $email)->delete();
+        Forgot_token::where('forgot_token_user_email', $email)->delete();
 
-    //     //Flash Message
-    //     flash_alert(
-    //         __('alert.icon_success'), //Icon
-    //         'Change Success', //Alert Message 
-    //         'Password Changed' //Sub Alert Message
-    //     );
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Change Success', //Alert Message 
+            'Password Changed' //Sub Alert Message
+        );
 
-    //     return redirect()->route('login');
-    // }
+        return redirect()->route('login');
+    }
 }
