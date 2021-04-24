@@ -183,38 +183,36 @@ class AuthController extends Controller
     //     return redirect()->back();
     // }
 
-    // public function change_password($email, $token)
-    // {
-    //     //Check Token 
-    //     $row = Forgot_token::where('forgot_token_user_email', $email)->where('forgot_token', $token)->first();
-    //     if (!$row) {
-    //         flash_alert(
-    //             __('alert.icon_error'), //Icon
-    //             'Failed', //Alert Message 
-    //             'Email or Token Not Found' //Sub Alert Message
-    //         );
+    public function change_password($email, $token)
+    {
+        //Check Token 
+        // $row = Forgot_token::where('forgot_token_user_email', $email)->where('forgot_token', $token)->first();
+        // if (!$row) {
+        //     flash_alert(
+        //         __('alert.icon_error'), //Icon
+        //         'Failed', //Alert Message 
+        //         'Email or Token Not Found' //Sub Alert Message
+        //     );
 
-    //         return redirect()->route('forgot_password');
-    //     }
+        //     return redirect()->route('forgot_password');
+        // }
 
-    //     // Check Token Expired
-    //     if (strtotime(date('Y-m-d H:i:s')) > intval($row->forgot_token_due_time)) {
+        // Check Token Expired
+        // if (strtotime(date('Y-m-d H:i:s')) > intval($row->forgot_token_due_time)) {
 
-    //         Forgot_token::where('forgot_token_user_email', $email)->delete();
+        //     Forgot_token::where('forgot_token_user_email', $email)->delete();
 
-    //         flash_alert(
-    //             __('alert.icon_error'), //Icon
-    //             'Failed', //Alert Message 
-    //             'Token Expired' //Sub Alert Message
-    //         );
+        //     flash_alert(
+        //         __('alert.icon_error'), //Icon
+        //         'Failed', //Alert Message 
+        //         'Token Expired' //Sub Alert Message
+        //     );
 
-    //         return redirect()->route('forgot_password');
-    //     }
+        //     return redirect()->route('forgot_password');
+        // }
 
-    //     $logo = ($setting) ? $setting->setting_logo : 'default-logo.png';
-
-    //     return view('auth.change_password', ['logo' => $logo, 'token' => $token, 'email' => $email]);
-    // }
+        return view('auth.change_password', ['token' => $token, 'email' => $email]);
+    }
 
     // public function change_password_process(Request $request, $email, $token)
     // {
