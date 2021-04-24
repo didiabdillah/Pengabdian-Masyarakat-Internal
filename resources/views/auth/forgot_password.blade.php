@@ -10,11 +10,11 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="{{url('/')}}" class="h1"><img src="{{URL::asset('assets/img/logo/' . $logo)}}" alt="" style="width: 100px;"></a>
-            <!-- <h3>Monitoring</h3> -->
+            <a href="{{url('/')}}" class="h1"><img src="{{URL::asset('assets/img/logo/polindra.png')}}" alt="" style="width: 100px;"></a>
+            <h3 class="mt-2">SIMTABMAS Polindra</h3>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+            <p class="login-box-msg">Lupa password? Silahkan pulihkan disini.</p>
             <form action="{{route('forgot_password_process')}}" method="post">
                 @csrf
                 <div class="input-group mb-3">
@@ -32,13 +32,13 @@
                 </div>
                 <div class="row ">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block">Forgot Password</button>
+                        <button type="submit" class="btn btn-primary btn-block">Lupa Password</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
             <p class="mt-3 mb-1 text-center">
-                <a href="{{route('login')}}">Back To Login</a>
+                <a href="{{route('login')}}">Kembali Ke Login</a>
             </p>
         </div>
         <!-- /.card-body -->
