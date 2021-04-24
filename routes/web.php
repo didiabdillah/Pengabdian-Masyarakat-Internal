@@ -42,7 +42,6 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         //Home
         Route::group(['prefix' => 'home'], function () {
             Route::get('/', 'HomeController@index')->name('home');
-            Route::post('/chart', 'HomeController@content_chart')->name('home_content_chart');
         });
     });
 });

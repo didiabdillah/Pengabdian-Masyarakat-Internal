@@ -19,7 +19,7 @@ class Is_Admin
      */
     public function handle($request, Closure $next)
     {
-        $role = User::where('id', Session::get('id'))->first()->role;
+        $role = User::where('user_id', Session::get('user_id'))->first()->user_role;
         if ($role == "admin") {
             return $next($request);
         } else {

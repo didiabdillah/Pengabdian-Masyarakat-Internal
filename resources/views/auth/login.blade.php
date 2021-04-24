@@ -62,7 +62,7 @@
             </form>
             </form>
 
-            <p class="mb-1 text-center">
+            <p class="mt-3 mb-1 text-center">
                 <a href="{{route('forgot_password')}}">Lupa Password</a>
             </p>
         </div>

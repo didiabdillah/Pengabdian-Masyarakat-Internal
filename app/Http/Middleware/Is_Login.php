@@ -20,11 +20,11 @@ class Is_Login
      */
     public function handle($request, Closure $next)
     {
-        if (Session::get('id') && Session::get('role') && Session::get('email') && Session::get('nama')) {
-            $user = User::where('id', Session::get('id'))
-                ->where('email', Session::get('email'))
-                ->where('role', Session::get('role'))
-                ->where('nama', Session::get('nama'))
+        if (Session::get('user_id') && Session::get('user_role') && Session::get('user_email') && Session::get('user_name')) {
+            $user = User::where('user_id', Session::get('user_id'))
+                ->where('user_email', Session::get('user_email'))
+                ->where('user_role', Session::get('user_role'))
+                ->where('user_name', Session::get('user_name'))
                 ->count();
 
             if ($user > 0) {

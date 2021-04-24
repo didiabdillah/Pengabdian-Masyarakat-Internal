@@ -18,7 +18,7 @@ class Is_Not_Login
      */
     public function handle($request, Closure $next)
     {
-        if (Session::get('id') && Session::get('email') && Session::get('role')) {
+        if (Session::get('user_id') && Session::get('user_email') && Session::get('user_role')) {
             return redirect()->route('home');
         } else {
             return $next($request);

@@ -35,7 +35,6 @@ class AuthController extends Controller
 
         $email = htmlspecialchars($request->login_email);
         $password = htmlspecialchars($request->login_password);
-        $remember = htmlspecialchars($request->remember);
 
         $user = User::firstWhere('user_email', $email);
 
@@ -103,9 +102,6 @@ class AuthController extends Controller
     {
         //Clean Session
         Session::flush();
-
-        //Clean Cookie
-        Cookie::queue(Cookie::forget('account'));
 
         //Flash Message
         flash_alert(
