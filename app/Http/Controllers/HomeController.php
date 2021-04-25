@@ -10,13 +10,14 @@ class HomeController extends Controller
     public function index()
     {
         $role = Session::get('user_role');
+        $userId = Session::get('user_id');
 
         if ($role == 'admin') {
-            echo "Admin";
+            return view('home.admin.home_admin');
         } else if ($role == 'reviewer') {
-            echo "Reviewer";
+            return view('home.reviewer.home_reviewer');
         } else if ($role == 'pengusul') {
-            echo "Pengusul";
+            return view('home.pengusul.home_pengusul');
         }
     }
 }

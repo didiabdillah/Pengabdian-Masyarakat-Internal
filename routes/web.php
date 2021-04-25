@@ -43,5 +43,17 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         Route::group(['prefix' => 'home'], function () {
             Route::get('/', 'HomeController@index')->name('home');
         });
+
+        Route::group(['middleware' => ['is_Admin']], function () {
+            //Reviewer
+            Route::group(['prefix' => 'reviewer'], function () {
+                Route::get('/', 'ReviewerController@index')->name('reviewer');
+            });
+
+            //Pengusul
+            Route::group(['prefix' => 'proposer'], function () {
+                Route::get('/', 'ProposerController@index')->name('proposer');
+            });
+        });
     });
 });
