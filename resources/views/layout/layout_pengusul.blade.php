@@ -80,7 +80,7 @@
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <a href="" class="btn btn-default btn-flat">Profile</a>
+                            <a href="{{route('profile', 'me')}}" class="btn btn-default btn-flat">Profile</a>
                             <a href="{{route('logout')}}" class="btn btn-default btn-flat float-right">Sign out</a>
                         </li>
                     </ul>
@@ -105,7 +105,7 @@
                         <img src="{{URL::asset('assets/img/profile/' . Session::get('user_image'))}}" class="img-circle elevation-2" alt="User Image" style="height: 2.1rem;">
                     </div>
                     <div class="info">
-                        <a href="" class="d-block">{{Str::words(Session::get('user_name'), 3)}}</a>
+                        <a href="{{route('profile', 'me')}}" class="d-block">{{Str::words(Session::get('user_name'), 3)}}</a>
                     </div>
                 </div>
 
