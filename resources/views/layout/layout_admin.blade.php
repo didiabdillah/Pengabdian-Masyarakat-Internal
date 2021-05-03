@@ -123,6 +123,46 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
+                                <p>
+                                    Usulan Pengabdian
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Data Pendukung
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-clipboard-check"></i>
+                                <p>
+                                    Logbook
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>
+                                    Laporan Kemajuan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-paste"></i>
+                                <p>
+                                    Laporan Akhir
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-user-friends"></i>
                                 <p>
                                     Reviewer

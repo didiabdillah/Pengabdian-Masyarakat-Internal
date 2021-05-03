@@ -121,7 +121,14 @@
                                 </p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="{{route('home')}}" class="nav-link @if(Request::segment(1) == 'usulan') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Usulan Pengabdian
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
