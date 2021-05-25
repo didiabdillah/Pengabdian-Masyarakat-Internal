@@ -9,6 +9,6 @@ class ReviewerController extends Controller
 {
     public function index()
     {
-        echo "Reviewer";
+        return view('reviewer.index');
     }
 }

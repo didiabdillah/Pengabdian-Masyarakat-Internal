@@ -9,6 +9,6 @@ class ProposerController extends Controller
 {
     public function index()
     {
-        echo "Pengusul";
+        return view('proposer.index');
     }
 }

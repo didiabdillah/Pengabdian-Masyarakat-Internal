@@ -122,7 +122,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
                                     Usulan Pengabdian
@@ -130,7 +130,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Data Pendukung
@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-check"></i>
                                 <p>
                                     Logbook
@@ -146,7 +146,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>
                                     Laporan Kemajuan
@@ -154,7 +154,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-paste"></i>
                                 <p>
                                     Laporan Akhir
