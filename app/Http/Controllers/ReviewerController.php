@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 use App\Models\User;
 
@@ -132,6 +133,29 @@ class ReviewerController extends Controller
             __('alert.icon_success'), //Icon
             'Update Success', //Alert Message 
             'Reviewer Updated' //Sub Alert Message
+        );
+
+        return redirect()->route('reviewer');
+    }
+
+    public function destroy($id)
+    {
+        $destination = "assets/img/profile/";
+
+        $imageOld =  User::where('user_id', $id)->first();
+        $image_path = public_path($destination . $imageOld->user_image);
+
+        User::destroy('user_id', $id);
+
+        if ($imageOld->user_image != "default.jpg") {
+            File::delete($image_path);
+        }
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Remove Success', //Alert Message 
+            'Reviewer Removed' //Sub Alert Message
         );
 
         return redirect()->route('reviewer');
