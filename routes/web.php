@@ -59,6 +59,11 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
             //Pengusul
             Route::group(['prefix' => 'proposer'], function () {
                 Route::get('/', 'ProposerController@index')->name('proposer');
+                Route::get('/insert', 'ProposerController@insert')->name('proposer_insert');
+                Route::post('/store', 'ProposerController@store')->name('proposer_store');
+                Route::get('/edit/{id}', 'ProposerController@edit')->name('proposer_edit');
+                Route::patch('/edit/{id}', 'ProposerController@update')->name('proposer_update');
+                Route::delete('/destroy/{id}', 'ProposerController@destroy')->name('proposer_destroy');
             });
         });
 
