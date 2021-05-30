@@ -49,6 +49,8 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
             //Reviewer
             Route::group(['prefix' => 'reviewer'], function () {
                 Route::get('/', 'ReviewerController@index')->name('reviewer');
+                Route::get('/insert', 'ReviewerController@insert')->name('reviewer_insert');
+                Route::post('/store', 'ReviewerController@store')->name('reviewer_store');
             });
 
             //Pengusul
