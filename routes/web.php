@@ -51,6 +51,9 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::get('/', 'ReviewerController@index')->name('reviewer');
                 Route::get('/insert', 'ReviewerController@insert')->name('reviewer_insert');
                 Route::post('/store', 'ReviewerController@store')->name('reviewer_store');
+                Route::get('/edit/{id}', 'ReviewerController@edit')->name('reviewer_edit');
+                Route::patch('/edit/{id}', 'ReviewerController@update')->name('reviewer_update');
+                Route::delete('/destroy/{id}', 'ReviewerController@destroy')->name('reviewer_destroy');
             });
 
             //Pengusul

@@ -75,4 +75,65 @@ class ReviewerController extends Controller
 
         return redirect()->route('reviewer');
     }
+
+    public function edit($id)
+    {
+        $user = User::where('user_id', $id)->first();
+
+        return view('reviewer.edit', ['user' => $user]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Input Validation
+        if (htmlspecialchars($request->password) != NULL) {
+            $request->validate([
+                'name'  => 'required|max:255',
+                'email'  => 'required|max:255',
+                'password'  => 'max:100|min:8',
+            ]);
+        } else {
+            $request->validate([
+                'name'  => 'required|max:255',
+                'email'  => 'required|max:255',
+            ]);
+        }
+
+        $user = User::where('user_id', $id)->first();
+
+        $name = htmlspecialchars($request->name);
+        $email = htmlspecialchars($request->email);
+        $password = (htmlspecialchars($request->password) != NULL) ? Hash::make($request->password) : $user->user_password;
+
+        //check is Email exist in DB
+        if (User::where('user_email', $email)->where('user_role', 'reviewer')->where('user_id', '!=', $user->user_id)->count() > 0) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Update Failed', //Alert Message 
+                'Email Already Exist' //Sub Alert Message
+            );
+
+            return redirect()->back();
+        }
+
+        $data = [
+            'user_password' => $password,
+            'user_name' => $name,
+            'user_email' => $email,
+        ];
+
+        //Update Data
+        User::where('user_id', $id)
+            ->update($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Update Success', //Alert Message 
+            'Reviewer Updated' //Sub Alert Message
+        );
+
+        return redirect()->route('reviewer');
+    }
 }

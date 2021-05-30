@@ -82,11 +82,11 @@
                                     </td>
 
                                     <td>
-                                        <form action="" method="POST" class="form-inline form-horizontal">
+                                        <form action="{{route('reviewer_destroy', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
                                             @csrf
                                             @method('delete')
                                             <div class="card-body">
-                                                <a class="btn btn-primary btn-sm" href="">
+                                                <a class="btn btn-primary btn-sm" href="{{route('reviewer_edit', $data->user_id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
