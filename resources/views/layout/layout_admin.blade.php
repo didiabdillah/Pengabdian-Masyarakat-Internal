@@ -146,7 +146,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
+                            <a href="{{route('laporan_kemajuan')}}" class="nav-link @if(Request::segment(1) == 'laporan_kemajuan' || Request::segment(2) == 'laporan_kemajuan') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>
                                     Laporan Kemajuan

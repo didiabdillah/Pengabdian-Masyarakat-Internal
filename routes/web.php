@@ -51,6 +51,11 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::get('/', 'PengabdianController@index')->name('pengabdian');
             });
 
+            //Laporan Kemajuan
+            Route::group(['prefix' => 'laporan_kemajuan'], function () {
+                Route::get('/', 'LaporanKemajuanController@index')->name('laporan_kemajuan');
+            });
+
             //Laporan Akhir
             Route::group(['prefix' => 'laporan_akhir'], function () {
                 Route::get('/', 'LaporanAkhirController@index')->name('laporan_akhir');

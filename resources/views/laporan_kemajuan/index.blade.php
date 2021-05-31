@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Laporan Akhir')
+@section('title', 'Laporan Kemajuan')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Laporan Akhir</h1>
+                    <h1>Laporan Kemajuan</h1>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                                         <h5>2021</h5>
                                     </td>
                                     <td>
-                                        <h5>laporan_akhir_pengabdian.pdf</h5>
+                                        <h5>laporan_kemajuan_pengabdian.pdf</h5>
                                     </td>
 
                                     <td>
