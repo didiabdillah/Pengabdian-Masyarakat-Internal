@@ -47,6 +47,11 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         //ADMIN
         Route::group(['middleware' => ['is_Admin']], function () {
             //Reviewer
+            Route::group(['prefix' => 'pengabdian'], function () {
+                Route::get('/', 'PengabdianController@index')->name('pengabdian');
+            });
+
+            //Reviewer
             Route::group(['prefix' => 'reviewer'], function () {
                 Route::get('/', 'ReviewerController@index')->name('reviewer');
                 Route::get('/insert', 'ReviewerController@insert')->name('reviewer_insert');
