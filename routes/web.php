@@ -46,9 +46,14 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
         //ADMIN
         Route::group(['middleware' => ['is_Admin']], function () {
-            //Reviewer
+            //Pengabdian
             Route::group(['prefix' => 'pengabdian'], function () {
                 Route::get('/', 'PengabdianController@index')->name('pengabdian');
+            });
+
+            //Laporan Akhir
+            Route::group(['prefix' => 'laporan_akhir'], function () {
+                Route::get('/', 'LaporanAkhirController@index')->name('laporan_akhir');
             });
 
             //Reviewer

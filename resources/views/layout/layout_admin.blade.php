@@ -154,7 +154,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
+                            <a href="{{route('laporan_akhir')}}" class="nav-link @if(Request::segment(1) == 'laporan_akhir' || Request::segment(2) == 'laporan_akhir') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-paste"></i>
                                 <p>
                                     Laporan Akhir
