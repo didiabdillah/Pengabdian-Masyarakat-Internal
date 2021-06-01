@@ -51,6 +51,11 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::get('/', 'PengabdianController@index')->name('pengabdian');
             });
 
+            //Data Pendukung
+            Route::group(['prefix' => 'data_pendukung'], function () {
+                Route::get('/', 'DataPendukungController@index')->name('data_pendukung');
+            });
+
             //Logbook
             Route::group(['prefix' => 'logbook'], function () {
                 Route::get('/', 'LogbookController@index')->name('logbook');

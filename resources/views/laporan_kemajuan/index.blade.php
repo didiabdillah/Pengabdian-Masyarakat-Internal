@@ -50,7 +50,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Skema</th>
+                                    <th>Bidang</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
                                     <th>File</th>

@@ -130,7 +130,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
+                            <a href="{{route('data_pendukung')}}" class="nav-link @if(Request::segment(1) == 'data_pendukung' || Request::segment(2) == 'data_pendukung') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Data Pendukung

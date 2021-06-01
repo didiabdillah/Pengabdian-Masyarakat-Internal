@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Laporan Akhir')
+@section('title', 'Data Pendukung')
 
 @section('page')
 
@@ -16,21 +16,21 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Laporan Akhir</h1>
+                    <h1>Data Pendukung</h1>
                 </div>
             </div>
 
         </div>
 
-        {{-- <div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Pengusul</a>
+                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Bidang</a>
                 </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-        </div> --}}
+        </div>
 
         <!--Content -->
         <section class="content">
@@ -51,9 +51,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Bidang</th>
-                                    <th>Judul</th>
-                                    <th>Tahun</th>
-                                    <th>File</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -66,26 +63,27 @@
                                     <td>
                                         <h5>Pengabdian</h5>
                                     </td>
-                                    <td>
-                                        <h5>Pengabdian Masjid Jatisawit Lor</h5>
-                                    </td>
-                                    <td>
-                                        <h5>2021</h5>
-                                    </td>
-                                    <td>
-                                        <h5>laporan_akhir_pengabdian.pdf</h5>
-                                    </td>
 
                                     <td>
-                                        <div class="card-body">
-                                            <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-download">
-                                                </i>
+                                        <form action="" method="POST" class="form-inline form-horizontal">
+                                            @csrf
+                                            @method('delete')
+                                            <div class="card-body">
+                                                <a class="btn btn-primary btn-sm" href="">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
 
-                                                Download
-                                            </a>
-                                        </div>
+                                                    Edit
+                                                </a>
 
+                                                <button class="btn btn-danger btn-sm btn-remove" type="submit">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
 
