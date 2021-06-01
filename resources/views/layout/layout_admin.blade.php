@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'x' || Request::segment(2) == 'x') {{'active'}} @endif">
+                            <a href="{{route('logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-check"></i>
                                 <p>
                                     Logbook
