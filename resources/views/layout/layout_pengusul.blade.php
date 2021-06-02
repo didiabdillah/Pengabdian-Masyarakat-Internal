@@ -122,7 +122,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('home')}}" class="nav-link @if(Request::segment(1) == 'usulan') {{'active'}} @endif">
+                            <a href="{{route('pengusul_pengabdian')}}" class="nav-link @if(Request::segment(1) == 'pengabdian' || Request::segment(2) == 'pengabdian') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Usulan Pengabdian
@@ -130,10 +130,26 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('home')}}" class="nav-link @if(Request::segment(1) == 'pelaksanaan') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-clipboard-list"></i>
+                            <a href="{{route('pengusul_logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-clipboard-check"></i>
                                 <p>
-                                    Pelaksanaan Kegiatan
+                                    Logbook
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('pengusul_laporan_kemajuan')}}" class="nav-link @if(Request::segment(1) == 'laporan_kemajuan' || Request::segment(2) == 'laporan_kemajuan') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>
+                                    Laporan Kemajuan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('pengusul_laporan_akhir')}}" class="nav-link @if(Request::segment(1) == 'laporan_akhir' || Request::segment(2) == 'laporan_akhir') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-paste"></i>
+                                <p>
+                                    Laporan Akhir
                                 </p>
                             </a>
                         </li>

@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'is_Login' => \App\Http\Middleware\Is_Login::class,
         'is_Not_Login' => \App\Http\Middleware\Is_Not_Login::class,
         'is_Admin' => \App\Http\Middleware\Is_Admin::class,
+        'is_Pengusul' => \App\Http\Middleware\Is_Pengusul::class,
         'prevent_Back_Button' => \App\Http\Middleware\Prevent_Back_Button::class,
     ];
 }
