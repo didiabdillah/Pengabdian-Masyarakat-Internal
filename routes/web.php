@@ -164,7 +164,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
                 //Logbook
                 Route::group(['prefix' => 'logbook'], function () {
-                    Route::get('/', 'LogbookController@index')->name('pengusul_logbook');
+                    Route::get('/', 'Pengusul\LogbookController@index')->name('pengusul_logbook');
                 });
             });
         });
