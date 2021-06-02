@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Usulan Pengabdian')
+@section('title', 'Laporan Akhir')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Usulan Pengabdian</h1>
+                    <h1>Laporan Akhir</h1>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Usulan Pengabdian</a>
+                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Laporan Akhir</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -50,9 +50,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Bidang</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
-                                    <th>Status</th>
+                                    <th>File</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -63,29 +64,25 @@
                                         <h5>1</h5>
                                     </td>
                                     <td>
+                                        <h5>Pengabdian</h5>
+                                    </td>
+                                    <td>
                                         <h5>Pengabdian Masjid Jatisawit Lor</h5>
                                     </td>
                                     <td>
                                         <h5>2021</h5>
                                     </td>
                                     <td>
-                                        <h5>Direkomendasikan</h5>
+                                        <h5>laporan_akhir_pengabdian.pdf</h5>
                                     </td>
 
                                     <td>
                                         <div class="card-body">
-                                            <a class="btn btn-primary btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-
-                                                Detail
-                                            </a>
-
                                             <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
+                                                <i class="fas fa-download">
                                                 </i>
 
-                                                Konfirmasi
+                                                Download
                                             </a>
                                         </div>
 
