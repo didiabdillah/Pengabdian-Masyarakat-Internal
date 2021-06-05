@@ -49,47 +49,47 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
             Route::group(['prefix' => 'admin'], function () {
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
-                    Route::get('/', 'PengabdianController@index')->name('pengabdian');
+                    Route::get('/', 'Admin\PengabdianController@index')->name('pengabdian');
                 });
 
                 //Data Pendukung
                 Route::group(['prefix' => 'data_pendukung'], function () {
-                    Route::get('/', 'DataPendukungController@index')->name('data_pendukung');
+                    Route::get('/', 'Admin\DataPendukungController@index')->name('data_pendukung');
                 });
 
                 //Logbook
                 Route::group(['prefix' => 'logbook'], function () {
-                    Route::get('/', 'LogbookController@index')->name('logbook');
+                    Route::get('/', 'Admin\LogbookController@index')->name('logbook');
                 });
 
                 //Laporan Kemajuan
                 Route::group(['prefix' => 'laporan_kemajuan'], function () {
-                    Route::get('/', 'LaporanKemajuanController@index')->name('laporan_kemajuan');
+                    Route::get('/', 'Admin\LaporanKemajuanController@index')->name('laporan_kemajuan');
                 });
 
                 //Laporan Akhir
                 Route::group(['prefix' => 'laporan_akhir'], function () {
-                    Route::get('/', 'LaporanAkhirController@index')->name('laporan_akhir');
+                    Route::get('/', 'Admin\LaporanAkhirController@index')->name('laporan_akhir');
                 });
 
                 //Reviewer
                 Route::group(['prefix' => 'reviewer'], function () {
-                    Route::get('/', 'ReviewerController@index')->name('reviewer');
-                    Route::get('/insert', 'ReviewerController@insert')->name('reviewer_insert');
-                    Route::post('/store', 'ReviewerController@store')->name('reviewer_store');
-                    Route::get('/edit/{id}', 'ReviewerController@edit')->name('reviewer_edit');
-                    Route::patch('/edit/{id}', 'ReviewerController@update')->name('reviewer_update');
-                    Route::delete('/destroy/{id}', 'ReviewerController@destroy')->name('reviewer_destroy');
+                    Route::get('/', 'Admin\ReviewerController@index')->name('reviewer');
+                    Route::get('/insert', 'Admin\ReviewerController@insert')->name('reviewer_insert');
+                    Route::post('/store', 'Admin\ReviewerController@store')->name('reviewer_store');
+                    Route::get('/edit/{id}', 'Admin\ReviewerController@edit')->name('reviewer_edit');
+                    Route::patch('/edit/{id}', 'Admin\ReviewerController@update')->name('reviewer_update');
+                    Route::delete('/destroy/{id}', 'Admin\ReviewerController@destroy')->name('reviewer_destroy');
                 });
 
                 //Pengusul
                 Route::group(['prefix' => 'proposer'], function () {
-                    Route::get('/', 'ProposerController@index')->name('proposer');
-                    Route::get('/insert', 'ProposerController@insert')->name('proposer_insert');
-                    Route::post('/store', 'ProposerController@store')->name('proposer_store');
-                    Route::get('/edit/{id}', 'ProposerController@edit')->name('proposer_edit');
-                    Route::patch('/edit/{id}', 'ProposerController@update')->name('proposer_update');
-                    Route::delete('/destroy/{id}', 'ProposerController@destroy')->name('proposer_destroy');
+                    Route::get('/', 'Admin\ProposerController@index')->name('proposer');
+                    Route::get('/insert', 'Admin\ProposerController@insert')->name('proposer_insert');
+                    Route::post('/store', 'Admin\ProposerController@store')->name('proposer_store');
+                    Route::get('/edit/{id}', 'Admin\ProposerController@edit')->name('proposer_edit');
+                    Route::patch('/edit/{id}', 'Admin\ProposerController@update')->name('proposer_update');
+                    Route::delete('/destroy/{id}', 'Admin\ProposerController@destroy')->name('proposer_destroy');
                 });
             });
         });

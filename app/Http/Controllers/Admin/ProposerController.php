@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -10,22 +11,22 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\User;
 
-class ReviewerController extends Controller
+class ProposerController extends Controller
 {
     public function index()
     {
-        $user = User::where('user_role', '=', 'reviewer')
+        $user = User::where('user_role', '=', 'pengusul')
             ->where('user_id', '!=', Session::get('user_id'))
             ->orderBy('user_name', 'asc')->get();
 
-        return view('reviewer.index', ['user' => $user]);
+        return view('admin.proposer.index', ['user' => $user]);
     }
 
     public function insert()
     {
         $user = User::orderBy('user_name', 'asc')->get();
 
-        return view('reviewer.insert', ['user' => $user]);
+        return view('admin.proposer.insert', ['user' => $user]);
     }
 
     public function store(Request $request)
@@ -44,7 +45,7 @@ class ReviewerController extends Controller
         $image = "default.jpg";
 
         //check is email exist in DB
-        if (User::where('user_email', $email)->where('user_role', 'reviewer')->count() > 0) {
+        if (User::where('user_email', $email)->where('user_role', 'pengusul')->count() > 0) {
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
@@ -60,7 +61,7 @@ class ReviewerController extends Controller
             'user_password' => Hash::make($password),
             'user_name' => $name,
             'user_email' => $email,
-            'user_role' => 'reviewer',
+            'user_role' => 'pengusul',
             'user_image' => $image,
         ];
 
@@ -71,17 +72,17 @@ class ReviewerController extends Controller
         flash_alert(
             __('alert.icon_success'), //Icon
             'Add Success', //Alert Message 
-            'Reviewer Added' //Sub Alert Message
+            'Pengusul Added' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer');
+        return redirect()->route('proposer');
     }
 
     public function edit($id)
     {
         $user = User::where('user_id', $id)->first();
 
-        return view('reviewer.edit', ['user' => $user]);
+        return view('admin.proposer.edit', ['user' => $user]);
     }
 
     public function update(Request $request, $id)
@@ -107,7 +108,7 @@ class ReviewerController extends Controller
         $password = (htmlspecialchars($request->password) != NULL) ? Hash::make($request->password) : $user->user_password;
 
         //check is Email exist in DB
-        if (User::where('user_email', $email)->where('user_role', 'reviewer')->where('user_id', '!=', $user->user_id)->count() > 0) {
+        if (User::where('user_email', $email)->where('user_role', 'pengusul')->where('user_id', '!=', $user->user_id)->count() > 0) {
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
@@ -132,10 +133,10 @@ class ReviewerController extends Controller
         flash_alert(
             __('alert.icon_success'), //Icon
             'Update Success', //Alert Message 
-            'Reviewer Updated' //Sub Alert Message
+            'Pengusul Updated' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer');
+        return redirect()->route('proposer');
     }
 
     public function destroy($id)
@@ -155,9 +156,9 @@ class ReviewerController extends Controller
         flash_alert(
             __('alert.icon_success'), //Icon
             'Remove Success', //Alert Message 
-            'Reviewer Removed' //Sub Alert Message
+            'Pengusul Removed' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer');
+        return redirect()->route('proposer');
     }
 }
