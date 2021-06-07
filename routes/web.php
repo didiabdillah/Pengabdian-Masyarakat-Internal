@@ -94,6 +94,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 });
             });
         });
+        // END ADMIN
 
         //REVIEWER
         Route::group(['middleware' => ['is_Reviewer']], function () {
@@ -109,6 +110,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 });
             });
         });
+        // END REVIEWER
 
         //PENGUSUL
         Route::group(['middleware' => ['is_Pengusul']], function () {
@@ -139,6 +141,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 });
             });
         });
+        // END PENGUSUL
 
         //Profile
         Route::group(['prefix' => 'u'], function () {
@@ -150,6 +153,11 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         });
 
         //ERROR PAGE
+        //403 Forbidden Page
+        Route::get('/forbidden', 'ErrorController@forbidden')->name('forbidden');
 
+        //404 Not Found Page
+        Route::get('/notfound', 'ErrorController@not_found')->name('not_found');
+        // END ERROR PAGE
     });
 });
