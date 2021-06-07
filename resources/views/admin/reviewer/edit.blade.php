@@ -22,7 +22,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('reviewer_update', $user->user_id)}}" method="POST">
+                    <form action="{{route('admin_reviewer_update', $user->user_id)}}" method="POST">
                         @csrf
                         @method('patch')
                         <div class="card-body">
@@ -57,7 +57,7 @@
                             </div>
 
                             <div class=" card-footer">
-                                <a href="{{route('reviewer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                <a href="{{route('admin_reviewer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
                             </div>
                         </div>

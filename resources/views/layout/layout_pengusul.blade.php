@@ -114,7 +114,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-header">MENU</li>
                         <li class="nav-item">
-                            <a href="{{route('home')}}" class="nav-link @if(Request::segment(1) == 'home') {{'active'}} @endif">
+                            <a href="{{route('pengusul_home')}}" class="nav-link @if(Request::segment(1) == 'home' || Request::segment(2) == 'home') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Home

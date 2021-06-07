@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="{{route('proposer_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Pengusul</a>
+                    <a href="{{route('admin_proposer_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Pengusul</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -82,11 +82,11 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{route('proposer_destroy', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
+                                        <form action="{{route('admin_proposer_destroy', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
                                             @csrf
                                             @method('delete')
                                             <div class="card-body">
-                                                <a class="btn btn-primary btn-sm" href="{{route('proposer_edit', $data->user_id)}}">
+                                                <a class="btn btn-primary btn-sm" href="{{route('admin_proposer_edit', $data->user_id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 

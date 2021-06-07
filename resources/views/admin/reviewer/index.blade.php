@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="{{route('reviewer_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Reviewer</a>
+                    <a href="{{route('admin_reviewer_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Reviewer</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -82,11 +82,11 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{route('reviewer_destroy', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
+                                        <form action="{{route('admin_reviewer_destroy', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
                                             @csrf
                                             @method('delete')
                                             <div class="card-body">
-                                                <a class="btn btn-primary btn-sm" href="{{route('reviewer_edit', $data->user_id)}}">
+                                                <a class="btn btn-primary btn-sm" href="{{route('admin_reviewer_edit', $data->user_id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 

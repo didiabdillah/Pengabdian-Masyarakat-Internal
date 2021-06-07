@@ -39,57 +39,58 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 //USER PAGE (LOGIN REQUIRED)
 Route::group(['middleware' => ['prevent_Back_Button']], function () {
     Route::group(['middleware' => ['is_Login']], function () {
-        //Home
-        Route::group(['prefix' => 'home'], function () {
-            Route::get('/', 'HomeController@index')->name('home');
-        });
 
         //ADMIN
         Route::group(['middleware' => ['is_Admin']], function () {
             Route::group(['prefix' => 'admin'], function () {
+                //Home
+                Route::group(['prefix' => '/home'], function () {
+                    Route::get('/', 'Admin\HomeController@index')->name('admin_home');
+                });
+
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
-                    Route::get('/', 'Admin\PengabdianController@index')->name('pengabdian');
+                    Route::get('/', 'Admin\PengabdianController@index')->name('admin_pengabdian');
                 });
 
                 //Data Pendukung
                 Route::group(['prefix' => 'data_pendukung'], function () {
-                    Route::get('/', 'Admin\DataPendukungController@index')->name('data_pendukung');
+                    Route::get('/', 'Admin\DataPendukungController@index')->name('admin_data_pendukung');
                 });
 
                 //Logbook
                 Route::group(['prefix' => 'logbook'], function () {
-                    Route::get('/', 'Admin\LogbookController@index')->name('logbook');
+                    Route::get('/', 'Admin\LogbookController@index')->name('admin_logbook');
                 });
 
                 //Laporan Kemajuan
                 Route::group(['prefix' => 'laporan_kemajuan'], function () {
-                    Route::get('/', 'Admin\LaporanKemajuanController@index')->name('laporan_kemajuan');
+                    Route::get('/', 'Admin\LaporanKemajuanController@index')->name('admin_laporan_kemajuan');
                 });
 
                 //Laporan Akhir
                 Route::group(['prefix' => 'laporan_akhir'], function () {
-                    Route::get('/', 'Admin\LaporanAkhirController@index')->name('laporan_akhir');
+                    Route::get('/', 'Admin\LaporanAkhirController@index')->name('admin_laporan_akhir');
                 });
 
                 //Reviewer
                 Route::group(['prefix' => 'reviewer'], function () {
-                    Route::get('/', 'Admin\ReviewerController@index')->name('reviewer');
-                    Route::get('/insert', 'Admin\ReviewerController@insert')->name('reviewer_insert');
-                    Route::post('/store', 'Admin\ReviewerController@store')->name('reviewer_store');
-                    Route::get('/edit/{id}', 'Admin\ReviewerController@edit')->name('reviewer_edit');
-                    Route::patch('/edit/{id}', 'Admin\ReviewerController@update')->name('reviewer_update');
-                    Route::delete('/destroy/{id}', 'Admin\ReviewerController@destroy')->name('reviewer_destroy');
+                    Route::get('/', 'Admin\ReviewerController@index')->name('admin_reviewer');
+                    Route::get('/insert', 'Admin\ReviewerController@insert')->name('admin_reviewer_insert');
+                    Route::post('/store', 'Admin\ReviewerController@store')->name('admin_reviewer_store');
+                    Route::get('/edit/{id}', 'Admin\ReviewerController@edit')->name('admin_reviewer_edit');
+                    Route::patch('/edit/{id}', 'Admin\ReviewerController@update')->name('admin_reviewer_update');
+                    Route::delete('/destroy/{id}', 'Admin\ReviewerController@destroy')->name('admin_reviewer_destroy');
                 });
 
                 //Pengusul
                 Route::group(['prefix' => 'proposer'], function () {
-                    Route::get('/', 'Admin\ProposerController@index')->name('proposer');
-                    Route::get('/insert', 'Admin\ProposerController@insert')->name('proposer_insert');
-                    Route::post('/store', 'Admin\ProposerController@store')->name('proposer_store');
-                    Route::get('/edit/{id}', 'Admin\ProposerController@edit')->name('proposer_edit');
-                    Route::patch('/edit/{id}', 'Admin\ProposerController@update')->name('proposer_update');
-                    Route::delete('/destroy/{id}', 'Admin\ProposerController@destroy')->name('proposer_destroy');
+                    Route::get('/', 'Admin\ProposerController@index')->name('admin_proposer');
+                    Route::get('/insert', 'Admin\ProposerController@insert')->name('admin_proposer_insert');
+                    Route::post('/store', 'Admin\ProposerController@store')->name('admin_proposer_store');
+                    Route::get('/edit/{id}', 'Admin\ProposerController@edit')->name('admin_proposer_edit');
+                    Route::patch('/edit/{id}', 'Admin\ProposerController@update')->name('admin_proposer_update');
+                    Route::delete('/destroy/{id}', 'Admin\ProposerController@destroy')->name('admin_proposer_destroy');
                 });
             });
         });
@@ -97,6 +98,11 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         //REVIEWER
         Route::group(['middleware' => ['is_Reviewer']], function () {
             Route::group(['prefix' => 'reviewer'], function () {
+                //Home
+                Route::group(['prefix' => '/home'], function () {
+                    Route::get('/', 'Reviewer\HomeController@index')->name('reviewer_home');
+                });
+
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Reviewer\PengabdianController@index')->name('reviewer_pengabdian');
@@ -107,6 +113,11 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         //PENGUSUL
         Route::group(['middleware' => ['is_Pengusul']], function () {
             Route::group(['prefix' => 'pengusul'], function () {
+                //Home
+                Route::group(['prefix' => '/home'], function () {
+                    Route::get('/', 'Pengusul\HomeController@index')->name('pengusul_home');
+                });
+
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Pengusul\PengabdianController@index')->name('pengusul_pengabdian');

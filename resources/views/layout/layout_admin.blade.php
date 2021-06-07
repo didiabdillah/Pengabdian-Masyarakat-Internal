@@ -114,7 +114,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-header">MENU</li>
                         <li class="nav-item">
-                            <a href="{{route('home')}}" class="nav-link @if(Request::segment(1) == 'home') {{'active'}} @endif">
+                            <a href="{{route('admin_home')}}" class="nav-link @if(Request::segment(1) == 'home' || Request::segment(2) == 'home') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Home
@@ -122,7 +122,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('pengabdian')}}" class="nav-link @if(Request::segment(1) == 'pengabdian' || Request::segment(2) == 'pengabdian') {{'active'}} @endif">
+                            <a href="{{route('admin_pengabdian')}}" class="nav-link @if(Request::segment(1) == 'pengabdian' || Request::segment(2) == 'pengabdian') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
                                     Usulan Pengabdian
@@ -130,7 +130,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('data_pendukung')}}" class="nav-link @if(Request::segment(1) == 'data_pendukung' || Request::segment(2) == 'data_pendukung') {{'active'}} @endif">
+                            <a href="{{route('admin_data_pendukung')}}" class="nav-link @if(Request::segment(1) == 'data_pendukung' || Request::segment(2) == 'data_pendukung') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Data Pendukung
@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
+                            <a href="{{route('admin_logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-check"></i>
                                 <p>
                                     Logbook
@@ -146,7 +146,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('laporan_kemajuan')}}" class="nav-link @if(Request::segment(1) == 'laporan_kemajuan' || Request::segment(2) == 'laporan_kemajuan') {{'active'}} @endif">
+                            <a href="{{route('admin_laporan_kemajuan')}}" class="nav-link @if(Request::segment(1) == 'laporan_kemajuan' || Request::segment(2) == 'laporan_kemajuan') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>
                                     Laporan Kemajuan
@@ -154,7 +154,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('laporan_akhir')}}" class="nav-link @if(Request::segment(1) == 'laporan_akhir' || Request::segment(2) == 'laporan_akhir') {{'active'}} @endif">
+                            <a href="{{route('admin_laporan_akhir')}}" class="nav-link @if(Request::segment(1) == 'laporan_akhir' || Request::segment(2) == 'laporan_akhir') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-paste"></i>
                                 <p>
                                     Laporan Akhir
@@ -162,7 +162,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                            <a href="{{route('admin_reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-user-friends"></i>
                                 <p>
                                     Reviewer
@@ -170,7 +170,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('proposer')}}" class="nav-link @if(Request::segment(1) == 'proposer' || Request::segment(2) == 'proposer') {{'active'}} @endif">
+                            <a href="{{route('admin_proposer')}}" class="nav-link @if(Request::segment(1) == 'proposer' || Request::segment(2) == 'proposer') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Pengusul

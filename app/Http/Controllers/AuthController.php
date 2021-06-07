@@ -55,8 +55,17 @@ class AuthController extends Controller
                     ];
                     $request->session()->put($data);
 
-                    //Goto User Home
-                    return redirect()->route('home');
+                    // Check Redirect Page
+                    if ($user->user_role == "admin") {
+                        //Goto Admin Home
+                        return redirect()->route('admin_home');
+                    } else if ($user->user_role == "reviewer") {
+                        //Goto Reviewer Home
+                        return redirect()->route('reviewer_home');
+                    } else if ($user->user_role == "pengusul") {
+                        //Goto Pengusul Home
+                        return redirect()->route('pengusul_home');
+                    }
                 } else {
                     // Flash Message
                     flash_alert(
