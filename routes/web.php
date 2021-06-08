@@ -128,11 +128,15 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Laporan Kemajuan
                 Route::group(['prefix' => 'laporan_kemajuan'], function () {
                     Route::get('/', 'Pengusul\LaporanKemajuanController@index')->name('pengusul_laporan_kemajuan');
+                    Route::get('/insert', 'Pengusul\LaporanKemajuanController@insert')->name('pengusul_laporan_kemajuan_insert');
+                    Route::post('/store', 'Pengusul\LaporanKemajuanController@store')->name('pengusul_laporan_kemajuan_store');
                 });
 
                 //Laporan Akhir
                 Route::group(['prefix' => 'laporan_akhir'], function () {
                     Route::get('/', 'Pengusul\LaporanAkhirController@index')->name('pengusul_laporan_akhir');
+                    Route::get('/insert', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
+                    Route::get('/store', 'Pengusul\LaporanAkhirController@store')->name('pengusul_laporan_akhir_store');
                 });
 
                 //Logbook

@@ -12,4 +12,13 @@ class LaporanAkhirController extends Controller
     {
         return view('pengusul.laporan_akhir.index');
     }
+
+    public function insert()
+    {
+        return view('pengusul.laporan_akhir.insert');
+    }
+
+    public function store(Request $request)
+    {
+    }
 }

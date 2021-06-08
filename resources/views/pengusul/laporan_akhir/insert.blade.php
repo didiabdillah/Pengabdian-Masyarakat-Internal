@@ -1,6 +1,6 @@
-@extends('layout.layout_admin')
+@extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Pengusul')
+@section('title', 'Tambah Laporan Akhir')
 
 @section('page')
 
@@ -18,37 +18,22 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Pengusul</h3>
+                        <h3 class="card-title">Tambah Laporan Akhir</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('proposer_store')}}" method="POST">
+                    <form action="{{route('pengusul_laporan_kemajuan_store')}}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{old('name')}}">
-                                @error('name')
-                                <div class="invalid-feedback">
-                                    {{$message}}
+                                <label for="file">File Upload</label>
+                                <div class="input-group  @error('file') is-invalid @enderror">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file">
+                                        <label class="custom-file-label" for="file">Choose file</label>
+                                    </div>
                                 </div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{old('email')}}">
-                                @error('email')
-                                <div class="invalid-feedback">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
-                                @error('password')
+                                @error('file')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -56,7 +41,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('proposer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                <a href="{{route('pengusul_laporan_akhir')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Insert</button>
                             </div>
                         </div>
@@ -74,5 +59,22 @@
 @endsection
 
 @push('plugin')
+<!-- Select2 -->
+<script src="{{URL::asset('assets/js/select2/js/select2.full.min.js')}}"></script>
 
+<script>
+    $(function() {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+    });
+</script>
+
+<!-- bs-custom-file-input -->
+<script src="{{URL::asset('assets/js/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        bsCustomFileInput.init();
+    });
+</script>
 @endpush
