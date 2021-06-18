@@ -10,18 +10,24 @@ class Biodata extends Model
     public $table = 'biodata';
 
     protected $fillable = [
+        'biodata_nidn',
         'biodata_user_id',
         'biodata_sex',
-        'biodata_college',
-        'biodata_study_program',
-        'biodata_position',
-        'biodata_birthplace',
-        'biodata_birthdate',
-        'biodata_ktp_number',
-        'biodata_hp_number',
-        'biodata_telephone_number',
-        'biodata_address',
-        'biodata_personal_web',
-        'biodata_image',
+        'biodata_institusi',
+        'biodata_program_studi',
+        'biodata_jabatan',
+        'biodata_pendidikan',
+        'biodata_alamat',
+        'biodata_tempat_lahir',
+        'biodata_tanggal_lahir',
+        'biodata_no_ktp',
+        'biodata_no_hp',
+        'biodata_no_telp',
+        'biodata_personal_web'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'biodata_user_id');
+    }
 }

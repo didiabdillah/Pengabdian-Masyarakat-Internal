@@ -51,6 +51,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Admin\PengabdianController@index')->name('admin_pengabdian');
+                    // Route::get('/detail', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
                 });
 
                 //Data Pendukung
@@ -61,6 +62,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Logbook
                 Route::group(['prefix' => 'logbook'], function () {
                     Route::get('/', 'Admin\LogbookController@index')->name('admin_logbook');
+                    // Route::get('/detail', 'Admin\LogbookController@detail')->name('admin_logbook_detail');
                 });
 
                 //Laporan Kemajuan
@@ -123,6 +125,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Pengusul\PengabdianController@index')->name('pengusul_pengabdian');
+                    // Route::get('/detail', 'Pengusul\PengabdianController@detail')->name('pengusul_pengabdian_detail');
                 });
 
                 //Laporan Kemajuan
@@ -142,6 +145,15 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Logbook
                 Route::group(['prefix' => 'logbook'], function () {
                     Route::get('/', 'Pengusul\LogbookController@index')->name('pengusul_logbook');
+                    // Route::get('/detail', 'Pengusul\LogbookController@detail')->name('pengusul_logbook_detail');
+                    // Route::get('/insert', 'Pengusul\LogbookController@insert')->name('pengusul_logbook_insert');
+                });
+
+                //biodata
+                Route::group(['prefix' => '/biodata'], function () {
+                    Route::get('/edit', 'Pengusul\BiodataController@edit')->name('pengusul_biodata_edit');
+                    Route::patch('/update', 'Pengusul\BiodataController@update')->name('pengusul_biodata_update');
+                    Route::patch('/update/picture', 'Pengusul\BiodataController@update_picture')->name('pengusul_biodata_update_picture');
                 });
             });
         });

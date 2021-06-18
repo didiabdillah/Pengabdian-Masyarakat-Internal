@@ -52,7 +52,6 @@
                                     <th>No</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
-                                    <th>Status</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -68,9 +67,6 @@
                                     <td>
                                         <h5>2021</h5>
                                     </td>
-                                    <td>
-                                        <h5>Direkomendasikan</h5>
-                                    </td>
 
                                     <td>
                                         <div class="card-body">
@@ -78,14 +74,14 @@
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
 
-                                                Detail
+                                                Edit
                                             </a>
 
                                             <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
+                                                <i class="fas fa-trash">
                                                 </i>
 
-                                                Konfirmasi
+                                                Hapus
                                             </a>
                                         </div>
 

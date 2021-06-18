@@ -10,6 +10,11 @@ class User extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'user_id', 'user_name', 'user_email', 'user_password', 'user_role', 'user_nidn', 'user_image'
+        'user_id', 'user_name', 'user_email', 'user_password', 'user_role', 'user_image'
     ];
+
+    public function biodata()
+    {
+        return $this->hasOne('App\Models\Biodata', 'biodata_user_id');
+    }
 }

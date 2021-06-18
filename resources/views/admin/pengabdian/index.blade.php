@@ -69,7 +69,7 @@
                                         <h5>2021</h5>
                                     </td>
                                     <td>
-                                        <h5>Direkomendasikan</h5>
+                                        <h5>Menunggu</h5>
                                     </td>
 
                                     <td>

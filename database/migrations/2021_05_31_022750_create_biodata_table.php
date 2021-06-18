@@ -15,19 +15,20 @@ class CreateBiodataTable extends Migration
     {
         Schema::create('biodata', function (Blueprint $table) {
             $table->bigIncrements('biodata_id');
+            $table->string('biodata_nidn', 50)->nullable();
             $table->string('biodata_user_id', 64)->unique();
-            $table->boolean('biodata_sex');
-            $table->string('biodata_college')->nullable();
-            $table->string('biodata_study_program')->nullable();
-            $table->string('biodata_position')->nullable();
-            $table->string('biodata_birthplace');
-            $table->date('biodata_birthdate');
-            $table->string('biodata_ktp_number');
-            $table->string('biodata_hp_number')->nullable();
-            $table->string('biodata_telephone_number')->nullable();
-            $table->string('biodata_address')->nullable();
+            $table->boolean('biodata_sex')->nullable();
+            $table->string('biodata_institusi')->nullable();
+            $table->string('biodata_program_studi')->nullable();
+            $table->string('biodata_jabatan')->nullable();
+            $table->string('biodata_pendidikan')->nullable();
+            $table->string('biodata_alamat')->nullable();
+            $table->string('biodata_tempat_lahir')->nullable();
+            $table->date('biodata_tanggal_lahir')->nullable();
+            $table->string('biodata_no_ktp')->nullable();
+            $table->string('biodata_no_hp')->nullable();
+            $table->string('biodata_no_telp')->nullable();
             $table->string('biodata_personal_web')->nullable();
-            $table->string('biodata_image');
             $table->timestamps();
 
             $table->foreign('biodata_user_id')->references('user_id')->on('users')->onUpdate('cascade')->onDelete('cascade');
