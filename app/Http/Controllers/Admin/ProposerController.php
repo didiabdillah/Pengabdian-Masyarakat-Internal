@@ -75,7 +75,7 @@ class ProposerController extends Controller
             'Pengusul Added' //Sub Alert Message
         );
 
-        return redirect()->route('proposer');
+        return redirect()->route('admin_proposer');
     }
 
     public function edit($id)
@@ -136,7 +136,7 @@ class ProposerController extends Controller
             'Pengusul Updated' //Sub Alert Message
         );
 
-        return redirect()->route('proposer');
+        return redirect()->route('admin_proposer');
     }
 
     public function destroy($id)
@@ -159,6 +159,6 @@ class ProposerController extends Controller
             'Pengusul Removed' //Sub Alert Message
         );
 
-        return redirect()->route('proposer');
+        return redirect()->route('admin_proposer');
     }
 }

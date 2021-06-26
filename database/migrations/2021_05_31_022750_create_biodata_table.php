@@ -15,7 +15,6 @@ class CreateBiodataTable extends Migration
     {
         Schema::create('biodata', function (Blueprint $table) {
             $table->bigIncrements('biodata_id');
-            $table->string('biodata_nidn', 50)->nullable();
             $table->string('biodata_user_id', 64)->unique();
             $table->boolean('biodata_sex')->nullable();
             $table->string('biodata_institusi')->nullable();
@@ -28,7 +27,7 @@ class CreateBiodataTable extends Migration
             $table->string('biodata_no_ktp')->nullable();
             $table->string('biodata_no_hp')->nullable();
             $table->string('biodata_no_telp')->nullable();
-            $table->string('biodata_personal_web')->nullable();
+            $table->string('biodata_web_personal')->nullable();
             $table->timestamps();
 
             $table->foreign('biodata_user_id')->references('user_id')->on('users')->onUpdate('cascade')->onDelete('cascade');

@@ -19,7 +19,16 @@ class Is_Not_Login
     public function handle($request, Closure $next)
     {
         if (Session::get('user_id') && Session::get('user_email') && Session::get('user_role')) {
-            return redirect()->route('home');
+            if (Session::get('user_role') == "admin") {
+                //Goto Admin Home
+                return redirect()->route('admin_home');
+            } else if (Session::get('user_role') == "reviewer") {
+                //Goto Reviewer Home
+                return redirect()->route('reviewer_home');
+            } else if (Session::get('user_role') == "pengusul") {
+                //Goto Pengusul Home
+                return redirect()->route('pengusul_home');
+            }
         } else {
             return $next($request);
         }

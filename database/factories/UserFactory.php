@@ -20,12 +20,13 @@ use Illuminate\Support\Facades\Hash;
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
     return [
-        'user_id' => 'a5c860decf204ea686aedbb6dbeb6ab1',
-        'user_name' => 'Didi',
-        'user_email' => 'abdillah1965didiokey@gmail.com',
-        'user_role' => 'admin',
+        'user_id' => 'a5c860decf204ea686aedbb6dbeb6ab3',
+        'user_name' => 'Rehn',
+        'user_email' => 'rehn@email.com',
+        'user_role' => 'pengusul',
         'user_password' => Hash::make('12345678'), // 12345678
         'user_image' => 'default.jpg',
+        'user_nidn' => NULL,
     ];
 
     // return [

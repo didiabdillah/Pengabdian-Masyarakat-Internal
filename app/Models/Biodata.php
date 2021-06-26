@@ -10,7 +10,6 @@ class Biodata extends Model
     public $table = 'biodata';
 
     protected $fillable = [
-        'biodata_nidn',
         'biodata_user_id',
         'biodata_sex',
         'biodata_institusi',
@@ -23,7 +22,7 @@ class Biodata extends Model
         'biodata_no_ktp',
         'biodata_no_hp',
         'biodata_no_telp',
-        'biodata_personal_web'
+        'biodata_web_personal'
     ];
 
     public function user()

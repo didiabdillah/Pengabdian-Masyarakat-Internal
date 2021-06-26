@@ -51,7 +51,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nidn">NIDN</label>
-                                                <input name="nidn" type="text" class="form-control @error('nidn') is-invalid @enderror" id="nidn" placeholder="Masukan NIDN" value="@if($user->biodata) @if($user->biodata->biodata_nidn){{$user->biodata->biodata_nidn}}@endif @endif">
+                                                <input name="nidn" type="text" class="form-control @error('nidn') is-invalid @enderror" id="nidn" placeholder="Masukan NIDN" value="@if($user->user_nidn){{$user->user_nidn}}@endif">
                                                 @error('email')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -64,9 +64,9 @@
                                                     <option value="0" @if($user->biodata) @if($user->biodata->biodata_sex == "0"){{"selected"}}@endif @endif>Laki-Laki</option>
                                                     <option value="1" @if($user->biodata) @if($user->biodata->biodata_sex == "1"){{"selected"}}@endif @endif>Perempuan</option>
                                                 </select>
-                                                @error('category')
+                                                @error('sex')
                                                 <div class="invalid-feedback">
-                                                    Pilih Kategori
+                                                    Pilih Jenis Kelamin
                                                 </div>
                                                 @enderror
                                             </div>

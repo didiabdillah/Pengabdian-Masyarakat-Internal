@@ -55,15 +55,13 @@
                                                         <li class="list-group-item">
                                                             <b>NIDN</b>
                                                             <a class="float-right">
-                                                                @if($user->biodata)
-                                                                @if($user->biodata->biodata_nidn)
-                                                                {{$user->biodata->biodata_nidn}}
+
+                                                                @if($user->user_nidn)
+                                                                {{$user->user_nidn}}
                                                                 @else
                                                                 {{"-"}}
                                                                 @endif
-                                                                @else
-                                                                {{"-"}}
-                                                                @endif
+
                                                             </a>
                                                         </li>
                                                     </ul>

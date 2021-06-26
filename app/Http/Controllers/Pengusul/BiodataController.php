@@ -59,12 +59,12 @@ class BiodataController extends Controller
         $data_user = [
             'user_email' => htmlspecialchars($request->email),
             'user_name' => htmlspecialchars($request->nama),
+            'user_nidn' => htmlspecialchars($request->nidn),
         ];
         User::where('user_id', $id)
             ->update($data_user);
 
         $data_biodata = [
-            'biodata_nidn' => htmlspecialchars($request->nidn),
             'biodata_user_id' => $id,
             'biodata_sex' => htmlspecialchars($request->sex),
             'biodata_institusi' => htmlspecialchars($request->institusi),
@@ -77,7 +77,7 @@ class BiodataController extends Controller
             'biodata_no_ktp' => htmlspecialchars($request->no_ktp),
             'biodata_no_hp' => htmlspecialchars($request->no_hp),
             'biodata_no_telp' => htmlspecialchars($request->no_telp),
-            'biodata_personal_web' => htmlspecialchars($request->personal_web),
+            'biodata_web_personal' => htmlspecialchars($request->web),
         ];
 
         Biodata::updateOrInsert(
