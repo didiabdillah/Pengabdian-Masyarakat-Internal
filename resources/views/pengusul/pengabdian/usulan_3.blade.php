@@ -68,14 +68,15 @@
                                 </div>
                             </div>
 
-                            <form action="" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('pengusul_pengabdian_upload_dokumen', $id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row m-4">
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="dokumen_usulan"><i class="fas fa-file-pdf fa-2x"></i> Dokumen Usulan</label>
-                                            <h6>Tanggal Unggah : 31 Desember 2021</h6>
-                                            <h6>Ukuran File : 6666 KByte</h6>
+                                            <h6>File Usulan : @if($dokumen_info){{$dokumen_info->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
+                                            <h6>Tanggal Unggah : @if($dokumen_info){{Carbon\Carbon::parse($dokumen_info->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
+                                            <h6>Ukuran File : @if($dokumen_info){{$dokumen_info->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
                                             <div class="input-group  @error('dokumen_usulan') is-invalid @enderror">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input  @error('dokumen_usulan') is-invalid @enderror" id="dokumen_usulan" name="dokumen_usulan">
@@ -119,6 +120,15 @@
 @endsection
 
 @push('plugin')
+<!-- bs-custom-file-input -->
+<script src="{{URL::asset('assets/js/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        bsCustomFileInput.init();
+    });
+</script>
+
 <!-- BS-Stepper -->
 <script src="{{URL::asset('assets/js/bs-stepper/js/bs-stepper.min.js')}}"></script>
 

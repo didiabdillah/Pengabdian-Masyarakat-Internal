@@ -5,18 +5,27 @@ namespace App\Http\Controllers\Pengusul;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
 
 use App\Models\User;
 use App\Models\Skema;
 use App\Models\Bidang;
 use App\Models\Usulanpengabdian;
 use App\Models\Anggotapengabdian;
+use App\Models\Dokumenusulan;
 
 class PengabdianController extends Controller
 {
     public function index()
     {
-        return view('pengusul.pengabdian.index');
+        $usulan_pengabdian = Usulanpengabdian::whereHas('anggotapengabdian', function ($query) {
+            $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
+        })->where('usulan_pengabdian_status', 'pending')
+            ->orderBy('usulan_pengabdian_tahun', 'asc')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->get();
+
+        return view('pengusul.pengabdian.index', ['usulan_pengabdian' => $usulan_pengabdian]);
     }
 
     public function tambah()
@@ -111,6 +120,14 @@ class PengabdianController extends Controller
 
     public function usulan($page, $id)
     {
+        $role_access = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->where('anggota_pengabdian_user_id', Session::get('user_id'))
+            ->first();
+
+        if ($role_access->anggota_pengabdian_role != "ketua") {
+            return redirect()->route('pengusul_pengabdian');
+        }
+
         if ($page == 1) {
             $skema = Skema::orderBy('skema_label', 'asc')->get();
             $bidang = Bidang::orderBy('bidang_label', 'asc')->get();
@@ -129,7 +146,11 @@ class PengabdianController extends Controller
 
             return view('pengusul.pengabdian.usulan_2', ['anggota' => $anggota, 'id' => $pengabdian_id]);
         } elseif ($page == 3) {
-            return view('pengusul.pengabdian.usulan_3');
+            $dokumen_info = Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+
+            $pengabdian_id = $id;
+
+            return view('pengusul.pengabdian.usulan_3', ['id' => $pengabdian_id, 'dokumen_info' => $dokumen_info]);
         } elseif ($page == 4) {
             return view('pengusul.pengabdian.usulan_4');
         } elseif ($page == 5) {
@@ -179,6 +200,61 @@ class PengabdianController extends Controller
         Anggotapengabdian::create($data);
 
         return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
+    }
+
+    public function upload_dokumen(Request $request, $id)
+    {
+        // Input Validation
+        $request->validate(
+            [
+                'dokumen_usulan' => 'required|mimes:pdf|max:10000',
+            ],
+            [
+                'dokumen_usulan.mimes' => 'Tipe File Harus PDF'
+            ]
+        );
+
+        $file = $request->file('dokumen_usulan');
+        $destination = "assets/file/dokumen_usulan/";
+
+        $is_exist = Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->count();
+
+        if ($is_exist > 0) {
+            $fileOld =  Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+            $file_path = public_path($destination . $fileOld->dokumen_usulan_hash_name);
+
+            //Update Data
+            $data = [
+                'dokumen_usulan_original_name' => $file->getClientOriginalName(),
+                'dokumen_usulan_hash_name' => $file->hashName(),
+                'dokumen_usulan_base_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'dokumen_usulan_file_size' => intval($file->getSize() / 1024),
+                'dokumen_usulan_extension' => $file->getClientOriginalExtension(),
+            ];
+
+            Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)
+                ->update($data);
+
+            $file->move($destination, $file->hashName());
+
+            File::delete($file_path);
+        } else {
+            //Insert Data
+            $data = [
+                'dokumen_usulan_pengabdian_id' => $id,
+                'dokumen_usulan_original_name' => $file->getClientOriginalName(),
+                'dokumen_usulan_hash_name' => $file->hashName(),
+                'dokumen_usulan_base_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'dokumen_usulan_file_size' => intval($file->getSize() / 1024),
+                'dokumen_usulan_extension' => $file->getClientOriginalExtension(),
+            ];
+
+            Dokumenusulan::create($data);
+
+            $file->move($destination, $file->hashName());
+        }
+
+        return redirect()->route('pengusul_pengabdian_usulan', [3, $id]);
     }
 
     public function remove_anggota($id, $removeid)

@@ -73,7 +73,7 @@
                         </div>
                         <div class="card-footer">
                             <a href="{{route('pengusul_pengabdian_usulan', [3, Request::segment(5)])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
-                            <button type="submit" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right "></i> Lanjut</button>
+                            <a href="{{route('pengusul_pengabdian_usulan', [5, Request::segment(5)])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> Lanjut</a>
                         </div>
                     </div>
                     <!-- /.card-body -->

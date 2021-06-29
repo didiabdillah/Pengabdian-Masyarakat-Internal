@@ -36,9 +36,99 @@
         <section class="content">
             <div class="container-fluid">
                 <!-- Default box -->
+                <!-- USULAN PENGABDIAN -->
                 <div class="card">
                     <div class="card-header">
+                        <b>Usulan Pengabdian Kepada Masyarakat</b>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover table-striped projects">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Judul</th>
+                                    <th>Tahun</th>
+                                    <th>Status</th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+                                @foreach($usulan_pengabdian as $usulan)
+                                <tr>
+                                    <td>
+                                        <h5>{{$loop->iteration}}</h5>
+                                    </td>
+                                    <td>
+                                        <h5>{{$usulan->usulan_pengabdian_judul}}</h5>
+                                    </td>
+                                    <td>
+                                        <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
+                                    </td>
+                                    <td>
+                                        @if($usulan->usulan_pengabdian_status == "diproses")
+                                        <h5><span class="badge badge-primary">Diproses</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "diterima")
+                                        <h5><span class="badge badge-success">Diterima</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "ditolak")
+                                        <h5><span class="badge badge-danger">Ditolak</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "pending")
+                                        <h5><span class="badge badge-warning">Pending</span></h5>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        <div class="card-body">
+                                            <a class="btn btn-success btn-sm" href="">
+                                                <i class="fas fa-folder">
+                                                </i>
+
+                                                Detail
+                                            </a>
+
+                                            @php $role = $usulan->anggotapengabdian()->where('anggota_pengabdian_user_id', Session::get('user_id'))->first()->anggota_pengabdian_role @endphp
+
+                                            @if($role == "ketua")
+                                            @if($usulan->usulan_pengabdian_status == "pending" || $usulan->usulan_pengabdian_status == "ditolak")
+                                            <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_usulan', [1, $usulan->usulan_pengabdian_id])}}">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+
+                                                Edit
+                                            </a>
+                                            @endif
+
+                                            @if($usulan->usulan_pengabdian_status == "pending")
+                                            <a class="btn btn-danger btn-sm" href="">
+                                                <i class="fas fa-trash">
+                                                </i>
+
+                                                Hapus
+                                            </a>
+                                            @endif
+                                            @endif
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- RIWAYAT -->
+                <div class="card">
+                    <div class="card-header">
+                        <b> Riwayat Pengabdian Kepada Masyarakat </b>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
