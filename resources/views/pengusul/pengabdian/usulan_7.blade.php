@@ -72,8 +72,14 @@
 
                         </div>
                         <div class="card-footer">
-                            <a href="{{route('pengusul_pengabdian_usulan', [6, Request::segment(5)])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
-                            <a href="" class="btn btn-primary ml-auto float-right"><i class="fas fa-paper-plane"></i> Submit</a>
+                            <form action="{{route('pengusul_pengabdian_submit', Request::segment(5))}}" method="POST" class="form-inline form-horizontal">
+                                @csrf
+                                <div class="card-body">
+                                    <a href="{{route('pengusul_pengabdian_usulan', [6, Request::segment(5)])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
+
+                                    <button type="submit" class="btn btn-primary ml-auto float-right btn-submit"><i class="fas fa-paper-plane"></i> Submit</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -89,6 +95,30 @@
 @endsection
 
 @push('plugin')
+<script>
+    // --------------
+    // Delete Button
+    // --------------
+    $('.btn-submit').on('click', function(e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal.fire({
+            title: 'Sudah yakin Untuk Di Submit?',
+            text: "Setelah Di Submit Tidak Dapat Di Ubah Lagi!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, kirim!',
+            cancelButtonText: 'Batal',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
 <!-- BS-Stepper -->
 <script src="{{URL::asset('assets/js/bs-stepper/js/bs-stepper.min.js')}}"></script>
 

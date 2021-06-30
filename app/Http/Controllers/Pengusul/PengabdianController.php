@@ -270,4 +270,17 @@ class PengabdianController extends Controller
 
         return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
     }
+
+    public function usulan_submit(Request $request, $id)
+    {
+        $data = [
+            'usulan_pengabdian_status' => 'diproses',
+            'usulan_pengabdian_submit' => true,
+        ];
+
+        Usulanpengabdian::where('usulan_pengabdian_id', $id)
+            ->update($data);
+
+        return redirect()->route('pengusul_pengabdian');
+    }
 }
