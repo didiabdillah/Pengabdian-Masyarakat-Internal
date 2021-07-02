@@ -16,7 +16,7 @@ class CreateUsulanLuaranTable extends Migration
         Schema::create('usulan_luaran', function (Blueprint $table) {
             $table->bigIncrements('usulan_luaran_id');
             $table->string('usulan_luaran_pengabdian_id', 64);
-            $table->enum('usulan_luaran_pengabdian_id', ['wajib', 'tambahan']);
+            $table->enum('usulan_luaran_pengabdian_tipe', ['wajib', 'tambahan']);
             $table->timestamps();
 
             $table->foreign('usulan_luaran_pengabdian_id')->references('usulan_pengabdian_id')->on('usulan_pengabdian')->onUpdate('cascade')->onDelete('cascade');

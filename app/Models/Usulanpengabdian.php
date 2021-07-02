@@ -33,4 +33,9 @@ class Usulanpengabdian extends Model
     {
         return $this->hasMany('App\Models\Dokumenusulan', 'dokumen_usulan_pengabdian_id');
     }
+
+    public function dokumen_rab()
+    {
+        return $this->hasMany('App\Models\Dokumen_rab', 'dokumen_rab_pengabdian_id');
+    }
 }

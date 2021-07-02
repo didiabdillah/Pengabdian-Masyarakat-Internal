@@ -13,6 +13,7 @@ use App\Models\Bidang;
 use App\Models\Usulanpengabdian;
 use App\Models\Anggotapengabdian;
 use App\Models\Dokumenusulan;
+use App\Models\Dokumen_rab;
 
 class PengabdianController extends Controller
 {
@@ -177,9 +178,12 @@ class PengabdianController extends Controller
 
             return view('pengusul.pengabdian.usulan_4', $view_data);
         } elseif ($page == 5) {
+            $dokumen_info = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
+
             $view_data = [
                 'id' => $id,
                 'page' => $page,
+                'dokumen_info' => $dokumen_info,
             ];
 
             return view('pengusul.pengabdian.usulan_5', $view_data);
@@ -293,6 +297,61 @@ class PengabdianController extends Controller
         }
 
         return redirect()->route('pengusul_pengabdian_usulan', [3, $id]);
+    }
+
+    public function upload_rab(Request $request, $id)
+    {
+        // Input Validation
+        $request->validate(
+            [
+                'dokumen_rab' => 'required|mimes:pdf|max:10000',
+            ],
+            [
+                'dokumen_rab.mimes' => 'Tipe File Harus PDF'
+            ]
+        );
+
+        $file = $request->file('dokumen_rab');
+        $destination = "assets/file/dokumen_rab/";
+
+        $is_exist = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->count();
+
+        if ($is_exist > 0) {
+            $fileOld =  Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
+            $file_path = public_path($destination . $fileOld->dokumen_rab_hash_name);
+
+            //Update Data
+            $data = [
+                'dokumen_rab_original_name' => $file->getClientOriginalName(),
+                'dokumen_rab_hash_name' => $file->hashName(),
+                'dokumen_rab_base_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'dokumen_rab_file_size' => intval($file->getSize() / 1024),
+                'dokumen_rab_extension' => $file->getClientOriginalExtension(),
+            ];
+
+            Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)
+                ->update($data);
+
+            $file->move($destination, $file->hashName());
+
+            File::delete($file_path);
+        } else {
+            //Insert Data
+            $data = [
+                'dokumen_rab_pengabdian_id' => $id,
+                'dokumen_rab_original_name' => $file->getClientOriginalName(),
+                'dokumen_rab_hash_name' => $file->hashName(),
+                'dokumen_rab_base_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'dokumen_rab_file_size' => intval($file->getSize() / 1024),
+                'dokumen_rab_extension' => $file->getClientOriginalExtension(),
+            ];
+
+            Dokumen_rab::create($data);
+
+            $file->move($destination, $file->hashName());
+        }
+
+        return redirect()->route('pengusul_pengabdian_usulan', [5, $id]);
     }
 
     public function remove_anggota($id, $removeid)

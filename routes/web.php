@@ -133,7 +133,8 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::get('/usulan/{id}/member/add', 'Pengusul\PengabdianController@tambah_anggota')->name('pengusul_pengabdian_tambah_anggota');
                     Route::post('/usulan/{id}/member/add', 'Pengusul\PengabdianController@store_anggota')->name('pengusul_pengabdian_store_anggota');
                     Route::delete('/usulan/{id}/member/remove/{removeid}', 'Pengusul\PengabdianController@remove_anggota')->name('pengusul_pengabdian_remove_anggota');
-                    Route::post('/usulan/{id}/upload', 'Pengusul\PengabdianController@upload_dokumen')->name('pengusul_pengabdian_upload_dokumen');
+                    Route::post('/usulan/{id}/upload/dokumen', 'Pengusul\PengabdianController@upload_dokumen')->name('pengusul_pengabdian_upload_dokumen');
+                    Route::post('/usulan/{id}/upload/rab', 'Pengusul\PengabdianController@upload_rab')->name('pengusul_pengabdian_upload_rab');
                     Route::post('/usulan/{id}/submit', 'Pengusul\PengabdianController@usulan_submit')->name('pengusul_pengabdian_submit');
                 });
 

@@ -68,7 +68,38 @@
                                 </div>
                             </div>
 
-                            <h5>RAB</h5>
+                            <form action="{{route('pengusul_pengabdian_upload_rab', $id)}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row m-4">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="dokumen_rab"><i class="fas fa-file-pdf fa-2x"></i> Dokumen Rencana Anggaran Biaya</label>
+                                            <h6>File RAB : @if($dokumen_info){{$dokumen_info->dokumen_rab_original_name}}@else{{"-"}}@endif</h6>
+                                            <h6>Tanggal Unggah : @if($dokumen_info){{Carbon\Carbon::parse($dokumen_info->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
+                                            <h6>Ukuran File : @if($dokumen_info){{$dokumen_info->dokumen_rab_file_size . " KB"}}@else{{"-"}}@endif</h6>
+                                            <div class="input-group  @error('dokumen_rab') is-invalid @enderror">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input  @error('dokumen_rab') is-invalid @enderror" id="dokumen_rab" name="dokumen_rab">
+                                                    <label class="custom-file-label" for="dokumen_rab">Unggah File</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Unggah</button>
+                                                </div>
+                                            </div>
+                                            @error('dokumen_rab')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-4 mt-4">
+                                        <div class="form-group mt-1">
+                                        </div>
+                                    </div> -->
+                                </div>
+
+                            </form>
 
                         </div>
                         <div class="card-footer">
@@ -89,6 +120,15 @@
 @endsection
 
 @push('plugin')
+<!-- bs-custom-file-input -->
+<script src="{{URL::asset('assets/js/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        bsCustomFileInput.init();
+    });
+</script>
+
 <!-- BS-Stepper -->
 <script src="{{URL::asset('assets/js/bs-stepper/js/bs-stepper.min.js')}}"></script>
 
