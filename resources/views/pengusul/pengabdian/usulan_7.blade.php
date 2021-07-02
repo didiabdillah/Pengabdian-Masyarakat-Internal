@@ -72,10 +72,10 @@
 
                         </div>
                         <div class="card-footer">
-                            <form action="{{route('pengusul_pengabdian_submit', Request::segment(5))}}" method="POST" class="form-inline form-horizontal">
+                            <form action="{{route('pengusul_pengabdian_submit', $id)}}" method="POST" class="form-inline form-horizontal">
                                 @csrf
                                 <div class="card-body">
-                                    <a href="{{route('pengusul_pengabdian_usulan', [6, Request::segment(5)])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
+                                    <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
 
                                     <button type="submit" class="btn btn-primary ml-auto float-right btn-submit"><i class="fas fa-paper-plane"></i> Submit</a>
                                 </div>

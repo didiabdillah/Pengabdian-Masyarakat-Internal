@@ -20,7 +20,8 @@ class PengabdianController extends Controller
     {
         $usulan_pengabdian = Usulanpengabdian::whereHas('anggotapengabdian', function ($query) {
             $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
-        })->where('usulan_pengabdian_status', 'pending')
+        })
+            // ->where('usulan_pengabdian_status', 'pending')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->get();
@@ -128,12 +129,21 @@ class PengabdianController extends Controller
             return redirect()->route('pengusul_pengabdian');
         }
 
+
         if ($page == 1) {
             $skema = Skema::orderBy('skema_label', 'asc')->get();
             $bidang = Bidang::orderBy('bidang_label', 'asc')->get();
             $usulan = Usulanpengabdian::where('usulan_pengabdian_id', $id)->first();
 
-            return view('pengusul.pengabdian.usulan_1', ['skema' => $skema, 'bidang' => $bidang, 'usulan' => $usulan]);
+            $view_data = [
+                'skema' => $skema,
+                'bidang' => $bidang,
+                'usulan' => $usulan,
+                'page' => $page,
+                'id' => $id,
+            ];
+
+            return view('pengusul.pengabdian.usulan_1', $view_data);
         } elseif ($page == 2) {
             $anggota = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
                 ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
@@ -142,23 +152,51 @@ class PengabdianController extends Controller
                 ->orderBy('anggota_pengabdian_role', 'asc')
                 ->get();
 
-            $pengabdian_id = $id;
+            $view_data = [
+                'anggota' => $anggota,
+                'id' => $id,
+                'page' => $page,
+            ];
 
-            return view('pengusul.pengabdian.usulan_2', ['anggota' => $anggota, 'id' => $pengabdian_id]);
+            return view('pengusul.pengabdian.usulan_2', $view_data);
         } elseif ($page == 3) {
             $dokumen_info = Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
-            $pengabdian_id = $id;
+            $view_data = [
+                'id' => $id,
+                'page' => $page,
+                'dokumen_info' => $dokumen_info,
+            ];
 
-            return view('pengusul.pengabdian.usulan_3', ['id' => $pengabdian_id, 'dokumen_info' => $dokumen_info]);
+            return view('pengusul.pengabdian.usulan_3', $view_data);
         } elseif ($page == 4) {
-            return view('pengusul.pengabdian.usulan_4');
+            $view_data = [
+                'id' => $id,
+                'page' => $page,
+            ];
+
+            return view('pengusul.pengabdian.usulan_4', $view_data);
         } elseif ($page == 5) {
-            return view('pengusul.pengabdian.usulan_5');
+            $view_data = [
+                'id' => $id,
+                'page' => $page,
+            ];
+
+            return view('pengusul.pengabdian.usulan_5', $view_data);
         } elseif ($page == 6) {
-            return view('pengusul.pengabdian.usulan_6');
+            $view_data = [
+                'id' => $id,
+                'page' => $page,
+            ];
+
+            return view('pengusul.pengabdian.usulan_6', $view_data);
         } elseif ($page == 7) {
-            return view('pengusul.pengabdian.usulan_7');
+            $view_data = [
+                'id' => $id,
+                'page' => $page,
+            ];
+
+            return view('pengusul.pengabdian.usulan_7', $view_data);
         } else {
             return redirect()->route('pengusul_pengabdian');
         }
