@@ -83,6 +83,7 @@
                                                 <th style="width: 10px">No</th>
                                                 <th>Mitra</th>
                                                 <th>Kontribusi Pendanaan</th>
+                                                <th>Dokumen</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>
@@ -95,18 +96,33 @@
                                                     <b>{{$data->mitra_sasaran_nama_pimpinan_mitra}}</b>
                                                     <br>
                                                     {{$data->mitra_sasaran_nama_mitra}}
-                                                    <br>
-                                                    <button type="button" data-toggle="modal" data-id="{{$data->mitra_sasaran_id}}" data-target="#modal-default" class="btn btn-primary upload-mitra-dokumen"><b><i class="fas fa-upload"></i></b></button>
-
                                                 </td>
                                                 <td>
-                                                    {{$data->mitra_sasaran_kontribusi_pendanaan_mitra}}
+                                                    Rp. {{$data->mitra_sasaran_kontribusi_pendanaan_mitra}}
+                                                </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <button type="button" data-toggle="modal" data-id="{{$data->mitra_sasaran_id}}" data-target="#modal-default" class="btn btn-primary upload-mitra-dokumen"><b><i class="fas fa-upload"></i></b></button>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            @if($data->mitra_sasaran_file_date)
+                                                            Nama File : {{$data->mitra_sasaran_file_original_name}}
+                                                            <br>
+                                                            Tanggal Unggah : {{Carbon\Carbon::parse($data->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
+                                                            @else
+                                                            Nama File : -
+                                                            <br>
+                                                            Tanggal Unggah : -
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <form action="{{route('pengusul_pengabdian_hapus_mitra', [$id, $data->mitra_sasaran_id])}}" method="POST" class="form-inline form-horizontal">
                                                         @csrf
                                                         @method('delete')
-                                                        <a class="btn btn-primary btn-sm" href="">
+                                                        <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_edit_mitra', [$id, $data->mitra_sasaran_id])}}">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Edit

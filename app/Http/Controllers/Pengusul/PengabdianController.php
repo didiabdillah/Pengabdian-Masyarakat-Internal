@@ -351,6 +351,98 @@ class PengabdianController extends Controller
         return redirect()->back();
     }
 
+    public function edit_mitra($id, $editid)
+    {
+        $provinsi = DB::table('wilayah_provinsi')->get();
+        $kabupaten = DB::table('wilayah_kabupaten')->get();
+        $kecamatan = DB::table('wilayah_kecamatan')->get();
+        $desa = DB::table('wilayah_desa')->get();
+
+        $mitra_sasaran = Mitra_sasaran::select(
+            'mitra_sasaran_id',
+            'mitra_sasaran_tipe_mitra',
+            'mitra_sasaran_jenis_mitra',
+            'mitra_sasaran_nama_pimpinan_mitra',
+            'mitra_sasaran_jabatan_pimpinan_mitra',
+            'mitra_sasaran_nama_mitra',
+            'mitra_sasaran_alamat_mitra',
+            'mitra_sasaran_provinsi_mitra',
+            'mitra_sasaran_kota_mitra',
+            'mitra_sasaran_kecamatan_mitra',
+            'mitra_sasaran_desa_mitra',
+            'mitra_sasaran_jarak_mitra',
+            'mitra_sasaran_bidang_masalah_mitra',
+            'mitra_sasaran_kontribusi_pendanaan_mitra'
+        )->where('mitra_sasaran_id', $editid)
+            ->first();
+
+        $view_data = [
+            'id' => $id,
+            'provinsi' => $provinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'desa' => $desa,
+            'mitra' => $mitra_sasaran,
+        ];
+
+        return view('pengusul.pengabdian.edit_mitra', $view_data);
+    }
+
+    public function update_mitra(Request $request, $id, $editid)
+    {
+        // Input Validation
+        $request->validate([
+            'tipe_mitra'  => 'required',
+            'jenis_mitra'  => 'required',
+            'nama_pimpinan'  => 'required|max:255',
+            'jabatan_pimpinan'  => 'required|max:255',
+            'nama_mitra'  => 'required|max:255',
+            'alamat_mitra'  => 'required|max:255',
+            'provinsi'  => 'required',
+            'kabupaten'  => 'required',
+            'kecamatan'  => 'required',
+            'desa'  => 'required',
+            'jarak_mitra'  => 'required|max:11',
+            'bidang_masalah'  => 'required|max:60000',
+            'kontribusi_pendanaan'  => 'required|max:20',
+        ]);
+
+        $tipe_mitra = htmlspecialchars($request->tipe_mitra);
+        $jenis_mitra = htmlspecialchars($request->jenis_mitra);
+        $nama_pimpinan = htmlspecialchars($request->nama_pimpinan);
+        $jabatan_pimpinan = htmlspecialchars($request->jabatan_pimpinan);
+        $nama_mitra = htmlspecialchars($request->nama_mitra);
+        $alamat_mitra = htmlspecialchars($request->alamat_mitra);
+        $provinsi = htmlspecialchars($request->provinsi);
+        $kabupaten = htmlspecialchars($request->kabupaten);
+        $kecamatan = htmlspecialchars($request->kecamatan);
+        $desa = htmlspecialchars($request->desa);
+        $jarak_mitra = htmlspecialchars($request->jarak_mitra);
+        $bidang_masalah = htmlspecialchars($request->bidang_masalah);
+        $kontribusi_pendanaan = htmlspecialchars($request->kontribusi_pendanaan);
+
+        //Insert Data Anggota Pengabdian
+        $data = [
+            'mitra_sasaran_tipe_mitra' => $tipe_mitra,
+            'mitra_sasaran_jenis_mitra' => $jenis_mitra,
+            'mitra_sasaran_nama_pimpinan_mitra' => $nama_pimpinan,
+            'mitra_sasaran_jabatan_pimpinan_mitra' => $jabatan_pimpinan,
+            'mitra_sasaran_nama_mitra' => $nama_mitra,
+            'mitra_sasaran_alamat_mitra' => $alamat_mitra,
+            'mitra_sasaran_provinsi_mitra' => $provinsi,
+            'mitra_sasaran_kota_mitra' => $kabupaten,
+            'mitra_sasaran_kecamatan_mitra' => $kecamatan,
+            'mitra_sasaran_desa_mitra' => $desa,
+            'mitra_sasaran_jarak_mitra' => $jarak_mitra,
+            'mitra_sasaran_bidang_masalah_mitra' => $bidang_masalah,
+            'mitra_sasaran_kontribusi_pendanaan_mitra' => $kontribusi_pendanaan,
+        ];
+        Mitra_sasaran::where('mitra_sasaran_id', $editid)
+            ->update($data);
+
+        return redirect()->route('pengusul_pengabdian_usulan', [6, $id]);
+    }
+
     public function hapus_mitra($id, $removeid)
     {
         $destination = "assets/file/dokumen_mitra/";
