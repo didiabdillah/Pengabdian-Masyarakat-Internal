@@ -31,11 +31,16 @@ class Usulanpengabdian extends Model
 
     public function dokumenusulan()
     {
-        return $this->hasMany('App\Models\Dokumenusulan', 'dokumen_usulan_pengabdian_id');
+        return $this->hasOne('App\Models\Dokumenusulan', 'dokumen_usulan_pengabdian_id');
     }
 
     public function dokumen_rab()
     {
-        return $this->hasMany('App\Models\Dokumen_rab', 'dokumen_rab_pengabdian_id');
+        return $this->hasOne('App\Models\Dokumen_rab', 'dokumen_rab_pengabdian_id');
+    }
+
+    public function mitra_sasaran()
+    {
+        return $this->hasMany('App\Models\Mitra_sasaran', 'mitra_sasaran_pengabdian_id');
     }
 }

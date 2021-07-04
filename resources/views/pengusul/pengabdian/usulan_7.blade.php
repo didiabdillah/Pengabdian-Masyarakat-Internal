@@ -77,7 +77,7 @@
                                 <div class="card-body">
                                     <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
 
-                                    <button type="submit" class="btn btn-primary ml-auto float-right btn-submit"><i class="fas fa-paper-plane"></i> Submit</a>
+                                    <button type="submit" class="btn btn-primary ml-auto float-right btn-submit"><i class="fas fa-paper-plane"></i> Kirim Usulan</a>
                                 </div>
                             </form>
                         </div>

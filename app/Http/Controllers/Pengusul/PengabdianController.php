@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Skema;
@@ -14,6 +15,7 @@ use App\Models\Usulanpengabdian;
 use App\Models\Anggotapengabdian;
 use App\Models\Dokumenusulan;
 use App\Models\Dokumen_rab;
+use App\Models\Mitra_sasaran;
 
 class PengabdianController extends Controller
 {
@@ -188,9 +190,14 @@ class PengabdianController extends Controller
 
             return view('pengusul.pengabdian.usulan_5', $view_data);
         } elseif ($page == 6) {
+            $mitra_sasaran = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
+                ->orderBy('created_at', 'asc')
+                ->get();
+
             $view_data = [
                 'id' => $id,
                 'page' => $page,
+                'mitra_sasaran' => $mitra_sasaran,
             ];
 
             return view('pengusul.pengabdian.usulan_6', $view_data);
@@ -219,6 +226,151 @@ class PengabdianController extends Controller
         return view('pengusul.pengabdian.tambah_anggota', ['id' => $id, 'result' => $result]);
     }
 
+    public function tambah_mitra($id)
+    {
+        $provinsi = DB::table('wilayah_provinsi')->get();
+        $kabupaten = DB::table('wilayah_kabupaten')->get();
+        $kecamatan = DB::table('wilayah_kecamatan')->get();
+        $desa = DB::table('wilayah_desa')->get();
+
+        $view_data = [
+            'id' => $id,
+            'provinsi' => $provinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'desa' => $desa,
+        ];
+
+        return view('pengusul.pengabdian.tambah_mitra', $view_data);
+    }
+
+    public function store_tambah_mitra(Request $request, $id)
+    {
+        // Input Validation
+        $request->validate([
+            'tipe_mitra'  => 'required',
+            'jenis_mitra'  => 'required',
+            'nama_pimpinan'  => 'required|max:255',
+            'jabatan_pimpinan'  => 'required|max:255',
+            'nama_mitra'  => 'required|max:255',
+            'alamat_mitra'  => 'required|max:255',
+            'provinsi'  => 'required',
+            'kabupaten'  => 'required',
+            'kecamatan'  => 'required',
+            'desa'  => 'required',
+            'jarak_mitra'  => 'required|max:11',
+            'bidang_masalah'  => 'required|max:60000',
+            'kontribusi_pendanaan'  => 'required|max:20',
+        ]);
+
+        $tipe_mitra = htmlspecialchars($request->tipe_mitra);
+        $jenis_mitra = htmlspecialchars($request->jenis_mitra);
+        $nama_pimpinan = htmlspecialchars($request->nama_pimpinan);
+        $jabatan_pimpinan = htmlspecialchars($request->jabatan_pimpinan);
+        $nama_mitra = htmlspecialchars($request->nama_mitra);
+        $alamat_mitra = htmlspecialchars($request->alamat_mitra);
+        $provinsi = htmlspecialchars($request->provinsi);
+        $kabupaten = htmlspecialchars($request->kabupaten);
+        $kecamatan = htmlspecialchars($request->kecamatan);
+        $desa = htmlspecialchars($request->desa);
+        $jarak_mitra = htmlspecialchars($request->jarak_mitra);
+        $bidang_masalah = htmlspecialchars($request->bidang_masalah);
+        $kontribusi_pendanaan = htmlspecialchars($request->kontribusi_pendanaan);
+
+        //Insert Data Anggota Pengabdian
+        $data = [
+            'mitra_sasaran_pengabdian_id' => $id,
+            'mitra_sasaran_tipe_mitra' => $tipe_mitra,
+            'mitra_sasaran_jenis_mitra' => $jenis_mitra,
+            'mitra_sasaran_nama_pimpinan_mitra' => $nama_pimpinan,
+            'mitra_sasaran_jabatan_pimpinan_mitra' => $jabatan_pimpinan,
+            'mitra_sasaran_nama_mitra' => $nama_mitra,
+            'mitra_sasaran_alamat_mitra' => $alamat_mitra,
+            'mitra_sasaran_provinsi_mitra' => $provinsi,
+            'mitra_sasaran_kota_mitra' => $kabupaten,
+            'mitra_sasaran_kecamatan_mitra' => $kecamatan,
+            'mitra_sasaran_desa_mitra' => $desa,
+            'mitra_sasaran_jarak_mitra' => $jarak_mitra,
+            'mitra_sasaran_bidang_masalah_mitra' => $bidang_masalah,
+            'mitra_sasaran_kontribusi_pendanaan_mitra' => $kontribusi_pendanaan,
+        ];
+        Mitra_sasaran::create($data);
+
+        return redirect()->route('pengusul_pengabdian_usulan', [6, $id]);
+    }
+
+    public function upload_dokumen_mitra(Request $request, $id)
+    {
+        // Input Validation
+        $request->validate(
+            [
+                'dokumen_mitra' => 'required|mimes:pdf|max:10000',
+            ],
+            [
+                'dokumen_mitra.mimes' => 'Tipe File Harus PDF'
+            ]
+        );
+
+        $id = $request->mitra_id;
+        $file = $request->file('dokumen_mitra');
+        $destination = "assets/file/dokumen_mitra/";
+        $file_original_name = $file->getClientOriginalName();
+        $file_hash_name = $file->hashName();
+        $file_base_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $file_size = intval($file->getSize() / 1024);
+        $file_extension = $file->getClientOriginalExtension();
+
+        $is_exist = Mitra_sasaran::where('mitra_sasaran_id', $id)
+            ->where('mitra_sasaran_file_hash_name', '!=', NULL)
+            ->count();
+
+        if ($is_exist > 0) {
+            $fileOld =  Mitra_sasaran::where('mitra_sasaran_id', $id)->first();
+            $file_path = public_path($destination . $fileOld->mitra_sasaran_file_hash_name);
+
+            $file->move($destination, $file->hashName());
+
+            File::delete($file_path);
+        } else {
+            $file->move($destination, $file->hashName());
+        }
+
+        //Update Data
+        $data = [
+            'mitra_sasaran_file_original_name' => $file_original_name,
+            'mitra_sasaran_file_hash_name' => $file_hash_name,
+            'mitra_sasaran_file_base_name' => $file_base_name,
+            'mitra_sasaran_file_size' => $file_size,
+            'mitra_sasaran_file_extension' => $file_extension,
+            'mitra_sasaran_file_date' => date('Y-m-d'),
+        ];
+
+        Mitra_sasaran::where('mitra_sasaran_id', $id)
+            ->update($data);
+
+        return redirect()->back();
+    }
+
+    public function hapus_mitra($id, $removeid)
+    {
+        $destination = "assets/file/dokumen_mitra/";
+        $fileOld =  Mitra_sasaran::where('mitra_sasaran_id', $removeid)->first();
+        $file_path = public_path($destination . $fileOld->mitra_sasaran_file_hash_name);
+
+        Mitra_sasaran::destroy('mitra_sasaran_id', $removeid);
+
+        File::delete($file_path);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Remove Success', //Alert Message 
+            'Mitra Terhapus' //Sub Alert Message
+        );
+
+        return redirect()->route('pengusul_pengabdian_usulan', [6, $id]);
+    }
+
     public function store_anggota(Request $request, $id)
     {
         // Input Validation
@@ -239,7 +391,7 @@ class PengabdianController extends Controller
             'anggota_pengabdian_role' => $peran,
             'anggota_pengabdian_tugas' => $tugas,
         ];
-        Anggotapengabdian::create($data);
+        Mitra_sasaran::create($data);
 
         return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
     }
