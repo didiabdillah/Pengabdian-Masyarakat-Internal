@@ -1,4 +1,18 @@
-@extends('layout.layout_admin')
+@php
+
+$profile_layout = NULL;
+
+if(Session::get('user_role') == "admin"){
+$profile_layout = 'layout.layout_admin';
+}elseif(Session::get('user_role') == "reviewer"){
+$profile_layout = 'layout.layout_reviewer';
+}elseif(Session::get('user_role') == "pengusul"){
+$profile_layout = 'layout.layout_pengusul';
+}
+
+@endphp
+
+@extends($profile_layout)
 
 @section('title', 'Profile Setting')
 
