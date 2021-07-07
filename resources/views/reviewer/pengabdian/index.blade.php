@@ -52,57 +52,53 @@
                                     <th>No</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
-                                    <th>Penulisan (25%)</th>
-                                    <th>Ide (50%)</th>
-                                    <th>Kesesuaian (25%)</th>
-                                    <th>Total</th>
+                                    <th>Status</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
                             <tbody>
 
+                                @foreach($usulan_pengabdian as $usulan)
                                 <tr>
                                     <td>
-                                        <h5>1</h5>
+                                        <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-                                        <h5>Pengabdian Masjid Jatisawit Lor</h5>
+                                        <h5>{{$usulan->usulan_pengabdian_judul}}</h5>
                                     </td>
                                     <td>
-                                        <h5>2021</h5>
+                                        <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
                                     </td>
                                     <td>
-                                        <h5>70.00</h5>
-                                    </td>
-                                    <td>
-                                        <h5>80.00</h5>
-                                    </td>
-                                    <td>
-                                        <h5>90.00</h5>
-                                    </td>
-                                    <td>
-                                        <h5>99</h5>
+                                        @if($usulan->usulan_pengabdian_status == "diproses")
+                                        <h5><span class="badge badge-primary">Diproses</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "diterima")
+                                        <h5><span class="badge badge-success">Diterima</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "ditolak")
+                                        <h5><span class="badge badge-danger">Ditolak</span></h5>
+                                        @endif
                                     </td>
 
                                     <td>
                                         <div class="card-body">
-                                            <a class="btn btn-primary btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
+                                            <a class="btn btn-success btn-sm" href="{{route('reviewer_pengabdian_detail', $usulan->usulan_pengabdian_id)}}">
+                                                <i class="fas fa-folder">
                                                 </i>
 
-                                                Edit
+                                                Detail
                                             </a>
 
-                                            <!-- <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
+                                            <a class="btn btn-primary btn-sm" href="{{route('reviewer_pengabdian_konfirmasi', $usulan->usulan_pengabdian_id)}}">
+                                                <i class="fas fa-check">
                                                 </i>
 
                                                 Konfirmasi
-                                            </a> -->
+                                            </a>
                                         </div>
 
                                     </td>
                                 </tr>
+                                @endforeach
 
                             </tbody>
                         </table>

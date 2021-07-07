@@ -109,11 +109,20 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Reviewer\PengabdianController@index')->name('reviewer_pengabdian');
+                    Route::get('/{id}/detail', 'Reviewer\PengabdianController@detail')->name('reviewer_pengabdian_detail');
+                    Route::get('/{id}/konfirmasi', 'Reviewer\PengabdianController@konfirmasi')->name('reviewer_pengabdian_konfirmasi');
                 });
 
                 //Penilaian
                 Route::group(['prefix' => 'penilaian'], function () {
                     Route::get('/', 'Reviewer\PenilaianController@index')->name('reviewer_penilaian_pengabdian');
+                });
+
+                //Biodata
+                Route::group(['prefix' => '/biodata'], function () {
+                    Route::get('/edit', 'Reviewer\BiodataController@edit')->name('reviewer_biodata_edit');
+                    Route::patch('/update', 'Reviewer\BiodataController@update')->name('reviewer_biodata_update');
+                    Route::patch('/update/picture', 'Reviewer\BiodataController@update_picture')->name('reviewer_biodata_update_picture');
                 });
             });
         });
@@ -170,7 +179,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     // Route::get('/insert', 'Pengusul\LogbookController@insert')->name('pengusul_logbook_insert');
                 });
 
-                //biodata
+                //Biodata
                 Route::group(['prefix' => '/biodata'], function () {
                     Route::get('/edit', 'Pengusul\BiodataController@edit')->name('pengusul_biodata_edit');
                     Route::patch('/update', 'Pengusul\BiodataController@update')->name('pengusul_biodata_update');
