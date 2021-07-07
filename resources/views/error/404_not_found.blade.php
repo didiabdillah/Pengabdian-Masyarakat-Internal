@@ -29,11 +29,22 @@ $profile_layout = 'layout.layout_pengusul';
                         <h2 class="headline text-warning"> 404</h2>
 
                         <div class="error-content">
-                            <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Page not found.</h3>
-
+                            <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Halaman Tidak Ditemukan.</h3>
+                            @php
+                            $link_route = NULL;
+                            if(Session::get('user_role') == "admin"){
+                            $link_route = 'admin_home';
+                            }
+                            elseif(Session::get('user_role') == "reviewer"){
+                            $link_route = 'reviewer_home';
+                            }
+                            elseif(Session::get('user_role') == "pengusul"){
+                            $link_route = 'pengusul_home';
+                            }
+                            @endphp
                             <p>
-                                We could not find the page you were looking for.
-                                Meanwhile, you may <a href="{{route('admin_home')}}">return to your correct page</a>
+                                Kami Tidak Dapat Menemukan Halaman Yang Anda Cari.
+                                Anda Mungkin <a href="{{route($link_route)}}">kembali ke halaman yang benar</a>
                             </p>
 
                         </div>

@@ -123,9 +123,17 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{route('reviewer_pengabdian')}}" class="nav-link @if(Request::segment(1) == 'pengabdian' || Request::segment(2) == 'pengabdian') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-copy"></i>
+                                <i class="nav-icon fas fa-file"></i>
                                 <p>
                                     Usulan Pengabdian
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('reviewer_penilaian_pengabdian')}}" class="nav-link @if(Request::segment(1) == 'penilaian' || Request::segment(2) == 'penilaian') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Penilaian Pengabdian
                                 </p>
                             </a>
                         </li>

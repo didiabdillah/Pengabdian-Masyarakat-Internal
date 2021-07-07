@@ -110,6 +110,11 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Reviewer\PengabdianController@index')->name('reviewer_pengabdian');
                 });
+
+                //Penilaian
+                Route::group(['prefix' => 'penilaian'], function () {
+                    Route::get('/', 'Reviewer\PenilaianController@index')->name('reviewer_penilaian_pengabdian');
+                });
             });
         });
         // END REVIEWER
