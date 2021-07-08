@@ -15,6 +15,8 @@ class CreateUsulanPengabdianTable extends Migration
     {
         Schema::create('usulan_pengabdian', function (Blueprint $table) {
             $table->string('usulan_pengabdian_id', 64)->primary()->unique();
+            $table->string('usulan_pengabdian_konfirmasi_reviewer_id', 64);
+            $table->string('usulan_pengabdian_penilaian_reviewer_id', 64);
             $table->string('usulan_pengabdian_judul');
             $table->boolean('usulan_pengabdian_kategori'); //[Kompetitif Nasional / Desentralisasi]
             $table->bigInteger('usulan_pengabdian_skema_id')->unsigned()->nullable();

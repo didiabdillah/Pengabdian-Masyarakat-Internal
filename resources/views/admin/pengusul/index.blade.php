@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="{{route('admin_proposer_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Pengusul</a>
+                    <a href="{{route('admin_pengusul_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Pengusul</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -51,9 +51,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Avatar</th>
+                                    <th>NIDN</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
                                     <th>Role</th>
                                     <th>Options</th>
                                 </tr>
@@ -69,24 +69,24 @@
                                         <img alt="Avatar" class="table-avatar" src="{{URL::asset('assets/img/profile/' . $data->user_image)}}" style="height: 40px;">
                                     </td>
                                     <td>
+                                        <h5>@if($data->user_nidn != NULL){{$data->user_nidn}}@else{{'-'}}@endif</h5>
+                                    </td>
+                                    <td>
                                         <h5>{{$data->user_name}}</h5>
                                     </td>
                                     <td>
                                         <h5>{{$data->user_email}}</h5>
                                     </td>
                                     <td>
-                                        <h5>{{$data->user_phone}}</h5>
-                                    </td>
-                                    <td>
                                         <h5>{{$data->user_role}}</h5>
                                     </td>
 
                                     <td>
-                                        <form action="{{route('admin_proposer_destroy', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
+                                        <form action="{{route('admin_pengusul_destroy', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
                                             @csrf
                                             @method('delete')
                                             <div class="card-body">
-                                                <a class="btn btn-primary btn-sm" href="{{route('admin_proposer_edit', $data->user_id)}}">
+                                                <a class="btn btn-primary btn-sm" href="{{route('admin_pengusul_edit', $data->user_id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 

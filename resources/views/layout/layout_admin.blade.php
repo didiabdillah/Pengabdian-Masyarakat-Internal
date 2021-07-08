@@ -170,7 +170,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin_proposer')}}" class="nav-link @if(Request::segment(1) == 'proposer' || Request::segment(2) == 'proposer') {{'active'}} @endif">
+                            <a href="{{route('admin_pengusul')}}" class="nav-link @if(Request::segment(1) == 'pengusul' || Request::segment(2) == 'pengusul') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Pengusul

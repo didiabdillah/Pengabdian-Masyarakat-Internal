@@ -86,13 +86,13 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 });
 
                 //Pengusul
-                Route::group(['prefix' => 'proposer'], function () {
-                    Route::get('/', 'Admin\ProposerController@index')->name('admin_proposer');
-                    Route::get('/insert', 'Admin\ProposerController@insert')->name('admin_proposer_insert');
-                    Route::post('/store', 'Admin\ProposerController@store')->name('admin_proposer_store');
-                    Route::get('/edit/{id}', 'Admin\ProposerController@edit')->name('admin_proposer_edit');
-                    Route::patch('/edit/{id}', 'Admin\ProposerController@update')->name('admin_proposer_update');
-                    Route::delete('/destroy/{id}', 'Admin\ProposerController@destroy')->name('admin_proposer_destroy');
+                Route::group(['prefix' => 'pengusul'], function () {
+                    Route::get('/', 'Admin\PengusulController@index')->name('admin_pengusul');
+                    Route::get('/insert', 'Admin\PengusulController@insert')->name('admin_pengusul_insert');
+                    Route::post('/store', 'Admin\PengusulController@store')->name('admin_pengusul_store');
+                    Route::get('/edit/{id}', 'Admin\PengusulController@edit')->name('admin_pengusul_edit');
+                    Route::patch('/edit/{id}', 'Admin\PengusulController@update')->name('admin_pengusul_update');
+                    Route::delete('/destroy/{id}', 'Admin\PengusulController@destroy')->name('admin_pengusul_destroy');
                 });
             });
         });

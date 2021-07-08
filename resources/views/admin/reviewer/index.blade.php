@@ -51,9 +51,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Avatar</th>
+                                    <th>NIDN</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
                                     <th>Role</th>
                                     <th>Options</th>
                                 </tr>
@@ -69,13 +69,13 @@
                                         <img alt="Avatar" class="table-avatar" src="{{URL::asset('assets/img/profile/' . $data->user_image)}}" style="height: 40px;">
                                     </td>
                                     <td>
+                                        <h5>@if($data->user_nidn != NULL){{$data->user_nidn}}@else{{'-'}}@endif</h5>
+                                    </td>
+                                    <td>
                                         <h5>{{$data->user_name}}</h5>
                                     </td>
                                     <td>
                                         <h5>{{$data->user_email}}</h5>
-                                    </td>
-                                    <td>
-                                        <h5>{{$data->user_phone}}</h5>
                                     </td>
                                     <td>
                                         <h5>{{$data->user_role}}</h5>

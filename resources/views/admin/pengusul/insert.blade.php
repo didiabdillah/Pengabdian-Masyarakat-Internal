@@ -22,12 +22,22 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('admin_proposer_store')}}" method="POST">
+                    <form action="{{route('admin_pengusul_store')}}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{old('name')}}">
+                                <label for="nidn">NIDN</label>
+                                <input type="text" class="form-control @error('nidn') is-invalid @enderror" id="nidn" name="nidn" placeholder="NIDN" value="{{old('nidn')}}">
+                                @error('nidn')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama" value="{{old('name')}}">
                                 @error('name')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -56,7 +66,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('admin_proposer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                <a href="{{route('admin_pengusul')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Insert</button>
                             </div>
                         </div>

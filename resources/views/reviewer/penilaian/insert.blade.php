@@ -22,7 +22,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('proposer_store')}}" method="POST">
+                    <form action="{{route('admin_pengusul_store')}}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
@@ -56,7 +56,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('proposer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                <a href="{{route('admin_pengusul')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Insert</button>
                             </div>
                         </div>

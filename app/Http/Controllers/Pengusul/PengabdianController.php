@@ -641,7 +641,7 @@ class PengabdianController extends Controller
     public function usulan_submit(Request $request, $id)
     {
         $data = [
-            'usulan_pengabdian_status' => 'diproses',
+            'usulan_pengabdian_status' => 'dikirim',
             'usulan_pengabdian_submit' => true,
         ];
 

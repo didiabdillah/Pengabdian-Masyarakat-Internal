@@ -71,8 +71,8 @@
                                         <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
                                     </td>
                                     <td>
-                                        @if($usulan->usulan_pengabdian_status == "diproses")
-                                        <h5><span class="badge badge-primary">Diproses</span></h5>
+                                        @if($usulan->usulan_pengabdian_status == "dikirim")
+                                        <h5><span class="badge badge-primary">Dikirim</span></h5>
                                         @elseif($usulan->usulan_pengabdian_status == "diterima")
                                         <h5><span class="badge badge-success">Diterima</span></h5>
                                         @elseif($usulan->usulan_pengabdian_status == "ditolak")

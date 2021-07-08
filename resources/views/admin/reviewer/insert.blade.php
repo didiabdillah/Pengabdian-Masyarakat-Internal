@@ -26,6 +26,16 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="nidn">NIDN</label>
+                                <input type="text" class="form-control @error('nidn') is-invalid @enderror" id="nidn" name="nidn" placeholder="NIDN" value="{{old('nidn')}}">
+                                @error('nidn')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{old('name')}}">
                                 @error('name')

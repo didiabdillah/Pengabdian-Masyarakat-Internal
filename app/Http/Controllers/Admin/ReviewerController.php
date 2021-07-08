@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 
 use App\Models\User;
+use App\Models\Biodata;
 
 class ReviewerController extends Controller
 {
@@ -33,12 +34,14 @@ class ReviewerController extends Controller
     {
         // Input Validation
         $request->validate([
+            'nidn'  => 'required|max:255',
             'name'  => 'required|max:255',
             'email'  => 'required|max:255',
             'password'  => 'required|max:100|min:8',
         ]);
 
         $id = str_replace('-', '', Str::uuid());
+        $nidn = htmlspecialchars($request->nidn);
         $name = htmlspecialchars($request->name);
         $email = htmlspecialchars($request->email);
         $password = htmlspecialchars($request->password);
@@ -59,6 +62,7 @@ class ReviewerController extends Controller
         $data = [
             'user_id' => $id,
             'user_password' => Hash::make($password),
+            'user_nidn' => $nidn,
             'user_name' => $name,
             'user_email' => $email,
             'user_role' => 'reviewer',
@@ -66,7 +70,13 @@ class ReviewerController extends Controller
         ];
 
         //Insert Data
-        User::create($data);
+        $query = User::create($data);
+
+        $data_biodata = [
+            'biodata_user_id' => $query->user_id
+        ];
+
+        Biodata::create($data_biodata);
 
         //Flash Message
         flash_alert(
@@ -75,7 +85,7 @@ class ReviewerController extends Controller
             'Reviewer Added' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer');
+        return redirect()->route('admin_reviewer');
     }
 
     public function edit($id)
@@ -90,12 +100,14 @@ class ReviewerController extends Controller
         // Input Validation
         if (htmlspecialchars($request->password) != NULL) {
             $request->validate([
+                'nidn'  => 'required|max:255',
                 'name'  => 'required|max:255',
                 'email'  => 'required|max:255',
                 'password'  => 'max:100|min:8',
             ]);
         } else {
             $request->validate([
+                'nidn'  => 'required|max:255',
                 'name'  => 'required|max:255',
                 'email'  => 'required|max:255',
             ]);
@@ -103,6 +115,7 @@ class ReviewerController extends Controller
 
         $user = User::where('user_id', $id)->first();
 
+        $nidn = htmlspecialchars($request->nidn);
         $name = htmlspecialchars($request->name);
         $email = htmlspecialchars($request->email);
         $password = (htmlspecialchars($request->password) != NULL) ? Hash::make($request->password) : $user->user_password;
@@ -120,6 +133,7 @@ class ReviewerController extends Controller
         }
 
         $data = [
+            'user_nidn' => $nidn,
             'user_password' => $password,
             'user_name' => $name,
             'user_email' => $email,
@@ -136,7 +150,7 @@ class ReviewerController extends Controller
             'Reviewer Updated' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer');
+        return redirect()->route('admin_reviewer');
     }
 
     public function destroy($id)
@@ -159,6 +173,6 @@ class ReviewerController extends Controller
             'Reviewer Removed' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer');
+        return redirect()->route('admin_reviewer');
     }
 }

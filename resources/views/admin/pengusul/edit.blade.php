@@ -22,13 +22,23 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('admin_proposer_update', $user->user_id)}}" method="POST">
+                    <form action="{{route('admin_pengusul_update', $user->user_id)}}" method="POST">
                         @csrf
                         @method('patch')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{$user->user_name}}">
+                                <label for="nidn">NIDN</label>
+                                <input type="text" class="form-control @error('nidn') is-invalid @enderror" id="nidn" name="nidn" placeholder="NIDN" value="{{$user->user_nidn}}">
+                                @error('nidn')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama" value="{{$user->user_name}}">
                                 @error('name')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -57,7 +67,7 @@
                             </div>
 
                             <div class=" card-footer">
-                                <a href="{{route('admin_proposer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                <a href="{{route('admin_pengusul')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
                             </div>
                         </div>
