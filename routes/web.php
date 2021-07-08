@@ -111,6 +111,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::get('/', 'Reviewer\PengabdianController@index')->name('reviewer_pengabdian');
                     Route::get('/{id}/detail', 'Reviewer\PengabdianController@detail')->name('reviewer_pengabdian_detail');
                     Route::get('/{id}/konfirmasi', 'Reviewer\PengabdianController@konfirmasi')->name('reviewer_pengabdian_konfirmasi');
+                    Route::patch('/{id}/konfirmasi', 'Reviewer\PengabdianController@konfirmasi_update')->name('reviewer_pengabdian_konfirmasi_status');
                 });
 
                 //Penilaian
