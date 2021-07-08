@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usulanpengabdian extends Model
+class Usulan_pengabdian extends Model
 {
     protected $table = 'usulan_pengabdian';
     protected $primaryKey = 'usulan_pengabdian_id';
@@ -24,14 +24,14 @@ class Usulanpengabdian extends Model
         'usulan_pengabdian_komentar',
     ];
 
-    public function anggotapengabdian()
+    public function anggota_pengabdian()
     {
-        return $this->hasMany('App\Models\Anggotapengabdian', 'anggota_pengabdian_pengabdian_id');
+        return $this->hasMany('App\Models\Anggota_pengabdian', 'anggota_pengabdian_pengabdian_id');
     }
 
-    public function dokumenusulan()
+    public function dokumen_usulan()
     {
-        return $this->hasOne('App\Models\Dokumenusulan', 'dokumen_usulan_pengabdian_id');
+        return $this->hasOne('App\Models\Dokumen_usulan', 'dokumen_usulan_pengabdian_id');
     }
 
     public function dokumen_rab()

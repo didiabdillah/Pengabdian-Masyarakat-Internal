@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\Usulanpengabdian;
-use App\Models\Anggotapengabdian;
-use App\Models\Dokumenusulan;
+use App\Models\Usulan_pengabdian;
+use App\Models\Anggota_pengabdian;
+use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 
@@ -16,7 +16,7 @@ class PengabdianController extends Controller
 {
     public function index()
     {
-        $usulan_pengabdian = Usulanpengabdian::where('usulan_pengabdian_submit', true)
+        $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_status', '!=', 'pending')
             ->orderBy('usulan_pengabdian_tahun', 'desc')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
@@ -31,15 +31,15 @@ class PengabdianController extends Controller
 
     public function detail($id)
     {
-        $ketua = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
             ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', 'ketua')
             ->first();
 
-        $dokumen_usulan = Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+        $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
-        $anggota = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
             ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', '!=', 'ketua')
@@ -66,15 +66,15 @@ class PengabdianController extends Controller
 
     public function konfirmasi($id)
     {
-        $ketua = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
             ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', 'ketua')
             ->first();
 
-        $dokumen_usulan = Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+        $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
-        $anggota = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
             ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', '!=', 'ketua')
@@ -119,7 +119,7 @@ class PengabdianController extends Controller
             'usulan_pengabdian_status' => $konfirmasi,
             'usulan_pengabdian_komentar' => $komentar,
         ];
-        Usulanpengabdian::where('usulan_pengabdian_id', $id)->update($data);
+        Usulan_pengabdian::where('usulan_pengabdian_id', $id)->update($data);
 
         //Flash Message
         flash_alert(

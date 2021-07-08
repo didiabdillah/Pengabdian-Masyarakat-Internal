@@ -18,8 +18,8 @@ class Dokumen_rab extends Model
         'dokumen_rab_extension',
     ];
 
-    public function usulanpengabdian()
+    public function usulan_pengabdian()
     {
-        return $this->belongsTo('App\Models\Usulanpengabdian', 'dokumen_rab_pengabdian_id');
+        return $this->belongsTo('App\Models\Usulan_pengabdian', 'dokumen_rab_pengabdian_id');
     }
 }

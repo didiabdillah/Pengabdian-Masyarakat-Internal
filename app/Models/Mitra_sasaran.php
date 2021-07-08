@@ -32,8 +32,8 @@ class Mitra_sasaran extends Model
         'mitra_sasaran_extension',
     ];
 
-    public function usulanpengabdian()
+    public function usulan_pengabdian()
     {
-        return $this->belongsTo('App\Models\Usulanpengabdian', 'mitra_sasaran_pengabdian_id');
+        return $this->belongsTo('App\Models\Usulan_pengabdian', 'mitra_sasaran_pengabdian_id');
     }
 }

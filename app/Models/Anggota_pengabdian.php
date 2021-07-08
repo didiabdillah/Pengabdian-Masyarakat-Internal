@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Anggotapengabdian extends Model
+class Anggota_pengabdian extends Model
 {
     protected $table = 'anggota_pengabdian';
     protected $primaryKey = 'anggota_pengabdian_id';
@@ -16,8 +16,8 @@ class Anggotapengabdian extends Model
         'anggota_pengabdian_tugas',
     ];
 
-    public function usulanpengabdian()
+    public function usulan_pengabdian()
     {
-        return $this->belongsTo('App\Models\Usulanpengabdian', 'anggota_pengabdian_pengabdian_id');
+        return $this->belongsTo('App\Models\Usulan_pengabdian', 'anggota_pengabdian_pengabdian_id');
     }
 }

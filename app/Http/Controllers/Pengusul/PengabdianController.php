@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Skema;
 use App\Models\Bidang;
-use App\Models\Usulanpengabdian;
-use App\Models\Anggotapengabdian;
-use App\Models\Dokumenusulan;
+use App\Models\Usulan_pengabdian;
+use App\Models\Anggota_pengabdian;
+use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 
@@ -21,7 +21,7 @@ class PengabdianController extends Controller
 {
     public function index()
     {
-        $usulan_pengabdian = Usulanpengabdian::whereHas('anggotapengabdian', function ($query) {
+        $usulan_pengabdian = Usulan_pengabdian::whereHas('anggota_pengabdian', function ($query) {
             $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
         })
             // ->where('usulan_pengabdian_status', 'pending')
@@ -74,7 +74,7 @@ class PengabdianController extends Controller
             'usulan_pengabdian_status' => "pending",
             'komentar' => NULL,
         ];
-        Usulanpengabdian::create($data);
+        Usulan_pengabdian::create($data);
 
         //Insert Data Ketua
         $data_anggota = [
@@ -83,7 +83,7 @@ class PengabdianController extends Controller
             'anggota_pengabdian_role' => 'ketua',
             'anggota_pengabdian_tugas' => NULL,
         ];
-        Anggotapengabdian::create($data_anggota);
+        Anggota_pengabdian::create($data_anggota);
 
         return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
     }
@@ -117,14 +117,14 @@ class PengabdianController extends Controller
             'usulan_pengabdian_lama_kegiatan' => $lama_kegiatan,
             'usulan_pengabdian_mahasiswa_terlibat' => $jumlah_mahasiswa,
         ];
-        Usulanpengabdian::where('usulan_pengabdian_id', $id)->update($data);
+        Usulan_pengabdian::where('usulan_pengabdian_id', $id)->update($data);
 
         return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
     }
 
     public function usulan($page, $id)
     {
-        $role_access = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+        $role_access = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
             ->where('anggota_pengabdian_user_id', Session::get('user_id'))
             ->first();
 
@@ -136,7 +136,7 @@ class PengabdianController extends Controller
         if ($page == 1) {
             $skema = Skema::orderBy('skema_label', 'asc')->get();
             $bidang = Bidang::orderBy('bidang_label', 'asc')->get();
-            $usulan = Usulanpengabdian::where('usulan_pengabdian_id', $id)->first();
+            $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)->first();
 
             $view_data = [
                 'skema' => $skema,
@@ -148,7 +148,7 @@ class PengabdianController extends Controller
 
             return view('pengusul.pengabdian.usulan_1', $view_data);
         } elseif ($page == 2) {
-            $anggota = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
                 ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
                 ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
                 ->where('anggota_pengabdian_role', '!=', 'ketua')
@@ -163,7 +163,7 @@ class PengabdianController extends Controller
 
             return view('pengusul.pengabdian.usulan_2', $view_data);
         } elseif ($page == 3) {
-            $dokumen_info = Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+            $dokumen_info = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
             $view_data = [
                 'id' => $id,
@@ -202,15 +202,15 @@ class PengabdianController extends Controller
 
             return view('pengusul.pengabdian.usulan_6', $view_data);
         } elseif ($page == 7) {
-            $ketua = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
                 ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
                 ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
                 ->where('anggota_pengabdian_role', 'ketua')
                 ->first();
 
-            $dokumen_usulan = Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+            $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
-            $anggota = Anggotapengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
                 ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
                 ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
                 ->where('anggota_pengabdian_role', '!=', 'ketua')
@@ -529,10 +529,10 @@ class PengabdianController extends Controller
         $file = $request->file('dokumen_usulan');
         $destination = "assets/file/dokumen_usulan/";
 
-        $is_exist = Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->count();
+        $is_exist = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->count();
 
         if ($is_exist > 0) {
-            $fileOld =  Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+            $fileOld =  Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
             $file_path = public_path($destination . $fileOld->dokumen_usulan_hash_name);
 
             //Update Data
@@ -544,7 +544,7 @@ class PengabdianController extends Controller
                 'dokumen_usulan_extension' => $file->getClientOriginalExtension(),
             ];
 
-            Dokumenusulan::where('dokumen_usulan_pengabdian_id', $id)
+            Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)
                 ->update($data);
 
             $file->move($destination, $file->hashName());
@@ -561,7 +561,7 @@ class PengabdianController extends Controller
                 'dokumen_usulan_extension' => $file->getClientOriginalExtension(),
             ];
 
-            Dokumenusulan::create($data);
+            Dokumen_usulan::create($data);
 
             $file->move($destination, $file->hashName());
         }
@@ -626,7 +626,7 @@ class PengabdianController extends Controller
 
     public function remove_anggota($id, $removeid)
     {
-        Anggotapengabdian::destroy('anggota_pengabdian_id', $removeid);
+        Anggota_pengabdian::destroy('anggota_pengabdian_id', $removeid);
 
         //Flash Message
         flash_alert(
@@ -645,7 +645,7 @@ class PengabdianController extends Controller
             'usulan_pengabdian_submit' => true,
         ];
 
-        Usulanpengabdian::where('usulan_pengabdian_id', $id)
+        Usulan_pengabdian::where('usulan_pengabdian_id', $id)
             ->update($data);
 
         return redirect()->route('pengusul_pengabdian');

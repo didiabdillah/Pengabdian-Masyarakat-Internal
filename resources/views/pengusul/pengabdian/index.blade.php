@@ -91,7 +91,7 @@
                                                 Detail
                                             </a>
 
-                                            @php $role = $usulan->anggotapengabdian()->where('anggota_pengabdian_user_id', Session::get('user_id'))->first()->anggota_pengabdian_role @endphp
+                                            @php $role = $usulan->anggota_pengabdian()->where('anggota_pengabdian_user_id', Session::get('user_id'))->first()->anggota_pengabdian_role @endphp
 
                                             @if($role == "ketua")
                                             @if($usulan->usulan_pengabdian_status == "pending" || $usulan->usulan_pengabdian_status == "ditolak")
