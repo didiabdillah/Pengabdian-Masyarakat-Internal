@@ -52,9 +52,10 @@ class ReviewerController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Add Failed', //Alert Message 
-                'User Email Already Exist' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Email Sudah Terdaftar' //Sub Alert Message
             );
+
 
             return redirect()->back();
         }
@@ -81,9 +82,10 @@ class ReviewerController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Add Success', //Alert Message 
-            'Reviewer Added' //Sub Alert Message
+            'Sukses', //Alert Message 
+            'Reviewer Ditambahkan' //Sub Alert Message
         );
+
 
         return redirect()->route('admin_reviewer');
     }
@@ -125,8 +127,8 @@ class ReviewerController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Update Failed', //Alert Message 
-                'Email Already Exist' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Email Sudah Terdaftar' //Sub Alert Message
             );
 
             return redirect()->back();
@@ -146,8 +148,8 @@ class ReviewerController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Update Success', //Alert Message 
-            'Reviewer Updated' //Sub Alert Message
+            'Sukses', //Alert Message 
+            'Reviewer Diperbaharui' //Sub Alert Message
         );
 
         return redirect()->route('admin_reviewer');
@@ -169,8 +171,8 @@ class ReviewerController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Remove Success', //Alert Message 
-            'Reviewer Removed' //Sub Alert Message
+            'Sukses', //Alert Message 
+            'Reviewer Terhapus' //Sub Alert Message
         );
 
         return redirect()->route('admin_reviewer');

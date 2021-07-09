@@ -63,8 +63,8 @@ class ProfileController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Failed', //Alert Message 
-                'Email Already Exist' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Email Sudah Digunakan' //Sub Alert Message
             );
 
             return redirect()->back();
@@ -88,8 +88,8 @@ class ProfileController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Success', //Alert Message 
-            'Profile Updated' //Sub Alert Message
+            'Sukses', //Alert Message 
+            'Profile Diperbaharui' //Sub Alert Message
         );
 
         return redirect()->back();
@@ -122,8 +122,8 @@ class ProfileController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_success'), //Icon
-                'Success', //Alert Message 
-                'Password Changed' //Sub Alert Message
+                'Sukses', //Alert Message 
+                'Password Diperbaharui' //Sub Alert Message
             );
 
             return redirect()->back();
@@ -132,8 +132,8 @@ class ProfileController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Failed', //Alert Message 
-                'Old Password Different' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Password Lama Salah' //Sub Alert Message
             );
 
             return redirect()->back();
@@ -142,7 +142,7 @@ class ProfileController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_error'), //Icon
-            'Error', //Alert Message 
+            'Gagal', //Alert Message 
             'Something Wrong' //Sub Alert Message
         );
 
@@ -188,8 +188,8 @@ class ProfileController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Success', //Alert Message 
-            'Profile Picture Updated' //Sub Alert Message
+            'Sukses', //Alert Message 
+            'Foto Profile Diperbaharui' //Sub Alert Message
         );
 
         return redirect()->back();

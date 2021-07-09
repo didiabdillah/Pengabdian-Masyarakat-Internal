@@ -48,7 +48,7 @@ class BiodataController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Failed', //Alert Message 
+                'Gagal', //Alert Message 
                 'Email Sudah Terdaftar' //Sub Alert Message
             );
 
@@ -96,7 +96,7 @@ class BiodataController extends Controller
         flash_alert(
             __('alert.icon_success'), //Icon
             'Success', //Alert Message 
-            'Biodata Berhasil Diubah' //Sub Alert Message
+            'Biodata Diperbaharui' //Sub Alert Message
         );
 
         return redirect()->route('reviewer_home');
@@ -141,8 +141,8 @@ class BiodataController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Success', //Alert Message 
-            'Foto Berhasil Diupload' //Sub Alert Message
+            'Sukses', //Alert Message 
+            'Foto Diperbaharui' //Sub Alert Message
         );
 
         return redirect()->back();

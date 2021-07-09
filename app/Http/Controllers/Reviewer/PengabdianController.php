@@ -124,8 +124,8 @@ class PengabdianController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Update Status Success', //Alert Message 
-            'Usulan pengabdian Status Updated' //Sub Alert Message
+            'Sukses', //Alert Message 
+            'Status Usulan pengabdian Diperbaharui' //Sub Alert Message
         );
 
         return redirect()->route('reviewer_pengabdian');

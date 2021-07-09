@@ -132,7 +132,7 @@ class PengabdianController extends Controller
             return redirect()->route('pengusul_pengabdian');
         }
 
-
+        // HALAMAN 1
         if ($page == 1) {
             $skema = Skema::orderBy('skema_label', 'asc')->get();
             $bidang = Bidang::orderBy('bidang_label', 'asc')->get();
@@ -147,6 +147,8 @@ class PengabdianController extends Controller
             ];
 
             return view('pengusul.pengabdian.usulan_1', $view_data);
+
+            // HALAMAN 2
         } elseif ($page == 2) {
             $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
                 ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
@@ -162,6 +164,8 @@ class PengabdianController extends Controller
             ];
 
             return view('pengusul.pengabdian.usulan_2', $view_data);
+
+            // HALAMAN 3
         } elseif ($page == 3) {
             $dokumen_info = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
@@ -172,6 +176,8 @@ class PengabdianController extends Controller
             ];
 
             return view('pengusul.pengabdian.usulan_3', $view_data);
+
+            // HALAMAN 4
         } elseif ($page == 4) {
             $view_data = [
                 'id' => $id,
@@ -179,6 +185,8 @@ class PengabdianController extends Controller
             ];
 
             return view('pengusul.pengabdian.usulan_4', $view_data);
+
+            // HALAMAN 5
         } elseif ($page == 5) {
             $dokumen_info = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
 
@@ -189,6 +197,8 @@ class PengabdianController extends Controller
             ];
 
             return view('pengusul.pengabdian.usulan_5', $view_data);
+
+            // HALAMAN 6
         } elseif ($page == 6) {
             $mitra_sasaran = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
                 ->orderBy('created_at', 'asc')
@@ -201,6 +211,8 @@ class PengabdianController extends Controller
             ];
 
             return view('pengusul.pengabdian.usulan_6', $view_data);
+
+            // HALAMAN 7
         } elseif ($page == 7) {
             $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
                 ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
@@ -234,6 +246,8 @@ class PengabdianController extends Controller
             ];
 
             return view('pengusul.pengabdian.usulan_7', $view_data);
+
+            // HALAMAN TIDAK TERSEDIA
         } else {
             return redirect()->route('pengusul_pengabdian');
         }
@@ -322,6 +336,13 @@ class PengabdianController extends Controller
         ];
         Mitra_sasaran::create($data);
 
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Mitra Ditambahkan' //Sub Alert Message
+        );
+
         return redirect()->route('pengusul_pengabdian_usulan', [6, $id]);
     }
 
@@ -373,6 +394,14 @@ class PengabdianController extends Controller
 
         Mitra_sasaran::where('mitra_sasaran_id', $id)
             ->update($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_error'), //Icon
+            'Sukses', //Alert Message 
+            'Dokumen Terunggah' //Sub Alert Message
+        );
+
 
         return redirect()->back();
     }
@@ -466,6 +495,13 @@ class PengabdianController extends Controller
         Mitra_sasaran::where('mitra_sasaran_id', $editid)
             ->update($data);
 
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Mitra Diperbaharui' //Sub Alert Message
+        );
+
         return redirect()->route('pengusul_pengabdian_usulan', [6, $id]);
     }
 
@@ -482,7 +518,7 @@ class PengabdianController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Remove Success', //Alert Message 
+            'Sukses', //Alert Message 
             'Mitra Terhapus' //Sub Alert Message
         );
 
@@ -509,7 +545,14 @@ class PengabdianController extends Controller
             'anggota_pengabdian_role' => $peran,
             'anggota_pengabdian_tugas' => $tugas,
         ];
-        Mitra_sasaran::create($data);
+        Anggota_pengabdian::create($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Anggota Ditambahkan' //Sub Alert Message
+        );
 
         return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
     }
@@ -550,6 +593,13 @@ class PengabdianController extends Controller
             $file->move($destination, $file->hashName());
 
             File::delete($file_path);
+
+            //Flash Message
+            flash_alert(
+                __('alert.icon_success'), //Icon
+                'Sukses', //Alert Message 
+                'Dokumen Diperbaharui' //Sub Alert Message
+            );
         } else {
             //Insert Data
             $data = [
@@ -564,6 +614,13 @@ class PengabdianController extends Controller
             Dokumen_usulan::create($data);
 
             $file->move($destination, $file->hashName());
+
+            //Flash Message
+            flash_alert(
+                __('alert.icon_success'), //Icon
+                'Sukses', //Alert Message 
+                'Dokumen Ditambahkan' //Sub Alert Message
+            );
         }
 
         return redirect()->route('pengusul_pengabdian_usulan', [3, $id]);
@@ -605,6 +662,13 @@ class PengabdianController extends Controller
             $file->move($destination, $file->hashName());
 
             File::delete($file_path);
+
+            //Flash Message
+            flash_alert(
+                __('alert.icon_success'), //Icon
+                'Sukses', //Alert Message 
+                'Dokumen Diperbaharui' //Sub Alert Message
+            );
         } else {
             //Insert Data
             $data = [
@@ -619,6 +683,13 @@ class PengabdianController extends Controller
             Dokumen_rab::create($data);
 
             $file->move($destination, $file->hashName());
+
+            //Flash Message
+            flash_alert(
+                __('alert.icon_success'), //Icon
+                'Sukses', //Alert Message 
+                'Dokumen Ditambahkan' //Sub Alert Message
+            );
         }
 
         return redirect()->route('pengusul_pengabdian_usulan', [5, $id]);
@@ -631,7 +702,7 @@ class PengabdianController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Remove Success', //Alert Message 
+            'Sukses', //Alert Message 
             'Anggota Terhapus' //Sub Alert Message
         );
 
@@ -647,6 +718,13 @@ class PengabdianController extends Controller
 
         Usulan_pengabdian::where('usulan_pengabdian_id', $id)
             ->update($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Usulan pengabdian Terkirim' //Sub Alert Message
+        );
 
         return redirect()->route('pengusul_pengabdian');
     }

@@ -70,8 +70,8 @@ class AuthController extends Controller
                     // Flash Message
                     flash_alert(
                         __('alert.icon_error'), //Icon
-                        'Login Failed', //Alert Message 
-                        'Wrong Password' //Sub Alert Message
+                        'Login Gagal', //Alert Message 
+                        'Password Salah' //Sub Alert Message
                     );
 
                     return redirect()->back();
@@ -80,8 +80,8 @@ class AuthController extends Controller
                 //Flash Message
                 flash_alert(
                     __('alert.icon_error'), //Icon
-                    'Login Failed', //Alert Message 
-                    'Wrong Email' //Sub Alert Message
+                    'Login Gagal', //Alert Message 
+                    'Email Salah' //Sub Alert Message
                 );
 
                 return redirect()->back();
@@ -90,8 +90,8 @@ class AuthController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Login Failed', //Alert Message 
-                'Account Not Found' //Sub Alert Message
+                'Login Gagal', //Alert Message 
+                'Akun Tidak Terdaftar' //Sub Alert Message
             );
 
             return redirect()->back();
@@ -101,8 +101,8 @@ class AuthController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_error'), //Icon
-            'Login Failed', //Alert Message 
-            'Something Wrong' //Sub Alert Message
+            'Login Gagal', //Alert Message 
+            'Ada Sesuatu Yang Salah' //Sub Alert Message
         );
 
         return redirect()->back();
@@ -116,8 +116,8 @@ class AuthController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Logout Success', //Alert Message 
-            'Login Again For Start Application' //Sub Alert Message
+            'Logout Sukses', //Alert Message 
+            'Silahkan Login Kembali Untuk Menggunakan Aplikasi' //Sub Alert Message
         );
 
         //Back To Login
@@ -151,8 +151,8 @@ class AuthController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Failed', //Alert Message 
-                'Email Not Found' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Email Tidak Ditemukan' //Sub Alert Message
             );
 
             return redirect()->back();
@@ -182,8 +182,8 @@ class AuthController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Email Sent', //Alert Message 
-            'Please Check Your Email For Confirmation' //Sub Alert Message
+            'Email Terkirim', //Alert Message 
+            'Silahkan Cek Email Anda Untuk Konfirmasi' //Sub Alert Message
         );
 
         return redirect()->back();
@@ -196,8 +196,8 @@ class AuthController extends Controller
         if (!$row) {
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Failed', //Alert Message 
-                'Email or Token Not Found' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Email atau Token Tidak Ditemukan' //Sub Alert Message
             );
 
             return redirect()->route('forgot_password');
@@ -210,8 +210,8 @@ class AuthController extends Controller
 
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Failed', //Alert Message 
-                'Token Expired' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Token Kadaluwarsa' //Sub Alert Message
             );
 
             return redirect()->route('forgot_password');
@@ -227,8 +227,8 @@ class AuthController extends Controller
         if (!$row) {
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Failed', //Alert Message 
-                'Email or Token Not Found' //Sub Alert Message
+                'gagal', //Alert Message 
+                'Email Atau Token Tidak Ditemukan' //Sub Alert Message
             );
 
             return redirect()->route('forgot_password');
@@ -241,8 +241,8 @@ class AuthController extends Controller
 
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Failed', //Alert Message 
-                'Token Expired' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Token Kadaluwarsa' //Sub Alert Message
             );
 
             return redirect()->route('forgot_password');
@@ -265,8 +265,8 @@ class AuthController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Change Success', //Alert Message 
-            'Password Changed' //Sub Alert Message
+            'Sukses', //Alert Message 
+            'Password Diperbaharui' //Sub Alert Message
         );
 
         return redirect()->route('login');

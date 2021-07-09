@@ -52,8 +52,8 @@ class PengusulController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Add Failed', //Alert Message 
-                'User Email Already Exist' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Email Sudah Terdaftar' //Sub Alert Message
             );
 
             return redirect()->back();
@@ -81,7 +81,7 @@ class PengusulController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Add Success', //Alert Message 
+            'Sukses', //Alert Message 
             'Pengusul Ditambahkan' //Sub Alert Message
         );
 
@@ -125,9 +125,10 @@ class PengusulController extends Controller
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
-                'Update Failed', //Alert Message 
-                'Email Already Exist' //Sub Alert Message
+                'Gagal', //Alert Message 
+                'Email Sudah Terdaftar' //Sub Alert Message
             );
+
 
             return redirect()->back();
         }
@@ -146,7 +147,7 @@ class PengusulController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Update Success', //Alert Message 
+            'Sukses', //Alert Message 
             'Pengusul Diperbaharui' //Sub Alert Message
         );
 
@@ -169,7 +170,7 @@ class PengusulController extends Controller
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
-            'Remove Success', //Alert Message 
+            'Sukses', //Alert Message 
             'Pengusul Terhapus' //Sub Alert Message
         );
 
