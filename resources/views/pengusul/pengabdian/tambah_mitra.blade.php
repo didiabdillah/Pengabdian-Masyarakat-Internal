@@ -146,7 +146,7 @@
                                     <div class="row">
                                         <div class="form-group col-lg-3 col-md-6">
                                             <label for="provinsi">Provinsi</label>
-                                            <select class="form-control select2-provinsi @error('provinsi') is-invalid @enderror" style="width: 100%;" name="provinsi">
+                                            <select class="form-control select2-provinsi @error('provinsi') is-invalid @enderror" style="width: 100%;" name="provinsi" id="provinsi">
                                                 <option value="">--Provinsi--</option>
                                                 @foreach($provinsi as $data)
                                                 <option value="{{$data->id}}" @if(old('provinsi')==$data->id){{'selected'}}@endif>{{$data->nama}}</option>
@@ -161,11 +161,9 @@
 
                                         <div class="form-group col-lg-3 col-md-6">
                                             <label for="kabupaten">Kabupaten / Kota</label>
-                                            <select class="form-control select2-kabupaten @error('kabupaten') is-invalid @enderror" style="width: 100%;" name="kabupaten">
+                                            <select class="form-control select2-kabupaten @error('kabupaten') is-invalid @enderror" style="width: 100%;" name="kabupaten" id="kabupaten">
                                                 <option value="">--Kabupaten / Kota--</option>
-                                                @foreach($kabupaten as $data)
-                                                <option value="{{$data->id}}" @if(old('kabupaten')==$data->id){{'selected'}}@endif>{{$data->nama}}</option>
-                                                @endforeach
+
                                             </select>
                                             @error('kabupaten')
                                             <div class="invalid-feedback">
@@ -176,11 +174,9 @@
 
                                         <div class="form-group col-lg-3 col-md-6">
                                             <label for="kecamatan">Kecamatan</label>
-                                            <select class="form-control select2-kecamatan @error('kecamatan') is-invalid @enderror" style="width: 100%;" name="kecamatan">
+                                            <select class="form-control select2-kecamatan @error('kecamatan') is-invalid @enderror" style="width: 100%;" name="kecamatan" id="kecamatan">
                                                 <option value="">--Kecamatan--</option>
-                                                @foreach($kecamatan as $data)
-                                                <option value="{{$data->id}}" @if(old('kecamatan')==$data->id){{'selected'}}@endif>{{$data->nama}}</option>
-                                                @endforeach
+
                                             </select>
                                             @error('kecamatan')
                                             <div class="invalid-feedback">
@@ -191,11 +187,9 @@
 
                                         <div class="form-group col-lg-3 col-md-6">
                                             <label for="desa">Desa</label>
-                                            <select class="form-control select2-desa @error('desa') is-invalid @enderror" style="width: 100%;" name="desa">
+                                            <select class="form-control select2-desa @error('desa') is-invalid @enderror" style="width: 100%;" name="desa" id="desa">
                                                 <option value="">--Desa--</option>
-                                                @foreach($desa as $data)
-                                                <option value="{{$data->id}}" @if(old('desa')==$data->id){{'selected'}}@endif>{{$data->nama}}</option>
-                                                @endforeach
+
                                             </select>
                                             @error('desa')
                                             <div class="invalid-feedback">
@@ -268,6 +262,150 @@
         $('.select2-kabupaten').select2()
         $('.select2-kecamatan').select2()
         $('.select2-desa').select2()
+    });
+</script>
+
+<script>
+    // Ajax setup from csrf token
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+
+@if($errors->any())
+@if(old('provinsi'))
+<script>
+    $(function() {
+        const provinsi_id = "{{old('provinsi')}}";
+        const kabupaten_id = "{{old('kabupaten')}}";
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_get_kabupaten')}}",
+            method: "POST",
+            data: {
+                id_provinsi: provinsi_id,
+                id_kabupaten: kabupaten_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#kabupaten').empty();
+                $('#kecamatan').empty();
+                $('#desa').empty();
+                $('#kabupaten').html(data);
+                $('#kecamatan').html('<option value="">--Kecamatan--</option>');
+                $('#desa').html('<option value="">--Desa--</option>');
+            }
+        });
+    });
+</script>
+@endif
+@if(old('kabupaten'))
+<script>
+    $(function() {
+        const kabupaten_id = "{{old('kabupaten')}}";
+        const kecamatan_id = "{{old('kecamatan')}}";
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_get_kecamatan')}}",
+            method: "POST",
+            data: {
+                id_kabupaten: kabupaten_id,
+                id_kecamatan: kecamatan_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#kecamatan').empty();
+                $('#desa').empty();
+                $('#kecamatan').html(data);
+                $('#desa').html('<option value="">--Desa--</option>');
+            }
+        });
+    });
+</script>
+@endif
+@if(old('kecamatan'))
+<script>
+    $(function() {
+        const kecamatan_id = "{{old('kecamatan')}}";
+        const desa_id = "{{old('desa')}}";
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_get_desa')}}",
+            method: "POST",
+            data: {
+                id_kecamatan: kecamatan_id,
+                id_desa: desa_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#desa').empty();
+                $('#desa').html(data);
+            }
+        });
+    });
+</script>
+@endif
+
+@endif
+
+<script>
+    $('select#provinsi').change(function() {
+        const provinsi_id = $(this).children("option:selected").val();
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_get_kabupaten')}}",
+            method: "POST",
+            data: {
+                id_provinsi: provinsi_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#kabupaten').empty();
+                $('#kecamatan').empty();
+                $('#desa').empty();
+                $('#kabupaten').html(data);
+                $('#kecamatan').html('<option value="">--Kecamatan--</option>');
+                $('#desa').html('<option value="">--Desa--</option>');
+            }
+        });
+    });
+
+    $('select#kabupaten').change(function() {
+        const kabupaten_id = $(this).children("option:selected").val();
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_get_kecamatan')}}",
+            method: "POST",
+            data: {
+                id_kabupaten: kabupaten_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#kecamatan').empty();
+                $('#desa').empty();
+                $('#kecamatan').html(data);
+                $('#desa').html('<option value="">--Desa--</option>');
+            }
+        });
+    });
+
+    $('select#kecamatan').change(function() {
+        const kecamatan_id = $(this).children("option:selected").val();
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_get_desa')}}",
+            method: "POST",
+            data: {
+                id_kecamatan: kecamatan_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#desa').empty();
+                $('#desa').html(data);
+            }
+        });
     });
 </script>
 

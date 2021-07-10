@@ -269,16 +269,10 @@ class PengabdianController extends Controller
     public function tambah_mitra($id)
     {
         $provinsi = DB::table('wilayah_provinsi')->get();
-        $kabupaten = DB::table('wilayah_kabupaten')->get();
-        $kecamatan = DB::table('wilayah_kecamatan')->get();
-        $desa = DB::table('wilayah_desa')->get();
 
         $view_data = [
             'id' => $id,
             'provinsi' => $provinsi,
-            'kabupaten' => $kabupaten,
-            'kecamatan' => $kecamatan,
-            'desa' => $desa,
         ];
 
         return view('pengusul.pengabdian.tambah_mitra', $view_data);
@@ -397,7 +391,7 @@ class PengabdianController extends Controller
 
         //Flash Message
         flash_alert(
-            __('alert.icon_error'), //Icon
+            __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
             'Dokumen Terunggah' //Sub Alert Message
         );
@@ -408,10 +402,6 @@ class PengabdianController extends Controller
 
     public function edit_mitra($id, $editid)
     {
-        $provinsi = DB::table('wilayah_provinsi')->get();
-        $kabupaten = DB::table('wilayah_kabupaten')->get();
-        $kecamatan = DB::table('wilayah_kecamatan')->get();
-        $desa = DB::table('wilayah_desa')->get();
 
         $mitra_sasaran = Mitra_sasaran::select(
             'mitra_sasaran_id',
@@ -430,6 +420,11 @@ class PengabdianController extends Controller
             'mitra_sasaran_kontribusi_pendanaan_mitra'
         )->where('mitra_sasaran_id', $editid)
             ->first();
+
+        $provinsi = DB::table('wilayah_provinsi')->get();
+        $kabupaten = DB::table('wilayah_kabupaten')->where('provinsi_id', $mitra_sasaran->mitra_sasaran_provinsi_mitra)->get();
+        $kecamatan = DB::table('wilayah_kecamatan')->where('kabupaten_id', $mitra_sasaran->mitra_sasaran_kota_mitra)->get();
+        $desa = DB::table('wilayah_desa')->where('kecamatan_id', $mitra_sasaran->mitra_sasaran_kecamatan_mitra)->get();
 
         $view_data = [
             'id' => $id,
@@ -562,10 +557,10 @@ class PengabdianController extends Controller
         // Input Validation
         $request->validate(
             [
-                'dokumen_usulan' => 'required|mimes:pdf|max:10000',
+                'dokumen_usulan' => 'required|mimetypes:application/pdf|max:10000',
             ],
             [
-                'dokumen_usulan.mimes' => 'Tipe File Harus PDF'
+                'dokumen_usulan.mimetypes' => 'Tipe File Harus PDF'
             ]
         );
 
@@ -727,5 +722,29 @@ class PengabdianController extends Controller
         );
 
         return redirect()->route('pengusul_pengabdian');
+    }
+
+    public function get_kabupaten(Request $request)
+    {
+        $kabupaten = DB::table('wilayah_kabupaten')->where('provinsi_id', $request->id_provinsi)->get();
+        $old_kabupaten = ($request->id_kabupaten) ? $request->id_kabupaten : NULL;
+
+        return view('pengusul.pengabdian.wilayah_list.list_kabupaten', ['kabupaten' => $kabupaten, 'old_kabupaten' => $old_kabupaten]);
+    }
+
+    public function get_kecamatan(Request $request)
+    {
+        $kecamatan = DB::table('wilayah_kecamatan')->where('kabupaten_id', $request->id_kabupaten)->get();
+        $old_kecamatan = ($request->id_kecamatan) ? $request->id_kecamatan : NULL;
+
+        return view('pengusul.pengabdian.wilayah_list.list_kecamatan', ['kecamatan' => $kecamatan, 'old_kecamatan' => $old_kecamatan]);
+    }
+
+    public function get_desa(Request $request)
+    {
+        $desa = DB::table('wilayah_desa')->where('kecamatan_id', $request->id_kecamatan)->get();
+        $old_desa = ($request->id_desa) ? $request->id_desa : NULL;
+
+        return view('pengusul.pengabdian.wilayah_list.list_desa', ['desa' => $desa, 'old_desa' => $old_desa]);
     }
 }

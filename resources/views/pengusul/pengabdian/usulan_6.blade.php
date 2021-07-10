@@ -140,7 +140,7 @@
                                             @endforeach
                                             @else
                                             <tr>
-                                                <td class="text-center" colspan="4">Mitra Sasaran Kosong</td>
+                                                <td class="text-center" colspan="5">Mitra Sasaran Kosong</td>
                                             </tr>
                                             @endif
                                         </tbody>
