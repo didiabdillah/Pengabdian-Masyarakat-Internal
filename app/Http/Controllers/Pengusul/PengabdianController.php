@@ -40,6 +40,42 @@ class PengabdianController extends Controller
         return view('pengusul.pengabdian.tambah', ['skema' => $skema, 'bidang' => $bidang]);
     }
 
+    public function hapus($id)
+    {
+        // Mitra Sasaran
+        $dokumen_mitra = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)->get();
+        $dokumen_mitra_destination = "assets/file/dokumen_mitra/";
+
+        foreach ($dokumen_mitra as $doc) {
+            $dokumen_mitra_file_path = public_path($dokumen_mitra_destination . $doc->mitra_sasaran_file_hash_name);
+            File::delete($dokumen_mitra_file_path);
+        }
+
+        // Dokumen RAB Pengabdian
+        $dokumen_rab = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
+        $dokumen_rab_destination = "assets/file/dokumen_rab/";
+        $dokumen_rab_file_path = public_path($dokumen_rab_destination . $dokumen_rab->dokumen_rab_hash_name);
+        File::delete($dokumen_rab_file_path);
+
+        // Dokumen Usulan Pengabdian
+        $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+        $dokumen_usulan_destination = "assets/file/dokumen_usulan/";
+        $dokumen_usulan_file_path = public_path($dokumen_usulan_destination . $dokumen_usulan->dokumen_usulan_hash_name);
+        File::delete($dokumen_usulan_file_path);
+
+        // Usulan pengabdian
+        Usulan_pengabdian::destroy('usulan_pengabdian_id', $id);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Usulan Pengabdian Terhapus' //Sub Alert Message
+        );
+
+        return redirect()->route('pengusul_pengabdian');
+    }
+
     public function store(Request $request)
     {
         // Input Validation

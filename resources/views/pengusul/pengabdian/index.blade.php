@@ -84,34 +84,40 @@
 
                                     <td>
                                         <div class="card-body">
-                                            <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-folder">
-                                                </i>
-
-                                                Detail
-                                            </a>
 
                                             @php $role = $usulan->anggota_pengabdian()->where('anggota_pengabdian_user_id', Session::get('user_id'))->first()->anggota_pengabdian_role @endphp
 
-                                            @if($role == "ketua")
-                                            @if($usulan->usulan_pengabdian_status == "pending" || $usulan->usulan_pengabdian_status == "ditolak")
-                                            <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_usulan', [1, $usulan->usulan_pengabdian_id])}}">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
+                                            <form action="{{route('pengusul_pengabdian_hapus', [$usulan->usulan_pengabdian_id])}}" method="POST" class="form-inline form-horizontal">
+                                                @csrf
+                                                @method('delete')
+                                                <a class="btn btn-success btn-sm" href="">
+                                                    <i class="fas fa-folder">
+                                                    </i>
 
-                                                Edit
-                                            </a>
-                                            @endif
+                                                    Detail
+                                                </a>
 
-                                            @if($usulan->usulan_pengabdian_status == "pending")
-                                            <a class="btn btn-danger btn-sm" href="">
-                                                <i class="fas fa-trash">
-                                                </i>
+                                                @if($role == "ketua")
+                                                @if($usulan->usulan_pengabdian_status == "pending" || $usulan->usulan_pengabdian_status == "ditolak")
+                                                <a class="btn btn-primary btn-sm ml-1" href="{{route('pengusul_pengabdian_usulan', [1, $usulan->usulan_pengabdian_id])}}">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
 
-                                                Hapus
-                                            </a>
-                                            @endif
-                                            @endif
+                                                    Edit
+                                                </a>
+                                                @endif
+
+                                                @if($usulan->usulan_pengabdian_status == "pending")
+                                                <button class="btn btn-danger btn-sm btn-remove ml-1" type="submit">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                    Hapus
+                                                </button>
+                                                @endif
+                                                @endif
+
+                                            </form>
+
                                         </div>
 
                                     </td>

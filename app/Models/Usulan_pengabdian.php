@@ -12,6 +12,7 @@ class Usulan_pengabdian extends Model
 
     protected $fillable = [
         'usulan_pengabdian_id',
+        'usulan_pengabdian_reviewer_id',
         'usulan_pengabdian_judul',
         'usulan_pengabdian_kategori',
         'usulan_pengabdian_skema_id',

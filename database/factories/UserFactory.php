@@ -19,24 +19,25 @@ use Illuminate\Support\Facades\Hash;
 */
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
+    // return [
+    //     'user_id' => 'a5c860decf204ea686aedbb6dbeb6ab3',
+    //     'user_name' => 'Rehn',
+    //     'user_email' => 'rehn@email.com',
+    //     'user_role' => 'pengusul',
+    //     'user_password' => Hash::make('12345678'), // 12345678
+    //     'user_image' => 'default.jpg',
+    //     'user_nidn' => 0987654321,
+    // ];
+
     return [
-        'user_id' => 'a5c860decf204ea686aedbb6dbeb6ab3',
-        'user_name' => 'Rehn',
-        'user_email' => 'rehn@email.com',
+        'user_id' => 'a5c860decf204ea686aedbb6dbeb6ab2',
+        'user_name' => 'Igoy',
+        'user_email' => 'igoy@email.com',
         'user_role' => 'pengusul',
         'user_password' => Hash::make('12345678'), // 12345678
         'user_image' => 'default.jpg',
-        'user_nidn' => NULL,
+        'user_nidn' => 1234567890,
     ];
-
-    // return [
-    //     'user_id' => 'a5c860decf204ea686aedbb6dbeb6ab2',
-    //     'user_name' => 'Igoy',
-    //     'user_email' => 'igoy@gmail.com',
-    //     'user_role' => 'reviewer',
-    //     'user_password' => Hash::make('12345678'), // 12345678
-    //     'user_image' => 'default.jpg',
-    // ];
 
     // return [
     //     'user_id' => 'a5c860decf204ea686aedbb6dbeb6ab3',
