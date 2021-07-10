@@ -115,6 +115,12 @@
                                                             <br>
                                                             Tanggal Unggah : -
                                                             @endif
+
+                                                            @if($data->mitra_sasaran_file_date)
+                                                            <br>
+                                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </td>
@@ -128,7 +134,7 @@
                                                             Edit
                                                         </a>
 
-                                                        <button class="btn btn-danger btn-sm btn-remove ml-2" type="submit">
+                                                        <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Hapus

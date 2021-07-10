@@ -747,4 +747,101 @@ class PengabdianController extends Controller
 
         return view('pengusul.pengabdian.wilayah_list.list_desa', ['desa' => $desa, 'old_desa' => $old_desa]);
     }
+
+    public function file_download($id, $file_name, $file_category)
+    {
+        $file_fetch = NULL;
+        $file = NULL;
+        $file_extension = NULL;
+        $file_original_name = NULL;
+
+        if ($file_category == "usulan") {
+            $file_fetch = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)
+                ->where('dokumen_usulan_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_usulan/" . $file_fetch->dokumen_usulan_hash_name);
+
+            $file_extension = $file_fetch->dokumen_usulan_extension;
+
+            $file_original_name = $file_fetch->dokumen_usulan_original_name;
+        } elseif ($file_category == "rab") {
+            $file_fetch = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)
+                ->where('dokumen_rab_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_rab/" . $file_fetch->dokumen_rab_hash_name);
+
+            $file_extension = $file_fetch->dokumen_rab_extension;
+
+            $file_original_name = $file_fetch->dokumen_rab_original_name;
+        } elseif ($file_category == "mitra") {
+            $file_fetch = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
+                ->where('mitra_sasaran_file_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
+
+            $file_extension = $file_fetch->mitra_sasaran_file_extension;
+
+            $file_original_name = $file_fetch->mitra_sasaran_file_original_name;
+        }
+
+        if ($file_fetch) {
+            if ($file_extension == "pdf") {
+
+                $headers = array(
+                    'Content-Type' => mime_content_type($file),
+                );
+
+                return response()->download($file, $file_original_name, $headers);
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function file_preview($id, $file_name, $file_category)
+    {
+        $file_fetch = NULL;
+        $file = NULL;
+        $file_extension = NULL;
+
+        if ($file_category == "usulan") {
+            $file_fetch = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)
+                ->where('dokumen_usulan_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_usulan/" . $file_fetch->dokumen_usulan_hash_name);
+
+            $file_extension = $file_fetch->dokumen_usulan_extension;
+        } elseif ($file_category == "rab") {
+            $file_fetch = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)
+                ->where('dokumen_rab_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_rab/" . $file_fetch->dokumen_rab_hash_name);
+
+            $file_extension = $file_fetch->dokumen_rab_extension;
+        } elseif ($file_category == "mitra") {
+            $file_fetch = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
+                ->where('mitra_sasaran_file_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
+
+            $file_extension = $file_fetch->mitra_sasaran_file_extension;
+        }
+
+        if ($file_fetch) {
+            if ($file_extension == "pdf") {
+
+                $headers = array(
+                    'Content-Type' => mime_content_type($file),
+                );
+
+                return response()->file($file, $headers);
+            }
+        }
+    }
 }

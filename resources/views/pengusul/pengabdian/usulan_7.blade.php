@@ -164,6 +164,11 @@
                                                 <h6>File Usulan : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
                                                 <h6>Tanggal Unggah : @if($dokumen_usulan){{Carbon\Carbon::parse($dokumen_usulan->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
                                                 <h6>Ukuran File : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
+
+                                                @if($dokumen_usulan)
+                                                <a href="{{route('pengusul_pengabdian_file_preview', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('pengusul_pengabdian_file_download', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -279,6 +284,11 @@
                                                 <h6>File RAB : @if($dokumen_rab){{$dokumen_rab->dokumen_rab_original_name}}@else{{"-"}}@endif</h6>
                                                 <h6>Tanggal Unggah : @if($dokumen_rab){{Carbon\Carbon::parse($dokumen_rab->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
                                                 <h6>Ukuran File : @if($dokumen_rab){{$dokumen_rab->dokumen_rab_file_size . " KB"}}@else{{"-"}}@endif</h6>
+
+                                                @if($dokumen_rab)
+                                                <a href="{{route('pengusul_pengabdian_file_preview', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('pengusul_pengabdian_file_download', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -342,6 +352,12 @@
                                                             Nama File : -
                                                             <br>
                                                             Tanggal Unggah : -
+                                                            @endif
+
+                                                            @if($data->mitra_sasaran_file_date)
+                                                            <br>
+                                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                             @endif
                                                         </td>
                                                     </tr>
