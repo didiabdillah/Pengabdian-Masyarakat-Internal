@@ -16,6 +16,7 @@ use App\Models\Anggota_pengabdian;
 use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
+use App\Models\Luaran_usulan;
 
 class PengabdianController extends Controller
 {
@@ -224,9 +225,40 @@ class PengabdianController extends Controller
 
             // HALAMAN 4
         } elseif ($page == 4) {
+
+            $luaran_wajib1 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->where('usulan_luaran_pengabdian_urutan', 1)
+                ->first();
+
+            $luaran_wajib2 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->where('usulan_luaran_pengabdian_urutan', 2)
+                ->first();
+
+            $luaran_wajib3 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->where('usulan_luaran_pengabdian_urutan', 3)
+                ->first();
+
+            $luaran_wajib4 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->where('usulan_luaran_pengabdian_urutan', 4)
+                ->first();
+
+            $luaran_tambahan = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
+                ->where('usulan_luaran_pengabdian_urutan', 0)
+                ->first();
+
             $view_data = [
                 'id' => $id,
                 'page' => $page,
+                'wajib1' => $luaran_wajib1,
+                'wajib2' => $luaran_wajib2,
+                'wajib3' => $luaran_wajib3,
+                'wajib4' => $luaran_wajib4,
+                'tambahan' => $luaran_tambahan,
             ];
 
             return view('pengusul.pengabdian.usulan_4', $view_data);
@@ -888,5 +920,81 @@ class PengabdianController extends Controller
                 return response()->file($file, $headers);
             }
         }
+    }
+
+    // LUARAN
+    public function tambah_luaran($id, $tipe, $page)
+    {
+        $view_data = [
+            'id' => $id,
+        ];
+
+        if ($tipe == "wajib") {
+            if ($page == 1) {
+                return view('pengusul.pengabdian.luaran.tambah_luaran_wajib1', $view_data);
+            } elseif ($page == 2) {
+                return view('pengusul.pengabdian.luaran.tambah_luaran_wajib2', $view_data);
+            } elseif ($page == 3) {
+                return view('pengusul.pengabdian.luaran.tambah_luaran_wajib3', $view_data);
+            } elseif ($page == 4) {
+                return view('pengusul.pengabdian.luaran.tambah_luaran_wajib4', $view_data);
+            }
+        } elseif ($tipe == "tambahan") {
+            return view('pengusul.pengabdian.luaran.tambah_luaran_tambahan', $view_data);
+        }
+    }
+
+    public function store_luaran(Request $request, $id, $tipe, $page)
+    {
+        // Input Validation
+        $request->validate([
+            'tahun'  => 'required',
+            'kategori'  => 'required',
+            'jenis'  => 'required',
+            'rencana'  => 'required|max:255',
+            'status'  => 'required',
+        ]);
+
+        $tahun = htmlspecialchars($request->tahun);
+        $kategori = htmlspecialchars($request->kategori);
+        $jenis = htmlspecialchars($request->jenis);
+        $rencana = htmlspecialchars($request->rencana);
+        $status = htmlspecialchars($request->status);
+
+        $data = [
+            'usulan_luaran_pengabdian_id' => $id,
+            'usulan_luaran_pengabdian_urutan' => $page,
+            'usulan_luaran_pengabdian_tipe' => $tipe,
+            'usulan_luaran_pengabdian_tahun' => $tahun,
+            'usulan_luaran_pengabdian_kategori' => $kategori,
+            'usulan_luaran_pengabdian_jenis' => $jenis,
+            'usulan_luaran_pengabdian_rencana' => $rencana,
+            'usulan_luaran_pengabdian_status' => $status,
+        ];
+
+        Luaran_usulan::create($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Luaran Sukses Ditambahkan', //Alert Message 
+            'Luaran ' . $tipe . " ditambahkan"  //Sub Alert Message
+        );
+
+        return redirect()->route('pengusul_pengabdian_usulan', [4, $id]);
+    }
+
+    public function destroy_luaran($id, $luaran_id)
+    {
+        Luaran_usulan::destroy('usulan_luaran_id', $luaran_id);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Usulan Luaran Terhapus' //Sub Alert Message
+        );
+
+        return redirect()->route('pengusul_pengabdian_usulan', [4, $id]);
     }
 }

@@ -30,6 +30,11 @@ class Usulan_pengabdian extends Model
         return $this->hasMany('App\Models\Anggota_pengabdian', 'anggota_pengabdian_pengabdian_id');
     }
 
+    public function luaran_usulan()
+    {
+        return $this->hasMany('App\Models\Luaran_usulan', 'usulan_luaran_pengabdian_id');
+    }
+
     public function dokumen_usulan()
     {
         return $this->hasOne('App\Models\Dokumen_usulan', 'dokumen_usulan_pengabdian_id');

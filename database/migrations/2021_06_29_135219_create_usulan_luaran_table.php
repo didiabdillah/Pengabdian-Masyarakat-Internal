@@ -17,6 +17,12 @@ class CreateUsulanLuaranTable extends Migration
             $table->bigIncrements('usulan_luaran_id');
             $table->string('usulan_luaran_pengabdian_id', 64);
             $table->enum('usulan_luaran_pengabdian_tipe', ['wajib', 'tambahan']);
+            $table->integer('usulan_luaran_pengabdian_urutan')->nullable();
+            $table->string('usulan_luaran_pengabdian_tahun');
+            $table->string('usulan_luaran_pengabdian_kategori');
+            $table->string('usulan_luaran_pengabdian_jenis');
+            $table->string('usulan_luaran_pengabdian_rencana');
+            $table->string('usulan_luaran_pengabdian_status');
             $table->timestamps();
 
             $table->foreign('usulan_luaran_pengabdian_id')->references('usulan_pengabdian_id')->on('usulan_pengabdian')->onUpdate('cascade')->onDelete('cascade');
@@ -30,6 +36,9 @@ class CreateUsulanLuaranTable extends Migration
      */
     public function down()
     {
+        Schema::table('usulan_luaran', function (Blueprint $table) {
+            $table->dropForeign('usulan_luaran_usulan_luaran_pengabdian_id_foreign');
+        });
         Schema::dropIfExists('usulan_luaran');
     }
 }

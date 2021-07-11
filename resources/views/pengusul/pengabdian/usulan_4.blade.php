@@ -68,8 +68,306 @@
                                 </div>
                             </div>
 
-                            <h5>Luaran Wajib Dan Luaran Tambahan</h5>
+                            <!-- LUARAN WAJIB -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card card-primary m-2 card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="fas fa-file-alt"></i>
+                                                Luaran Wajib
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="3">
+                                                            <h5><span class="badge badge-danger">Isi Luaran Wajib Belum Lengkap</span></h5>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h5>Tahun 1 :</h5>
+                                                        </td>
 
+                                                        <td>
+                                                            1. <b>- Publikasi di prosiding seminar nasional ber ISBN</b>
+                                                            <br>
+                                                            @if($wajib1)
+                                                            @if($wajib1->usulan_luaran_pengabdian_jenis && $wajib1->usulan_luaran_pengabdian_status)
+                                                            <b>{{$wajib1->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib1->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                            @endif
+                                                            @if($wajib1->usulan_luaran_pengabdian_rencana)
+                                                            <h5>{{$wajib1->usulan_luaran_pengabdian_rencana}}</h5>
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                        </td>
+
+                                                        <td>
+                                                            @if($wajib1)
+                                                            <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $wajib1->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                    <i class="fas fa-pencil-alt">
+                                                                    </i>
+                                                                    Ubah
+                                                                </a>
+
+                                                                <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
+                                                                    <i class="fas fa-trash">
+                                                                    </i>
+                                                                    Hapus
+                                                                </button>
+                                                            </form>
+                                                            @else
+                                                            <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_tambah_luaran', [$id, 'wajib', 1])}}">
+                                                                <i class="fas fa-plus">
+                                                                </i>
+                                                                Tambah
+                                                            </a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+
+                                                        </td>
+
+                                                        <td>
+                                                            @if($wajib2)
+                                                            2. <b>- {{$wajib2->usulan_luaran_pengabdian_kategori}}, ...</b>
+                                                            <br>
+                                                            @if($wajib2->usulan_luaran_pengabdian_jenis && $wajib2->usulan_luaran_pengabdian_status)
+                                                            <b>{{$wajib2->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib2->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                            @endif
+                                                            @if($wajib2->usulan_luaran_pengabdian_rencana)
+                                                            <h5>{{$wajib2->usulan_luaran_pengabdian_rencana}}</h5>
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                            @else
+                                                            2. <b>- Publikasi di media massa, ...</b>
+                                                            <br>
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                        </td>
+
+                                                        <td>
+                                                            @if($wajib2)
+                                                            <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $wajib2->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                    <i class="fas fa-pencil-alt">
+                                                                    </i>
+                                                                    Ubah
+                                                                </a>
+
+                                                                <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
+                                                                    <i class="fas fa-trash">
+                                                                    </i>
+                                                                    Hapus
+                                                                </button>
+                                                            </form>
+                                                            @else
+                                                            <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_tambah_luaran', [$id, 'wajib', 2])}}">
+                                                                <i class="fas fa-plus">
+                                                                </i>
+                                                                Tambah
+                                                            </a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+
+                                                        </td>
+
+                                                        <td>
+                                                            3. <b>- Video pelaksanaan kegiatan</b>
+                                                            <br>
+                                                            @if($wajib3)
+                                                            @if($wajib3->usulan_luaran_pengabdian_jenis && $wajib3->usulan_luaran_pengabdian_status)
+                                                            <b>{{$wajib3->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib3->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                            @endif
+                                                            @if($wajib3->usulan_luaran_pengabdian_rencana)
+                                                            <h5>{{$wajib3->usulan_luaran_pengabdian_rencana}}</h5>
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                        </td>
+
+                                                        <td>
+                                                            @if($wajib3)
+                                                            <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $wajib3->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                    <i class="fas fa-pencil-alt">
+                                                                    </i>
+                                                                    Ubah
+                                                                </a>
+
+                                                                <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
+                                                                    <i class="fas fa-trash">
+                                                                    </i>
+                                                                    Hapus
+                                                                </button>
+                                                            </form>
+                                                            @else
+                                                            <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_tambah_luaran', [$id, 'wajib', 3])}}">
+                                                                <i class="fas fa-plus">
+                                                                </i>
+                                                                Tambah
+                                                            </a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+
+                                                        </td>
+
+                                                        <td>
+                                                            4. <b>- Peningkatan pemberdayaan mitra,...</b>
+                                                            <br>
+                                                            @if($wajib4)
+                                                            @if($wajib4->usulan_luaran_pengabdian_jenis && $wajib4->usulan_luaran_pengabdian_status)
+                                                            <b>{{$wajib4->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib4->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                            @endif
+                                                            @if($wajib4->usulan_luaran_pengabdian_rencana)
+                                                            <h5>{{$wajib4->usulan_luaran_pengabdian_rencana}}</h5>
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                        </td>
+
+                                                        <td>
+                                                            @if($wajib4)
+                                                            <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $wajib4->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                    <i class="fas fa-pencil-alt">
+                                                                    </i>
+                                                                    Ubah
+                                                                </a>
+
+                                                                <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
+                                                                    <i class="fas fa-trash">
+                                                                    </i>
+                                                                    Hapus
+                                                                </button>
+                                                            </form>
+                                                            @else
+                                                            <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_tambah_luaran', [$id, 'wajib', 4])}}">
+                                                                <i class="fas fa-plus">
+                                                                </i>
+                                                                Tambah
+                                                            </a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+
+                            <!-- LUARAN TAMBAHAN -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card card-secondary m-2 card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="fas fa-file-alt"></i>
+                                                Luaran Tambahan
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th colspan="3">
+
+                                                    </th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h5>Tahun 1 :</h5>
+                                                        </td>
+
+                                                        <td>
+                                                            @if($tambahan)
+                                                            @if($tambahan->usulan_luaran_pengabdian_jenis && $tambahan->usulan_luaran_pengabdian_status)
+                                                            <b>{{$tambahan->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$tambahan->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                            @endif
+                                                            @if($tambahan->usulan_luaran_pengabdian_rencana)
+                                                            <h5>{{$tambahan->usulan_luaran_pengabdian_rencana}}</h5>
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                            @else
+                                                            <h5><span class="badge badge-warning">-</span></h5>
+                                                            @endif
+                                                        </td>
+
+                                                        <td>
+                                                            @if($tambahan)
+                                                            <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $tambahan->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                    <i class="fas fa-pencil-alt">
+                                                                    </i>
+                                                                    Ubah
+                                                                </a>
+
+                                                                <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
+                                                                    <i class="fas fa-trash">
+                                                                    </i>
+                                                                    Hapus
+                                                                </button>
+                                                            </form>
+                                                            @else
+                                                            <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_tambah_luaran', [$id, 'tambahan', 0])}}">
+                                                                <i class="fas fa-plus">
+                                                                </i>
+                                                                Tambah
+                                                            </a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
                         </div>
                         <div class="card-footer">
                             <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -89,6 +387,29 @@
 @endsection
 
 @push('plugin')
+<script>
+    // --------------
+    // Delete Button
+    // --------------
+    $('.btn-remove').on('click', function(e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
 <!-- BS-Stepper -->
 <script src="{{URL::asset('assets/js/bs-stepper/js/bs-stepper.min.js')}}"></script>
 
