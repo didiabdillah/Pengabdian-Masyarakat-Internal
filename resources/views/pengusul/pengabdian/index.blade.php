@@ -142,7 +142,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="example2" class="table table-bordered table-hover table-striped projects">
+                        <table id="example3" class="table table-bordered table-hover table-striped projects">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -152,38 +152,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach($riwayat_pengabdian as $riwayat)
                                 <tr>
                                     <td>
-                                        <h5>1</h5>
+                                        <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-                                        <h5>Pengabdian Masjid Jatisawit Lor</h5>
+                                        <h5>{{$riwayat->usulan_pengabdian_judul}}</h5>
                                     </td>
                                     <td>
-                                        <h5>2021</h5>
+                                        <h5>{{$riwayat->usulan_pengabdian_tahun}}</h5>
                                     </td>
 
                                     <td>
                                         <div class="card-body">
                                             <a class="btn btn-primary btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
+                                                <i class="fas fa-folder">
                                                 </i>
 
-                                                Edit
-                                            </a>
-
-                                            <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-trash">
-                                                </i>
-
-                                                Hapus
+                                                Detail
                                             </a>
                                         </div>
-
                                     </td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -237,6 +229,16 @@
     $(function() {
 
         $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "pagingType": "simple_numbers",
+        });
+        $('#example3').DataTable({
             "paging": true,
             "lengthChange": true,
             "searching": true,

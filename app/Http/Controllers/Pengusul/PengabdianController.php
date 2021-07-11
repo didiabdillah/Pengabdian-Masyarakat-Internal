@@ -25,11 +25,20 @@ class PengabdianController extends Controller
             $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
         })
             // ->where('usulan_pengabdian_status', 'pending')
-            ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 
-        return view('pengusul.pengabdian.index', ['usulan_pengabdian' => $usulan_pengabdian]);
+        $riwayat_pengabdian = Usulan_pengabdian::whereHas('anggota_pengabdian', function ($query) {
+            $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
+        })
+            ->where('usulan_pengabdian_tahun', '<', date('Y'))
+            ->where('usulan_pengabdian_status', 'diterima')
+            ->orderBy('usulan_pengabdian.created_at', 'desc')
+            ->orderBy('usulan_pengabdian_tahun', 'asc')
+            ->get();
+
+        return view('pengusul.pengabdian.index', ['usulan_pengabdian' => $usulan_pengabdian, 'riwayat_pengabdian' => $riwayat_pengabdian]);
     }
 
     public function tambah()
