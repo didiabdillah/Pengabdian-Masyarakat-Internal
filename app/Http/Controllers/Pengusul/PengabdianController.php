@@ -317,6 +317,35 @@ class PengabdianController extends Controller
                 ->orderBy('created_at', 'asc')
                 ->get();
 
+            $luaran_wajib1 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->where('usulan_luaran_pengabdian_urutan', 1)
+                ->first();
+
+            $luaran_wajib2 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->where('usulan_luaran_pengabdian_urutan', 2)
+                ->first();
+
+            $luaran_wajib3 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->where('usulan_luaran_pengabdian_urutan', 3)
+                ->first();
+
+            $luaran_wajib4 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->where('usulan_luaran_pengabdian_urutan', 4)
+                ->first();
+
+            $jumlah_luaran_wajib = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->count();
+
+            $luaran_tambahan = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
+                ->where('usulan_luaran_pengabdian_urutan', 0)
+                ->first();
+
             $view_data = [
                 'mitra_sasaran' => $mitra_sasaran,
                 'dokumen_rab' => $dokumen_rab,
@@ -325,6 +354,12 @@ class PengabdianController extends Controller
                 'ketua' => $ketua,
                 'id' => $id,
                 'page' => $page,
+                'wajib1' => $luaran_wajib1,
+                'wajib2' => $luaran_wajib2,
+                'wajib3' => $luaran_wajib3,
+                'wajib4' => $luaran_wajib4,
+                'tambahan' => $luaran_tambahan,
+                'jumlah_luaran_wajib' => $jumlah_luaran_wajib,
             ];
 
             return view('pengusul.pengabdian.usulan_7', $view_data);
