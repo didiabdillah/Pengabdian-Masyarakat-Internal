@@ -246,6 +246,10 @@ class PengabdianController extends Controller
                 ->where('usulan_luaran_pengabdian_urutan', 4)
                 ->first();
 
+            $jumlah_luaran_wajib = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->count();
+
             $luaran_tambahan = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
                 ->where('usulan_luaran_pengabdian_urutan', 0)
@@ -259,6 +263,7 @@ class PengabdianController extends Controller
                 'wajib3' => $luaran_wajib3,
                 'wajib4' => $luaran_wajib4,
                 'tambahan' => $luaran_tambahan,
+                'jumlah_luaran_wajib' => $jumlah_luaran_wajib,
             ];
 
             return view('pengusul.pengabdian.usulan_4', $view_data);
@@ -979,6 +984,72 @@ class PengabdianController extends Controller
             __('alert.icon_success'), //Icon
             'Luaran Sukses Ditambahkan', //Alert Message 
             'Luaran ' . $tipe . " ditambahkan"  //Sub Alert Message
+        );
+
+        return redirect()->route('pengusul_pengabdian_usulan', [4, $id]);
+    }
+
+    public function edit_luaran($id, $luaran_id)
+    {
+        $luaran = Luaran_usulan::where('usulan_luaran_id', $luaran_id)
+            ->first();
+
+        $tipe = $luaran->usulan_luaran_pengabdian_tipe;
+        $page = $luaran->usulan_luaran_pengabdian_urutan;
+
+        $view_data = [
+            'id' => $id,
+            'luaran' => $luaran,
+        ];
+
+        if ($tipe == "wajib") {
+            if ($page == 1) {
+                return view('pengusul.pengabdian.luaran.ubah_luaran_wajib1', $view_data);
+            } elseif ($page == 2) {
+                return view('pengusul.pengabdian.luaran.ubah_luaran_wajib2', $view_data);
+            } elseif ($page == 3) {
+                return view('pengusul.pengabdian.luaran.ubah_luaran_wajib3', $view_data);
+            } elseif ($page == 4) {
+                return view('pengusul.pengabdian.luaran.ubah_luaran_wajib4', $view_data);
+            }
+        } elseif ($tipe == "tambahan") {
+            return view('pengusul.pengabdian.luaran.ubah_luaran_tambahan', $view_data);
+        }
+    }
+
+    public function update_luaran(Request $request, $id, $luaran_id)
+    {
+        // Input Validation
+        $request->validate([
+            'tahun'  => 'required',
+            'kategori'  => 'required',
+            'jenis'  => 'required',
+            'rencana'  => 'required|max:255',
+            'status'  => 'required',
+        ]);
+
+        $tahun = htmlspecialchars($request->tahun);
+        $kategori = htmlspecialchars($request->kategori);
+        $jenis = htmlspecialchars($request->jenis);
+        $rencana = htmlspecialchars($request->rencana);
+        $status = htmlspecialchars($request->status);
+
+        $data = [
+            'usulan_luaran_pengabdian_tahun' => $tahun,
+            'usulan_luaran_pengabdian_kategori' => $kategori,
+            'usulan_luaran_pengabdian_jenis' => $jenis,
+            'usulan_luaran_pengabdian_rencana' => $rencana,
+            'usulan_luaran_pengabdian_status' => $status,
+        ];
+
+        Luaran_usulan::where('usulan_luaran_id', $luaran_id)
+            ->update($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Luaran Sukses Diubah', //Alert Message 
+            'Luaran diubah'  //Sub Alert Message
         );
 
         return redirect()->route('pengusul_pengabdian_usulan', [4, $id]);

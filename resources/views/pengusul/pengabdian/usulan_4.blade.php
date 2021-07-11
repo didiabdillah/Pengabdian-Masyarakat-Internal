@@ -83,7 +83,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th colspan="3">
+                                                            @if($jumlah_luaran_wajib = 4)
+                                                            <h5><span class="badge badge-primary">Isi Luaran Wajib Sudah Lengkap</span></h5>
+                                                            @else
                                                             <h5><span class="badge badge-danger">Isi Luaran Wajib Belum Lengkap</span></h5>
+                                                            @endif
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -115,7 +119,7 @@
                                                             <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $wajib1->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_edit_luaran', [$id, $wajib1->usulan_luaran_id])}}">
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i>
                                                                     Ubah
@@ -166,7 +170,7 @@
                                                             <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $wajib2->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_edit_luaran', [$id, $wajib2->usulan_luaran_id])}}">
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i>
                                                                     Ubah
@@ -215,7 +219,7 @@
                                                             <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $wajib3->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_edit_luaran', [$id, $wajib3->usulan_luaran_id])}}">
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i>
                                                                     Ubah
@@ -264,7 +268,7 @@
                                                             <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $wajib4->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_edit_luaran', [$id, $wajib4->usulan_luaran_id])}}">
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i>
                                                                     Ubah
@@ -338,7 +342,7 @@
                                                             <form action="{{route('pengusul_pengabdian_destroy_luaran', [$id, $tambahan->usulan_luaran_id])}}" method="POST" class="form-inline form-horizontal">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <a class="btn btn-primary btn-sm" href="">
+                                                                <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_edit_luaran', [$id, $tambahan->usulan_luaran_id])}}">
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i>
                                                                     Ubah
