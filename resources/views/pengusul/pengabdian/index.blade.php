@@ -23,6 +23,24 @@
         </div>
 
         <div class="container-fluid">
+            @if($is_tambah_unlock == true)
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Usulan</h5>
+                        <ul class="mb-0">
+                            <li>
+                                <b>Periode</b> : {{$tambah_unlock->unlock_feature_start_year . " / " . $tambah_unlock->unlock_feature_end_year}}
+                            </li>
+                            <li>
+                                <b>Mulai</b> : {{Carbon\Carbon::parse($tambah_unlock->unlock_feature_start_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            <li>
+                                <b>Selesai</b> : {{Carbon\Carbon::parse($tambah_unlock->unlock_feature_end_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
                     <a href="{{route('pengusul_pengabdian_tambah')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Usulan Pengabdian</a>
@@ -30,6 +48,7 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
+            @endif
         </div>
 
         <!--Content -->

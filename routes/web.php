@@ -50,7 +50,9 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
-                    Route::get('/', 'Admin\PengabdianController@index')->name('admin_pengabdian');
+                    Route::get('/usulan', 'Admin\PengabdianController@usulan_pengabdian')->name('admin_pengabdian_usulan');
+
+                    Route::get('/pelaksanaan', 'Admin\PengabdianController@pelaksanaan_pengabdian')->name('admin_pengabdian_pelaksanaan');
                     // Route::get('/detail', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
                 });
 
@@ -141,41 +143,45 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Pengusul\PengabdianController@index')->name('pengusul_pengabdian');
                     // Route::get('/detail', 'Pengusul\PengabdianController@detail')->name('pengusul_pengabdian_detail');
-                    Route::get('/tambah', 'Pengusul\PengabdianController@tambah')->name('pengusul_pengabdian_tambah');
-                    Route::post('/tambah', 'Pengusul\PengabdianController@store')->name('pengusul_pengabdian_store');
+
                     Route::delete('/{id}/hapus', 'Pengusul\PengabdianController@hapus')->name('pengusul_pengabdian_hapus');
-                    Route::patch('/usulan/1/{id}', 'Pengusul\PengabdianController@update')->name('pengusul_pengabdian_update');
-                    Route::get('/usulan/{page}/{id}', 'Pengusul\PengabdianController@usulan')->name('pengusul_pengabdian_usulan');
 
-                    Route::get('/usulan/{id}/member/add', 'Pengusul\PengabdianController@tambah_anggota')->name('pengusul_pengabdian_tambah_anggota');
-                    Route::post('/usulan/{id}/member/add', 'Pengusul\PengabdianController@store_anggota')->name('pengusul_pengabdian_store_anggota');
-                    Route::delete('/usulan/{id}/member/remove/{removeid}', 'Pengusul\PengabdianController@remove_anggota')->name('pengusul_pengabdian_remove_anggota');
+                    Route::group(['middleware' => ['is_Unlock_Tambah_Usulan']], function () {
+                        Route::get('/tambah', 'Pengusul\PengabdianController@tambah')->name('pengusul_pengabdian_tambah');
+                        Route::post('/tambah', 'Pengusul\PengabdianController@store')->name('pengusul_pengabdian_store');
+                        Route::patch('/usulan/1/{id}', 'Pengusul\PengabdianController@update')->name('pengusul_pengabdian_update');
+                        Route::get('/usulan/{page}/{id}', 'Pengusul\PengabdianController@usulan')->name('pengusul_pengabdian_usulan');
 
-                    Route::post('/usulan/{id}/upload/dokumen', 'Pengusul\PengabdianController@upload_dokumen')->name('pengusul_pengabdian_upload_dokumen');
+                        Route::get('/usulan/{id}/member/add', 'Pengusul\PengabdianController@tambah_anggota')->name('pengusul_pengabdian_tambah_anggota');
+                        Route::post('/usulan/{id}/member/add', 'Pengusul\PengabdianController@store_anggota')->name('pengusul_pengabdian_store_anggota');
+                        Route::delete('/usulan/{id}/member/remove/{removeid}', 'Pengusul\PengabdianController@remove_anggota')->name('pengusul_pengabdian_remove_anggota');
 
-                    Route::post('/usulan/{id}/upload/rab', 'Pengusul\PengabdianController@upload_rab')->name('pengusul_pengabdian_upload_rab');
+                        Route::post('/usulan/{id}/upload/dokumen', 'Pengusul\PengabdianController@upload_dokumen')->name('pengusul_pengabdian_upload_dokumen');
 
-                    Route::get('/usulan/{id}/mitra/tambah', 'Pengusul\PengabdianController@tambah_mitra')->name('pengusul_pengabdian_tambah_mitra');
-                    Route::post('/usulan/{id}/mitra/tambah', 'Pengusul\PengabdianController@store_tambah_mitra')->name('pengusul_pengabdian_store_tambah_mitra');
-                    Route::get('/usulan/{id}/mitra/edit/{editid}', 'Pengusul\PengabdianController@edit_mitra')->name('pengusul_pengabdian_edit_mitra');
-                    Route::patch('/usulan/{id}/mitra/edit/{editid}', 'Pengusul\PengabdianController@update_mitra')->name('pengusul_pengabdian_update_mitra');
-                    Route::patch('/usulan/{id}/mitra/upload', 'Pengusul\PengabdianController@upload_dokumen_mitra')->name('pengusul_pengabdian_upload_dokumen_mitra');
-                    Route::delete('/usulan/{id}/mitra/hapus/{removeid}', 'Pengusul\PengabdianController@hapus_mitra')->name('pengusul_pengabdian_hapus_mitra');
+                        Route::post('/usulan/{id}/upload/rab', 'Pengusul\PengabdianController@upload_rab')->name('pengusul_pengabdian_upload_rab');
 
-                    Route::post('/usulan/{id}/submit', 'Pengusul\PengabdianController@usulan_submit')->name('pengusul_pengabdian_submit');
+                        Route::get('/usulan/{id}/mitra/tambah', 'Pengusul\PengabdianController@tambah_mitra')->name('pengusul_pengabdian_tambah_mitra');
+                        Route::post('/usulan/{id}/mitra/tambah', 'Pengusul\PengabdianController@store_tambah_mitra')->name('pengusul_pengabdian_store_tambah_mitra');
+                        Route::get('/usulan/{id}/mitra/edit/{editid}', 'Pengusul\PengabdianController@edit_mitra')->name('pengusul_pengabdian_edit_mitra');
+                        Route::patch('/usulan/{id}/mitra/edit/{editid}', 'Pengusul\PengabdianController@update_mitra')->name('pengusul_pengabdian_update_mitra');
+                        Route::patch('/usulan/{id}/mitra/upload', 'Pengusul\PengabdianController@upload_dokumen_mitra')->name('pengusul_pengabdian_upload_dokumen_mitra');
+                        Route::delete('/usulan/{id}/mitra/hapus/{removeid}', 'Pengusul\PengabdianController@hapus_mitra')->name('pengusul_pengabdian_hapus_mitra');
 
-                    Route::post('/usulan/mitra/get/kabupaten', 'Pengusul\PengabdianController@get_kabupaten')->name('pengusul_pengabdian_get_kabupaten');
-                    Route::post('/usulan/mitra/get/kecamatan', 'Pengusul\PengabdianController@get_kecamatan')->name('pengusul_pengabdian_get_kecamatan');
-                    Route::post('/usulan/mitra/get/desa', 'Pengusul\PengabdianController@get_desa')->name('pengusul_pengabdian_get_desa');
+                        Route::post('/usulan/{id}/submit', 'Pengusul\PengabdianController@usulan_submit')->name('pengusul_pengabdian_submit');
 
-                    Route::get('usulan/{id}/download/{file_name}/{file_category}', 'Pengusul\PengabdianController@file_download')->name('pengusul_pengabdian_file_download');
-                    Route::get('usulan/{id}/preview/{file_name}/{file_category}', 'Pengusul\PengabdianController@file_preview')->name('pengusul_pengabdian_file_preview');
+                        Route::post('/usulan/mitra/get/kabupaten', 'Pengusul\PengabdianController@get_kabupaten')->name('pengusul_pengabdian_get_kabupaten');
+                        Route::post('/usulan/mitra/get/kecamatan', 'Pengusul\PengabdianController@get_kecamatan')->name('pengusul_pengabdian_get_kecamatan');
+                        Route::post('/usulan/mitra/get/desa', 'Pengusul\PengabdianController@get_desa')->name('pengusul_pengabdian_get_desa');
 
-                    Route::get('/usulan/{id}/luaran/{luaran_id}/edit', 'Pengusul\PengabdianController@edit_luaran')->name('pengusul_pengabdian_edit_luaran');
-                    Route::patch('/usulan/{id}/luaran/{luaran_id}/edit', 'Pengusul\PengabdianController@update_luaran')->name('pengusul_pengabdian_update_luaran');
-                    Route::delete('/usulan/{id}/luaran/{luaran_id}/delete', 'Pengusul\PengabdianController@destroy_luaran')->name('pengusul_pengabdian_destroy_luaran');
-                    Route::get('/usulan/{id}/luaran/{tipe}/{urutan}', 'Pengusul\PengabdianController@tambah_luaran')->name('pengusul_pengabdian_tambah_luaran');
-                    Route::post('/usulan/{id}/luaran/{tipe}/{urutan}', 'Pengusul\PengabdianController@store_luaran')->name('pengusul_pengabdian_store_luaran');
+                        Route::get('usulan/{id}/download/{file_name}/{file_category}', 'Pengusul\PengabdianController@file_download')->name('pengusul_pengabdian_file_download');
+                        Route::get('usulan/{id}/preview/{file_name}/{file_category}', 'Pengusul\PengabdianController@file_preview')->name('pengusul_pengabdian_file_preview');
+
+                        Route::get('/usulan/{id}/luaran/{luaran_id}/edit', 'Pengusul\PengabdianController@edit_luaran')->name('pengusul_pengabdian_edit_luaran');
+                        Route::patch('/usulan/{id}/luaran/{luaran_id}/edit', 'Pengusul\PengabdianController@update_luaran')->name('pengusul_pengabdian_update_luaran');
+                        Route::delete('/usulan/{id}/luaran/{luaran_id}/delete', 'Pengusul\PengabdianController@destroy_luaran')->name('pengusul_pengabdian_destroy_luaran');
+                        Route::get('/usulan/{id}/luaran/{tipe}/{urutan}', 'Pengusul\PengabdianController@tambah_luaran')->name('pengusul_pengabdian_tambah_luaran');
+                        Route::post('/usulan/{id}/luaran/{tipe}/{urutan}', 'Pengusul\PengabdianController@store_luaran')->name('pengusul_pengabdian_store_luaran');
+                    });
                 });
 
                 //Laporan Kemajuan

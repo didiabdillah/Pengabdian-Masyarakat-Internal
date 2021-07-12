@@ -8,8 +8,13 @@ use Illuminate\Support\Facades\Session;
 
 class PengabdianController extends Controller
 {
-    public function index()
+    public function usulan_pengabdian()
     {
-        return view('admin.pengabdian.index');
+        return view('admin.pengabdian.usulan');
+    }
+
+    public function pelaksanaan_pengabdian()
+    {
+        return view('admin.pengabdian.pelaksanaan');
     }
 }

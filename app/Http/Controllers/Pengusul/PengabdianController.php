@@ -17,6 +17,7 @@ use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 use App\Models\Luaran_usulan;
+use App\Models\Unlock_feature;
 
 class PengabdianController extends Controller
 {
@@ -39,7 +40,22 @@ class PengabdianController extends Controller
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 
-        return view('pengusul.pengabdian.index', ['usulan_pengabdian' => $usulan_pengabdian, 'riwayat_pengabdian' => $riwayat_pengabdian]);
+        $is_tambah_unlock = false;
+        $tambah_unlock = Unlock_feature::where('unlock_feature_name', __('unlock.tambah_usulan_pengabdian'))->first();
+        if ($tambah_unlock) {
+            if (strtotime($tambah_unlock->unlock_feature_start_time) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($tambah_unlock->unlock_feature_end_time)) {
+                $is_tambah_unlock = true;
+            }
+        }
+
+        $view_data = [
+            'usulan_pengabdian' => $usulan_pengabdian,
+            'riwayat_pengabdian' => $riwayat_pengabdian,
+            'is_tambah_unlock' => $is_tambah_unlock,
+            'tambah_unlock' => $tambah_unlock,
+        ];
+
+        return view('pengusul.pengabdian.index', $view_data);
     }
 
     public function tambah()

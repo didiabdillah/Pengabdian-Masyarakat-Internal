@@ -121,13 +121,32 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin_pengabdian')}}" class="nav-link @if(Request::segment(1) == 'pengabdian' || Request::segment(2) == 'pengabdian') {{'active'}} @endif">
+                        <li class="nav-item @if(Request::segment(2) == 'pengabdian'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'pelaksanaan_pengabdian' || Request::segment(2) == 'pengabdian') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
-                                    Usulan Pengabdian
+                                    Pengabdian
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin_pengabdian_usulan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'usulan') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Usulan Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin_pengabdian_pelaksanaan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'pelaksanaan') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Pelaksanaan Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin_data_pendukung')}}" class="nav-link @if(Request::segment(1) == 'data_pendukung' || Request::segment(2) == 'data_pendukung') {{'active'}} @endif">
