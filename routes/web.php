@@ -50,9 +50,14 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
-                    Route::get('/usulan', 'Admin\PengabdianController@usulan_pengabdian')->name('admin_pengabdian_usulan');
+                    Route::group(['prefix' => 'usulan'], function () {
+                        Route::get('/', 'Admin\PengabdianController@usulan_pengabdian')->name('admin_pengabdian_usulan');
+                    });
 
-                    Route::get('/pelaksanaan', 'Admin\PengabdianController@pelaksanaan_pengabdian')->name('admin_pengabdian_pelaksanaan');
+                    Route::group(['prefix' => 'pelaksanaan'], function () {
+                        Route::get('/', 'Admin\PengabdianController@pelaksanaan_pengabdian')->name('admin_pengabdian_pelaksanaan');
+                        Route::patch('/', 'Admin\PengabdianController@pelaksanaan_pengabdian_update')->name('admin_pengabdian_pelaksanaan_update');
+                    });
                     // Route::get('/detail', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
                 });
 

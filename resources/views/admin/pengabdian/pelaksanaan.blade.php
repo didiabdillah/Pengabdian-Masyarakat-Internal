@@ -6,6 +6,10 @@
 
 @include('layout.flash_alert')
 
+@push('style')
+<link rel="stylesheet" href="{{URL::asset('assets/css/daterangepicker/daterangepicker.css')}}">
+@endpush
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -46,42 +50,58 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('proposer_update', $user->user_id)}}" method="POST">
+                        <form action="{{route('admin_pengabdian_pelaksanaan_update')}}" method="POST">
                             @csrf
                             @method('patch')
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{$user->user_name}}">
-                                    @error('name')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
+                                <input type="hidden" value="{{$waktu->unlock_feature_id}}" name="id" id="id">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="tahun_mulai">Tahun Priode Mulai</label>
+                                            <input type="text" class="form-control @error('tahun_mulai') is-invalid @enderror" id="tahun_mulai" name="tahun_mulai" placeholder="2xxx" value="{{$waktu->unlock_feature_start_year}}">
+                                            @error('tahun_mulai')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    @enderror
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <br>
+                                            <h2 class="text-center mt-2"> / </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="tahun_selesai">Tahun Priode Selesai</label>
+                                            <input type="text" class="form-control @error('tahun_selesai') is-invalid @enderror" id="tahun_selesai" name="tahun_selesai" placeholder="2xxx" value="{{$waktu->unlock_feature_end_year}}">
+                                            @error('tahun_selesai')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
 
+                                <!-- Date and time range -->
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{$user->user_email}}">
-                                    @error('email')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                </div>
+                                    <label>Waktu Pelaksanaan</label>
 
-                                <div class="form-group">
-                                    <label for="password">Password (Optional)</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password (Optional)">
-                                    @error('password')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control float-right" id="waktu" name="waktu" value="{{date('Y/m/d H:i', strtotime($waktu->unlock_feature_start_time)) . ' - ' . date('Y/m/d H:i', strtotime($waktu->unlock_feature_end_time))}}">
                                     </div>
-                                    @enderror
+                                    <!-- /.input group -->
                                 </div>
+                                <!-- /.form group -->
 
                                 <div class=" card-footer">
-                                    <a href="{{route('proposer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                    <a href="" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
                                 </div>
                             </div>
@@ -146,6 +166,26 @@
             "autoWidth": false,
             "responsive": true,
             "pagingType": "simple_numbers",
+        });
+    });
+</script>
+
+<!-- date-range-picker -->
+<script src="{{URL::asset('assets/js//moment/moment.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/daterangepicker/daterangepicker.js')}}"></script>
+
+<script>
+    $(function() {
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#waktu').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 5,
+            timePicker24Hour: true,
+            locale: {
+                format: 'YYYY/MM/DD HH:mm'
+            }
         });
     });
 </script>
