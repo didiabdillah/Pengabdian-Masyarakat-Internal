@@ -129,14 +129,6 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('reviewer_penilaian_pengabdian')}}" class="nav-link @if(Request::segment(1) == 'penilaian' || Request::segment(2) == 'penilaian') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Penilaian Pengabdian
-                                </p>
-                            </a>
-                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

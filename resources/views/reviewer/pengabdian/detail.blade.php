@@ -28,12 +28,13 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('reviewer_pengabdian')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
-                        <div class="card-tools">
+                        <a href="{{route('reviewer_pengabdian')}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a href="{{route('reviewer_pengabdian_nilai', $id)}}" class="btn btn-success ml-auto float-right"><i class="fas fa-pencil-alt"></i> Nilai Usulan</a>
+                        <!-- <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card-body">
 
@@ -133,6 +134,11 @@
                                             <h6>File Usulan : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
                                             <h6>Tanggal Unggah : @if($dokumen_usulan){{Carbon\Carbon::parse($dokumen_usulan->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
                                             <h6>Ukuran File : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
+
+                                            @if($dokumen_usulan)
+                                            <a href="{{route('reviewer_pengabdian_file_preview', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                            <a href="{{route('reviewer_pengabdian_file_download', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -224,6 +230,180 @@
                                     </div>
                                     <div class="card-body">
 
+                                        <!-- LUARAN WAJIB -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card m-2">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            <i class="fas fa-file-alt"></i>
+                                                            Luaran Wajib
+                                                        </h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan="2">
+                                                                        @if($jumlah_luaran_wajib = 4)
+                                                                        <h5><span class="badge badge-primary">Isi Luaran Wajib Sudah Lengkap</span></h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-danger">Isi Luaran Wajib Belum Lengkap</span></h5>
+                                                                        @endif
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <h5>Tahun 1 :</h5>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        1. <b>- Publikasi di prosiding seminar nasional ber ISBN</b>
+                                                                        <br>
+                                                                        @if($wajib1)
+                                                                        @if($wajib1->usulan_luaran_pengabdian_jenis && $wajib1->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$wajib1->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib1->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($wajib1->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$wajib1->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+
+                                                                    </td>
+
+                                                                    <td>
+                                                                        @if($wajib2)
+                                                                        2. <b>- {{$wajib2->usulan_luaran_pengabdian_kategori}}, ...</b>
+                                                                        <br>
+                                                                        @if($wajib2->usulan_luaran_pengabdian_jenis && $wajib2->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$wajib2->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib2->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($wajib2->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$wajib2->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        2. <b>- Publikasi di media massa, ...</b>
+                                                                        <br>
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+
+                                                                    </td>
+
+                                                                    <td>
+                                                                        3. <b>- Video pelaksanaan kegiatan</b>
+                                                                        <br>
+                                                                        @if($wajib3)
+                                                                        @if($wajib3->usulan_luaran_pengabdian_jenis && $wajib3->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$wajib3->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib3->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($wajib3->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$wajib3->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+
+                                                                    </td>
+
+                                                                    <td>
+                                                                        4. <b>- Peningkatan pemberdayaan mitra,...</b>
+                                                                        <br>
+                                                                        @if($wajib4)
+                                                                        @if($wajib4->usulan_luaran_pengabdian_jenis && $wajib4->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$wajib4->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib4->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($wajib4->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$wajib4->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card -->
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+
+                                        <!-- LUARAN TAMBAHAN -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card m-2">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            <i class="fas fa-file-alt"></i>
+                                                            Luaran Tambahan
+                                                        </h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <th colspan="2">
+
+                                                                </th>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <h5>Tahun 1 :</h5>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        @if($tambahan)
+                                                                        @if($tambahan->usulan_luaran_pengabdian_jenis && $tambahan->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$tambahan->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$tambahan->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($tambahan->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$tambahan->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card -->
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
                                     </div>
                                 </div>
                                 <!-- /.card -->
@@ -248,6 +428,11 @@
                                             <h6>File RAB : @if($dokumen_rab){{$dokumen_rab->dokumen_rab_original_name}}@else{{"-"}}@endif</h6>
                                             <h6>Tanggal Unggah : @if($dokumen_rab){{Carbon\Carbon::parse($dokumen_rab->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
                                             <h6>Ukuran File : @if($dokumen_rab){{$dokumen_rab->dokumen_rab_file_size . " KB"}}@else{{"-"}}@endif</h6>
+
+                                            @if($dokumen_rab)
+                                            <a href="{{route('reviewer_pengabdian_file_preview', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                            <a href="{{route('reviewer_pengabdian_file_download', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -311,6 +496,12 @@
                                                         Nama File : -
                                                         <br>
                                                         Tanggal Unggah : -
+                                                        @endif
+
+                                                        @if($data->mitra_sasaran_file_date)
+                                                        <br>
+                                                        <a href="{{route('reviewer_pengabdian_file_preview', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                        <a href="{{route('reviewer_pengabdian_file_download', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                         @endif
                                                     </td>
                                                 </tr>

@@ -11,12 +11,15 @@ use App\Models\Anggota_pengabdian;
 use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
+use App\Models\Luaran_usulan;
+use App\Models\Penilaian_usulan;
 
 class PengabdianController extends Controller
 {
     public function index()
     {
         $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
+            ->where('usulan_pengabdian_reviewer_id', Session::get('user_id'))
             ->where('usulan_pengabdian_status', '!=', 'pending')
             ->orderBy('usulan_pengabdian_tahun', 'desc')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
@@ -52,6 +55,35 @@ class PengabdianController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
+        $luaran_wajib1 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->where('usulan_luaran_pengabdian_urutan', 1)
+            ->first();
+
+        $luaran_wajib2 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->where('usulan_luaran_pengabdian_urutan', 2)
+            ->first();
+
+        $luaran_wajib3 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->where('usulan_luaran_pengabdian_urutan', 3)
+            ->first();
+
+        $luaran_wajib4 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->where('usulan_luaran_pengabdian_urutan', 4)
+            ->first();
+
+        $jumlah_luaran_wajib = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->count();
+
+        $luaran_tambahan = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
+            ->where('usulan_luaran_pengabdian_urutan', 0)
+            ->first();
+
         $view_data = [
             'mitra_sasaran' => $mitra_sasaran,
             'dokumen_rab' => $dokumen_rab,
@@ -59,75 +91,193 @@ class PengabdianController extends Controller
             'dokumen_usulan' => $dokumen_usulan,
             'ketua' => $ketua,
             'id' => $id,
+            'wajib1' => $luaran_wajib1,
+            'wajib2' => $luaran_wajib2,
+            'wajib3' => $luaran_wajib3,
+            'wajib4' => $luaran_wajib4,
+            'tambahan' => $luaran_tambahan,
+            'jumlah_luaran_wajib' => $jumlah_luaran_wajib,
         ];
 
         return view('reviewer.pengabdian.detail', $view_data);
     }
 
-    public function konfirmasi($id)
+    public function nilai($id)
     {
-        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
-            ->where('anggota_pengabdian_role', 'ketua')
-            ->first();
+        // $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+        //     ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+        //     ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+        //     ->where('anggota_pengabdian_role', 'ketua')
+        //     ->first();
 
-        $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+        // $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
-        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
-            ->where('anggota_pengabdian_role', '!=', 'ketua')
-            ->orderBy('anggota_pengabdian_role', 'asc')
-            ->get();
+        // $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+        //     ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+        //     ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+        //     ->where('anggota_pengabdian_role', '!=', 'ketua')
+        //     ->orderBy('anggota_pengabdian_role', 'asc')
+        //     ->get();
 
-        $dokumen_rab = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
+        // $dokumen_rab = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
 
-        $mitra_sasaran = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
-            ->orderBy('created_at', 'asc')
-            ->get();
+        // $mitra_sasaran = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
+        //     ->orderBy('created_at', 'asc')
+        //     ->get();
 
         $view_data = [
-            'mitra_sasaran' => $mitra_sasaran,
-            'dokumen_rab' => $dokumen_rab,
-            'anggota' => $anggota,
-            'dokumen_usulan' => $dokumen_usulan,
-            'ketua' => $ketua,
+            // 'mitra_sasaran' => $mitra_sasaran,
+            // 'dokumen_rab' => $dokumen_rab,
+            // 'anggota' => $anggota,
+            // 'dokumen_usulan' => $dokumen_usulan,
+            // 'ketua' => $ketua,
             'id' => $id,
         ];
 
-        return view('reviewer.pengabdian.konfirmasi', $view_data);
+        return view('reviewer.pengabdian.nilai', $view_data);
     }
 
-    public function konfirmasi_update(Request $request, $id)
+    public function nilai_update(Request $request, $id)
     {
         // Input Validation
         $request->validate(
             [
-                'status'  => 'required',
+                'nilai_1'  => 'required',
+                'nilai_2'  => 'required',
+                'nilai_3'  => 'required',
+                'nilai_4'  => 'required',
+                'nilai_5'  => 'required',
                 'komentar'  => 'max:60000',
             ]
         );
 
-        $status = htmlspecialchars($request->status);
-        $komentar = $request->note;
+        $nilai_1 = $request->nilai_1;
+        $nilai_2 = $request->nilai_2;
+        $nilai_3 = $request->nilai_3;
+        $nilai_4 = $request->nilai_4;
+        $nilai_5 = $request->nilai_5;
+        $komentar = htmlspecialchars($request->komentar);
 
-        $konfirmasi = ($status == 1) ? "diterima" : "ditolak";
-
-        //Update Data
+        //Input Data
         $data = [
-            'usulan_pengabdian_status' => $konfirmasi,
-            'usulan_pengabdian_komentar' => $komentar,
+            'penilaian_usulan_pengabdian_id' => $id,
+            'penilaian_usulan_komentar' => $komentar,
+            'penilaian_usulan_nilai_1' => $nilai_1,
+            'penilaian_usulan_nilai_2' => $nilai_2,
+            'penilaian_usulan_nilai_3' => $nilai_3,
+            'penilaian_usulan_nilai_4' => $nilai_4,
+            'penilaian_usulan_nilai_5' => $nilai_5,
         ];
-        Usulan_pengabdian::where('usulan_pengabdian_id', $id)->update($data);
+
+        Penilaian_usulan::updateOrInsert(
+            ['penilaian_usulan_pengabdian_id' => $id],
+            $data
+        );
 
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
-            'Status Usulan pengabdian Diperbaharui' //Sub Alert Message
+            'Nilai Disubmit' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer_pengabdian');
+        return redirect()->route('reviewer_pengabdian_detail', $id);
+    }
+
+    public function file_download($id, $file_name, $file_category)
+    {
+        $file_fetch = NULL;
+        $file = NULL;
+        $file_extension = NULL;
+        $file_original_name = NULL;
+
+        if ($file_category == "usulan") {
+            $file_fetch = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)
+                ->where('dokumen_usulan_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_usulan/" . $file_fetch->dokumen_usulan_hash_name);
+
+            $file_extension = $file_fetch->dokumen_usulan_extension;
+
+            $file_original_name = $file_fetch->dokumen_usulan_original_name;
+        } elseif ($file_category == "rab") {
+            $file_fetch = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)
+                ->where('dokumen_rab_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_rab/" . $file_fetch->dokumen_rab_hash_name);
+
+            $file_extension = $file_fetch->dokumen_rab_extension;
+
+            $file_original_name = $file_fetch->dokumen_rab_original_name;
+        } elseif ($file_category == "mitra") {
+            $file_fetch = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
+                ->where('mitra_sasaran_file_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
+
+            $file_extension = $file_fetch->mitra_sasaran_file_extension;
+
+            $file_original_name = $file_fetch->mitra_sasaran_file_original_name;
+        }
+
+        if ($file_fetch) {
+            if ($file_extension == "pdf") {
+
+                $headers = array(
+                    'Content-Type' => mime_content_type($file),
+                );
+
+                return response()->download($file, $file_original_name, $headers);
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function file_preview($id, $file_name, $file_category)
+    {
+        $file_fetch = NULL;
+        $file = NULL;
+        $file_extension = NULL;
+
+        if ($file_category == "usulan") {
+            $file_fetch = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)
+                ->where('dokumen_usulan_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_usulan/" . $file_fetch->dokumen_usulan_hash_name);
+
+            $file_extension = $file_fetch->dokumen_usulan_extension;
+        } elseif ($file_category == "rab") {
+            $file_fetch = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)
+                ->where('dokumen_rab_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_rab/" . $file_fetch->dokumen_rab_hash_name);
+
+            $file_extension = $file_fetch->dokumen_rab_extension;
+        } elseif ($file_category == "mitra") {
+            $file_fetch = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
+                ->where('mitra_sasaran_file_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
+
+            $file_extension = $file_fetch->mitra_sasaran_file_extension;
+        }
+
+        if ($file_fetch) {
+            if ($file_extension == "pdf") {
+
+                $headers = array(
+                    'Content-Type' => mime_content_type($file),
+                );
+
+                return response()->file($file, $headers);
+            }
+        }
     }
 }

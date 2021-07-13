@@ -49,4 +49,9 @@ class Usulan_pengabdian extends Model
     {
         return $this->hasMany('App\Models\Mitra_sasaran', 'mitra_sasaran_pengabdian_id');
     }
+
+    public function penilaian_usulan()
+    {
+        return $this->hasOne('App\Models\Penilaian_usulan', 'penilaian_usulan_pengabdian_id');
+    }
 }

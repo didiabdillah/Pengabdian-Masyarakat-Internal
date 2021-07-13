@@ -117,7 +117,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         Route::group(['middleware' => ['is_Reviewer']], function () {
             Route::group(['prefix' => 'reviewer'], function () {
                 //Home
-                Route::group(['prefix' => '/home'], function () {
+                Route::group(['prefix' => 'home'], function () {
                     Route::get('/', 'Reviewer\HomeController@index')->name('reviewer_home');
                 });
 
@@ -125,17 +125,15 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Reviewer\PengabdianController@index')->name('reviewer_pengabdian');
                     Route::get('/{id}/detail', 'Reviewer\PengabdianController@detail')->name('reviewer_pengabdian_detail');
-                    Route::get('/{id}/konfirmasi', 'Reviewer\PengabdianController@konfirmasi')->name('reviewer_pengabdian_konfirmasi');
-                    Route::patch('/{id}/konfirmasi', 'Reviewer\PengabdianController@konfirmasi_update')->name('reviewer_pengabdian_konfirmasi_status');
-                });
+                    Route::get('/{id}/nilai', 'Reviewer\PengabdianController@nilai')->name('reviewer_pengabdian_nilai');
+                    Route::patch('/{id}/nilai', 'Reviewer\PengabdianController@nilai_update')->name('reviewer_pengabdian_nilai_update');
 
-                //Penilaian
-                Route::group(['prefix' => 'penilaian'], function () {
-                    Route::get('/', 'Reviewer\PenilaianController@index')->name('reviewer_penilaian_pengabdian');
+                    Route::get('/{id}/download/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_download')->name('reviewer_pengabdian_file_download');
+                    Route::get('/{id}/preview/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_preview')->name('reviewer_pengabdian_file_preview');
                 });
 
                 //Biodata
-                Route::group(['prefix' => '/biodata'], function () {
+                Route::group(['prefix' => 'biodata'], function () {
                     Route::get('/edit', 'Reviewer\BiodataController@edit')->name('reviewer_biodata_edit');
                     Route::patch('/update', 'Reviewer\BiodataController@update')->name('reviewer_biodata_update');
                     Route::patch('/update/picture', 'Reviewer\BiodataController@update_picture')->name('reviewer_biodata_update_picture');
