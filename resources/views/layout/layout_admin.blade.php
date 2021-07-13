@@ -180,13 +180,32 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin_reviewer')}}" class="nav-link @if(Request::segment(1) == 'reviewer' || Request::segment(2) == 'reviewer') {{'active'}} @endif">
+                        <li class="nav-item @if(Request::segment(2) == 'reviewer'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'reviewer') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-user-friends"></i>
                                 <p>
                                     Reviewer
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin_reviewer')}}" class="nav-link @if(Request::segment(3) == 'daftar') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Daftar Reviewer
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin_plotting_reviewer')}}" class="nav-link @if(Request::segment(3) == 'plotting') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Plotting Reviewer
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin_pengusul')}}" class="nav-link @if(Request::segment(1) == 'pengusul' || Request::segment(2) == 'pengusul') {{'active'}} @endif">

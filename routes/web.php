@@ -84,12 +84,20 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
                 //Reviewer
                 Route::group(['prefix' => 'reviewer'], function () {
-                    Route::get('/', 'Admin\ReviewerController@index')->name('admin_reviewer');
-                    Route::get('/insert', 'Admin\ReviewerController@insert')->name('admin_reviewer_insert');
-                    Route::post('/store', 'Admin\ReviewerController@store')->name('admin_reviewer_store');
-                    Route::get('/edit/{id}', 'Admin\ReviewerController@edit')->name('admin_reviewer_edit');
-                    Route::patch('/edit/{id}', 'Admin\ReviewerController@update')->name('admin_reviewer_update');
-                    Route::delete('/destroy/{id}', 'Admin\ReviewerController@destroy')->name('admin_reviewer_destroy');
+                    Route::group(['prefix' => 'daftar'], function () {
+                        Route::get('/', 'Admin\ReviewerController@index')->name('admin_reviewer');
+                        Route::get('/insert', 'Admin\ReviewerController@insert')->name('admin_reviewer_insert');
+                        Route::post('/store', 'Admin\ReviewerController@store')->name('admin_reviewer_store');
+                        Route::get('/edit/{id}', 'Admin\ReviewerController@edit')->name('admin_reviewer_edit');
+                        Route::patch('/edit/{id}', 'Admin\ReviewerController@update')->name('admin_reviewer_update');
+                        Route::delete('/destroy/{id}', 'Admin\ReviewerController@destroy')->name('admin_reviewer_destroy');
+                    });
+
+                    Route::group(['prefix' => 'plotting'], function () {
+                        Route::get('/', 'Admin\PlottingReviewerController@index')->name('admin_plotting_reviewer');
+                        Route::get('/{id}/give', 'Admin\PlottingReviewerController@give_reviewer')->name('admin_plotting_give_reviewer');
+                        Route::patch('/{id}/give', 'Admin\PlottingReviewerController@give_reviewer_update')->name('admin_plotting_give_reviewer_update');
+                    });
                 });
 
                 //Pengusul

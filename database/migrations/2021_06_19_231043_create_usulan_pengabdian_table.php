@@ -24,7 +24,7 @@ class CreateUsulanPengabdianTable extends Migration
             $table->integer('usulan_pengabdian_mahasiswa_terlibat');
             $table->year('usulan_pengabdian_tahun');
             $table->boolean('usulan_pengabdian_submit');
-            $table->enum('usulan_pengabdian_status', ['dikirim', 'diterima', 'ditolak', 'pending']);
+            $table->enum('usulan_pengabdian_status', ['dikirim', 'diterima', 'ditolak', 'dinilai', 'revisi', 'pending']);
             $table->text('usulan_pengabdian_komentar')->nullable();
 
             $table->timestamps();
