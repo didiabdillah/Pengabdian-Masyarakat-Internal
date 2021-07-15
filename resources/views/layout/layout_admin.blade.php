@@ -122,7 +122,7 @@
                             </a>
                         </li>
                         <li class="nav-item @if(Request::segment(2) == 'pengabdian'){{'menu-is-opening menu-open'}} @endif">
-                            <a href="#" class="nav-link @if(Request::segment(2) == 'pelaksanaan_pengabdian' || Request::segment(2) == 'pengabdian') {{'active'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'pengabdian') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
                                     Pengabdian
@@ -139,10 +139,18 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin_pengabdian_pelaksanaan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'pelaksanaan') {{'active'}} @endif">
+                                    <a href="{{route('admin_pengabdian_pelaksanaan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'pelaksanaan' && Request::segment(4) == NULL) {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Pelaksanaan Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin_penilaian_pelaksanaan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'pelaksanaan' && Request::segment(4) == 'penilaian') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Pelaksanaan Penilaian
                                         </p>
                                     </a>
                                 </li>

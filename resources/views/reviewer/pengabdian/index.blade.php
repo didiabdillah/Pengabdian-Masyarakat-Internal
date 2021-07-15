@@ -22,15 +22,27 @@
 
         </div>
 
-        {{--<div class="container-fluid">
+        <div class="container-fluid">
+            @if($is_nilai_unlock == true)
             <div class="row">
-                <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Usulan Pengabdian</a>
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Penilaian Usulan</h5>
+                        <ul class="mb-0">
+                            <li>
+                                <b>Periode</b> : {{$nilai_unlock->unlock_feature_start_year . " / " . $nilai_unlock->unlock_feature_end_year}}
+                            </li>
+                            <li>
+                                <b>Batas Awal</b> : {{Carbon\Carbon::parse($nilai_unlock->unlock_feature_start_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            <li>
+                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse($nilai_unlock->unlock_feature_end_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div> --}}
+            @endif
+        </div>
 
         <!--Content -->
         <section class="content">

@@ -57,9 +57,17 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::group(['prefix' => 'pelaksanaan'], function () {
                         Route::get('/', 'Admin\PengabdianController@pelaksanaan_pengabdian')->name('admin_pengabdian_pelaksanaan');
                         Route::patch('/', 'Admin\PengabdianController@pelaksanaan_pengabdian_update')->name('admin_pengabdian_pelaksanaan_update');
+
+                        Route::group(['prefix' => 'penilaian'], function () {
+                            Route::get('/', 'Admin\PengabdianController@pelaksanaan_penilaian')->name('admin_penilaian_pelaksanaan');
+                            Route::patch('/', 'Admin\PengabdianController@pelaksanaan_penilaian_update')->name('admin_penilaian_pelaksanaan_update');
+                        });
                     });
+
                     // Route::get('/detail', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
                 });
+
+                //Penilaian
 
                 //Data Pendukung
                 Route::group(['prefix' => 'data_pendukung'], function () {
@@ -124,14 +132,17 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Reviewer\PengabdianController@index')->name('reviewer_pengabdian');
-                    Route::get('/{id}/detail', 'Reviewer\PengabdianController@detail')->name('reviewer_pengabdian_detail');
-                    Route::get('/{id}/nilai', 'Reviewer\PengabdianController@nilai')->name('reviewer_pengabdian_nilai');
-                    Route::patch('/{id}/nilai', 'Reviewer\PengabdianController@nilai_update')->name('reviewer_pengabdian_nilai_update');
-                    Route::get('/{id}/nilai/ulasan', 'Reviewer\PengabdianController@nilai_ulasan')->name('reviewer_pengabdian_nilai_ulasan');
-                    Route::patch('/{id}/nilai/ulasan', 'Reviewer\PengabdianController@nilai_ulasan_update')->name('reviewer_pengabdian_nilai_ulasan_update');
 
-                    Route::get('/{id}/download/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_download')->name('reviewer_pengabdian_file_download');
-                    Route::get('/{id}/preview/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_preview')->name('reviewer_pengabdian_file_preview');
+                    Route::group(['middleware' => ['is_Unlock_Nilai_Usulan']], function () {
+                        Route::get('/{id}/detail', 'Reviewer\PengabdianController@detail')->name('reviewer_pengabdian_detail');
+                        Route::get('/{id}/nilai', 'Reviewer\PengabdianController@nilai')->name('reviewer_pengabdian_nilai');
+                        Route::patch('/{id}/nilai', 'Reviewer\PengabdianController@nilai_update')->name('reviewer_pengabdian_nilai_update');
+                        Route::get('/{id}/nilai/ulasan', 'Reviewer\PengabdianController@nilai_ulasan')->name('reviewer_pengabdian_nilai_ulasan');
+                        Route::patch('/{id}/nilai/ulasan', 'Reviewer\PengabdianController@nilai_ulasan_update')->name('reviewer_pengabdian_nilai_ulasan_update');
+
+                        Route::get('/{id}/download/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_download')->name('reviewer_pengabdian_file_download');
+                        Route::get('/{id}/preview/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_preview')->name('reviewer_pengabdian_file_preview');
+                    });
                 });
 
                 //Biodata

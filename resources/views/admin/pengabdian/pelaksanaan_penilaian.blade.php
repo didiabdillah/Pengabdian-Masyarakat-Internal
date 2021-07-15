@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Pelaksanaan Usulan Pengabdian')
+@section('title', 'Pelaksanaan Penilaian Usulan Pengabdian')
 
 @section('page')
 
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('admin_pengabdian_pelaksanaan_update')}}" method="POST">
+                        <form action="{{route('admin_penilaian_pelaksanaan_update')}}" method="POST">
                             @csrf
                             @method('patch')
                             <div class="card-body">

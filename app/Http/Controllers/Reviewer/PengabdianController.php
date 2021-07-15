@@ -13,11 +13,20 @@ use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 use App\Models\Luaran_usulan;
 use App\Models\Penilaian_usulan;
+use App\Models\Unlock_feature;
 
 class PengabdianController extends Controller
 {
     public function index()
     {
+        $is_nilai_unlock = false;
+        $nilai_unlock = Unlock_feature::where('unlock_feature_name', __('unlock.nilai_usulan_pengabdian'))->first();
+        if ($nilai_unlock) {
+            if (strtotime($nilai_unlock->unlock_feature_start_time) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($nilai_unlock->unlock_feature_end_time)) {
+                $is_nilai_unlock = true;
+            }
+        }
+
         $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_reviewer_id', Session::get('user_id'))
             ->where('usulan_pengabdian_status', '!=', 'pending')
@@ -27,6 +36,8 @@ class PengabdianController extends Controller
 
         $view_data = [
             'usulan_pengabdian' => $usulan_pengabdian,
+            'is_nilai_unlock' => $is_nilai_unlock,
+            'nilai_unlock' => $nilai_unlock,
         ];
 
         return view('reviewer.pengabdian.index', $view_data);
@@ -104,6 +115,23 @@ class PengabdianController extends Controller
 
     public function nilai($id)
     {
+        // Check Is Penilaian Locked
+        $is_lock = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)
+            ->first();
+
+        if ($is_lock) {
+            if ($is_lock->penilaian_usulan_lock == true) {
+                //Flash Message
+                flash_alert(
+                    __('alert.icon_error'), //Icon
+                    'Penilaian Dikunci', //Alert Message 
+                    'Tidak Dapat Melakukan Perubahan' //Sub Alert Message
+                );
+
+                return redirect()->route('reviewer_pengabdian');
+            }
+        }
+
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
             ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
@@ -134,6 +162,23 @@ class PengabdianController extends Controller
 
     public function nilai_update(Request $request, $id)
     {
+        // Check Is Penilaian Locked
+        $is_lock = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)
+            ->first();
+
+        if ($is_lock) {
+            if ($is_lock->penilaian_usulan_lock == true) {
+                //Flash Message
+                flash_alert(
+                    __('alert.icon_error'), //Icon
+                    'Penilaian Dikunci', //Alert Message 
+                    'Tidak Dapat Melakukan Perubahan' //Sub Alert Message
+                );
+
+                return redirect()->route('reviewer_pengabdian');
+            }
+        }
+
         // Input Validation
         $request->validate(
             [
@@ -178,7 +223,7 @@ class PengabdianController extends Controller
         flash_alert(
             __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
-            'Nilai Disubmit' //Sub Alert Message
+            'Nilai Ditambah' //Sub Alert Message
         );
 
         return redirect()->route('reviewer_pengabdian_nilai_ulasan', $id);
@@ -186,6 +231,23 @@ class PengabdianController extends Controller
 
     public function nilai_ulasan($id)
     {
+        // Check Is Penilaian Locked
+        $is_lock = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)
+            ->first();
+
+        if ($is_lock) {
+            if ($is_lock->penilaian_usulan_lock == true) {
+                //Flash Message
+                flash_alert(
+                    __('alert.icon_error'), //Icon
+                    'Penilaian Dikunci', //Alert Message 
+                    'Tidak Dapat Melakukan Perubahan' //Sub Alert Message
+                );
+
+                return redirect()->route('reviewer_pengabdian');
+            }
+        }
+
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
             ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
@@ -239,6 +301,23 @@ class PengabdianController extends Controller
 
     public function nilai_ulasan_update(Request $request, $id)
     {
+        // Check Is Penilaian Locked
+        $is_lock = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)
+            ->first();
+
+        if ($is_lock) {
+            if ($is_lock->penilaian_usulan_lock == true) {
+                //Flash Message
+                flash_alert(
+                    __('alert.icon_error'), //Icon
+                    'Penilaian Dikunci', //Alert Message 
+                    'Tidak Dapat Melakukan Perubahan' //Sub Alert Message
+                );
+
+                return redirect()->route('reviewer_pengabdian');
+            }
+        }
+
         //Input Data
         $data = [
             'penilaian_usulan_pengabdian_id' => $id,
