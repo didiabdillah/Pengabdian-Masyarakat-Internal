@@ -127,6 +127,8 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::get('/{id}/detail', 'Reviewer\PengabdianController@detail')->name('reviewer_pengabdian_detail');
                     Route::get('/{id}/nilai', 'Reviewer\PengabdianController@nilai')->name('reviewer_pengabdian_nilai');
                     Route::patch('/{id}/nilai', 'Reviewer\PengabdianController@nilai_update')->name('reviewer_pengabdian_nilai_update');
+                    Route::get('/{id}/nilai/ulasan', 'Reviewer\PengabdianController@nilai_ulasan')->name('reviewer_pengabdian_nilai_ulasan');
+                    Route::patch('/{id}/nilai/ulasan', 'Reviewer\PengabdianController@nilai_ulasan_update')->name('reviewer_pengabdian_nilai_ulasan_update');
 
                     Route::get('/{id}/download/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_download')->name('reviewer_pengabdian_file_download');
                     Route::get('/{id}/preview/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_preview')->name('reviewer_pengabdian_file_preview');

@@ -11,13 +11,14 @@ class Penilaian_usulan extends Model
 
     protected $fillable = [
         'penilaian_usulan_pengabdian_id',
-        'penilaian_usulan_rekomendasi_anggaran',
+        'penilaian_usulan_lock',
         'penilaian_usulan_komentar',
         'penilaian_usulan_nilai_1',
         'penilaian_usulan_nilai_2',
         'penilaian_usulan_nilai_3',
         'penilaian_usulan_nilai_4',
         'penilaian_usulan_nilai_5',
+        'penilaian_usulan_nilai_6',
     ];
 
     public function usulan_pengabdian()

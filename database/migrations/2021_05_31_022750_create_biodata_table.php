@@ -18,6 +18,7 @@ class CreateBiodataTable extends Migration
             $table->string('biodata_user_id', 64)->unique();
             $table->boolean('biodata_sex')->nullable();
             $table->string('biodata_institusi')->nullable();
+            $table->string('biodata_jurusan')->nullable();
             $table->string('biodata_program_studi')->nullable();
             $table->string('biodata_jabatan')->nullable();
             $table->string('biodata_pendidikan')->nullable();

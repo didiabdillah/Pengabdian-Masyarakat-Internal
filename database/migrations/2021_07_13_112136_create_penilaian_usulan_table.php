@@ -16,13 +16,14 @@ class CreatePenilaianUsulanTable extends Migration
         Schema::create('penilaian_usulan', function (Blueprint $table) {
             $table->bigIncrements('penilaian_usulan_id');
             $table->string('penilaian_usulan_pengabdian_id', 64);
-            $table->string('penilaian_usulan_rekomendasi_anggaran')->nullable();
+            $table->boolean('penilaian_usulan_lock')->default(false);
             $table->text('penilaian_usulan_komentar')->nullable();
             $table->integer('penilaian_usulan_nilai_1');
             $table->integer('penilaian_usulan_nilai_2');
             $table->integer('penilaian_usulan_nilai_3');
             $table->integer('penilaian_usulan_nilai_4');
             $table->integer('penilaian_usulan_nilai_5');
+            $table->integer('penilaian_usulan_nilai_6');
             $table->timestamps();
 
             $table->foreign('penilaian_usulan_pengabdian_id')->references('usulan_pengabdian_id')->on('usulan_pengabdian')->onUpdate('cascade')->onDelete('cascade');

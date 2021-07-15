@@ -104,33 +104,28 @@ class PengabdianController extends Controller
 
     public function nilai($id)
     {
-        // $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-        //     ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-        //     ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
-        //     ->where('anggota_pengabdian_role', 'ketua')
-        //     ->first();
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', 'ketua')
+            ->first();
 
-        // $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+        $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
+            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->first();
 
-        // $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-        //     ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-        //     ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
-        //     ->where('anggota_pengabdian_role', '!=', 'ketua')
-        //     ->orderBy('anggota_pengabdian_role', 'asc')
-        //     ->get();
-
-        // $dokumen_rab = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
-
-        // $mitra_sasaran = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
-        //     ->orderBy('created_at', 'asc')
-        //     ->get();
+        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', '!=', 'ketua')
+            ->orderBy('anggota_pengabdian_role', 'asc')
+            ->get();
 
         $view_data = [
-            // 'mitra_sasaran' => $mitra_sasaran,
-            // 'dokumen_rab' => $dokumen_rab,
-            // 'anggota' => $anggota,
-            // 'dokumen_usulan' => $dokumen_usulan,
-            // 'ketua' => $ketua,
+            'anggota' => $anggota,
+            'usulan' => $usulan,
+            'ketua' => $ketua,
             'id' => $id,
         ];
 
@@ -147,6 +142,7 @@ class PengabdianController extends Controller
                 'nilai_3'  => 'required',
                 'nilai_4'  => 'required',
                 'nilai_5'  => 'required',
+                'nilai_6'  => 'required',
                 'komentar'  => 'max:60000',
             ]
         );
@@ -156,6 +152,7 @@ class PengabdianController extends Controller
         $nilai_3 = $request->nilai_3;
         $nilai_4 = $request->nilai_4;
         $nilai_5 = $request->nilai_5;
+        $nilai_6 = $request->nilai_6;
         $komentar = htmlspecialchars($request->komentar);
 
         //Input Data
@@ -167,6 +164,9 @@ class PengabdianController extends Controller
             'penilaian_usulan_nilai_3' => $nilai_3,
             'penilaian_usulan_nilai_4' => $nilai_4,
             'penilaian_usulan_nilai_5' => $nilai_5,
+            'penilaian_usulan_nilai_6' => $nilai_6,
+            'created_at' =>  date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         Penilaian_usulan::updateOrInsert(
@@ -181,7 +181,85 @@ class PengabdianController extends Controller
             'Nilai Disubmit' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer_pengabdian_detail', $id);
+        return redirect()->route('reviewer_pengabdian_nilai_ulasan', $id);
+    }
+
+    public function nilai_ulasan($id)
+    {
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', 'ketua')
+            ->first();
+
+        $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
+            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->first();
+
+        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', '!=', 'ketua')
+            ->orderBy('anggota_pengabdian_role', 'asc')
+            ->get();
+
+        $nilai = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)->first();
+
+        $keterangan_nilai = [
+            "1" => "Sangat Buruk",
+            "2" => "Buruk Sekali",
+            "3" => "Buruk",
+            "4" => "Baik",
+            "5" => "Baik Sekali",
+            "6" => "Istimewa",
+        ];
+
+        $total_nilai = [
+            "1" => $nilai->penilaian_usulan_nilai_1 * 10,
+            "2" => $nilai->penilaian_usulan_nilai_2 * 15,
+            "3" => $nilai->penilaian_usulan_nilai_3 * 20,
+            "4" => $nilai->penilaian_usulan_nilai_4 * 25,
+            "5" => $nilai->penilaian_usulan_nilai_5 * 10,
+            "6" => $nilai->penilaian_usulan_nilai_6 * 20,
+        ];
+
+        $view_data = [
+            'anggota' => $anggota,
+            'usulan' => $usulan,
+            'ketua' => $ketua,
+            'nilai' => $nilai,
+            'id' => $id,
+            'ket_nilai' => $keterangan_nilai,
+            'total_nilai' => $total_nilai,
+        ];
+
+        return view('reviewer.pengabdian.ulasan_nilai', $view_data);
+    }
+
+    public function nilai_ulasan_update(Request $request, $id)
+    {
+        //Input Data
+        $data = [
+            'penilaian_usulan_pengabdian_id' => $id,
+            'penilaian_usulan_lock' => true,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)
+            ->update($data);
+
+        Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->update(['usulan_pengabdian_status' => 'dinilai']);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Nilai Dikirimkan' //Sub Alert Message
+        );
+
+        return redirect()->route('reviewer_pengabdian');
     }
 
     public function file_download($id, $file_name, $file_category)

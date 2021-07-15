@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Konfirmasi Usulan Pengabdian</h1>
+                    <h1>Penilaian Usulan Pengabdian</h1>
                 </div>
             </div>
 
@@ -34,6 +34,41 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="alert alert-light">
+                            <h5><b>Form Penilaian Usulan Pengabdian</b></h5>
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Nama Ketua Pengusul</th>
+                                        <td>: {{$ketua->user_name}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">NIDN</th>
+                                        <td>: {{$ketua->user_nidn}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Skema</th>
+                                        <td>: {{$usulan->skema_label}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Bidang</th>
+                                        <td>: {{$usulan->bidang_label}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Jurusan</th>
+                                        <td>: </td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Program Studi</th>
+                                        <td>: {{$ketua->biodata_program_studi}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Nama Anggota</th>
+                                        <td>: @foreach($anggota as $row){{$row->user_name . ", "}}@endforeach</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <form action="{{route('reviewer_pengabdian_nilai_update', $id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -41,35 +76,43 @@
                             <div class="card-body">
 
                                 <div class="form-group clearfix">
-                                    <label for="nilai_1">1. Administrasi (Kesesuaian Dengan Template)</label>
+                                    <label for="nilai_1">1. Analisis Situasi</label>
+                                    <p>(Kondisi Eksisting Mitra, Persoalan Yang Dihadapi Mitra)</p>
+                                    <h6>Bobot : 10%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1a" name="nilai_1" value="5">
+                                        <input type="radio" id="nilai_1a" name="nilai_1" value="1">
                                         <label for="nilai_1a">
-                                            Sangat Sesuai
+                                            (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1b" name="nilai_1" value="4">
+                                        <input type="radio" id="nilai_1b" name="nilai_1" value="2">
                                         <label for="nilai_1b">
-                                            Sesuai
+                                            (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_1c" name="nilai_1" value="3">
                                         <label for="nilai_1c">
-                                            Cukup Sesuai
+                                            (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1d" name="nilai_1" value="2">
+                                        <input type="radio" id="nilai_1d" name="nilai_1" value="4">
                                         <label for="nilai_1d">
-                                            Kurang Sesuai
+                                            (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1e" name="nilai_1" value="1">
+                                        <input type="radio" id="nilai_1e" name="nilai_1" value="5">
                                         <label for="nilai_1e">
-                                            Tidak Sesuai
+                                            (5) Baik Sekali
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_1f" name="nilai_1" value="6">
+                                        <label for="nilai_1f">
+                                            (6) Istimewa
                                         </label>
                                     </div>
                                 </div>
@@ -77,35 +120,43 @@
                                 <hr>
 
                                 <div class="form-group clearfix">
-                                    <label for="nilai_2">2. Substansi (Sesuai Dengan Kepakaran, Judul, Tujuan, Dan Acuan)</label>
+                                    <label for="nilai_2">2. Permasalahan Mitra</label>
+                                    <p>(Kecocokan Permasalahan Dan Program Serta Kompetensi Tim)</p>
+                                    <h6>Bobot : 15%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2a" name="nilai_2" value="5">
+                                        <input type="radio" id="nilai_2a" name="nilai_2" value="1">
                                         <label for="nilai_2a">
-                                            Sangat Sesuai
+                                            (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2b" name="nilai_2" value="4">
+                                        <input type="radio" id="nilai_2b" name="nilai_2" value="2">
                                         <label for="nilai_2b">
-                                            Sesuai
+                                            (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_2c" name="nilai_2" value="3">
                                         <label for="nilai_2c">
-                                            Cukup Sesuai
+                                            (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2d" name="nilai_2" value="2">
+                                        <input type="radio" id="nilai_2d" name="nilai_2" value="4">
                                         <label for="nilai_2d">
-                                            Kurang Sesuai
+                                            (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2e" name="nilai_2" value="1">
+                                        <input type="radio" id="nilai_2e" name="nilai_2" value="5">
                                         <label for="nilai_2e">
-                                            Tidak Sesuai
+                                            (5) Baik Sekali
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_2f" name="nilai_2" value="6">
+                                        <label for="nilai_2f">
+                                            (6) Istimewa
                                         </label>
                                     </div>
                                 </div>
@@ -113,35 +164,43 @@
                                 <hr>
 
                                 <div class="form-group clearfix">
-                                    <label for="nilai_3">3. Anggaran (Kelayakan, Kepatutan, Terisi Semua)</label>
+                                    <label for="nilai_3">3. Solusi Yang Ditawarkan</label>
+                                    <p>(Ketepatan Metode Pendekatan Untuk Mengatasi Permasalahan, Rencana Kegiatan, Kontribusi Partisipasi Mitra)</p>
+                                    <h6>Bobot : 20%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3a" name="nilai_3" value="5">
+                                        <input type="radio" id="nilai_3a" name="nilai_3" value="1">
                                         <label for="nilai_3a">
-                                            Sangat Sesuai
+                                            (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3b" name="nilai_3" value="4">
+                                        <input type="radio" id="nilai_3b" name="nilai_3" value="2">
                                         <label for="nilai_3b">
-                                            Sesuai
+                                            (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_3c" name="nilai_3" value="3">
                                         <label for="nilai_3c">
-                                            Cukup Sesuai
+                                            (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3d" name="nilai_3" value="2">
+                                        <input type="radio" id="nilai_3d" name="nilai_3" value="4">
                                         <label for="nilai_3d">
-                                            Kurang Sesuai
+                                            (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3e" name="nilai_3" value="1">
+                                        <input type="radio" id="nilai_3e" name="nilai_3" value="5">
                                         <label for="nilai_3e">
-                                            Tidak Sesuai
+                                            (5) Baik Sekali
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_3f" name="nilai_3" value="6">
+                                        <label for="nilai_3f">
+                                            (6) Istimewa
                                         </label>
                                     </div>
                                 </div>
@@ -149,35 +208,43 @@
                                 <hr>
 
                                 <div class="form-group clearfix">
-                                    <label for="nilai_4">4. Luaran yang Dijanjikan</label>
+                                    <label for="nilai_4">4. Target Luaran</label>
+                                    <p>(Jenis Luaran Dan Spesifikasinya Sesuai Kegiatan Yang Diusulkan)</p>
+                                    <h6>Bobot : 25%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4a" name="nilai_4" value="5">
+                                        <input type="radio" id="nilai_4a" name="nilai_4" value="1">
                                         <label for="nilai_4a">
-                                            Sangat Sesuai
+                                            (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4b" name="nilai_4" value="4">
+                                        <input type="radio" id="nilai_4b" name="nilai_4" value="2">
                                         <label for="nilai_4b">
-                                            Sesuai
+                                            (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_4c" name="nilai_4" value="3">
                                         <label for="nilai_4c">
-                                            Cukup Sesuai
+                                            (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4d" name="nilai_4" value="2">
+                                        <input type="radio" id="nilai_4d" name="nilai_4" value="4">
                                         <label for="nilai_4d">
-                                            Kurang Sesuai
+                                            (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4e" name="nilai_4" value="1">
+                                        <input type="radio" id="nilai_4e" name="nilai_4" value="5">
                                         <label for="nilai_4e">
-                                            Tidak Sesuai
+                                            (5) Baik Sekali
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_4f" name="nilai_4" value="6">
+                                        <label for="nilai_4f">
+                                            (6) Istimewa
                                         </label>
                                     </div>
                                 </div>
@@ -185,35 +252,87 @@
                                 <hr>
 
                                 <div class="form-group clearfix">
-                                    <label for="nilai_5">5. Mahasiswa Yang Terlibat</label>
+                                    <label for="nilai_5">5. Kelayakan Usulan</label>
+                                    <p>(Jadwal Kegiatan, Kualifikasi Tim Pelaksana, Kelengkapan Lampiran)</p>
+                                    <h6>Bobot : 10%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5a" name="nilai_5" value="5">
+                                        <input type="radio" id="nilai_5a" name="nilai_5" value="1">
                                         <label for="nilai_5a">
-                                            5 Orang Atau Lebih
+                                            (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5b" name="nilai_5" value="4">
+                                        <input type="radio" id="nilai_5b" name="nilai_5" value="2">
                                         <label for="nilai_5b">
-                                            4 Orang
+                                            (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_5c" name="nilai_5" value="3">
                                         <label for="nilai_5c">
-                                            3 Orang
+                                            (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5d" name="nilai_5" value="2">
+                                        <input type="radio" id="nilai_5d" name="nilai_5" value="4">
                                         <label for="nilai_5d">
-                                            2 Orang
+                                            (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5e" name="nilai_5" value="1">
+                                        <input type="radio" id="nilai_5e" name="nilai_5" value="5">
                                         <label for="nilai_5e">
-                                            1 Orang
+                                            (5) Baik Sekali
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_5f" name="nilai_5" value="6">
+                                        <label for="nilai_5f">
+                                            (6) Istimewa
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group clearfix">
+                                    <label for="nilai_6">6. Biaya Pekerjaan</label>
+                                    <p>(Kelayakan Usulan Biaya (Honorarium (Maks 30%), Bahan Habis, Peralatan), Perjalanan, Lain-Lain Pengeluaran)</p>
+                                    <h6>Bobot : 20%</h6>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_6a" name="nilai_6" value="1">
+                                        <label for="nilai_6a">
+                                            (1) Sangat Buruk
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_6b" name="nilai_6" value="2">
+                                        <label for="nilai_6b">
+                                            (2) Buruk Sekali
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_6c" name="nilai_6" value="3">
+                                        <label for="nilai_6c">
+                                            (3) Buruk
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_6d" name="nilai_6" value="4">
+                                        <label for="nilai_6d">
+                                            (4) Baik
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_6e" name="nilai_6" value="5">
+                                        <label for="nilai_6e">
+                                            (5) Baik Sekali
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="radio" id="nilai_6f" name="nilai_6" value="6">
+                                        <label for="nilai_6f">
+                                            (6) Istimewa
                                         </label>
                                     </div>
                                 </div>

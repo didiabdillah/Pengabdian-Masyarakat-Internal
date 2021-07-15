@@ -33,9 +33,9 @@
                                 <b>Periode</b> : {{$tambah_unlock->unlock_feature_start_year . " / " . $tambah_unlock->unlock_feature_end_year}}
                             </li>
                             <li>
-                                <b>Mulai</b> : {{Carbon\Carbon::parse($tambah_unlock->unlock_feature_start_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                                <b>Batas Awal</b> : {{Carbon\Carbon::parse($tambah_unlock->unlock_feature_start_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
                             <li>
-                                <b>Selesai</b> : {{Carbon\Carbon::parse($tambah_unlock->unlock_feature_end_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse($tambah_unlock->unlock_feature_end_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
                             </li>
                         </ul>
                     </div>
@@ -150,7 +150,7 @@
                 </div>
                 <!-- /.card -->
 
-                <!-- RIWAYAT -->
+                {{-- <!-- RIWAYAT -->
                 <div class="card">
                     <div class="card-header">
                         <b> Riwayat Pengabdian Kepada Masyarakat </b>
@@ -175,34 +175,34 @@
                                 <tr>
                                     <td>
                                         <h5>{{$loop->iteration}}</h5>
-                                    </td>
-                                    <td>
-                                        <h5>{{$riwayat->usulan_pengabdian_judul}}</h5>
-                                    </td>
-                                    <td>
-                                        <h5>{{$riwayat->usulan_pengabdian_tahun}}</h5>
-                                    </td>
+                </td>
+                <td>
+                    <h5>{{$riwayat->usulan_pengabdian_judul}}</h5>
+                </td>
+                <td>
+                    <h5>{{$riwayat->usulan_pengabdian_tahun}}</h5>
+                </td>
 
-                                    <td>
-                                        <div class="card-body">
-                                            <a class="btn btn-primary btn-sm" href="">
-                                                <i class="fas fa-folder">
-                                                </i>
+                <td>
+                    <div class="card-body">
+                        <a class="btn btn-primary btn-sm" href="">
+                            <i class="fas fa-folder">
+                            </i>
 
-                                                Detail
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                            Detail
+                        </a>
                     </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
+                </td>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
             </div>
-        </section>
+            <!-- /.card-body -->
+</div>
+<!-- /.card --> --}}
+</div>
+</section>
 </div>
 <!-- /.content -->
 
