@@ -74,43 +74,42 @@
                             @csrf
                             @method('patch')
                             <div class="card-body">
-
                                 <div class="form-group clearfix">
                                     <label for="nilai_1">1. Analisis Situasi</label>
                                     <p>(Kondisi Eksisting Mitra, Persoalan Yang Dihadapi Mitra)</p>
                                     <h6>Bobot : 10%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1a" name="nilai_1" value="1">
+                                        <input type="radio" id="nilai_1a" name="nilai_1" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_1a">
                                             (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1b" name="nilai_1" value="2">
+                                        <input type="radio" id="nilai_1b" name="nilai_1" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 2){{"checked"}}@endif @endif>
                                         <label for="nilai_1b">
                                             (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1c" name="nilai_1" value="3">
+                                        <input type="radio" id="nilai_1c" name="nilai_1" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 3){{"checked"}}@endif @endif>
                                         <label for="nilai_1c">
                                             (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1d" name="nilai_1" value="4">
+                                        <input type="radio" id="nilai_1d" name="nilai_1" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 4){{"checked"}}@endif @endif>
                                         <label for="nilai_1d">
                                             (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1e" name="nilai_1" value="5">
+                                        <input type="radio" id="nilai_1e" name="nilai_1" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 5){{"checked"}}@endif @endif>
                                         <label for="nilai_1e">
                                             (5) Baik Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1f" name="nilai_1" value="6">
+                                        <input type="radio" id="nilai_1f" name="nilai_1" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 6){{"checked"}}@endif @endif>
                                         <label for="nilai_1f">
                                             (6) Istimewa
                                         </label>
@@ -124,37 +123,37 @@
                                     <p>(Kecocokan Permasalahan Dan Program Serta Kompetensi Tim)</p>
                                     <h6>Bobot : 15%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2a" name="nilai_2" value="1">
+                                        <input type="radio" id="nilai_2a" name="nilai_2" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_2a">
                                             (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2b" name="nilai_2" value="2">
+                                        <input type="radio" id="nilai_2b" name="nilai_2" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 2){{"checked"}}@endif @endif>
                                         <label for="nilai_2b">
                                             (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2c" name="nilai_2" value="3">
+                                        <input type="radio" id="nilai_2c" name="nilai_2" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 3){{"checked"}}@endif @endif>
                                         <label for="nilai_2c">
                                             (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2d" name="nilai_2" value="4">
+                                        <input type="radio" id="nilai_2d" name="nilai_2" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 4){{"checked"}}@endif @endif>
                                         <label for="nilai_2d">
                                             (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2e" name="nilai_2" value="5">
+                                        <input type="radio" id="nilai_2e" name="nilai_2" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 5){{"checked"}}@endif @endif>
                                         <label for="nilai_2e">
                                             (5) Baik Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2f" name="nilai_2" value="6">
+                                        <input type="radio" id="nilai_2f" name="nilai_2" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 6){{"checked"}}@endif @endif>
                                         <label for="nilai_2f">
                                             (6) Istimewa
                                         </label>
@@ -168,37 +167,37 @@
                                     <p>(Ketepatan Metode Pendekatan Untuk Mengatasi Permasalahan, Rencana Kegiatan, Kontribusi Partisipasi Mitra)</p>
                                     <h6>Bobot : 20%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3a" name="nilai_3" value="1">
+                                        <input type="radio" id="nilai_3a" name="nilai_3" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_3a">
                                             (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3b" name="nilai_3" value="2">
+                                        <input type="radio" id="nilai_3b" name="nilai_3" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 2){{"checked"}}@endif @endif>
                                         <label for="nilai_3b">
                                             (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3c" name="nilai_3" value="3">
+                                        <input type="radio" id="nilai_3c" name="nilai_3" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 3){{"checked"}}@endif @endif>
                                         <label for="nilai_3c">
                                             (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3d" name="nilai_3" value="4">
+                                        <input type="radio" id="nilai_3d" name="nilai_3" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 4){{"checked"}}@endif @endif>
                                         <label for="nilai_3d">
                                             (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3e" name="nilai_3" value="5">
+                                        <input type="radio" id="nilai_3e" name="nilai_3" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 5){{"checked"}}@endif @endif>
                                         <label for="nilai_3e">
                                             (5) Baik Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3f" name="nilai_3" value="6">
+                                        <input type="radio" id="nilai_3f" name="nilai_3" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 6){{"checked"}}@endif @endif>
                                         <label for="nilai_3f">
                                             (6) Istimewa
                                         </label>
@@ -212,37 +211,37 @@
                                     <p>(Jenis Luaran Dan Spesifikasinya Sesuai Kegiatan Yang Diusulkan)</p>
                                     <h6>Bobot : 25%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4a" name="nilai_4" value="1">
+                                        <input type="radio" id="nilai_4a" name="nilai_4" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_4a">
                                             (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4b" name="nilai_4" value="2">
+                                        <input type="radio" id="nilai_4b" name="nilai_4" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 2){{"checked"}}@endif @endif>
                                         <label for="nilai_4b">
                                             (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4c" name="nilai_4" value="3">
+                                        <input type="radio" id="nilai_4c" name="nilai_4" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 3){{"checked"}}@endif @endif>
                                         <label for="nilai_4c">
                                             (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4d" name="nilai_4" value="4">
+                                        <input type="radio" id="nilai_4d" name="nilai_4" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 4){{"checked"}}@endif @endif>
                                         <label for="nilai_4d">
                                             (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4e" name="nilai_4" value="5">
+                                        <input type="radio" id="nilai_4e" name="nilai_4" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 5){{"checked"}}@endif @endif>
                                         <label for="nilai_4e">
                                             (5) Baik Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4f" name="nilai_4" value="6">
+                                        <input type="radio" id="nilai_4f" name="nilai_4" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 6){{"checked"}}@endif @endif>
                                         <label for="nilai_4f">
                                             (6) Istimewa
                                         </label>
@@ -256,37 +255,37 @@
                                     <p>(Jadwal Kegiatan, Kualifikasi Tim Pelaksana, Kelengkapan Lampiran)</p>
                                     <h6>Bobot : 10%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5a" name="nilai_5" value="1">
+                                        <input type="radio" id="nilai_5a" name="nilai_5" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_5a">
                                             (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5b" name="nilai_5" value="2">
+                                        <input type="radio" id="nilai_5b" name="nilai_5" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 2){{"checked"}}@endif @endif>
                                         <label for="nilai_5b">
                                             (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5c" name="nilai_5" value="3">
+                                        <input type="radio" id="nilai_5c" name="nilai_5" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 3){{"checked"}}@endif @endif>
                                         <label for="nilai_5c">
                                             (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5d" name="nilai_5" value="4">
+                                        <input type="radio" id="nilai_5d" name="nilai_5" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 4){{"checked"}}@endif @endif>
                                         <label for="nilai_5d">
                                             (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5e" name="nilai_5" value="5">
+                                        <input type="radio" id="nilai_5e" name="nilai_5" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 5){{"checked"}}@endif @endif>
                                         <label for="nilai_5e">
                                             (5) Baik Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5f" name="nilai_5" value="6">
+                                        <input type="radio" id="nilai_5f" name="nilai_5" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 6){{"checked"}}@endif @endif>
                                         <label for="nilai_5f">
                                             (6) Istimewa
                                         </label>
@@ -300,37 +299,37 @@
                                     <p>(Kelayakan Usulan Biaya (Honorarium (Maks 30%), Bahan Habis, Peralatan), Perjalanan, Lain-Lain Pengeluaran)</p>
                                     <h6>Bobot : 20%</h6>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6a" name="nilai_6" value="1">
+                                        <input type="radio" id="nilai_6a" name="nilai_6" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_6a">
                                             (1) Sangat Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6b" name="nilai_6" value="2">
+                                        <input type="radio" id="nilai_6b" name="nilai_6" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 2){{"checked"}}@endif @endif>
                                         <label for="nilai_6b">
                                             (2) Buruk Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6c" name="nilai_6" value="3">
+                                        <input type="radio" id="nilai_6c" name="nilai_6" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 3){{"checked"}}@endif @endif>
                                         <label for="nilai_6c">
                                             (3) Buruk
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6d" name="nilai_6" value="4">
+                                        <input type="radio" id="nilai_6d" name="nilai_6" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 4){{"checked"}}@endif @endif>
                                         <label for="nilai_6d">
                                             (4) Baik
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6e" name="nilai_6" value="5">
+                                        <input type="radio" id="nilai_6e" name="nilai_6" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 5){{"checked"}}@endif @endif>
                                         <label for="nilai_6e">
                                             (5) Baik Sekali
                                         </label>
                                     </div>
                                     <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6f" name="nilai_6" value="6">
+                                        <input type="radio" id="nilai_6f" name="nilai_6" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 6){{"checked"}}@endif @endif>
                                         <label for="nilai_6f">
                                             (6) Istimewa
                                         </label>

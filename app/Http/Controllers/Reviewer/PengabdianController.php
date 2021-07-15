@@ -116,11 +116,13 @@ class PengabdianController extends Controller
     public function nilai($id)
     {
         // Check Is Penilaian Locked
-        $is_lock = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)
+        $penilaian_usulan = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)
             ->first();
 
-        if ($is_lock) {
-            if ($is_lock->penilaian_usulan_lock == true) {
+        $nilai = [];
+
+        if ($penilaian_usulan) {
+            if ($penilaian_usulan->penilaian_usulan_lock == true) {
                 //Flash Message
                 flash_alert(
                     __('alert.icon_error'), //Icon
@@ -155,6 +157,7 @@ class PengabdianController extends Controller
             'usulan' => $usulan,
             'ketua' => $ketua,
             'id' => $id,
+            'nilai' => $penilaian_usulan,
         ];
 
         return view('reviewer.pengabdian.nilai', $view_data);
