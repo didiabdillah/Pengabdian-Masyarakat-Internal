@@ -30,6 +30,14 @@
                     </div>
                     @enderror
                 </div>
+                <div class="input-group mb-3">
+                    <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}" {{--style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"--}}></div>
+                    @if($errors->has('g-recaptcha-response'))
+                    <small class="text-danger">
+                        {{$errors->first('g-recaptcha-response')}}
+                    </small>
+                    @endif
+                </div>
                 <div class="row ">
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-block">Lupa Password</button>

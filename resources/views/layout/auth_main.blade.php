@@ -20,7 +20,8 @@
   <link rel="stylesheet" href="{{URL::asset('assets/css/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{URL::asset('assets/css/adminlte.css')}}">
-
+  <!-- Google Captcha -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body class="hold-transition login-page">

@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
+use App\Rules\Captcha;
+
 use App\Models\User;
 use App\Models\Forgot_token;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login()
     {
         return view('auth.login');
     }
@@ -26,6 +28,7 @@ class AuthController extends Controller
             [
                 'login_email'  => 'required|email:rfc,dns|max:255',
                 'login_password'  => 'required|max:100|min:8',
+                'g-recaptcha-response' => new Captcha(),
             ],
             [
                 'login_password.required' => 'The password field is required.',
@@ -135,6 +138,7 @@ class AuthController extends Controller
         $request->validate(
             [
                 'email'  => 'required|email:rfc,dns|max:255',
+                'g-recaptcha-response' => new Captcha(),
             ],
             [
                 'email.required' => 'The email field is required.',
