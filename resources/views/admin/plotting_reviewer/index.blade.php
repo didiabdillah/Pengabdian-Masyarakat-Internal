@@ -76,6 +76,8 @@
                                         <h5><span class="badge badge-success">Diterima</span></h5>
                                         @elseif($usulan->usulan_pengabdian_status == "ditolak")
                                         <h5><span class="badge badge-danger">Ditolak</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "dinilai")
+                                        <h5><span class="badge badge-info">Dinilai</span></h5>
                                         @elseif($usulan->usulan_pengabdian_status == "pending")
                                         <h5><span class="badge badge-warning">Pending</span></h5>
                                         @endif
