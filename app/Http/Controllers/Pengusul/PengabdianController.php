@@ -26,17 +26,8 @@ class PengabdianController extends Controller
         $usulan_pengabdian = Usulan_pengabdian::whereHas('anggota_pengabdian', function ($query) {
             $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
         })
-            // ->where('usulan_pengabdian_status', 'pending')
+            ->where('usulan_pengabdian_tahun', date('Y'))
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
-            ->orderBy('usulan_pengabdian_tahun', 'asc')
-            ->get();
-
-        $riwayat_pengabdian = Usulan_pengabdian::whereHas('anggota_pengabdian', function ($query) {
-            $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
-        })
-            ->where('usulan_pengabdian_tahun', '<', date('Y'))
-            ->where('usulan_pengabdian_status', 'diterima')
-            ->orderBy('usulan_pengabdian.created_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 
@@ -50,12 +41,28 @@ class PengabdianController extends Controller
 
         $view_data = [
             'usulan_pengabdian' => $usulan_pengabdian,
-            'riwayat_pengabdian' => $riwayat_pengabdian,
             'is_tambah_unlock' => $is_tambah_unlock,
             'tambah_unlock' => $tambah_unlock,
         ];
 
         return view('pengusul.pengabdian.index', $view_data);
+    }
+
+    public function riwayat()
+    {
+        $riwayat_pengabdian = Usulan_pengabdian::whereHas('anggota_pengabdian', function ($query) {
+            $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
+        })
+            ->where('usulan_pengabdian_tahun', '<', date('Y'))
+            ->orderBy('usulan_pengabdian.created_at', 'desc')
+            ->orderBy('usulan_pengabdian_tahun', 'desc')
+            ->get();
+
+        $view_data = [
+            'riwayat_pengabdian' => $riwayat_pengabdian,
+        ];
+
+        return view('pengusul.pengabdian.riwayat.riwayat', $view_data);
     }
 
     public function tambah()

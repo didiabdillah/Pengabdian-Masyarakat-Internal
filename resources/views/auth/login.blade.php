@@ -14,7 +14,7 @@
             <h3 class="mt-2">SIABMAS Polindra</h3>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Silahkan Login Untuk Memulai Aplikasi</p>
+            <p class="login-box-msg">Login Untuk Menggunakan Aplikasi</p>
 
             <form action="{{route('login_process')}}" method="post">
                 @csrf

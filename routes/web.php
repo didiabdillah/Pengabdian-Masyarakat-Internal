@@ -166,6 +166,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Pengabdian
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Pengusul\PengabdianController@index')->name('pengusul_pengabdian');
+                    Route::get('/riwayat', 'Pengusul\PengabdianController@riwayat')->name('pengusul_pengabdian_riwayat');
                     // Route::get('/detail', 'Pengusul\PengabdianController@detail')->name('pengusul_pengabdian_detail');
 
                     Route::delete('/{id}/hapus', 'Pengusul\PengabdianController@hapus')->name('pengusul_pengabdian_hapus');

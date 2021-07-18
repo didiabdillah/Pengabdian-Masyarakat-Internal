@@ -121,13 +121,32 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('pengusul_pengabdian')}}" class="nav-link @if(Request::segment(1) == 'pengabdian' || Request::segment(2) == 'pengabdian') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-copy"></i>
+                        <li class="nav-item @if(Request::segment(2) == 'pengabdian'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'pengabdian') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
-                                    Usulan Pengabdian
+                                    Pengabdian
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('pengusul_pengabdian')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) != 'riwayat') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Usulan Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('pengusul_pengabdian_riwayat')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'riwayat' && Request::segment(4) == NULL) {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Riwayat Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('pengusul_logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
