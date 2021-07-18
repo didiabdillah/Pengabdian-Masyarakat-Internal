@@ -22,7 +22,7 @@ class Usulan_pengabdian extends Model
         'usulan_pengabdian_submit',
         'usulan_pengabdian_status',
         'usulan_pengabdian_tahun',
-        'usulan_pengabdian_komentar',
+        // 'usulan_pengabdian_komentar',
     ];
 
     public function anggota_pengabdian()
@@ -43,6 +43,21 @@ class Usulan_pengabdian extends Model
     public function dokumen_rab()
     {
         return $this->hasOne('App\Models\Dokumen_rab', 'dokumen_rab_pengabdian_id');
+    }
+
+    public function logbook()
+    {
+        return $this->hasOne('App\Models\Logbook', 'logbook_pengabdian_id');
+    }
+
+    public function laporan_kemajuan()
+    {
+        return $this->hasOne('App\Models\Laporan_kemajuan', 'laporan_kemajuan_pengabdian_id');
+    }
+
+    public function laporan_akhir()
+    {
+        return $this->hasOne('App\Models\Laporan_akhir', 'laporan_akhir_pengabdian_id');
     }
 
     public function mitra_sasaran()

@@ -24,13 +24,12 @@ class Mitra_sasaran extends Model
         'mitra_sasaran_jarak_mitra',
         'mitra_sasaran_bidang_masalah_mitra',
         'mitra_sasaran_kontribusi_pendanaan_mitra',
-        'mitra_sasaran_file_date',
-        'mitra_sasaran_original_name',
-        'mitra_sasaran_hash_name',
-        'mitra_sasaran_base_name',
-        'mitra_sasaran_file_size',
-        'mitra_sasaran_extension',
     ];
+
+    public function mitra_file()
+    {
+        return $this->hasMany('App\Models\Mitra_file', 'mitra_file_mitra_sasaran_id');
+    }
 
     public function usulan_pengabdian()
     {

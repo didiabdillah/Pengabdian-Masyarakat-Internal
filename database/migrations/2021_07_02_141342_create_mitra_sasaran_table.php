@@ -29,12 +29,6 @@ class CreateMitraSasaranTable extends Migration
             $table->string('mitra_sasaran_jarak_mitra');
             $table->text('mitra_sasaran_bidang_masalah_mitra');
             $table->string('mitra_sasaran_kontribusi_pendanaan_mitra')->nullable();
-            $table->string('mitra_sasaran_file_original_name', 255)->nullable();
-            $table->string('mitra_sasaran_file_hash_name', 255)->nullable();
-            $table->string('mitra_sasaran_file_base_name', 255)->nullable();
-            $table->string('mitra_sasaran_file_size', 255)->nullable();
-            $table->string('mitra_sasaran_file_extension', 50)->nullable();
-            $table->date('mitra_sasaran_file_date')->nullable();
 
             $table->timestamps();
 

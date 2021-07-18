@@ -16,6 +16,8 @@ class User extends Model
         'user_email',
         'user_password',
         'user_role',
+        'user_ban',
+        'user_active',
         'user_image'
     ];
 

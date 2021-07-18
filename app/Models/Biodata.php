@@ -13,6 +13,7 @@ class Biodata extends Model
         'biodata_user_id',
         'biodata_sex',
         'biodata_institusi',
+        'biodata_jurusan',
         'biodata_program_studi',
         'biodata_jabatan',
         'biodata_pendidikan',

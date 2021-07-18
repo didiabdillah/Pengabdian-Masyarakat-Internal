@@ -17,7 +17,7 @@ class CreateAnggotaPengabdianTable extends Migration
             $table->bigIncrements('anggota_pengabdian_id');
             $table->string('anggota_pengabdian_user_id', 64);
             $table->string('anggota_pengabdian_pengabdian_id', 64);
-            $table->enum('anggota_pengabdian_role', ['ketua', 'anggota1', 'anggota2']);
+            $table->enum('anggota_pengabdian_role', ['ketua', 'anggota']);
             $table->text('anggota_pengabdian_tugas')->nullable();
 
             $table->timestamps();
