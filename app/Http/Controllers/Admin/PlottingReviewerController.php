@@ -21,7 +21,10 @@ class PlottingReviewerController extends Controller
             ->where('user_id', '!=', Session::get('user_id'))
             ->orderBy('user_name', 'asc')->get();
 
-        $usulan_pengabdian = Usulan_pengabdian::orderBy('usulan_pengabdian.updated_at', 'desc')
+        $usulan_pengabdian = Usulan_pengabdian::leftjoin('users', 'usulan_pengabdian.usulan_pengabdian_reviewer_id', '=', 'users.user_id')
+            ->where('usulan_pengabdian_submit', true)
+            ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 

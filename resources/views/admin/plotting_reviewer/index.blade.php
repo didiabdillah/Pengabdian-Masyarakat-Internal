@@ -52,6 +52,8 @@
                                     <th>No</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
+                                    <th>Pengusul</th>
+                                    <th>Reviewer</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </tr>
@@ -68,6 +70,26 @@
                                     </td>
                                     <td>
                                         <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            @php
+                                            $ketua= $usulan->anggota_pengabdian()
+                                            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                                            ->where('anggota_pengabdian_role', 'ketua')
+                                            ->first();
+                                            @endphp
+                                            {{$ketua->user_name}}
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            @if($usulan->user_name)
+                                            {{$usulan->user_name}}
+                                            @else
+                                            -
+                                            @endif
+                                        </h5>
                                     </td>
                                     <td>
                                         @if($usulan->usulan_pengabdian_status == "dikirim")
