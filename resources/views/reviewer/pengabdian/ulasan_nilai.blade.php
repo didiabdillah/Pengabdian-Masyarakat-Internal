@@ -75,7 +75,7 @@
                                     </tr>
                                     <tr style="height: 5px;">
                                         <th scope="row" style="width: 250px;">Jurusan</th>
-                                        <td>: </td>
+                                        <td>: {{$ketua->biodata_jurusan}}</td>
                                     </tr>
                                     <tr style="height: 5px;">
                                         <th scope="row" style="width: 250px;">Program Studi</th>

@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\Unlock_feature;
-
 class PengabdianController extends Controller
 {
     public function usulan_pengabdian()
@@ -17,7 +15,7 @@ class PengabdianController extends Controller
 
     public function pelaksanaan_pengabdian()
     {
-        $waktu = Unlock_feature::where('unlock_feature_name', __('unlock.tambah_usulan_pengabdian'))->first();
+        $waktu = get_where_local_db_json("unlock_feature.json", "name", __('unlock.tambah_usulan_pengabdian'));
 
         $view_data = [
             'waktu' => $waktu,
@@ -37,13 +35,15 @@ class PengabdianController extends Controller
         $time_end = date('Y-m-d H:i:s', strtotime($waktu[1]));
 
         $data = [
-            'unlock_feature_start_year' => $year_start,
-            'unlock_feature_end_year' => $year_end,
-            'unlock_feature_start_time' => $time_start,
-            'unlock_feature_end_time' => $time_end,
+            "id" => $request->id,
+            "name" => __('unlock.tambah_usulan_pengabdian'),
+            "start_year" => $year_start,
+            "end_year" => $year_end,
+            "start_time" => $time_start,
+            "end_time" => $time_end,
         ];
 
-        Unlock_feature::where('unlock_feature_id', $request->id)->update($data);
+        update_local_db_json("unlock_feature.json", "id", $request->id, $data);
 
         //Flash Message
         flash_alert(
@@ -57,7 +57,7 @@ class PengabdianController extends Controller
 
     public function pelaksanaan_penilaian()
     {
-        $waktu = Unlock_feature::where('unlock_feature_name', __('unlock.nilai_usulan_pengabdian'))->first();
+        $waktu = get_where_local_db_json("unlock_feature.json", "name", __('unlock.nilai_usulan_pengabdian'));
 
         $view_data = [
             'waktu' => $waktu,
@@ -77,13 +77,15 @@ class PengabdianController extends Controller
         $time_end = date('Y-m-d H:i:s', strtotime($waktu[1]));
 
         $data = [
-            'unlock_feature_start_year' => $year_start,
-            'unlock_feature_end_year' => $year_end,
-            'unlock_feature_start_time' => $time_start,
-            'unlock_feature_end_time' => $time_end,
+            "id" => $request->id,
+            "name" => __('unlock.nilai_usulan_pengabdian'),
+            "start_year" => $year_start,
+            "end_year" => $year_end,
+            "start_time" => $time_start,
+            "end_time" => $time_end,
         ];
 
-        Unlock_feature::where('unlock_feature_id', $request->id)->update($data);
+        update_local_db_json("unlock_feature.json", "id", $request->id, $data);
 
         //Flash Message
         flash_alert(

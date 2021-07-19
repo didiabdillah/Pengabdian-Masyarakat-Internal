@@ -17,7 +17,6 @@ use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 use App\Models\Luaran_usulan;
-use App\Models\Unlock_feature;
 use App\Models\Mitra_file;
 
 class PengabdianController extends Controller
@@ -33,9 +32,9 @@ class PengabdianController extends Controller
             ->get();
 
         $is_tambah_unlock = false;
-        $tambah_unlock = Unlock_feature::where('unlock_feature_name', __('unlock.tambah_usulan_pengabdian'))->first();
+        $tambah_unlock = get_where_local_db_json("unlock_feature.json", "name", __('unlock.tambah_usulan_pengabdian'));
         if ($tambah_unlock) {
-            if (strtotime($tambah_unlock->unlock_feature_start_time) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($tambah_unlock->unlock_feature_end_time)) {
+            if (strtotime($tambah_unlock["start_time"]) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($tambah_unlock["end_time"])) {
                 $is_tambah_unlock = true;
             }
         }

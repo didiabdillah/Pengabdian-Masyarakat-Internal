@@ -30,12 +30,12 @@
                         <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Penilaian Usulan</h5>
                         <ul class="mb-0">
                             <li>
-                                <b>Periode</b> : {{$nilai_unlock->unlock_feature_start_year . " / " . $nilai_unlock->unlock_feature_end_year}}
+                                <b>Periode</b> : {{$nilai_unlock["start_year"] . " / " . $nilai_unlock["end_year"]}}
                             </li>
                             <li>
-                                <b>Batas Awal</b> : {{Carbon\Carbon::parse($nilai_unlock->unlock_feature_start_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                                <b>Batas Awal</b> : {{Carbon\Carbon::parse($nilai_unlock["start_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
                             <li>
-                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse($nilai_unlock->unlock_feature_end_time)->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse($nilai_unlock["end_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
                             </li>
                         </ul>
                     </div>

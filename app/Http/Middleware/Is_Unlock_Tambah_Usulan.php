@@ -4,8 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-use Illuminate\Support\Facades\DB;
-
 class Is_Unlock_Tambah_Usulan
 {
     /**
@@ -17,9 +15,10 @@ class Is_Unlock_Tambah_Usulan
      */
     public function handle($request, Closure $next)
     {
-        $tambah_unlock = DB::table('unlock_feature')->where('unlock_feature_name', __('unlock.tambah_usulan_pengabdian'))->first();
+        $tambah_unlock = get_where_local_db_json("unlock_feature.json", "name", __('unlock.tambah_usulan_pengabdian'));
+
         if ($tambah_unlock) {
-            if (strtotime($tambah_unlock->unlock_feature_start_time) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($tambah_unlock->unlock_feature_end_time)) {
+            if (strtotime($tambah_unlock["start_time"]) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($tambah_unlock["end_time"])) {
                 return $next($request);
             } else {
                 //Flash Message

@@ -13,16 +13,15 @@ use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 use App\Models\Luaran_usulan;
 use App\Models\Penilaian_usulan;
-use App\Models\Unlock_feature;
 
 class PengabdianController extends Controller
 {
     public function index()
     {
         $is_nilai_unlock = false;
-        $nilai_unlock = Unlock_feature::where('unlock_feature_name', __('unlock.nilai_usulan_pengabdian'))->first();
+        $nilai_unlock = get_where_local_db_json("unlock_feature.json", "name", __('unlock.nilai_usulan_pengabdian'));
         if ($nilai_unlock) {
-            if (strtotime($nilai_unlock->unlock_feature_start_time) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($nilai_unlock->unlock_feature_end_time)) {
+            if (strtotime($nilai_unlock["start_time"]) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($nilai_unlock["end_time"])) {
                 $is_nilai_unlock = true;
             }
         }
@@ -119,7 +118,7 @@ class PengabdianController extends Controller
         $penilaian_usulan = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)
             ->first();
 
-        $nilai = [];
+        // $nilai = [];
 
         if ($penilaian_usulan) {
             if ($penilaian_usulan->penilaian_usulan_lock == true) {

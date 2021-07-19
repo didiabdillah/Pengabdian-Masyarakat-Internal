@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BidangSeed::class);
         $this->call(SkemaSeed::class);
         $this->call(UnlockFeatureSeed::class);
+        $this->call(UnlockFeatureSeedJson::class);
         $this->call(WilayahIndonesiaSeed::class);
     }
 }

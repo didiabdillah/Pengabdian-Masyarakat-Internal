@@ -54,12 +54,12 @@
                             @csrf
                             @method('patch')
                             <div class="card-body">
-                                <input type="hidden" value="{{$waktu->unlock_feature_id}}" name="id" id="id">
+                                <input type="hidden" value="{{$waktu['id']}}" name="id" id="id">
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="tahun_mulai">Tahun Priode Mulai</label>
-                                            <input type="text" class="form-control @error('tahun_mulai') is-invalid @enderror" id="tahun_mulai" name="tahun_mulai" placeholder="2xxx" value="{{$waktu->unlock_feature_start_year}}">
+                                            <input type="text" class="form-control @error('tahun_mulai') is-invalid @enderror" id="tahun_mulai" name="tahun_mulai" placeholder="2xxx" value="{{$waktu['start_year']}}">
                                             @error('tahun_mulai')
                                             <div class="invalid-feedback">
                                                 {{$message}}
@@ -76,7 +76,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="tahun_selesai">Tahun Priode Selesai</label>
-                                            <input type="text" class="form-control @error('tahun_selesai') is-invalid @enderror" id="tahun_selesai" name="tahun_selesai" placeholder="2xxx" value="{{$waktu->unlock_feature_end_year}}">
+                                            <input type="text" class="form-control @error('tahun_selesai') is-invalid @enderror" id="tahun_selesai" name="tahun_selesai" placeholder="2xxx" value="{{$waktu['end_year']}}">
                                             @error('tahun_selesai')
                                             <div class="invalid-feedback">
                                                 {{$message}}
@@ -94,7 +94,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-clock"></i></span>
                                         </div>
-                                        <input type="text" class="form-control float-right" id="waktu" name="waktu" value="{{date('Y/m/d H:i', strtotime($waktu->unlock_feature_start_time)) . ' - ' . date('Y/m/d H:i', strtotime($waktu->unlock_feature_end_time))}}">
+                                        <input type="text" class="form-control float-right" id="waktu" name="waktu" value="{{date('Y/m/d H:i', strtotime($waktu['start_time'])) . ' - ' . date('Y/m/d H:i', strtotime($waktu['end_time']))}}">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
