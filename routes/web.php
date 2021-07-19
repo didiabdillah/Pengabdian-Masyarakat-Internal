@@ -158,6 +158,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         //PENGUSUL
         Route::group(['middleware' => ['is_Pengusul']], function () {
             Route::group(['prefix' => 'pengusul'], function () {
+
                 //Home
                 Route::group(['prefix' => '/home'], function () {
                     Route::get('/', 'Pengusul\HomeController@index')->name('pengusul_home');
@@ -219,8 +220,8 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Laporan Akhir
                 Route::group(['prefix' => 'laporan_akhir'], function () {
                     Route::get('/', 'Pengusul\LaporanAkhirController@index')->name('pengusul_laporan_akhir');
-                    Route::get('/insert', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
-                    Route::get('/store', 'Pengusul\LaporanAkhirController@store')->name('pengusul_laporan_akhir_store');
+                    // Route::get('/insert', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
+                    Route::patch('/update', 'Pengusul\LaporanAkhirController@update')->name('pengusul_laporan_akhir_upload_update');
                 });
 
                 //Logbook
@@ -256,5 +257,12 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
         //404 Not Found Page
         Route::get('/notfound', 'ErrorController@not_found')->name('not_found');
         // END ERROR PAGE
+
+        // FILE
+        Route::group(['prefix' => 'file'], function () {
+            Route::get('/{id}/download/{file_name}/{file_category}', 'FileController@file_download')->name('file_download');
+            Route::get('/{id}/preview/{file_name}/{file_category}', 'FileController@file_preview')->name('file_preview');
+        });
+        // END FILE
     });
 });

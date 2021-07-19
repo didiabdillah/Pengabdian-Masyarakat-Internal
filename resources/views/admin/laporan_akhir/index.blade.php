@@ -50,45 +50,70 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Bidang</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
-                                    <th>File</th>
-                                    <th>Options</th>
+                                    <th>Pengusul</th>
+                                    <th>Laporan Akhir</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach($laporan_akhir as $data)
                                 <tr>
                                     <td>
-                                        <h5>1</h5>
+                                        <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-                                        <h5>Pengabdian</h5>
+                                        <h5>{{$data->usulan_pengabdian_judul}}</h5>
                                     </td>
                                     <td>
-                                        <h5>Pengabdian Masjid Jatisawit Lor</h5>
+                                        <h5>{{$data->usulan_pengabdian_tahun}}</h5>
                                     </td>
                                     <td>
-                                        <h5>2021</h5>
-                                    </td>
-                                    <td>
-                                        <h5>laporan_akhir_pengabdian.pdf</h5>
+                                        <h5>
+                                            @php
+                                            $ketua= $data->anggota_pengabdian()
+                                            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                                            ->where('anggota_pengabdian_role', 'ketua')
+                                            ->first();
+                                            @endphp
+                                            {{$ketua->user_name}}
+                                        </h5>
                                     </td>
 
                                     <td>
-                                        <div class="card-body">
-                                            <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-download">
-                                                </i>
+                                        @php
+                                        $doc = $data->laporan_akhir()->where('laporan_akhir_pengabdian_id', $data->usulan_pengabdian_id)->first();
+                                        @endphp
 
-                                                Download
-                                            </a>
+                                        @if($doc)
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div class="col-11">
+                                                Nama File : {{$doc->laporan_akhir_original_name}}
+                                                <br>
+                                                Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_akhir_file_date)->isoFormat('D MMMM Y')}}
+                                                <br>
+                                                <a href="{{route('file_preview', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('file_download', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            </div>
                                         </div>
-
+                                        @else
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="fas fa-file-pdf fa-2x"></i>
+                                            </div>
+                                            <div class="col-11">
+                                                Nama File : -
+                                                <br>
+                                                Tanggal Unggah : -
+                                            </div>
+                                        </div>
+                                        @endif
                                     </td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
