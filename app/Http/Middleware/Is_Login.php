@@ -25,17 +25,23 @@ class Is_Login
                 ->where('user_email', Session::get('user_email'))
                 ->where('user_role', Session::get('user_role'))
                 ->where('user_name', Session::get('user_name'))
-                ->count();
+                ->first();
 
-            if ($user > 0) {
-                return $next($request);
+            if ($user) {
+                if ($user->user_active == true) {
+                    if ($user->user_ban == false) {
+                        return $next($request);
+                    } else {
+                        return redirect()->route('logout');
+                    }
+                } else {
+                    return redirect()->route('logout');
+                }
             } else {
                 return redirect()->route('logout');
             }
         } else {
-            Session::flush();
-
-            return redirect()->route('login');
+            return redirect()->route('logout');
         }
     }
 }

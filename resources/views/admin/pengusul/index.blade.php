@@ -55,6 +55,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <th>Status</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -79,6 +80,22 @@
                                     </td>
                                     <td>
                                         <h5>{{$data->user_role}}</h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            @if($data->user_active == true)
+                                            <span class="badge badge-success">Aktif</span>
+                                            @else
+                                            <span class="badge badge-warning">Tidak Aktif</span>
+                                            @endif
+                                        </h5>
+                                        <h5>
+                                            @if($data->user_ban == true)
+                                            <span class="badge badge-danger">Suspended</span>
+                                            @else
+                                            <span class="badge badge-primary">Not Suspend</span>
+                                            @endif
+                                        </h5>
                                     </td>
 
                                     <td>

@@ -119,6 +119,8 @@ class PengusulController extends Controller
         $name = htmlspecialchars($request->name);
         $email = htmlspecialchars($request->email);
         $password = (htmlspecialchars($request->password) != NULL) ? Hash::make($request->password) : $user->user_password;
+        $active = ($request->active == 'on') ? true : false;
+        $suspend = ($request->suspend == 'on') ? true : false;
 
         //check is Email exist in DB
         if (User::where('user_email', $email)->where('user_role', 'pengusul')->where('user_id', '!=', $user->user_id)->count() > 0) {
@@ -129,7 +131,6 @@ class PengusulController extends Controller
                 'Email Sudah Terdaftar' //Sub Alert Message
             );
 
-
             return redirect()->back();
         }
 
@@ -138,6 +139,8 @@ class PengusulController extends Controller
             'user_password' => $password,
             'user_name' => $name,
             'user_email' => $email,
+            'user_active' => $active,
+            'user_ban' => $suspend,
         ];
 
         //Update Data
