@@ -13,6 +13,7 @@ class Anggota_pengabdian extends Model
         'anggota_pengabdian_user_id',
         'anggota_pengabdian_pengabdian_id',
         'anggota_pengabdian_role',
+        'anggota_pengabdian_role_position',
         'anggota_pengabdian_tugas',
     ];
 

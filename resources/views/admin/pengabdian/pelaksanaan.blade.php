@@ -20,7 +20,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Pelaksanaan Penilaian Usulan Pengabdian</h1>
+                    <h1>Pelaksanaan Usulan Pengabdian</h1>
                 </div>
             </div>
 

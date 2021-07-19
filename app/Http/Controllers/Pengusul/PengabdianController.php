@@ -18,6 +18,7 @@ use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 use App\Models\Luaran_usulan;
 use App\Models\Unlock_feature;
+use App\Models\Mitra_file;
 
 class PengabdianController extends Controller
 {
@@ -150,6 +151,7 @@ class PengabdianController extends Controller
             'anggota_pengabdian_user_id' => $request->session()->get('user_id'),
             'anggota_pengabdian_pengabdian_id' => $id,
             'anggota_pengabdian_role' => 'ketua',
+            'anggota_pengabdian_role_position' => 0,
             'anggota_pengabdian_tugas' => NULL,
         ];
         Anggota_pengabdian::create($data_anggota);
@@ -197,8 +199,12 @@ class PengabdianController extends Controller
             ->where('anggota_pengabdian_user_id', Session::get('user_id'))
             ->first();
 
-        if ($role_access->anggota_pengabdian_role != "ketua") {
-            return redirect()->route('pengusul_pengabdian');
+        if ($role_access) {
+            if ($role_access->anggota_pengabdian_role != "ketua") {
+                return redirect()->route('pengusul_pengabdian');
+            }
+        } else {
+            return redirect()->route('not_found');
         }
 
         // HALAMAN 1
@@ -223,7 +229,7 @@ class PengabdianController extends Controller
                 ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
                 ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
                 ->where('anggota_pengabdian_role', '!=', 'ketua')
-                ->orderBy('anggota_pengabdian_role', 'asc')
+                ->orderBy('anggota_pengabdian_role_position', 'asc')
                 ->get();
 
             $view_data = [
@@ -406,6 +412,41 @@ class PengabdianController extends Controller
         return view('pengusul.pengabdian.tambah_anggota', ['id' => $id, 'result' => $result]);
     }
 
+    public function store_anggota(Request $request, $id)
+    {
+        // Input Validation
+        $request->validate([
+            'user_id'  => 'required',
+            'peran'  => 'required',
+            'tugas'  => 'required|max:1024',
+        ]);
+
+        $user_id = htmlspecialchars($request->user_id);
+        $peran = 'anggota';
+        $tugas = htmlspecialchars($request->tugas);
+
+        $position = intval(str_replace("anggota", "", htmlspecialchars($request->peran)));
+
+        //Insert Data Anggota Pengabdian
+        $data = [
+            'anggota_pengabdian_user_id' => $user_id,
+            'anggota_pengabdian_pengabdian_id' => $id,
+            'anggota_pengabdian_role' => $peran,
+            'anggota_pengabdian_role_position' => $position,
+            'anggota_pengabdian_tugas' => $tugas,
+        ];
+        Anggota_pengabdian::create($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Anggota Ditambahkan' //Sub Alert Message
+        );
+
+        return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
+    }
+
     public function tambah_mitra($id)
     {
         $provinsi = DB::table('wilayah_provinsi')->get();
@@ -482,31 +523,56 @@ class PengabdianController extends Controller
 
     public function upload_dokumen_mitra(Request $request, $id)
     {
-        // Input Validation
-        $request->validate(
-            [
-                'dokumen_mitra' => 'required|mimes:pdf|max:10000',
-            ],
-            [
-                'dokumen_mitra.mimes' => 'Tipe File Harus PDF'
-            ]
-        );
+        $file = NULL;
+        $category = NULL;
+        // $destination = NULL;
 
-        $id = $request->mitra_id;
-        $file = $request->file('dokumen_mitra');
+        // Input Validation
+        if ($request->doc_category == 'dokumen1') {
+            $request->validate(
+                [
+                    'dokumen_mitra' => 'required|mimes:pdf|max:10000',
+                ],
+                [
+                    'dokumen_mitra.mimes' => 'Tipe File Harus PDF'
+                ]
+            );
+
+            $file = $request->file('dokumen_mitra');
+            $category = "dokumen1";
+            // $destination = "assets/file/dokumen_mitra/dokumen1/";
+        } elseif ($request->doc_category == 'dokumen2') {
+            $request->validate(
+                [
+                    'dokumen_mitra2' => 'required|mimes:pdf|max:10000',
+                ],
+                [
+                    'dokumen_mitra2.mimes' => 'Tipe File Harus PDF'
+                ]
+            );
+
+            $file = $request->file('dokumen_mitra2');
+            $category = "dokumen2";
+            // $destination = "assets/file/dokumen_mitra/dokumen2/";
+        }
+
         $destination = "assets/file/dokumen_mitra/";
+        $id = $request->mitra_id;
         $file_original_name = $file->getClientOriginalName();
         $file_hash_name = $file->hashName();
         $file_base_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $file_size = intval($file->getSize() / 1024);
         $file_extension = $file->getClientOriginalExtension();
 
-        $is_exist = Mitra_sasaran::where('mitra_sasaran_id', $id)
-            ->where('mitra_sasaran_file_hash_name', '!=', NULL)
+        $is_exist = Mitra_file::where('mitra_file_mitra_sasaran_id', $id)
+            ->where('mitra_file_kategori', $category)
             ->count();
 
         if ($is_exist > 0) {
-            $fileOld =  Mitra_sasaran::where('mitra_sasaran_id', $id)->first();
+            $fileOld =  Mitra_file::where('mitra_file_mitra_sasaran_id', $id)
+                ->where('mitra_file_kategori', $category)
+                ->first();
+
             $file_path = public_path($destination . $fileOld->mitra_sasaran_file_hash_name);
 
             $file->move($destination, $file->hashName());
@@ -518,6 +584,8 @@ class PengabdianController extends Controller
 
         //Update Data
         $data = [
+            'mitra_file_mitra_sasaran_id' => $id,
+            'mitra_file_kategori' => $category,
             'mitra_sasaran_file_original_name' => $file_original_name,
             'mitra_sasaran_file_hash_name' => $file_hash_name,
             'mitra_sasaran_file_base_name' => $file_base_name,
@@ -526,8 +594,10 @@ class PengabdianController extends Controller
             'mitra_sasaran_file_date' => date('Y-m-d'),
         ];
 
-        Mitra_sasaran::where('mitra_sasaran_id', $id)
-            ->update($data);
+        Mitra_file::updateOrInsert(
+            ['mitra_file_mitra_sasaran_id' => $id, 'mitra_file_kategori' => $category],
+            $data
+        );
 
         //Flash Message
         flash_alert(
@@ -658,38 +728,6 @@ class PengabdianController extends Controller
         );
 
         return redirect()->route('pengusul_pengabdian_usulan', [6, $id]);
-    }
-
-    public function store_anggota(Request $request, $id)
-    {
-        // Input Validation
-        $request->validate([
-            'user_id'  => 'required',
-            'peran'  => 'required',
-            'tugas'  => 'required|max:1024',
-        ]);
-
-        $user_id = htmlspecialchars($request->user_id);
-        $peran = htmlspecialchars($request->peran);
-        $tugas = htmlspecialchars($request->tugas);
-
-        //Insert Data Anggota Pengabdian
-        $data = [
-            'anggota_pengabdian_user_id' => $user_id,
-            'anggota_pengabdian_pengabdian_id' => $id,
-            'anggota_pengabdian_role' => $peran,
-            'anggota_pengabdian_tugas' => $tugas,
-        ];
-        Anggota_pengabdian::create($data);
-
-        //Flash Message
-        flash_alert(
-            __('alert.icon_success'), //Icon
-            'Sukses', //Alert Message 
-            'Anggota Ditambahkan' //Sub Alert Message
-        );
-
-        return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
     }
 
     public function upload_dokumen(Request $request, $id)
@@ -916,8 +954,9 @@ class PengabdianController extends Controller
 
             $file_original_name = $file_fetch->dokumen_rab_original_name;
         } elseif ($file_category == "mitra") {
-            $file_fetch = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
-                ->where('mitra_sasaran_file_hash_name', $file_name)
+            $file_fetch = Mitra_sasaran::join('mitra_file', 'mitra_sasaran.mitra_sasaran_id', '=', 'mitra_file.mitra_file_mitra_sasaran_id')
+                ->where('mitra_sasaran.mitra_sasaran_pengabdian_id', $id)
+                ->where('mitra_file.mitra_sasaran_file_hash_name', $file_name)
                 ->first();
 
             $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
@@ -964,8 +1003,9 @@ class PengabdianController extends Controller
 
             $file_extension = $file_fetch->dokumen_rab_extension;
         } elseif ($file_category == "mitra") {
-            $file_fetch = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
-                ->where('mitra_sasaran_file_hash_name', $file_name)
+            $file_fetch = Mitra_sasaran::join('mitra_file', 'mitra_sasaran.mitra_sasaran_id', '=', 'mitra_file.mitra_file_mitra_sasaran_id')
+                ->where('mitra_sasaran.mitra_sasaran_pengabdian_id', $id)
+                ->where('mitra_file.mitra_sasaran_file_hash_name', $file_name)
                 ->first();
 
             $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);

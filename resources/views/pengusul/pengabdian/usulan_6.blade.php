@@ -103,24 +103,48 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-2">
-                                                            <button type="button" data-toggle="modal" data-id="{{$data->mitra_sasaran_id}}" data-target="#modal-default" class="btn btn-primary upload-mitra-dokumen"><b><i class="fas fa-upload"></i></b></button>
+                                                            <button type="button" data-toggle="modal" data-mitraid="{{$data->mitra_sasaran_id}}" data-target="#modal-default" class="btn btn-primary upload-mitra-dokumen"><b><i class="fas fa-upload"></i></b></button>
                                                         </div>
                                                         <div class="col-10">
-                                                            @if($data->mitra_sasaran_file_date)
-                                                            Nama File : {{$data->mitra_sasaran_file_original_name}}
+                                                            @php
+                                                            $doc1 = $data->mitra_file()->where('mitra_file_mitra_sasaran_id', $data->mitra_sasaran_id)->where('mitra_file_kategori', 'dokumen1')->first();
+                                                            @endphp
+                                                            @if($doc1)
+                                                            Nama File : {{$doc1->mitra_sasaran_file_original_name}}
                                                             <br>
-                                                            Tanggal Unggah : {{Carbon\Carbon::parse($data->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
+                                                            Tanggal Unggah : {{Carbon\Carbon::parse($doc1->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
+                                                            <br>
+                                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                             @else
                                                             Nama File : -
                                                             <br>
                                                             Tanggal Unggah : -
                                                             @endif
 
-                                                            @if($data->mitra_sasaran_file_date)
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <button type="button" data-toggle="modal" data-mitraid="{{$data->mitra_sasaran_id}}" data-target="#modal-default2" class="btn btn-info upload-mitra-dokumen2"><b><i class="fas fa-upload"></i></b></button>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            @php
+                                                            $doc2 = $data->mitra_file()->where('mitra_file_mitra_sasaran_id', $data->mitra_sasaran_id)->where('mitra_file_kategori', 'dokumen2')->first();
+                                                            @endphp
+                                                            @if($doc2)
+                                                            Nama File : {{$doc2->mitra_sasaran_file_original_name}}
                                                             <br>
-                                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            Tanggal Unggah : {{Carbon\Carbon::parse($doc2->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
+                                                            <br>
+                                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            @else
+                                                            Nama File : -
+                                                            <br>
+                                                            Tanggal Unggah : -
                                                             @endif
+
                                                         </div>
                                                     </div>
                                                 </td>
@@ -188,6 +212,7 @@
                     @method('patch')
                     <div class="card-body">
                         <input type="hidden" class="" id="mitra_id" name="mitra_id" value="">
+                        <input type="hidden" name="doc_category" value="dokumen1">
                         <div class="form-group">
                             <label for="dokumen_mitra">Dokumen Mitra Upload (PDF)</label>
                             <div class="input-group  @error('dokumen_mitra') is-invalid @enderror">
@@ -204,17 +229,62 @@
                         </div>
                     </div>
                     <!-- /.card-body -->
-
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
-            </div>
-            </form>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+</div>
+
+<!-- Upload MoU Modal -->
+<div class="modal fade " id="modal-default2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Dokumen MoU</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('pengusul_pengabdian_upload_dokumen_mitra', $id)}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('patch')
+                    <div class="card-body">
+                        <input type="hidden" id="mitra_id2" name="mitra_id" value="">
+                        <input type="hidden" name="doc_category" value="dokumen2">
+                        <div class="form-group">
+                            <label for="dokumen_mitra2">Dokumen MoU Upload (PDF)</label>
+                            <div class="input-group  @error('dokumen_mitra2') is-invalid @enderror">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input @error('dokumen_mitra2') is-invalid @enderror" id="dokumen_mitra2" name="dokumen_mitra2">
+                                    <label class="custom-file-label" id="dokumen_mitra_label2" for="dokumen_mitra2">Upload File Disini</label>
+                                </div>
+                            </div>
+                            @error('dokumen_mitra2')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>
 @endsection
 
@@ -254,20 +324,40 @@
 @error('dokumen_mitra')
 <script type="text/javascript">
     $(document).ready(function() {
+        var mitra_id = "{{old('mitra_id')}}";
         $('#modal-default').modal('show');
+        $('#mitra_id').val(mitra_id);
+    });
+</script>
+@enderror
+
+@error('dokumen_mitra2')
+<script type="text/javascript">
+    $(document).ready(function() {
+        var mitra_id = "{{old('mitra_id')}}";
+        $('#modal-default2').modal('show');
+        $('#mitra_id2').val(mitra_id);
     });
 </script>
 @enderror
 
 <script type="text/javascript">
     $(document).on('click', '.upload-mitra-dokumen', function() {
-        var mitra_id = $(this).data("id");
+        var mitra_id = $(this).data("mitraid");
 
         $('#mitra_id').val(mitra_id);
         $('#dokumen_mitra').val("");
         $('#dokumen_mitra_label').text("Upload File Disini");
     });
+    $(document).on('click', '.upload-mitra-dokumen2', function() {
+        var mitra_id = $(this).data("mitraid");
+
+        $('#mitra_id2').val(mitra_id);
+        $('#dokumen_mitra2').val("");
+        $('#dokumen_mitra_label2').text("Upload File Disini");
+    });
 </script>
+
 <!-- BS-Stepper -->
 <script src="{{URL::asset('assets/js/bs-stepper/js/bs-stepper.min.js')}}"></script>
 

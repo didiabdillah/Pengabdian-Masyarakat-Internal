@@ -516,22 +516,37 @@
                                                             Rp. {{$data->mitra_sasaran_kontribusi_pendanaan_mitra}}
                                                         </td>
                                                         <td>
-                                                            <i class="fas fa-file-pdf fa-2x"></i>
-                                                            <br>
-                                                            @if($data->mitra_sasaran_file_date)
-                                                            Nama File : {{$data->mitra_sasaran_file_original_name}}
-                                                            <br>
-                                                            Tanggal Unggah : {{Carbon\Carbon::parse($data->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
-                                                            @else
-                                                            Nama File : -
-                                                            <br>
-                                                            Tanggal Unggah : -
-                                                            @endif
+                                                            @php
+                                                            $doc = $data->mitra_file()->where('mitra_file_mitra_sasaran_id', $data->mitra_sasaran_id)->get();
+                                                            @endphp
 
-                                                            @if($data->mitra_sasaran_file_date)
-                                                            <br>
-                                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            @if($doc->count() > 0)
+                                                            @foreach($doc as $row)
+                                                            <div class="row">
+                                                                <div class="col-1">
+                                                                    <i class="fas fa-file-pdf fa-2x"></i>
+                                                                </div>
+                                                                <div class="col-11">
+                                                                    Nama File : {{$row->mitra_sasaran_file_original_name}}
+                                                                    <br>
+                                                                    Tanggal Unggah : {{Carbon\Carbon::parse($row->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
+                                                                    <br>
+                                                                    <a href="{{route('pengusul_pengabdian_file_preview', [$id, $row->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                                    <a href="{{route('pengusul_pengabdian_file_download', [$id, $row->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                                </div>
+                                                            </div>
+                                                            @endforeach
+                                                            @else
+                                                            <div class="row">
+                                                                <div class="col-1">
+                                                                    <i class="fas fa-file-pdf fa-2x"></i>
+                                                                </div>
+                                                                <div class="col-11">
+                                                                    Nama File : -
+                                                                    <br>
+                                                                    Tanggal Unggah : -
+                                                                </div>
+                                                            </div>
                                                             @endif
                                                         </td>
                                                     </tr>

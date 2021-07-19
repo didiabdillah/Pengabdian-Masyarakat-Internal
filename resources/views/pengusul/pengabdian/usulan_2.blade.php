@@ -79,11 +79,7 @@
                                 <div class="col-md-10">
                                     <div class="card bg-light d-flex flex-fill">
                                         <div class="card-header text-muted border-bottom-0">
-                                            @if($row->anggota_pengabdian_role == 'anggota1')
-                                            {{"Anggota Pengusul 1"}}
-                                            @elseif($row->anggota_pengabdian_role == 'anggota2')
-                                            {{"Anggota Pengusul 2"}}
-                                            @endif
+                                            {{"Anggota Pengusul " . $row->anggota_pengabdian_role_position}}
                                         </div>
                                         <div class="card-body pt-0">
                                             <div class="row">
@@ -102,6 +98,14 @@
                                                             <span class="fa-li"><i class="fas fa-lg fa-university"></i></span>
                                                             @if($row->biodata_institusi)
                                                             {{$row->biodata_institusi}}
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                        </li>
+                                                        <li class="small mt-1">
+                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span>
+                                                            @if($row->biodata_jurusan)
+                                                            {{$row->biodata_jurusan}}
                                                             @else
                                                             {{"-"}}
                                                             @endif
