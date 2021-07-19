@@ -40,7 +40,7 @@ class PengusulController extends Controller
             'password'  => 'required|max:100|min:8',
         ]);
 
-        $id = str_replace('-', '', Str::uuid());
+        $id = hexdec(uniqid()) . strtotime(now());
         $nidn = htmlspecialchars($request->nidn);
         $name = htmlspecialchars($request->name);
         $email = htmlspecialchars($request->email);

@@ -18,7 +18,7 @@ class UsersSeed extends Seeder
      */
     public function run(Faker $faker)
     {
-        $user_id = str_replace('-', '', Str::uuid());
+        $user_id = hexdec(uniqid()) . strtotime(now());
 
         User::create([
             'user_id' => $user_id,
@@ -47,7 +47,7 @@ class UsersSeed extends Seeder
             'biodata_web_personal' => $faker->domainName,
         ]);
 
-        $user_id = str_replace('-', '', Str::uuid());
+        $user_id = hexdec(uniqid()) . strtotime(now());
 
         User::create([
             'user_id' => $user_id,
@@ -76,7 +76,7 @@ class UsersSeed extends Seeder
             'biodata_web_personal' => $faker->domainName,
         ]);
 
-        $user_id = str_replace('-', '', Str::uuid());
+        $user_id = hexdec(uniqid()) . strtotime(now());
 
         User::create([
             'user_id' => $user_id,
@@ -105,7 +105,7 @@ class UsersSeed extends Seeder
             'biodata_web_personal' => $faker->domainName,
         ]);
 
-        $user_id = str_replace('-', '', Str::uuid());
+        $user_id = hexdec(uniqid()) . strtotime(now());
 
         User::create([
             'user_id' => $user_id,

@@ -131,7 +131,7 @@ class PengabdianController extends Controller
             'jumlah_mahasiswa'  => 'required|max:3',
         ]);
 
-        $id = hexdec(uniqid()) . strtotime(now());
+        $id = uniqid() . strtotime(now());
         $judul = htmlspecialchars($request->judul);
         $kategori = htmlspecialchars($request->kategori);
         $skema = htmlspecialchars($request->skema);
