@@ -76,25 +76,35 @@ class PengabdianController extends Controller
     public function hapus($id)
     {
         // Mitra Sasaran
-        $dokumen_mitra = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)->get();
-        $dokumen_mitra_destination = "assets/file/dokumen_mitra/";
-
-        foreach ($dokumen_mitra as $doc) {
-            $dokumen_mitra_file_path = public_path($dokumen_mitra_destination . $doc->mitra_sasaran_file_hash_name);
-            File::delete($dokumen_mitra_file_path);
+        $mitra_sasaran = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)->get();
+        if ($mitra_sasaran) {
+            foreach ($mitra_sasaran as $mitra) {
+                $mitra_file = $mitra->mitra_file()->where('mitra_file_mitra_sasaran_id', $mitra->mitra_sasaran_id)->get();
+                if ($mitra_file) {
+                    $dokumen_mitra_destination = "assets/file/dokumen_mitra/";
+                    foreach ($mitra_file as $file) {
+                        $dokumen_mitra_file_path = public_path($dokumen_mitra_destination . $file->mitra_sasaran_file_hash_name);
+                        File::delete($dokumen_mitra_file_path);
+                    }
+                }
+            }
         }
 
         // Dokumen RAB Pengabdian
         $dokumen_rab = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
-        $dokumen_rab_destination = "assets/file/dokumen_rab/";
-        $dokumen_rab_file_path = public_path($dokumen_rab_destination . $dokumen_rab->dokumen_rab_hash_name);
-        File::delete($dokumen_rab_file_path);
+        if ($dokumen_rab) {
+            $dokumen_rab_destination = "assets/file/dokumen_rab/";
+            $dokumen_rab_file_path = public_path($dokumen_rab_destination . $dokumen_rab->dokumen_rab_hash_name);
+            File::delete($dokumen_rab_file_path);
+        }
 
         // Dokumen Usulan Pengabdian
         $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
-        $dokumen_usulan_destination = "assets/file/dokumen_usulan/";
-        $dokumen_usulan_file_path = public_path($dokumen_usulan_destination . $dokumen_usulan->dokumen_usulan_hash_name);
-        File::delete($dokumen_usulan_file_path);
+        if ($dokumen_usulan) {
+            $dokumen_usulan_destination = "assets/file/dokumen_usulan/";
+            $dokumen_usulan_file_path = public_path($dokumen_usulan_destination . $dokumen_usulan->dokumen_usulan_hash_name);
+            File::delete($dokumen_usulan_file_path);
+        }
 
         // Usulan pengabdian
         Usulan_pengabdian::destroy('usulan_pengabdian_id', $id);
