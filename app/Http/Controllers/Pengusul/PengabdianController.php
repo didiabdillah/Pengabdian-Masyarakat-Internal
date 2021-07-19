@@ -712,12 +712,16 @@ class PengabdianController extends Controller
     public function hapus_mitra($id, $removeid)
     {
         $destination = "assets/file/dokumen_mitra/";
-        $fileOld =  Mitra_sasaran::where('mitra_sasaran_id', $removeid)->first();
-        $file_path = public_path($destination . $fileOld->mitra_sasaran_file_hash_name);
+
+        $data =  Mitra_file::where('mitra_file_mitra_sasaran_id', $removeid)->get();
+
+        foreach ($data as $fileOld) {
+            $file_path = public_path($destination . $fileOld->mitra_sasaran_file_hash_name);
+
+            File::delete($file_path);
+        }
 
         Mitra_sasaran::destroy('mitra_sasaran_id', $removeid);
-
-        File::delete($file_path);
 
         //Flash Message
         flash_alert(
