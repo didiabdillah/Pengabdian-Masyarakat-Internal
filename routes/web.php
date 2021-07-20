@@ -97,6 +97,16 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::delete('/{id}/destroy', 'Admin\BidangController@destroy')->name('admin_bidang_destroy');
                 });
 
+                //Skema
+                Route::group(['prefix' => 'skema'], function () {
+                    Route::get('/', 'Admin\SkemaController@index')->name('admin_skema');
+                    Route::get('/insert', 'Admin\SkemaController@insert')->name('admin_skema_insert');
+                    Route::post('/store', 'Admin\SkemaController@store')->name('admin_skema_store');
+                    Route::get('/{id}/edit', 'Admin\SkemaController@edit')->name('admin_skema_edit');
+                    Route::patch('/{id}/update', 'Admin\SkemaController@update')->name('admin_skema_update');
+                    Route::delete('/{id}/destroy', 'Admin\SkemaController@destroy')->name('admin_skema_destroy');
+                });
+
                 //Data Pendukung
                 Route::group(['prefix' => 'data_pendukung'], function () {
                     Route::get('/', 'Admin\DataPendukungController@index')->name('admin_data_pendukung');
