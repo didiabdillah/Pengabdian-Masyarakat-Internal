@@ -173,6 +173,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('admin_bidang')}}" class="nav-link @if(Request::segment(1) == 'bidang' || Request::segment(2) == 'bidang') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-box"></i>
+                                <p>
+                                    Bidang
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('admin_logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-check"></i>
                                 <p>

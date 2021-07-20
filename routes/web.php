@@ -87,6 +87,16 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     });
                 });
 
+                //Bidang
+                Route::group(['prefix' => 'bidang'], function () {
+                    Route::get('/', 'Admin\BidangController@index')->name('admin_bidang');
+                    Route::get('/insert', 'Admin\BidangController@insert')->name('admin_bidang_insert');
+                    Route::post('/store', 'Admin\BidangController@store')->name('admin_bidang_store');
+                    Route::get('/{id}/edit', 'Admin\BidangController@edit')->name('admin_bidang_edit');
+                    Route::patch('/{id}/update', 'Admin\BidangController@update')->name('admin_bidang_update');
+                    Route::delete('/{id}/destroy', 'Admin\BidangController@destroy')->name('admin_bidang_destroy');
+                });
+
                 //Data Pendukung
                 Route::group(['prefix' => 'data_pendukung'], function () {
                     Route::get('/', 'Admin\DataPendukungController@index')->name('admin_data_pendukung');
