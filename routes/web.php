@@ -67,7 +67,25 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     // Route::get('/detail', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
                 });
 
-                //Penilaian
+                //Jurusan
+                Route::group(['prefix' => 'jurusan'], function () {
+                    Route::get('/', 'Admin\JurusanController@index')->name('admin_jurusan');
+                    Route::get('/insert', 'Admin\JurusanController@insert')->name('admin_jurusan_insert');
+                    Route::post('/store', 'Admin\JurusanController@store')->name('admin_jurusan_store');
+                    Route::get('/{id}/edit', 'Admin\JurusanController@edit')->name('admin_jurusan_edit');
+                    Route::patch('/{id}/update', 'Admin\JurusanController@update')->name('admin_jurusan_update');
+                    Route::delete('/{id}/destroy', 'Admin\JurusanController@destroy')->name('admin_jurusan_destroy');
+
+                    // Program Studi
+                    Route::group(['prefix' => '/{jurusan_id}/prodi'], function () {
+                        Route::get('/', 'Admin\JurusanController@prodi_index')->name('admin_prodi');
+                        Route::get('/insert', 'Admin\JurusanController@prodi_insert')->name('admin_prodi_insert');
+                        Route::post('/store', 'Admin\JurusanController@prodi_store')->name('admin_prodi_store');
+                        Route::get('/{id}/edit', 'Admin\JurusanController@prodi_edit')->name('admin_prodi_edit');
+                        Route::patch('/{id}/update', 'Admin\JurusanController@prodi_update')->name('admin_prodi_update');
+                        Route::delete('/{id}/destroy', 'Admin\JurusanController@prodi_destroy')->name('admin_prodi_destroy');
+                    });
+                });
 
                 //Data Pendukung
                 Route::group(['prefix' => 'data_pendukung'], function () {

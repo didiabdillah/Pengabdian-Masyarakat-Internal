@@ -165,6 +165,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('admin_jurusan')}}" class="nav-link @if(Request::segment(1) == 'jurusan' || Request::segment(2) == 'jurusan') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-graduation-cap"></i>
+                                <p>
+                                    Jurusan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('admin_logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-check"></i>
                                 <p>
