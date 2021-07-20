@@ -6,11 +6,66 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\Usulan_pengabdian;
+
 class PengabdianController extends Controller
 {
     public function usulan_pengabdian()
     {
-        return view('admin.pengabdian.usulan');
+        $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
+            ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->orderBy('usulan_pengabdian_tahun', 'desc')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->get();
+
+        $view_data = [
+            'usulan_pengabdian' => $usulan_pengabdian,
+        ];
+
+        return view('admin.pengabdian.usulan', $view_data);
+    }
+
+    public function konfirmasi($id)
+    {
+        $konfirmasi = Usulan_pengabdian::select('usulan_pengabdian_status as status')
+            ->where('usulan_pengabdian_id', $id)
+            ->first();
+
+        $view_data = [
+            'id' => $id,
+            'konfirmasi' => $konfirmasi,
+        ];
+
+        return view('admin.pengabdian.konfirmasi', $view_data);
+    }
+
+    public function konfirmasi_update(Request $request, $id)
+    {
+        // Input Validation
+        $request->validate(
+            [
+                'status'  => 'required',
+            ]
+        );
+
+        $status = htmlspecialchars($request->status);
+
+        $konfirmasi = ($status == 1) ? "diterima" : "ditolak";
+
+        //Update Data
+        $data = [
+            'usulan_pengabdian_status' => $konfirmasi,
+        ];
+        Usulan_pengabdian::where('usulan_pengabdian_id', $id)->update($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Status Usulan pengabdian Diperbaharui' //Sub Alert Message
+        );
+
+        return redirect()->route('admin_pengabdian_usulan');
     }
 
     public function pelaksanaan_pengabdian()

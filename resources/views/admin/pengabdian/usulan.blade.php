@@ -16,21 +16,15 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Usulan Pengabdian</h1>
+                    <h1>Data Usulan Pengabdian</h1>
                 </div>
             </div>
 
         </div>
 
-        {{-- <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Pengusul</a>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div> --}}
+        <div class="container-fluid">
+
+        </div>
 
         <!--Content -->
         <section class="content">
@@ -52,37 +46,67 @@
                                     <th>No</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
+                                    <th>Pengusul</th>
+                                    <th>Skema</th>
+                                    <th>Bidang</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
                             <tbody>
 
+                                @foreach($usulan_pengabdian as $usulan)
                                 <tr>
                                     <td>
-                                        <h5>1</h5>
+                                        <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-                                        <h5>Pengabdian Masjid Jatisawit Lor</h5>
+                                        <h5>{{$usulan->usulan_pengabdian_judul}}</h5>
                                     </td>
                                     <td>
-                                        <h5>2021</h5>
+                                        <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
                                     </td>
                                     <td>
-                                        <h5>Menunggu</h5>
+                                        <h5>
+                                            {{$ketua = $usulan->anggota_pengabdian()
+                                            ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                            ->where('anggota_pengabdian_pengabdian_id', $usulan->usulan_pengabdian_id)
+                                            ->where('anggota_pengabdian_role', 'ketua')
+                                            ->first()->user_name}}
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            {{
+                                                $usulan->join('skema_pengabdian', 'skema_pengabdian.skema_id', '=', 'usulan_pengabdian.usulan_pengabdian_skema_id')->first()->skema_label
+                                            }}
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            {{
+                                                $usulan->join('bidang_pengabdian', 'bidang_pengabdian.bidang_id', '=', 'usulan_pengabdian.usulan_pengabdian_bidang_id')->first()->bidang_label
+                                            }}
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        @if($usulan->usulan_pengabdian_status == "dikirim")
+                                        <h5><span class="badge badge-primary">Dikirim</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "diterima")
+                                        <h5><span class="badge badge-success">Diterima</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "ditolak")
+                                        <h5><span class="badge badge-danger">Ditolak</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "dinilai")
+                                        <h5><span class="badge badge-info">Dinilai</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "revisi")
+                                        <h5><span class="badge badge-danger">Revisi</span></h5>
+                                        @endif
                                     </td>
 
                                     <td>
                                         <div class="card-body">
-                                            <a class="btn btn-primary btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-
-                                                Detail
-                                            </a>
-
-                                            <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
+                                            <a class="btn btn-success btn-sm" href="{{route('admin_pengabdian_usulan_konfirmasi', $usulan->usulan_pengabdian_id)}}">
+                                                <i class="fas fa-check">
                                                 </i>
 
                                                 Konfirmasi
@@ -91,6 +115,7 @@
 
                                     </td>
                                 </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
