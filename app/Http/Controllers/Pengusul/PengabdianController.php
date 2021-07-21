@@ -812,10 +812,10 @@ class PengabdianController extends Controller
         // Input Validation
         $request->validate(
             [
-                'dokumen_usulan' => 'required|mimetypes:application/pdf|max:10000',
+                'dokumen_usulan' => 'required|mimes:pdf,doc,docx|max:10000',
             ],
             [
-                'dokumen_usulan.mimetypes' => 'Tipe File Harus PDF'
+                'dokumen_usulan.mimes' => 'Tipe File Harus PDF Atau Word'
             ]
         );
 
@@ -881,10 +881,10 @@ class PengabdianController extends Controller
         // Input Validation
         $request->validate(
             [
-                'dokumen_rab' => 'required|mimes:pdf|max:10000',
+                'dokumen_rab' => 'required|mimes:xls,xlsx|max:10000',
             ],
             [
-                'dokumen_rab.mimes' => 'Tipe File Harus PDF'
+                'dokumen_rab.mimes' => 'Tipe File Harus Excel'
             ]
         );
 

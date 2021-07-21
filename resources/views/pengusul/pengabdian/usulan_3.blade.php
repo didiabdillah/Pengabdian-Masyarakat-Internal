@@ -73,14 +73,14 @@
                                 <div class="row m-4">
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <label for="dokumen_usulan"><i class="fas fa-file-alt fa-2x"></i> Dokumen Usulan</label>
+                                            <label for="dokumen_usulan"><i class="fas fa-file-alt fa-2x"></i> Dokumen Usulan (PDF/Word)</label>
                                             <h6>File Usulan : @if($dokumen_info){{$dokumen_info->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
                                             <h6>Tanggal Unggah : @if($dokumen_info){{Carbon\Carbon::parse($dokumen_info->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
                                             <h6>Ukuran File : @if($dokumen_info){{$dokumen_info->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
 
                                             @if($dokumen_info)
-                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $dokumen_info->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $dokumen_info->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            <a href="{{route('file_preview', [$id, $dokumen_info->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                            <a href="{{route('file_download', [$id, $dokumen_info->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                             <br>
                                             <br>
                                             @endif
