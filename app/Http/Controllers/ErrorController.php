@@ -18,4 +18,9 @@ class ErrorController extends Controller
     {
         return view('error.403_forbidden');
     }
+
+    public function coming_soon()
+    {
+        return view('error.coming_soon');
+    }
 }

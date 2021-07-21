@@ -296,6 +296,9 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
         //404 Not Found Page
         Route::get('/notfound', 'ErrorController@not_found')->name('not_found');
+
+        //Coming Soon
+        Route::get('/comingsoon', 'ErrorController@coming_soon')->name('coming_soon');
         // END ERROR PAGE
 
         // FILE
