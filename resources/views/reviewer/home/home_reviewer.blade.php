@@ -116,6 +116,22 @@
 
                                                         <hr>
 
+                                                        <strong><i class="fas fa-graduation-cap mr-1"></i>Jurusan</strong>
+
+                                                        <p class="text-muted">
+                                                            @if($user->biodata)
+                                                            @if($user->biodata->biodata_jurusan)
+                                                            {{$user->biodata->biodata_jurusan}}
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                        </p>
+
+                                                        <hr>
+
                                                         <strong><i class="fas fa-graduation-cap mr-1"></i>Program Studi</strong>
 
                                                         <p class="text-muted">
@@ -164,6 +180,10 @@
 
                                                         <hr>
 
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="card-body">
                                                         <strong><i class="fas fa-map-marker-alt mr-1"></i>Alamat</strong>
 
                                                         <p class="text-muted">
@@ -179,10 +199,7 @@
                                                         </p>
 
                                                         <hr>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="card-body">
+
                                                         <strong><i class="fas fa-birthday-cake mr-1"></i>Tempat/Tanggal Lahir</strong>
 
                                                         <p class="text-muted">
