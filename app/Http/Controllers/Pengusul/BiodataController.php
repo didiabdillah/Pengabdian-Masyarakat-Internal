@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\User;
 use App\Models\Biodata;
+use App\Models\Jurusan;
+use App\Models\Prodi;
 
 class BiodataController extends Controller
 {
@@ -17,7 +19,10 @@ class BiodataController extends Controller
         $id = Session::get('user_id');
         $user = User::find($id);
 
-        return view('pengusul.biodata.biodata_edit', ['user' => $user, 'user_id' => $id]);
+        $jurusan = Jurusan::orderBy('jurusan_nama', 'asc')->get();
+        $prodi = Prodi::orderBy('prodi_nama', 'asc')->get();
+
+        return view('pengusul.biodata.biodata_edit', ['user' => $user, 'user_id' => $id, 'jurusan' => $jurusan, 'prodi' => $prodi]);
     }
 
     public function update(Request $request)
@@ -39,11 +44,23 @@ class BiodataController extends Controller
             'tanggal_lahir'  => 'required',
             'no_ktp'  => 'required|max:16',
             'no_telp'  => 'max:16',
-            'no_hp'  => 'max:16',
+            'no_hp'  => 'required|max:16',
             'email'  => 'required|email:rfc,dns|max:255',
             'web'  => 'max:255',
         ]);
 
+        //check is NIDN exist in DB
+        if (User::where('user_nidn', htmlspecialchars($request->nidn))->where('user_id', '!=', $id)->count() > 0) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Gagal', //Alert Message 
+                'NIDN Sudah Terdaftar' //Sub Alert Message
+            );
+
+            return redirect()->back();
+        }
+        dd('ok');
         //check is Email exist in DB
         if (User::where('user_email', htmlspecialchars($request->email))->where('user_id', '!=', $id)->count() > 0) {
             //Flash Message

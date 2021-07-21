@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\User;
 use App\Models\Biodata;
+use App\Models\Jurusan;
+use App\Models\Prodi;
 
 class ReviewerController extends Controller
 {
@@ -25,9 +27,15 @@ class ReviewerController extends Controller
 
     public function insert()
     {
-        $user = User::orderBy('user_name', 'asc')->get();
+        $jurusan = Jurusan::orderBy('jurusan_nama', 'asc')->get();
+        $prodi = Prodi::orderBy('prodi_nama', 'asc')->get();
 
-        return view('admin.reviewer.insert', ['user' => $user]);
+        $view_data = [
+            'jurusan' => $jurusan,
+            'prodi' => $prodi,
+        ];
+
+        return view('admin.reviewer.insert', $view_data);
     }
 
     public function store(Request $request)
@@ -38,6 +46,12 @@ class ReviewerController extends Controller
             'name'  => 'required|max:255',
             'email'  => 'required|max:255',
             'password'  => 'required|max:100|min:8',
+            'sex'  => 'required',
+            'institusi'  => 'max:255',
+            'jurusan'  => 'max:255',
+            'program_studi'  => 'max:255',
+            'pendidikan'  => 'max:255',
+            'jabatan'  => 'max:255',
         ]);
 
         $id = hexdec(uniqid()) . strtotime(now());
@@ -47,8 +61,20 @@ class ReviewerController extends Controller
         $password = htmlspecialchars($request->password);
         $image = "default.jpg";
 
+        //check is NIDN exist in DB
+        if (User::where('user_nidn', $nidn)->count() > 0) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Gagal', //Alert Message 
+                'NIDN Sudah Terdaftar' //Sub Alert Message
+            );
+
+            return redirect()->back();
+        }
+
         //check is email exist in DB
-        if (User::where('user_email', $email)->where('user_role', 'reviewer')->count() > 0) {
+        if (User::where('user_email', $email)->count() > 0) {
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
@@ -71,10 +97,16 @@ class ReviewerController extends Controller
         ];
 
         //Insert Data
-        $query = User::create($data);
+        User::create($data);
 
         $data_biodata = [
-            'biodata_user_id' => $query->user_id
+            'biodata_user_id' => $id,
+            'biodata_sex' => htmlspecialchars($request->sex),
+            'biodata_institusi' => htmlspecialchars($request->institusi),
+            'biodata_jurusan' => htmlspecialchars($request->jurusan),
+            'biodata_program_studi' => htmlspecialchars($request->program_studi),
+            'biodata_jabatan' => htmlspecialchars($request->jabatan),
+            'biodata_pendidikan' => htmlspecialchars($request->pendidikan),
         ];
 
         Biodata::create($data_biodata);
@@ -86,13 +118,13 @@ class ReviewerController extends Controller
             'Reviewer Ditambahkan' //Sub Alert Message
         );
 
-
         return redirect()->route('admin_reviewer');
     }
 
     public function edit($id)
     {
-        $user = User::where('user_id', $id)->first();
+        $user = User::join('biodata', 'biodata_user_id', '=', 'user_id')
+            ->where('user_id', $id)->first();
 
         return view('admin.reviewer.edit', ['user' => $user]);
     }
@@ -106,12 +138,24 @@ class ReviewerController extends Controller
                 'name'  => 'required|max:255',
                 'email'  => 'required|max:255',
                 'password'  => 'max:100|min:8',
+                'sex'  => 'required',
+                'institusi'  => 'max:255',
+                'jurusan'  => 'max:255',
+                'program_studi'  => 'max:255',
+                'pendidikan'  => 'max:255',
+                'jabatan'  => 'max:255',
             ]);
         } else {
             $request->validate([
                 'nidn'  => 'required|max:255',
                 'name'  => 'required|max:255',
                 'email'  => 'required|max:255',
+                'sex'  => 'required',
+                'institusi'  => 'max:255',
+                'jurusan'  => 'max:255',
+                'program_studi'  => 'max:255',
+                'pendidikan'  => 'max:255',
+                'jabatan'  => 'max:255',
             ]);
         }
 
@@ -124,8 +168,20 @@ class ReviewerController extends Controller
         $active = ($request->active == 'on') ? true : false;
         $suspend = ($request->suspend == 'on') ? true : false;
 
+        //check is NIDN exist in DB
+        if (User::where('user_nidn', $nidn)->where('user_id', '!=', $user->user_id)->count() > 0) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Gagal', //Alert Message 
+                'NIDN Sudah Terdaftar' //Sub Alert Message
+            );
+
+            return redirect()->back();
+        }
+
         //check is Email exist in DB
-        if (User::where('user_email', $email)->where('user_role', 'reviewer')->where('user_id', '!=', $user->user_id)->count() > 0) {
+        if (User::where('user_email', $email)->where('user_id', '!=', $user->user_id)->count() > 0) {
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
@@ -148,6 +204,18 @@ class ReviewerController extends Controller
         //Update Data
         User::where('user_id', $id)
             ->update($data);
+
+        $data_biodata = [
+            'biodata_sex' => htmlspecialchars($request->sex),
+            'biodata_institusi' => htmlspecialchars($request->institusi),
+            'biodata_jurusan' => htmlspecialchars($request->jurusan),
+            'biodata_program_studi' => htmlspecialchars($request->program_studi),
+            'biodata_jabatan' => htmlspecialchars($request->jabatan),
+            'biodata_pendidikan' => htmlspecialchars($request->pendidikan),
+        ];
+
+        // Update Data
+        Biodata::where('biodata_user_id', $id)->update($data_biodata);
 
         //Flash Message
         flash_alert(

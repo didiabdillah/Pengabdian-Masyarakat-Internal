@@ -4,6 +4,8 @@
 
 @section('page')
 
+@include('layout.flash_alert')
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -80,6 +82,15 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
+                                                <label for="jurusan">Jurusan</label>
+                                                <input name="jurusan" type="text" class="form-control @error('jurusan') is-invalid @enderror" id="jurusan" placeholder="Masukan Jurusan" value="@if($user->biodata) @if($user->biodata->biodata_jurusan){{$user->biodata->biodata_jurusan}}@endif @endif">
+                                                @error('jurusan')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="program_studi">Program Studi</label>
                                                 <input name="program_studi" type="text" class="form-control @error('program_studi') is-invalid @enderror" id="program_studi" placeholder="Masukan Program Studi" value="@if($user->biodata) @if($user->biodata->biodata_program_studi){{$user->biodata->biodata_program_studi}}@endif @endif">
                                                 @error('program_studi')
@@ -106,6 +117,9 @@
                                                 </div>
                                                 @enderror
                                             </div>
+                                        </div>
+
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="alamat">Alamat</label>
                                                 <input name="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" placeholder="Masukan Alamat" value="@if($user->biodata) @if($user->biodata->biodata_alamat){{$user->biodata->biodata_alamat}}@endif @endif">
@@ -115,8 +129,6 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="tempat_lahir">Tempat Lahir</label>
                                                 <input name="tempat_lahir" type="text" class="form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" placeholder="Masukan Tempat Lahir" value="@if($user->biodata) @if($user->biodata->biodata_tempat_lahir){{$user->biodata->biodata_tempat_lahir}}@endif @endif">
@@ -153,7 +165,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="no_telp">No Telp</label>
+                                                <label for="no_telp">No Telp (Optional)</label>
                                                 <input name="no_telp" type="text" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" placeholder="Masukan No Telp" value="@if($user->biodata) @if($user->biodata->biodata_no_telp){{$user->biodata->biodata_no_telp}}@endif @endif">
                                                 @error('no_telp')
                                                 <div class="invalid-feedback">
@@ -180,7 +192,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="web">Web Personal</label>
+                                                <label for="web">Web Personal (Optional)</label>
                                                 <input name="web" type="text" class="form-control @error('web') is-invalid @enderror" id="web" placeholder="Masukan Web Personal" value="@if($user->biodata) @if($user->biodata->biodata_web_personal){{$user->biodata->biodata_web_personal}}@endif @endif">
                                                 @error('web')
                                                 <div class="invalid-feedback">

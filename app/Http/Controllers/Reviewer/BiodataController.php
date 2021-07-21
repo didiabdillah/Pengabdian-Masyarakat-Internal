@@ -30,6 +30,7 @@ class BiodataController extends Controller
             'nidn'  => 'required|max:16',
             'sex'  => 'required',
             'institusi'  => 'required|max:255',
+            'jurusan'  => 'required|max:255',
             'program_studi'  => 'required|max:255',
             'pendidikan'  => 'required|max:255',
             'jabatan'  => 'required|max:255',
@@ -42,6 +43,18 @@ class BiodataController extends Controller
             'email'  => 'required|email:rfc,dns|max:255',
             'web'  => 'max:255',
         ]);
+
+        //check is NIDN exist in DB
+        if (User::where('user_nidn', htmlspecialchars($request->nidn))->where('user_id', '!=', $id)->count() > 0) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Gagal', //Alert Message 
+                'NIDN Sudah Terdaftar' //Sub Alert Message
+            );
+
+            return redirect()->back();
+        }
 
         //check is Email exist in DB
         if (User::where('user_email', htmlspecialchars($request->email))->where('user_id', '!=', $id)->count() > 0) {
@@ -68,6 +81,7 @@ class BiodataController extends Controller
             'biodata_user_id' => $id,
             'biodata_sex' => htmlspecialchars($request->sex),
             'biodata_institusi' => htmlspecialchars($request->institusi),
+            'biodata_jurusan' => htmlspecialchars($request->jurusan),
             'biodata_program_studi' => htmlspecialchars($request->program_studi),
             'biodata_jabatan' => htmlspecialchars($request->jabatan),
             'biodata_pendidikan' => htmlspecialchars($request->pendidikan),
