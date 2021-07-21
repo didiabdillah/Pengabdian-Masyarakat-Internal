@@ -65,17 +65,25 @@ class FileController extends Controller
             $file_extension = $file_fetch->laporan_akhir_extension;
 
             $file_original_name = $file_fetch->laporan_akhir_original_name;
+        } elseif ($file_category == "template_dokumen") {
+            $file_fetch = get_where_local_db_json("template_dokumen.json", "id", $id);
+
+            $file = public_path("assets/file/template_dokumen/" . $file_fetch["hash_name"]);
+
+            $file_extension = $file_fetch["extension"];
+
+            $file_original_name = $file_fetch["original_name"];
         }
 
         if ($file_fetch) {
-            if ($file_extension == "pdf") {
+            // if ($file_extension == "pdf") {
 
-                $headers = array(
-                    'Content-Type' => mime_content_type($file),
-                );
+            $headers = array(
+                'Content-Type' => mime_content_type($file),
+            );
 
-                return response()->download($file, $file_original_name, $headers);
-            }
+            return response()->download($file, $file_original_name, $headers);
+            // }
         }
 
         return redirect()->back();
@@ -120,6 +128,14 @@ class FileController extends Controller
             $file = public_path("assets/file/laporan_akhir/" . $file_fetch->laporan_akhir_hash_name);
 
             $file_extension = $file_fetch->laporan_akhir_extension;
+        } elseif ($file_category == "template_dokumen") {
+            $file_fetch = get_where_local_db_json("template_dokumen.json", "id", $id);
+
+            $file = public_path("assets/file/template_dokumen/" . $file_fetch["hash_name"]);
+
+            $file_extension = $file_fetch["extension"];
+
+            $file_original_name = $file_fetch["original_name"];
         }
 
         if ($file_fetch) {
@@ -130,6 +146,8 @@ class FileController extends Controller
                 );
 
                 return response()->file($file, $headers);
+            } else {
+                return redirect()->route('coming_soon');
             }
         }
     }

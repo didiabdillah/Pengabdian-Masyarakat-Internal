@@ -73,7 +73,7 @@
                                 <div class="row m-4">
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <label for="dokumen_usulan"><i class="fas fa-file-pdf fa-2x"></i> Dokumen Usulan</label>
+                                            <label for="dokumen_usulan"><i class="fas fa-file-alt fa-2x"></i> Dokumen Usulan</label>
                                             <h6>File Usulan : @if($dokumen_info){{$dokumen_info->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
                                             <h6>Tanggal Unggah : @if($dokumen_info){{Carbon\Carbon::parse($dokumen_info->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
                                             <h6>Ukuran File : @if($dokumen_info){{$dokumen_info->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
@@ -101,10 +101,36 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-4 mt-4">
-                                        <div class="form-group mt-1">
+
+                                    <div class="col-md-4">
+                                        <h5><b>Template Dokumen Usulan</b></h5>
+                                        @if($template['hash_name'] != "" || $template['hash_name'] != NULL)
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="fas fa-file"></i>
+                                            </div>
+                                            <div class="col-11">
+                                                Nama File : {{$template["original_name"]}}
+                                                <br>
+                                                Tanggal Update : {{Carbon\Carbon::parse($template["datetime"])->isoFormat('D MMMM Y')}}
+                                                <br>
+                                                <a href="{{route('file_preview', [$template['id'], $template['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('file_download', [$template['id'], $template['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            </div>
                                         </div>
-                                    </div> -->
+                                        @else
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="fas fa-file"></i>
+                                            </div>
+                                            <div class="col-11">
+                                                Nama File : -
+                                                <br>
+                                                Tanggal Update : -
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
                                 </div>
 
                             </form>

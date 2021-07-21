@@ -111,7 +111,7 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column pb-5" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-header">MENU</li>
                         <li class="nav-item">
                             <a href="{{route('admin_home')}}" class="nav-link @if(Request::segment(1) == 'home' || Request::segment(2) == 'home') {{'active'}} @endif">
@@ -247,7 +247,14 @@
                                 </p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="{{route('admin_template_dokumen')}}" class="nav-link @if(Request::segment(1) == 'template_dokumen' || Request::segment(2) == 'template_dokumen'){{'active'}}@endif">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Template Dokumen
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

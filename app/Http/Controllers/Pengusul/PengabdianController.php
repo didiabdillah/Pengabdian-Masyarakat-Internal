@@ -252,11 +252,13 @@ class PengabdianController extends Controller
             // HALAMAN 3
         } elseif ($page == 3) {
             $dokumen_info = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+            $template = get_where_local_db_json("template_dokumen.json", "name", __('template.dokumen_usulan'));
 
             $view_data = [
                 'id' => $id,
                 'page' => $page,
                 'dokumen_info' => $dokumen_info,
+                'template' => $template,
             ];
 
             return view('pengusul.pengabdian.usulan_3', $view_data);
@@ -309,11 +311,13 @@ class PengabdianController extends Controller
             // HALAMAN 5
         } elseif ($page == 5) {
             $dokumen_info = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
+            $template = get_where_local_db_json("template_dokumen.json", "name", __('template.dokumen_rab'));
 
             $view_data = [
                 'id' => $id,
                 'page' => $page,
                 'dokumen_info' => $dokumen_info,
+                'template' => $template,
             ];
 
             return view('pengusul.pengabdian.usulan_5', $view_data);

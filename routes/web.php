@@ -157,6 +157,16 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::patch('/edit/{id}', 'Admin\PengusulController@update')->name('admin_pengusul_update');
                     Route::delete('/destroy/{id}', 'Admin\PengusulController@destroy')->name('admin_pengusul_destroy');
                 });
+
+                //Template Dokumen
+                Route::group(['prefix' => 'template_dokumen'], function () {
+                    Route::get('/', 'Admin\TemplateDokumenController@index')->name('admin_template_dokumen');
+                    // Route::post('/store', 'Admin\TemplateDokumenController@store')->name('admin_template_dokumen_store');
+                    // Route::get('/insert', 'Admin\TemplateDokumenController@insert')->name('admin_template_dokumen_insert');
+                    Route::get('/{id}/edit', 'Admin\TemplateDokumenController@edit')->name('admin_template_dokumen_edit');
+                    Route::patch('/{id}/update', 'Admin\TemplateDokumenController@update')->name('admin_template_dokumen_update');
+                    Route::patch('/{id}/destroy', 'Admin\TemplateDokumenController@destroy')->name('admin_template_dokumen_destroy');
+                });
             });
         });
         // END ADMIN
