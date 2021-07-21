@@ -412,13 +412,73 @@ class PengabdianController extends Controller
     {
         $nidn = $request->input('nidn');
         $result = NULL;
+        $anggota1 = NULL;
+        $anggota2 = NULL;
 
         if ($nidn) {
-            $result = User::where('user_nidn', $nidn)
+            // Get User Data
+            $user = User::where('user_nidn', $nidn)
+                ->where('user_role', 'pengusul')
                 ->first();
+
+            if ($user) {
+                // Get User ID
+                $user_id = $user->user_id;
+
+                $result = $user;
+
+                // Cek Apakah User Sudah Terdaftar Di Usulan Ini
+                $query = Anggota_pengabdian::where([['anggota_pengabdian_pengabdian_id', $id], ['anggota_pengabdian_user_id', $user_id]])->count();
+                if ($query > 0) {
+                    $result = NULL;
+
+                    //Flash Message
+                    flash_alert(
+                        __('alert.icon_error'), //Icon
+                        'Gagal', //Alert Message 
+                        'Nama Pengusul Sudah Masuk Usulan Kelompok Ini' //Sub Alert Message
+                    );
+                }
+
+                // Cek Apakah User Sudah Terdaftar Di Usulan Lain
+                // $query = Anggota_pengabdian::join('usulan_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
+                //     ->where([['anggota_pengabdian.anggota_pengabdian_pengabdian_id', $id], ['usulan_pengabdian.usulan_pengabdian_tahun', date('Y')]])
+                //     ->where('usulan_pengabdian.usulan_pengabdian_id', '!=', $id)
+                //     ->count();
+
+                // if ($query > 0) {
+                //     $result = NULL;
+
+                //     //Flash Message
+                //     flash_alert(
+                //         __('alert.icon_error'), //Icon
+                //         'Gagal', //Alert Message 
+                //         'Nama Pengusul Sudah Masuk Usulan Kelompok Lain' //Sub Alert Message
+                //     );
+                // }
+
+                $anggota1 = Anggota_pengabdian::where([['anggota_pengabdian_pengabdian_id', $id], ['anggota_pengabdian_role', 'pengusul'], ['anggota_pengabdian_role_position', 1]])->first();
+                $anggota2 = Anggota_pengabdian::where([['anggota_pengabdian_pengabdian_id', $id], ['anggota_pengabdian_role', 'pengusul'], ['anggota_pengabdian_role_position', 2]])->first();
+            } else {
+                $result = NULL;
+
+                //Flash Message
+                flash_alert(
+                    __('alert.icon_error'), //Icon
+                    'Gagal', //Alert Message 
+                    'Nama Pengusul Tidak Ditemukan' //Sub Alert Message
+                );
+            }
         }
 
-        return view('pengusul.pengabdian.tambah_anggota', ['id' => $id, 'result' => $result]);
+        $view_data = [
+            'id' => $id,
+            'result' => $result,
+            'anggota1' => $anggota1,
+            'anggota2' => $anggota2,
+        ];
+
+        return view('pengusul.pengabdian.tambah_anggota', $view_data);
     }
 
     public function store_anggota(Request $request, $id)

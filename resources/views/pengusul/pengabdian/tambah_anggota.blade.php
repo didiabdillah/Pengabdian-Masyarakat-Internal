@@ -4,14 +4,20 @@
 
 @section('page')
 
+@if($errors->count() == 0 && Session::get('icon') && Session::get('alert') && Session::get('subalert') && $result == NULL)
 @include('layout.flash_alert')
+@php
+Session::forget('icon');
+Session::forget('alert');
+Session::forget('subalert');
+@endphp
+@endif
 
 @push('style')
 <!-- BS Stepper -->
 <link rel="stylesheet" href="{{URL::asset('assets/css/bs-stepper/css/bs-stepper.min.css')}}">
 
 @endpush
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -209,9 +215,12 @@
                                         <div class="col-md-10">
                                             <select class="form-control select2 @error('peran') is-invalid @enderror" data-placeholder="Pilih Lama Kegiatan" style="width: 100%;" name="peran">
                                                 <option value="">--Peran--</option>
+                                                @if($result)
                                                 @for($i = 1; $i<=2; $i++) <!-- -->
                                                     <option value="anggota{{$i}}" @if(old('peran')=="anggota" . $i ){{'selected'}}@endif>Anggota Pengusul {{$i}}</option>
+
                                                     @endfor
+                                                    @endif
                                             </select>
                                             @error('peran')
                                             <div class="invalid-feedback">
