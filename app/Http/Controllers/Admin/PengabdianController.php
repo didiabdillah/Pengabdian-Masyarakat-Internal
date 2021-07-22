@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\Usulan_pengabdian;
+use App\Models\Penilaian_usulan;
+use App\Models\Anggota_pengabdian;
 
 class PengabdianController extends Controller
 {
@@ -27,6 +29,45 @@ class PengabdianController extends Controller
 
     public function konfirmasi($id)
     {
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', 'ketua')
+            ->first();
+
+        $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
+            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->first();
+
+        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', '!=', 'ketua')
+            ->orderBy('anggota_pengabdian_role', 'asc')
+            ->get();
+
+        $nilai = Penilaian_usulan::where('penilaian_usulan_pengabdian_id', $id)->first();
+
+        $keterangan_nilai = [
+            "0" => "-",
+            "1" => "Sangat Buruk",
+            "2" => "Buruk Sekali",
+            "3" => "Buruk",
+            "4" => "Baik",
+            "5" => "Baik Sekali",
+            "6" => "Istimewa",
+        ];
+
+        $total_nilai = [
+            "1" => ($nilai) ? $nilai->penilaian_usulan_nilai_1 * 10 : 0,
+            "2" => ($nilai) ? $nilai->penilaian_usulan_nilai_2 * 15 : 0,
+            "3" => ($nilai) ? $nilai->penilaian_usulan_nilai_3 * 20 : 0,
+            "4" => ($nilai) ? $nilai->penilaian_usulan_nilai_4 * 25 : 0,
+            "5" => ($nilai) ? $nilai->penilaian_usulan_nilai_5 * 10 : 0,
+            "6" => ($nilai) ? $nilai->penilaian_usulan_nilai_6 * 20 : 0,
+        ];
+
         $konfirmasi = Usulan_pengabdian::select('usulan_pengabdian_status as status')
             ->where('usulan_pengabdian_id', $id)
             ->first();
@@ -34,6 +75,12 @@ class PengabdianController extends Controller
         $view_data = [
             'id' => $id,
             'konfirmasi' => $konfirmasi,
+            'anggota' => $anggota,
+            'usulan' => $usulan,
+            'ketua' => $ketua,
+            'nilai' => $nilai,
+            'ket_nilai' => $keterangan_nilai,
+            'total_nilai' => $total_nilai,
         ];
 
         return view('admin.pengabdian.konfirmasi', $view_data);
