@@ -6,10 +6,38 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\Logbook;
+use App\Models\Usulan_pengabdian;
+
 class LogbookController extends Controller
 {
     public function index()
     {
-        return view('admin.logbook.index');
+        $pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
+            ->where('usulan_pengabdian_status', 'diterima')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('usulan_pengabdian_tahun', 'asc')
+            ->get();
+
+        $view_data = [
+            'pengabdian' => $pengabdian,
+        ];
+
+        return view('admin.logbook.index', $view_data);
+    }
+
+    // ================================================================================================
+
+    // Logbook Detail
+    public function logbook_index($pengabdian_id)
+    {
+        $logbook = Logbook::where('logbook_pengabdian_id', $pengabdian_id)->orderBy('created_at', 'asc')->get();
+
+        $view_data = [
+            'logbook' => $logbook,
+            'pengabdian_id' => $pengabdian_id
+        ];
+
+        return view('admin.logbook.logbook_index', $view_data);
     }
 }

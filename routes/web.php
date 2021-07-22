@@ -117,7 +117,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Logbook
                 Route::group(['prefix' => 'logbook'], function () {
                     Route::get('/', 'Admin\LogbookController@index')->name('admin_logbook');
-                    // Route::get('/detail', 'Admin\LogbookController@detail')->name('admin_logbook_detail');
+                    Route::get('/{pengabdian_id}/detail', 'Admin\LogbookController@logbook_index')->name('admin_logbook_detail');
                 });
 
                 //Laporan Kemajuan
