@@ -277,8 +277,12 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Logbook
                 Route::group(['prefix' => 'logbook'], function () {
                     Route::get('/', 'Pengusul\LogbookController@index')->name('pengusul_logbook');
-                    // Route::get('/detail', 'Pengusul\LogbookController@detail')->name('pengusul_logbook_detail');
-                    // Route::get('/insert', 'Pengusul\LogbookController@insert')->name('pengusul_logbook_insert');
+                    Route::get('/{pengabdian_id}/detail', 'Pengusul\LogbookController@logbook_index')->name('pengusul_logbook_detail');
+                    Route::get('/{pengabdian_id}/insert', 'Pengusul\LogbookController@logbook_insert')->name('pengusul_logbook_detail_insert');
+                    Route::post('/{pengabdian_id}/insert', 'Pengusul\LogbookController@logbook_store')->name('pengusul_logbook_detail_store');
+                    Route::get('/{pengabdian_id}/{id}/edit', 'Pengusul\LogbookController@logbook_edit')->name('pengusul_logbook_detail_edit');
+                    Route::patch('/{pengabdian_id}/{id}/edit', 'Pengusul\LogbookController@logbook_update')->name('pengusul_logbook_detail_update');
+                    Route::delete('/{pengabdian_id}/{id}/destroy', 'Pengusul\LogbookController@logbook_destroy')->name('pengusul_logbook_detail_destroy');
                 });
 
                 //Biodata

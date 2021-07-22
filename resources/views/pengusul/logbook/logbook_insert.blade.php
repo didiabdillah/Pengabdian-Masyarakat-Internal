@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Jurusan')
+@section('title', 'Tambah Logobook')
 
 @section('page')
 
@@ -18,17 +18,22 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Jurusan</h3>
+                        <h3 class="card-title">Tambah Logbook</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('admin_jurusan_store')}}" method="POST">
+                    <form action="{{route('pengusul_logbook_detail_store', $pengabdian_id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Nama Jurusan</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Jurusan" value="{{old('name')}}">
-                                @error('name')
+                                <label for="file">File Logbook</label>
+                                <div class="input-group  @error('file') is-invalid @enderror">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file">
+                                        <label class="custom-file-label" id="file_label" for="file">Upload File Disini</label>
+                                    </div>
+                                </div>
+                                @error('file')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -36,7 +41,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('admin_jurusan')}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
+                                <a href="{{route('pengusul_logbook_detail', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Tambah</button>
                             </div>
                         </div>
@@ -54,5 +59,12 @@
 @endsection
 
 @push('plugin')
+<!-- bs-custom-file-input -->
+<script src="{{URL::asset('assets/js/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 
+<script type="text/javascript">
+    $(function() {
+        bsCustomFileInput.init();
+    });
+</script>
 @endpush

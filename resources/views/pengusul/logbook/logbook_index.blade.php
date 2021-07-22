@@ -22,17 +22,15 @@
 
         </div>
 
-        {{--
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Logbook</a>
+                    <a href="{{route('pengusul_logbook_detail_insert', $pengabdian_id)}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Logbook</a>
                 </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->
         </div>
-        --}}
 
         <!--Content -->
         <section class="content">
@@ -40,7 +38,7 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-
+                        <a href="{{route('pengusul_logbook')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -52,32 +50,51 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Tahun</th>
+                                    <th>Dokumen Logbook</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($pengabdian as $data)
+                                @foreach($logbook as $data)
                                 <tr>
                                     <td>
                                         <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-                                        <h5>{{$data->usulan_pengabdian_judul}}</h5>
-                                    </td>
-                                    <td>
-                                        <h5>{{$data->usulan_pengabdian_tahun}}</h5>
-                                    </td>
-                                    <td>
-                                        <div class="card-body">
-                                            <a class="btn btn-primary btn-sm" href="{{route('pengusul_logbook_detail', $data->usulan_pengabdian_id)}}">
-                                                <i class="fas fa-folder">
-                                                </i>
-
-                                                Kelola Logbook
-                                            </a>
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="fas fa-file-alt fa-2x"></i>
+                                            </div>
+                                            <div class="col-11">
+                                                Nama File : {{$data->logbook_original_name}}
+                                                <br>
+                                                Tanggal Unggah : {{Carbon\Carbon::parse($data->logbook_date)->isoFormat('D MMMM Y')}}
+                                                <br>
+                                                <a href="{{route('file_preview', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('file_download', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            </div>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <form action="{{route('pengusul_logbook_detail_destroy', [$pengabdian_id, $data->logbook_id])}}" method="POST" class="form-inline form-horizontal">
+                                            @csrf
+                                            @method('delete')
+                                            <div class="card-body">
+                                                <a class="btn btn-primary btn-sm" href="{{route('pengusul_logbook_detail_edit', [$pengabdian_id, $data->logbook_id])}}">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+
+                                                    Edit
+                                                </a>
+
+                                                <button class="btn btn-danger btn-sm btn-remove" type="submit">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

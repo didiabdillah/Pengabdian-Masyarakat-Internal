@@ -13,6 +13,7 @@ use App\Models\Usulan_pengabdian;
 use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
+use App\Models\Logbook;
 
 class FileController extends Controller
 {
@@ -73,6 +74,16 @@ class FileController extends Controller
             $file_extension = $file_fetch["extension"];
 
             $file_original_name = $file_fetch["original_name"];
+        } elseif ($file_category == "logbook") {
+            $file_fetch = Logbook::where('logbook_id', $id)
+                ->where('logbook_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/logbook/" . $file_fetch->logbook_hash_name);
+
+            $file_extension = $file_fetch->logbook_extension;
+
+            $file_original_name = $file_fetch->logbook_original_name;
         }
 
         if ($file_fetch) {
@@ -136,6 +147,14 @@ class FileController extends Controller
             $file_extension = $file_fetch["extension"];
 
             $file_original_name = $file_fetch["original_name"];
+        } elseif ($file_category == "logbook") {
+            $file_fetch = Logbook::where('logbook_id', $id)
+                ->where('logbook_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/logbook/" . $file_fetch->logbook_hash_name);
+
+            $file_extension = $file_fetch->logbook_extension;
         }
 
         if ($file_fetch) {
