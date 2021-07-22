@@ -9,6 +9,8 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
+    @include('layout.suspend_banner')
+
     <!-- Overview content -->
     <section class="content">
 
