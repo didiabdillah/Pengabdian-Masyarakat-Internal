@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\Usulan_pengabdian;
 use App\Models\Logbook;
+use App\Models\User;
 
 class LogbookController extends Controller
 {
@@ -24,7 +25,10 @@ class LogbookController extends Controller
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 
+        $is_suspend = User::find(Session::get('user_id'))->user_ban;
+
         $view_data = [
+            'is_suspend' => $is_suspend,
             'pengabdian' => $pengabdian,
         ];
 
@@ -38,9 +42,10 @@ class LogbookController extends Controller
     {
         $logbook = Logbook::where('logbook_pengabdian_id', $pengabdian_id)->orderBy('created_at', 'asc')->get();
 
+
         $view_data = [
             'logbook' => $logbook,
-            'pengabdian_id' => $pengabdian_id
+            'pengabdian_id' => $pengabdian_id,
         ];
 
         return view('pengusul.logbook.logbook_index', $view_data);

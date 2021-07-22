@@ -3,13 +3,12 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cookie;
 
 use App\Models\User;
 
 use Closure;
 
-class Is_Login
+class Is_Suspend
 {
     /**
      * Handle an incoming request.
@@ -20,17 +19,14 @@ class Is_Login
      */
     public function handle($request, Closure $next)
     {
-        if (Session::get('user_id') && Session::get('user_role') && Session::get('user_email') && Session::get('user_name')) {
+        if (Session::get('user_id')) {
             $user = User::where('user_id', Session::get('user_id'))
-                ->where('user_email', Session::get('user_email'))
-                ->where('user_role', Session::get('user_role'))
-                ->where('user_name', Session::get('user_name'))
                 ->first();
 
-            if ($user) {
+            if ($user->user_ban == false) {
                 return $next($request);
             } else {
-                return redirect()->route('logout');
+                return redirect()->route('suspend');
             }
         } else {
             return redirect()->route('logout');

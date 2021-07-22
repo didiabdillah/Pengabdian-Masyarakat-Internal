@@ -137,34 +137,36 @@
                                 @enderror
                             </div>
 
+                            {{--
                             <div class="form-group clearfix">
                                 <div class="icheck-success">
                                     <input type="checkbox" id="checkboxPrimary1" name="active" @if($user->user_active == true){{"checked"}}@endif>
-                                    <label for="checkboxPrimary1">
-                                        Active
-                                    </label>
-                                </div>
-                                <div class="icheck-danger">
-                                    <input type="checkbox" id="checkboxPrimary2" name="suspend" @if($user->user_ban == true){{"checked"}}@endif>
-                                    <label for="checkboxPrimary2">
-                                        Suspend
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class=" card-footer">
-                                <a href="{{route('admin_pengusul')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
-                            </div>
+                            <label for="checkboxPrimary1">
+                                Active
+                            </label>
                         </div>
-                        <!-- /.card-body -->
-                    </form>
+                        <div class="icheck-danger">
+                            <input type="checkbox" id="checkboxPrimary2" name="suspend" @if($user->user_ban == true){{"checked"}}@endif>
+                            <label for="checkboxPrimary2">
+                                Suspend
+                            </label>
+                        </div>
                 </div>
-                <!-- /.card -->
-            </div>
-        </section>
+                --}}
 
-    </section>
+                <div class=" card-footer">
+                    <a href="{{route('admin_pengusul')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            </form>
+</div>
+<!-- /.card -->
+</div>
+</section>
+
+</section>
 
 </div>
 @endsection

@@ -44,59 +44,37 @@ class AuthController extends Controller
 
         //Check Email Account Available
         if ($user) {
-            if ($user->user_active == true) {
-                if ($user->user_ban == false) {
-                    //Check Email Match
-                    if ($email == $user->user_email) {
-                        //Check Password Match
-                        if (Hash::check($password, $user->user_password)) {
-                            //Create Session
-                            $data = [
-                                'user_id' => $user->user_id,
-                                'user_name' => $user->user_name,
-                                'user_email' => $user->user_email,
-                                'user_role' => $user->user_role,
-                                'user_image' => $user->user_image
-                            ];
-                            $request->session()->put($data);
+            //Check Email Match
+            if ($email == $user->user_email) {
+                //Check Password Match
+                if (Hash::check($password, $user->user_password)) {
+                    //Create Session
+                    $data = [
+                        'user_id' => $user->user_id,
+                        'user_name' => $user->user_name,
+                        'user_email' => $user->user_email,
+                        'user_role' => $user->user_role,
+                        'user_image' => $user->user_image
+                    ];
+                    $request->session()->put($data);
 
-                            // Check Redirect Page
-                            if ($user->user_role == "admin") {
-                                //Goto Admin Home
-                                return redirect()->route('admin_home');
-                            } else if ($user->user_role == "reviewer") {
-                                //Goto Reviewer Home
-                                return redirect()->route('reviewer_home');
-                            } else if ($user->user_role == "pengusul") {
-                                //Goto Pengusul Home
-                                return redirect()->route('pengusul_home');
-                            }
-                        } else {
-                            // Flash Message
-                            flash_alert(
-                                __('alert.icon_error'), //Icon
-                                'Login Gagal', //Alert Message 
-                                'Password Salah' //Sub Alert Message
-                            );
-
-                            return redirect()->back();
-                        }
-                    } else {
-                        //Flash Message
-                        flash_alert(
-                            __('alert.icon_error'), //Icon
-                            'Login Gagal', //Alert Message 
-                            'Email Salah' //Sub Alert Message
-                        );
-
-                        return redirect()->back();
+                    // Check Redirect Page
+                    if ($user->user_role == "admin") {
+                        //Goto Admin Home
+                        return redirect()->route('admin_home');
+                    } else if ($user->user_role == "reviewer") {
+                        //Goto Reviewer Home
+                        return redirect()->route('reviewer_home');
+                    } else if ($user->user_role == "pengusul") {
+                        //Goto Pengusul Home
+                        return redirect()->route('pengusul_home');
                     }
                 } else {
-                    //Flash Message
+                    // Flash Message
                     flash_alert(
                         __('alert.icon_error'), //Icon
                         'Login Gagal', //Alert Message 
-                        'Akun Terkunci / Suspend' //Sub Alert Message
+                        'Password Salah' //Sub Alert Message
                     );
 
                     return redirect()->back();
@@ -106,7 +84,7 @@ class AuthController extends Controller
                 flash_alert(
                     __('alert.icon_error'), //Icon
                     'Login Gagal', //Alert Message 
-                    'Akun Tidak Aktif' //Sub Alert Message
+                    'Email Salah' //Sub Alert Message
                 );
 
                 return redirect()->back();

@@ -71,12 +71,21 @@
                                     </td>
                                     <td>
                                         <div class="card-body">
+                                            @if($is_suspend)
+                                            <a class="btn btn-info btn-sm" style="pointer-events: none; cursor: default;">
+                                                <i class="fas fa-folder">
+                                                </i>
+
+                                                Kelola Logbook
+                                            </a>
+                                            @else
                                             <a class="btn btn-primary btn-sm" href="{{route('pengusul_logbook_detail', $data->usulan_pengabdian_id)}}">
                                                 <i class="fas fa-folder">
                                                 </i>
 
                                                 Kelola Logbook
                                             </a>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

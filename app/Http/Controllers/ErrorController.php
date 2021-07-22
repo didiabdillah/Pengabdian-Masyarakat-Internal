@@ -23,4 +23,9 @@ class ErrorController extends Controller
     {
         return view('error.coming_soon');
     }
+
+    public function suspend()
+    {
+        return view('error.suspend');
+    }
 }

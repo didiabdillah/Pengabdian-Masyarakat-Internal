@@ -4,15 +4,15 @@
         "name": "tambah_usulan_pengabdian",
         "start_year": "2021",
         "end_year": "2022",
-        "start_time": "2021-07-19 18:55:00",
-        "end_time": "2021-07-22 18:55:00"
+        "start_time": "2021-07-20 18:55:00",
+        "end_time": "2021-07-27 18:55:00"
     },
     {
         "id": "60f5688fa32ed",
         "name": "nilai_usulan_pengabdian",
         "start_year": "2021",
         "end_year": "2021",
-        "start_time": "2021-07-18 18:55:00",
-        "end_time": "2021-07-19 22:55:00"
+        "start_time": "2021-07-19 18:55:00",
+        "end_time": "2021-07-26 22:55:00"
     }
 ]

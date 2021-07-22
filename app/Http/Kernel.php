@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'prevent_Back_Button' => \App\Http\Middleware\Prevent_Back_Button::class,
         'is_Unlock_Tambah_Usulan' => \App\Http\Middleware\Is_Unlock_Tambah_Usulan::class,
         'is_Unlock_Nilai_Usulan' => \App\Http\Middleware\Is_Unlock_Nilai_Usulan::class,
+        'is_Suspend' => \App\Http\Middleware\Is_Suspend::class,
     ];
 }

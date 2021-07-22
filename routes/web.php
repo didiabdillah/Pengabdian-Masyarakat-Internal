@@ -139,6 +139,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                         Route::get('/edit/{id}', 'Admin\ReviewerController@edit')->name('admin_reviewer_edit');
                         Route::patch('/edit/{id}', 'Admin\ReviewerController@update')->name('admin_reviewer_update');
                         Route::delete('/destroy/{id}', 'Admin\ReviewerController@destroy')->name('admin_reviewer_destroy');
+                        Route::put('/suspend/{id}', 'Admin\ReviewerController@suspend')->name('admin_reviewer_suspend');
                     });
 
                     Route::group(['prefix' => 'plotting'], function () {
@@ -156,6 +157,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::get('/edit/{id}', 'Admin\PengusulController@edit')->name('admin_pengusul_edit');
                     Route::patch('/edit/{id}', 'Admin\PengusulController@update')->name('admin_pengusul_update');
                     Route::delete('/destroy/{id}', 'Admin\PengusulController@destroy')->name('admin_pengusul_destroy');
+                    Route::put('/suspend/{id}', 'Admin\PengusulController@suspend')->name('admin_pengusul_suspend');
                 });
 
                 //Template Dokumen
@@ -222,7 +224,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
                     Route::delete('/{id}/hapus', 'Pengusul\PengabdianController@hapus')->name('pengusul_pengabdian_hapus');
 
-                    Route::group(['middleware' => ['is_Unlock_Tambah_Usulan']], function () {
+                    Route::group(['middleware' => ['is_Unlock_Tambah_Usulan', 'is_Suspend']], function () {
                         Route::get('/tambah', 'Pengusul\PengabdianController@tambah')->name('pengusul_pengabdian_tambah');
                         Route::post('/tambah', 'Pengusul\PengabdianController@store')->name('pengusul_pengabdian_store');
                         Route::patch('/usulan/1/{id}', 'Pengusul\PengabdianController@update')->name('pengusul_pengabdian_update');
@@ -249,9 +251,6 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                         Route::post('/usulan/mitra/get/kecamatan', 'Pengusul\PengabdianController@get_kecamatan')->name('pengusul_pengabdian_get_kecamatan');
                         Route::post('/usulan/mitra/get/desa', 'Pengusul\PengabdianController@get_desa')->name('pengusul_pengabdian_get_desa');
 
-                        Route::get('usulan/{id}/download/{file_name}/{file_category}', 'Pengusul\PengabdianController@file_download')->name('pengusul_pengabdian_file_download');
-                        Route::get('usulan/{id}/preview/{file_name}/{file_category}', 'Pengusul\PengabdianController@file_preview')->name('pengusul_pengabdian_file_preview');
-
                         Route::get('/usulan/{id}/luaran/{luaran_id}/edit', 'Pengusul\PengabdianController@edit_luaran')->name('pengusul_pengabdian_edit_luaran');
                         Route::patch('/usulan/{id}/luaran/{luaran_id}/edit', 'Pengusul\PengabdianController@update_luaran')->name('pengusul_pengabdian_update_luaran');
                         Route::delete('/usulan/{id}/luaran/{luaran_id}/delete', 'Pengusul\PengabdianController@destroy_luaran')->name('pengusul_pengabdian_destroy_luaran');
@@ -263,26 +262,35 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Laporan Kemajuan
                 Route::group(['prefix' => 'laporan_kemajuan'], function () {
                     Route::get('/', 'Pengusul\LaporanKemajuanController@index')->name('pengusul_laporan_kemajuan');
-                    Route::get('/insert', 'Pengusul\LaporanKemajuanController@insert')->name('pengusul_laporan_kemajuan_insert');
-                    Route::post('/store', 'Pengusul\LaporanKemajuanController@store')->name('pengusul_laporan_kemajuan_store');
+
+                    Route::group(['middleware' => ['is_Suspend']], function () {
+                        Route::get('/insert', 'Pengusul\LaporanKemajuanController@insert')->name('pengusul_laporan_kemajuan_insert');
+                        Route::post('/store', 'Pengusul\LaporanKemajuanController@store')->name('pengusul_laporan_kemajuan_store');
+                    });
                 });
 
                 //Laporan Akhir
                 Route::group(['prefix' => 'laporan_akhir'], function () {
                     Route::get('/', 'Pengusul\LaporanAkhirController@index')->name('pengusul_laporan_akhir');
-                    // Route::get('/insert', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
-                    Route::patch('/update', 'Pengusul\LaporanAkhirController@update')->name('pengusul_laporan_akhir_upload_update');
+
+                    Route::group(['middleware' => ['is_Suspend']], function () {
+                        // Route::get('/insert', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
+                        Route::patch('/update', 'Pengusul\LaporanAkhirController@update')->name('pengusul_laporan_akhir_upload_update');
+                    });
                 });
 
                 //Logbook
                 Route::group(['prefix' => 'logbook'], function () {
                     Route::get('/', 'Pengusul\LogbookController@index')->name('pengusul_logbook');
-                    Route::get('/{pengabdian_id}/detail', 'Pengusul\LogbookController@logbook_index')->name('pengusul_logbook_detail');
-                    Route::get('/{pengabdian_id}/insert', 'Pengusul\LogbookController@logbook_insert')->name('pengusul_logbook_detail_insert');
-                    Route::post('/{pengabdian_id}/insert', 'Pengusul\LogbookController@logbook_store')->name('pengusul_logbook_detail_store');
-                    Route::get('/{pengabdian_id}/{id}/edit', 'Pengusul\LogbookController@logbook_edit')->name('pengusul_logbook_detail_edit');
-                    Route::patch('/{pengabdian_id}/{id}/edit', 'Pengusul\LogbookController@logbook_update')->name('pengusul_logbook_detail_update');
-                    Route::delete('/{pengabdian_id}/{id}/destroy', 'Pengusul\LogbookController@logbook_destroy')->name('pengusul_logbook_detail_destroy');
+
+                    Route::group(['middleware' => ['is_Suspend']], function () {
+                        Route::get('/{pengabdian_id}/detail', 'Pengusul\LogbookController@logbook_index')->name('pengusul_logbook_detail');
+                        Route::get('/{pengabdian_id}/insert', 'Pengusul\LogbookController@logbook_insert')->name('pengusul_logbook_detail_insert');
+                        Route::post('/{pengabdian_id}/insert', 'Pengusul\LogbookController@logbook_store')->name('pengusul_logbook_detail_store');
+                        Route::get('/{pengabdian_id}/{id}/edit', 'Pengusul\LogbookController@logbook_edit')->name('pengusul_logbook_detail_edit');
+                        Route::patch('/{pengabdian_id}/{id}/edit', 'Pengusul\LogbookController@logbook_update')->name('pengusul_logbook_detail_update');
+                        Route::delete('/{pengabdian_id}/{id}/destroy', 'Pengusul\LogbookController@logbook_destroy')->name('pengusul_logbook_detail_destroy');
+                    });
                 });
 
                 //Biodata
@@ -313,6 +321,9 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
         //Coming Soon
         Route::get('/comingsoon', 'ErrorController@coming_soon')->name('coming_soon');
+
+        //Suspend
+        Route::get('/suspend', 'ErrorController@suspend')->name('suspend');
         // END ERROR PAGE
 
         // FILE

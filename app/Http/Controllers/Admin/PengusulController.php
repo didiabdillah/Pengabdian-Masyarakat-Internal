@@ -173,8 +173,6 @@ class PengusulController extends Controller
         $name = htmlspecialchars($request->name);
         $email = htmlspecialchars($request->email);
         $password = (htmlspecialchars($request->password) != NULL) ? Hash::make($request->password) : $user->user_password;
-        $active = ($request->active == 'on') ? true : false;
-        $suspend = ($request->suspend == 'on') ? true : false;
 
         //check is NIDN exist in DB
         if (User::where('user_nidn', $nidn)->where('user_id', '!=', $user->user_id)->count() > 0) {
@@ -205,8 +203,6 @@ class PengusulController extends Controller
             'user_password' => $password,
             'user_name' => $name,
             'user_email' => $email,
-            'user_active' => $active,
-            'user_ban' => $suspend,
         ];
 
         //Update Data
@@ -253,6 +249,30 @@ class PengusulController extends Controller
             __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
             'Pengusul Terhapus' //Sub Alert Message
+        );
+
+        return redirect()->route('admin_pengusul');
+    }
+
+    public function suspend(Request $request, $id)
+    {
+        $user = User::where('user_id', $id)->first();
+
+        $suspend = ($user->user_ban == false) ? true : false;
+
+        $data = [
+            'user_ban' => $suspend,
+        ];
+
+        //Update Data
+        User::where('user_id', $id)
+            ->update($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Status Pengusul Diperbaharui' //Sub Alert Message
         );
 
         return redirect()->route('admin_pengusul');

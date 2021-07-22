@@ -39,10 +39,13 @@ class PengabdianController extends Controller
             }
         }
 
+        $is_suspend = User::find(Session::get('user_id'))->user_ban;
+
         $view_data = [
             'usulan_pengabdian' => $usulan_pengabdian,
             'is_tambah_unlock' => $is_tambah_unlock,
             'tambah_unlock' => $tambah_unlock,
+            'is_suspend' => $is_suspend,
         ];
 
         return view('pengusul.pengabdian.index', $view_data);

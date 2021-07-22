@@ -55,7 +55,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
-                                    <th>Status</th>
+                                    <!-- <th>Status</th> -->
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -81,22 +81,41 @@
                                     <td>
                                         <h5>{{$data->user_role}}</h5>
                                     </td>
+
+                                    {{--
                                     <td>
-                                        <h5>
-                                            @if($data->user_active == true)
-                                            <span class="badge badge-success">Aktif</span>
-                                            @else
-                                            <span class="badge badge-warning">Tidak Aktif</span>
-                                            @endif
-                                        </h5>
+                                        <form action="{{route('admin_reviewer_suspend', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
+                                    @csrf
+                                    @method('put')
+                                    <div class="card-body">
                                         <h5>
                                             @if($data->user_ban == true)
                                             <span class="badge badge-danger">Suspended</span>
                                             @else
-                                            <span class="badge badge-primary">Not Suspend</span>
+                                            <span class="badge badge-success">Active</span>
                                             @endif
                                         </h5>
+
+                                        @if($data->user_ban == true)
+                                        <button class="btn btn-success btn-sm btn-suspend" type="submit">
+                                            <i class="fas fa-unlock">
+                                            </i>
+
+                                            Unsuspend
+                                        </button>
+                                        @else
+                                        <button class="btn btn-danger btn-sm btn-suspend" type="submit">
+                                            <i class="fas fa-lock">
+                                            </i>
+
+                                            Suspend
+                                        </button>
+                                        @endif
+                                    </div>
+                                    </form>
                                     </td>
+                                    --}}
+
                                     <td>
                                         <form action="{{route('admin_reviewer_destroy', $data->user_id)}}" method="POST" class="form-inline form-horizontal">
                                             @csrf
@@ -151,6 +170,24 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+    $('.btn-suspend').on('click', function(e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal.fire({
+            title: 'Yakin?',
+            text: "Apakah Anda Yakin!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Sure!',
+            cancelButtonText: 'Cancel'
         }).then((result) => {
             if (result.isConfirmed) {
                 form.submit();

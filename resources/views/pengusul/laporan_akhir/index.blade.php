@@ -104,7 +104,11 @@
                                     </td>
 
                                     <td>
+                                        @if($is_suspend)
+                                        <button type="button" style="pointer-events: none; cursor: default;" class="btn btn-info upload-laporan-akhir"><b><i class="fas fa-upload"></i> Upload</b></button>
+                                        @else
                                         <button type="button" data-toggle="modal" data-id="{{$data->usulan_pengabdian_id}}" data-target="#modal-default" class="btn btn-primary upload-laporan-akhir"><b><i class="fas fa-upload"></i> Upload</b></button>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -119,6 +123,7 @@
 </div>
 <!-- /.content -->
 
+@if($is_suspend == false)
 <!-- Upload Laporan Akhir Modal -->
 <div class="modal fade " id="modal-default">
     <div class="modal-dialog">
@@ -162,6 +167,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+@endif
 @endsection
 
 @push('plugin')

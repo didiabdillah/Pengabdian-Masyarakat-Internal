@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\Laporan_akhir;
 use App\Models\Usulan_pengabdian;
+use App\Models\User;
 
 class LaporanAkhirController extends Controller
 {
@@ -24,7 +25,10 @@ class LaporanAkhirController extends Controller
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 
+        $is_suspend = User::find(Session::get('user_id'))->user_ban;
+
         $view_data = [
+            'is_suspend' => $is_suspend,
             'laporan_akhir' => $laporan_akhir,
         ];
 

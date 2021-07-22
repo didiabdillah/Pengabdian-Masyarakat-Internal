@@ -43,7 +43,11 @@
             </div>
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
+                    @if($is_suspend)
+                    <a style="pointer-events: none; cursor: default;" class="btn btn-info btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Usulan Pengabdian</a>
+                    @else
                     <a href="{{route('pengusul_pengabdian_tambah')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Usulan Pengabdian</a>
+                    @endif
                 </div>
                 <!-- /.col -->
             </div>
@@ -121,12 +125,21 @@
                                                 @if($role == "ketua")
                                                 @if($is_tambah_unlock == true)
                                                 @if($usulan->usulan_pengabdian_status == "pending")
+                                                @if($is_suspend)
+                                                <a class="btn btn-info btn-sm ml-1" style="pointer-events: none; cursor: default;">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+
+                                                    Edit
+                                                </a>
+                                                @else
                                                 <a class="btn btn-primary btn-sm ml-1" href="{{route('pengusul_pengabdian_usulan', [1, $usulan->usulan_pengabdian_id])}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
                                                     Edit
                                                 </a>
+                                                @endif
                                                 @endif
                                                 @endif
 
