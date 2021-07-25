@@ -2,6 +2,10 @@
 
 @section('title', 'Tambah Logobook')
 
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
+
 @section('page')
 
 @include('layout.flash_alert')
@@ -18,22 +22,38 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Logbook</h3>
+                        <h3 class="card-title">Tambah Catatan Kegiatan</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form action="{{route('pengusul_logbook_detail_store', $pengabdian_id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="file">File Logbook</label>
-                                <div class="input-group  @error('file') is-invalid @enderror">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file">
-                                        <label class="custom-file-label" id="file_label" for="file">Upload File Disini</label>
-                                    </div>
+
+                            <div class="form-group ">
+                                <label for="tanggal">Tanggal Kegiatan</label>
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{old('tanggal')}}">
+                                @error('tanggal')
+                                <div class="invalid-feedback">
+                                    {{$message}}
                                 </div>
-                                @error('file')
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="uraian">Uraian Kegiatan</label>
+                                <textarea class="form-control @error('uraian') is-invalid @enderror" id="uraian" name="uraian" placeholder="Uraian kegiatan">{{old('uraian')}}</textarea>
+                                @error('uraian')
+                                <div class=" invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="presentase">Presentase Kegiatan (%)</label>
+                                <input type="text" class="form-control @error('presentase') is-invalid @enderror" id="presentase" name="presentase" placeholder="%" value="{{old('presentase')}}">
+                                @error('presentase')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -49,6 +69,7 @@
                     </form>
                 </div>
                 <!-- /.card -->
+
             </div>
         </section>
 

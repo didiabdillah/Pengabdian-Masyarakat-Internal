@@ -50,6 +50,11 @@ class Usulan_pengabdian extends Model
         return $this->hasOne('App\Models\Logbook', 'logbook_pengabdian_id');
     }
 
+    public function logbook_berkas()
+    {
+        return $this->hasOne('App\Models\Logbook_berkas', 'logbook_berkas_pengabdian_id');
+    }
+
     public function laporan_kemajuan()
     {
         return $this->hasOne('App\Models\Laporan_kemajuan', 'laporan_kemajuan_pengabdian_id');

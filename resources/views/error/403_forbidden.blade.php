@@ -16,6 +16,10 @@ $profile_layout = 'layout.layout_pengusul';
 
 @section('title', '403 Forbidden')
 
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
+
 @section('page')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

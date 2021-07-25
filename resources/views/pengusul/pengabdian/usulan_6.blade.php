@@ -2,6 +2,10 @@
 
 @section('title', 'Tambah Usulan Pengabdian')
 
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
+
 @section('page')
 
 @include('layout.flash_alert')
@@ -114,8 +118,8 @@
                                                             <br>
                                                             Tanggal Unggah : {{Carbon\Carbon::parse($doc1->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
                                                             <br>
-                                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            <a href="{{route('file_preview', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                            <a href="{{route('file_download', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                             @else
                                                             Nama File : -
                                                             <br>
@@ -137,8 +141,8 @@
                                                             <br>
                                                             Tanggal Unggah : {{Carbon\Carbon::parse($doc2->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
                                                             <br>
-                                                            <a href="{{route('pengusul_pengabdian_file_preview', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                            <a href="{{route('pengusul_pengabdian_file_download', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            <a href="{{route('file_preview', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                            <a href="{{route('file_download', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                             @else
                                                             Nama File : -
                                                             <br>

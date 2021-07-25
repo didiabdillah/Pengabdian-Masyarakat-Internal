@@ -2,6 +2,10 @@
 
 @section('title', 'Tambah Usulan Pengabdian')
 
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
+
 @section('page')
 
 @if($errors->count() == 0 && Session::get('icon') && Session::get('alert') && Session::get('subalert') && $result == NULL)

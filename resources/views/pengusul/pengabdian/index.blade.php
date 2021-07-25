@@ -2,14 +2,16 @@
 
 @section('title', 'Usulan Pengabdian')
 
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
+
 @section('page')
 
 @include('layout.flash_alert')
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-
-    @include('layout.suspend_banner')
 
     <!-- Overview content -->
     <section class="content">

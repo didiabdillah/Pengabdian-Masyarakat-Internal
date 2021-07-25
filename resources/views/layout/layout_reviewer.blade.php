@@ -36,8 +36,16 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
+
+        @php $is_suspended = App\Models\User::select('user_ban')->where('user_id', Session::get('user_id'))->first()->user_ban; @endphp
+        @if($is_suspended)
+        <div class="alert alert-danger main-header layout-navbar-fixed mt-5 pt-3" role="alert">
+            <b><i class="icon fas fa-ban"></i> Akun Anda Ditangguhkan!</b> Beberapa Akses Fitur Tidak Dapat Digunakan... Silahkan Menghubungi Admin Untuk Melakukan Pemulihan Akun
+        </div>
+        @endif
+
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light layout-navbar-fixed">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">

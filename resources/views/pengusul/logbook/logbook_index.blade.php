@@ -2,6 +2,10 @@
 
 @section('title', 'Logbook')
 
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
+
 @section('page')
 
 @include('layout.flash_alert')
@@ -50,7 +54,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Dokumen Logbook</th>
+                                    <th>Tanggal</th>
+                                    <th>Uraian Kegiatan</th>
+                                    <th>Presentase (%)</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -61,19 +67,13 @@
                                         <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <i class="fas fa-file-alt fa-2x"></i>
-                                            </div>
-                                            <div class="col-11">
-                                                Nama File : {{$data->logbook_original_name}}
-                                                <br>
-                                                Tanggal Unggah : {{Carbon\Carbon::parse($data->logbook_date)->isoFormat('D MMMM Y')}}
-                                                <br>
-                                                <a href="{{route('file_preview', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
-                                            </div>
-                                        </div>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
                                     </td>
                                     <td>
                                         <form action="{{route('pengusul_logbook_detail_destroy', [$pengabdian_id, $data->logbook_id])}}" method="POST" class="form-inline form-horizontal">
@@ -104,6 +104,113 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="example3" class="table table-bordered table-hover table-striped projects">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>File Berkas/Foto</th>
+                                    <th>Keterangan Berkas/Foto</th>
+                                    <th>Ukuran</th>
+                                    <th>Tanggal Unggah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($logbook as $data)
+                                <tr>
+                                    <td>
+                                        <h5>{{$loop->iteration}}</h5>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="fas fa-file-alt fa-2x"></i>
+                                            </div>
+                                            <div class="col-11">
+                                                Nama File : {{$data->logbook_original_name}}
+                                                <br>
+                                                Tanggal Unggah : {{Carbon\Carbon::parse($data->logbook_date)->isoFormat('D MMMM Y')}}
+                                                <br>
+                                                <a href="{{route('file_preview', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('file_download', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.card-body -->
+
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Berkas Kegiatan</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form action="{{route('pengusul_logbook_detail_store', $pengabdian_id)}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="keterangan">Keterangan Berkas</label>
+                                    <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" placeholder="Isian keterangan Berkas" value="{{old('keterangan')}}">
+                                    @error('keterangan')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="file">File Berkas</label>
+                                    <div class="input-group  @error('file') is-invalid @enderror">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file">
+                                            <label class="custom-file-label" id="file_label" for="file">Upload File Disini</label>
+                                        </div>
+                                    </div>
+                                    @error('file')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
+                                </div>
+
+                                <div class="card-footer">
+                                    <a href="{{route('pengusul_logbook_detail', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Submit</button>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
             </div>
         </section>
 </div>
@@ -151,6 +258,17 @@
     $(function() {
 
         $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "pagingType": "simple_numbers",
+        });
+
+        $('#example3').DataTable({
             "paging": true,
             "lengthChange": true,
             "searching": true,

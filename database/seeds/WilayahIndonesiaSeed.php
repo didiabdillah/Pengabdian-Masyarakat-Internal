@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class WilayahIndonesiaSeed extends Seeder
 {
@@ -14,7 +15,8 @@ class WilayahIndonesiaSeed extends Seeder
     public function run()
     {
         $path = base_path('sql/wilayah_indo.sql');
-        $sql = file_get_contents($path);
+        // $sql = file_get_contents($path);
+        $sql = File::get($path);
         DB::unprepared($sql);
     }
 }

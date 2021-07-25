@@ -16,12 +16,9 @@ class CreateLogbookTable extends Migration
         Schema::create('logbook', function (Blueprint $table) {
             $table->bigIncrements('logbook_id');
             $table->string('logbook_pengabdian_id', 64);
-            $table->dateTime('logbook_date');
-            $table->string('logbook_original_name', 255);
-            $table->string('logbook_hash_name', 255);
-            $table->string('logbook_base_name', 255);
-            $table->string('logbook_file_size', 255);
-            $table->string('logbook_extension', 50);
+            $table->date('logbook_date');
+            $table->text('logbook_uraian_kegiatan');
+            $table->unsignedFloat('logbook_presentase');
 
             $table->timestamps();
 

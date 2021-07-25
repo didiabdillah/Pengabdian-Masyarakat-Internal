@@ -2,6 +2,10 @@
 
 @section('title', 'Tambah Usulan Pengabdian')
 
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
+
 @section('page')
 
 @include('layout.flash_alert')
@@ -128,7 +132,7 @@
                                                                         @if($ketua->anggota_pengabdian_tugas)
                                                                         {{$ketua->anggota_pengabdian_tugas}}
                                                                         @else
-                                                                        {{"-"}}
+                                                                        {{"Leader"}}
                                                                         @endif
                                                                     </h6>
                                                                 </div>
@@ -166,8 +170,8 @@
                                                 <h6>Ukuran File : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
 
                                                 @if($dokumen_usulan)
-                                                <a href="{{route('pengusul_pengabdian_file_preview', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('pengusul_pengabdian_file_download', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                <a href="{{route('file_preview', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('file_download', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                 @endif
                                             </div>
                                         </div>
@@ -460,8 +464,8 @@
                                                 <h6>Ukuran File : @if($dokumen_rab){{$dokumen_rab->dokumen_rab_file_size . " KB"}}@else{{"-"}}@endif</h6>
 
                                                 @if($dokumen_rab)
-                                                <a href="{{route('pengusul_pengabdian_file_preview', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('pengusul_pengabdian_file_download', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                <a href="{{route('file_preview', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('file_download', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                 @endif
                                             </div>
                                         </div>
@@ -531,8 +535,8 @@
                                                                     <br>
                                                                     Tanggal Unggah : {{Carbon\Carbon::parse($row->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
                                                                     <br>
-                                                                    <a href="{{route('pengusul_pengabdian_file_preview', [$id, $row->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                                    <a href="{{route('pengusul_pengabdian_file_download', [$id, $row->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                                    <a href="{{route('file_preview', [$id, $row->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                                    <a href="{{route('file_download', [$id, $row->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                                 </div>
                                                             </div>
                                                             @endforeach

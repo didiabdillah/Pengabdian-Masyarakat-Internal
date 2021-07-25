@@ -340,7 +340,7 @@
 
                                 <div class="form-group">
                                     <label for="komentar">Komentar</label>
-                                    <textarea class="form-control @error('komentar') is-invalid @enderror" id="komentar" name="komentar" placeholder="Komentar"></textarea>
+                                    <textarea class="form-control @error('komentar') is-invalid @enderror" id="komentar" name="komentar" placeholder="Komentar">{{old('komentar')}}</textarea>
                                     @error('komentar')
                                     <div class=" invalid-feedback">
                                         {{$message}}

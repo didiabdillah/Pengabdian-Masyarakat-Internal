@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Usulan_pengabdian;
 use App\Models\Logbook;
 use App\Models\User;
+use App\Models\Logbook_berkas;
 
 class LogbookController extends Controller
 {
@@ -41,11 +42,12 @@ class LogbookController extends Controller
     public function logbook_index($pengabdian_id)
     {
         $logbook = Logbook::where('logbook_pengabdian_id', $pengabdian_id)->orderBy('created_at', 'asc')->get();
-
+        $berkas = Logbook_berkas::where('logbook_berkas_pengabdian_id', $pengabdian_id)->orderBy('created_at', 'desc')->get();
 
         $view_data = [
             'logbook' => $logbook,
             'pengabdian_id' => $pengabdian_id,
+            'berkas' => $berkas,
         ];
 
         return view('pengusul.logbook.logbook_index', $view_data);

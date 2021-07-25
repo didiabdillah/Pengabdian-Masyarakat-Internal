@@ -12,11 +12,8 @@ class Logbook extends Model
     protected $fillable = [
         'logbook_pengabdian_id',
         'logbook_date',
-        'logbook_original_name',
-        'logbook_hash_name',
-        'logbook_base_name',
-        'logbook_file_size',
-        'logbook_extension',
+        'logbook_uraian_kegiatan',
+        'logbook_presentase',
     ];
 
     public function usulan_pengabdian()

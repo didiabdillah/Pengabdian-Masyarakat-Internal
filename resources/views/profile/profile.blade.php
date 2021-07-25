@@ -16,6 +16,10 @@ $profile_layout = 'layout.layout_pengusul';
 
 @section('title', 'Profile')
 
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
+
 @section('page')
 
 @include('layout.flash_alert')
