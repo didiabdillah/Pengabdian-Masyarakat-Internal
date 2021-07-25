@@ -24,7 +24,6 @@
         <!--Content -->
         <section class="content">
             <div class="container-fluid">
-                <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
                         <a href="{{route('admin_logbook')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -39,11 +38,54 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Dokumen Logbook</th>
+                                    <th>Tanggal</th>
+                                    <th>Uraian Kegiatan</th>
+                                    <th>Presentase (%)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($logbook as $data)
+                                <tr>
+                                    <td>
+                                        <h5>{{$loop->iteration}}</h5>
+                                    </td>
+                                    <td>
+                                        {{$data->logbook_date}}
+                                    </td>
+                                    <td>
+                                        {{$data->logbook_uraian_kegiatan}}
+                                    </td>
+                                    <td>
+                                        {{intval($data->logbook_presentase)}}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="example3" class="table table-bordered table-hover table-striped projects">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>File Berkas/Foto</th>
+                                    <th>Keterangan Berkas/Foto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($berkas as $data)
                                 <tr>
                                     <td>
                                         <h5>{{$loop->iteration}}</h5>
@@ -54,23 +96,29 @@
                                                 <i class="fas fa-file-alt fa-2x"></i>
                                             </div>
                                             <div class="col-11">
-                                                Nama File : {{$data->logbook_original_name}}
+                                                Nama File : {{$data->logbook_berkas_original_name}}
                                                 <br>
-                                                Tanggal Unggah : {{Carbon\Carbon::parse($data->logbook_date)->isoFormat('D MMMM Y')}}
+                                                Tanggal Unggah : {{Carbon\Carbon::parse($data->logbook_berkas_date)->isoFormat('D MMMM Y')}}
                                                 <br>
-                                                <a href="{{route('file_preview', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                Ukuran File : {{$data->logbook_berkas_file_size . " KB"}}
+                                                <br>
+                                                <a href="{{route('file_preview', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('file_download', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                             </div>
                                         </div>
+                                    </td>
+                                    <td>
+                                        {{$data->logbook_berkas_keterangan}}
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
                     <!-- /.card-body -->
+
                 </div>
-                <!-- /.card -->
             </div>
         </section>
 </div>
@@ -118,6 +166,17 @@
     $(function() {
 
         $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "pagingType": "simple_numbers",
+        });
+
+        $('#example3').DataTable({
             "paging": true,
             "lengthChange": true,
             "searching": true,
