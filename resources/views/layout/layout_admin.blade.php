@@ -165,10 +165,10 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin_data_pendukung')}}" class="nav-link @if(Request::segment(1) == 'data_pendukung' || Request::segment(2) == 'data_pendukung') {{'active'}} @endif">
+                            <a href="{{route('admin_data_luaran')}}" class="nav-link @if(Request::segment(1) == 'data_luaran' || Request::segment(2) == 'data_luaran') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Data Pendukung
+                                    Data Luaran
                                 </p>
                             </a>
                         </li>

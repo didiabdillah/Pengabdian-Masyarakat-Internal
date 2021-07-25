@@ -47,17 +47,17 @@ class Usulan_pengabdian extends Model
 
     public function logbook()
     {
-        return $this->hasOne('App\Models\Logbook', 'logbook_pengabdian_id');
+        return $this->hasMany('App\Models\Logbook', 'logbook_pengabdian_id');
     }
 
     public function logbook_berkas()
     {
-        return $this->hasOne('App\Models\Logbook_berkas', 'logbook_berkas_pengabdian_id');
+        return $this->hasMany('App\Models\Logbook_berkas', 'logbook_berkas_pengabdian_id');
     }
 
     public function laporan_kemajuan()
     {
-        return $this->hasOne('App\Models\Laporan_kemajuan', 'laporan_kemajuan_pengabdian_id');
+        return $this->hasMany('App\Models\Laporan_kemajuan', 'laporan_kemajuan_pengabdian_id');
     }
 
     public function laporan_akhir()

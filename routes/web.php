@@ -109,9 +109,30 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::delete('/{id}/destroy', 'Admin\SkemaController@destroy')->name('admin_skema_destroy');
                 });
 
-                //Data Pendukung
-                Route::group(['prefix' => 'data_pendukung'], function () {
-                    Route::get('/', 'Admin\DataPendukungController@index')->name('admin_data_pendukung');
+                //Data Luaran
+                Route::group(['prefix' => 'data_luaran'], function () {
+                    Route::get('/', 'Admin\DataLuaranController@index')->name('admin_data_luaran');
+
+                    // Kategori
+                    Route::get('/kategori/insert', 'Admin\DataLuaranController@kategori_insert')->name('admin_data_luaran_kategori_insert');
+                    Route::post('/kategori/insert', 'Admin\DataLuaranController@kategori_store')->name('admin_data_luaran_kategori_store');
+                    Route::get('/kategori/{id}/edit', 'Admin\DataLuaranController@kategori_edit')->name('admin_data_luaran_kategori_edit');
+                    Route::patch('/kategori/{id}/edit', 'Admin\DataLuaranController@kategori_update')->name('admin_data_luaran_kategori_update');
+                    Route::delete('/kategori/{id}/destroy', 'Admin\DataLuaranController@kategori_destroy')->name('admin_data_luaran_kategori_destroy');
+
+                    // Jenis
+                    Route::get('/jenis/insert', 'Admin\DataLuaranController@jenis_insert')->name('admin_data_luaran_jenis_insert');
+                    Route::post('/jenis/insert', 'Admin\DataLuaranController@jenis_store')->name('admin_data_luaran_jenis_store');
+                    Route::get('/jenis/{id}/edit', 'Admin\DataLuaranController@jenis_edit')->name('admin_data_luaran_jenis_edit');
+                    Route::patch('/jenis/{id}/edit', 'Admin\DataLuaranController@jenis_update')->name('admin_data_luaran_jenis_update');
+                    Route::delete('/jenis/{id}/destroy', 'Admin\DataLuaranController@jenis_destroy')->name('admin_data_luaran_jenis_destroy');
+
+                    // Status
+                    Route::get('/status/insert', 'Admin\DataLuaranController@status_insert')->name('admin_data_luaran_status_insert');
+                    Route::post('/status/insert', 'Admin\DataLuaranController@status_store')->name('admin_data_luaran_status_store');
+                    Route::get('/status/{id}/edit', 'Admin\DataLuaranController@status_edit')->name('admin_data_luaran_status_edit');
+                    Route::patch('/status/{id}/edit', 'Admin\DataLuaranController@status_update')->name('admin_data_luaran_status_update');
+                    Route::delete('/status/{id}/destroy', 'Admin\DataLuaranController@status_destroy')->name('admin_data_luaran_status_destroy');
                 });
 
                 //Logbook
