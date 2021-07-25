@@ -14,6 +14,7 @@ use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 use App\Models\Logbook;
+use App\Models\Logbook_berkas;
 
 class FileController extends Controller
 {
@@ -74,16 +75,16 @@ class FileController extends Controller
             $file_extension = $file_fetch["extension"];
 
             $file_original_name = $file_fetch["original_name"];
-        } elseif ($file_category == "logbook") {
-            $file_fetch = Logbook::where('logbook_id', $id)
-                ->where('logbook_hash_name', $file_name)
+        } elseif ($file_category == "logbook_berkas") {
+            $file_fetch = Logbook_berkas::where('logbook_berkas_id', $id)
+                ->where('logbook_berkas_hash_name', $file_name)
                 ->first();
 
-            $file = public_path("assets/file/logbook/" . $file_fetch->logbook_hash_name);
+            $file = public_path("assets/file/logbook_berkas/" . $file_fetch->logbook_berkas_hash_name);
 
-            $file_extension = $file_fetch->logbook_extension;
+            $file_extension = $file_fetch->logbook_berkas_extension;
 
-            $file_original_name = $file_fetch->logbook_original_name;
+            $file_original_name = $file_fetch->logbook_berkas_original_name;
         }
 
         if ($file_fetch) {
@@ -147,18 +148,25 @@ class FileController extends Controller
             $file_extension = $file_fetch["extension"];
 
             $file_original_name = $file_fetch["original_name"];
-        } elseif ($file_category == "logbook") {
-            $file_fetch = Logbook::where('logbook_id', $id)
-                ->where('logbook_hash_name', $file_name)
+        } elseif ($file_category == "logbook_berkas") {
+            $file_fetch = Logbook_berkas::where('logbook_berkas_id', $id)
+                ->where('logbook_berkas_hash_name', $file_name)
                 ->first();
 
-            $file = public_path("assets/file/logbook/" . $file_fetch->logbook_hash_name);
+            $file = public_path("assets/file/logbook_berkas/" . $file_fetch->logbook_berkas_hash_name);
 
-            $file_extension = $file_fetch->logbook_extension;
+            $file_extension = $file_fetch->logbook_berkas_extension;
         }
 
         if ($file_fetch) {
             if ($file_extension == "pdf") {
+
+                $headers = array(
+                    'Content-Type' => mime_content_type($file),
+                );
+
+                return response()->file($file, $headers);
+            } elseif ($file_extension == "jpg" || $file_extension == "jpeg" || $file_extension == "png" || $file_extension == "gif") {
 
                 $headers = array(
                     'Content-Type' => mime_content_type($file),

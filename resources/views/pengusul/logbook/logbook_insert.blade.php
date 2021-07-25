@@ -52,7 +52,7 @@
 
                             <div class="form-group">
                                 <label for="presentase">Presentase Kegiatan (%)</label>
-                                <input type="text" class="form-control @error('presentase') is-invalid @enderror" id="presentase" name="presentase" placeholder="%" value="{{old('presentase')}}">
+                                <input type="text" class="form-control @error('presentase') is-invalid @enderror" id="presentase" name="presentase" placeholder="%" value="{{intval(old('presentase'))}}">
                                 @error('presentase')
                                 <div class="invalid-feedback">
                                     {{$message}}

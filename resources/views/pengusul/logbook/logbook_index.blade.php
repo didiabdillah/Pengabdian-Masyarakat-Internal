@@ -67,13 +67,13 @@
                                         <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-
+                                        {{$data->logbook_date}}
                                     </td>
                                     <td>
-
+                                        {{$data->logbook_uraian_kegiatan}}
                                     </td>
                                     <td>
-
+                                        {{intval($data->logbook_presentase)}}
                                     </td>
                                     <td>
                                         <form action="{{route('pengusul_logbook_detail_destroy', [$pengabdian_id, $data->logbook_id])}}" method="POST" class="form-inline form-horizontal">
@@ -120,12 +120,10 @@
                                     <th>No</th>
                                     <th>File Berkas/Foto</th>
                                     <th>Keterangan Berkas/Foto</th>
-                                    <th>Ukuran</th>
-                                    <th>Tanggal Unggah</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($logbook as $data)
+                                @foreach($berkas as $data)
                                 <tr>
                                     <td>
                                         <h5>{{$loop->iteration}}</h5>
@@ -136,26 +134,19 @@
                                                 <i class="fas fa-file-alt fa-2x"></i>
                                             </div>
                                             <div class="col-11">
-                                                Nama File : {{$data->logbook_original_name}}
+                                                Nama File : {{$data->logbook_berkas_original_name}}
                                                 <br>
-                                                Tanggal Unggah : {{Carbon\Carbon::parse($data->logbook_date)->isoFormat('D MMMM Y')}}
+                                                Tanggal Unggah : {{Carbon\Carbon::parse($data->logbook_berkas_date)->isoFormat('D MMMM Y')}}
                                                 <br>
-                                                <a href="{{route('file_preview', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$data->logbook_id, $data->logbook_hash_name,'logbook'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                Ukuran File : {{$data->logbook_berkas_file_size . " KB"}}
+                                                <br>
+                                                <a href="{{route('file_preview', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                <a href="{{route('file_download', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
+                                        {{$data->logbook_berkas_keterangan}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -172,7 +163,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('pengusul_logbook_detail_store', $pengabdian_id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('pengusul_logbook_detail_store_berkas', $pengabdian_id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
 
@@ -203,7 +194,7 @@
 
                                 <div class="card-footer">
                                     <a href="{{route('pengusul_logbook_detail', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Submit</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -278,6 +269,15 @@
             "responsive": true,
             "pagingType": "simple_numbers",
         });
+    });
+</script>
+
+<!-- bs-custom-file-input -->
+<script src="{{URL::asset('assets/js/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        bsCustomFileInput.init();
     });
 </script>
 @endpush

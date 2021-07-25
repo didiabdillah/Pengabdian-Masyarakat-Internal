@@ -67,36 +67,31 @@ class LogbookController extends Controller
         // Input Validation
         $request->validate(
             [
-                'file' => 'required|mimes:pdf,doc,docx|max:10000',
-            ],
-            [
-                'file.mimes' => 'Tipe File Harus PDF Atau Word'
+                'tanggal' => 'required',
+                'uraian' => 'required|max:60000',
+                'presentase' => 'required|numeric|min:0|max:100',
             ]
         );
 
-        $file = $request->file('file');
-        $destination = "assets/file/logbook/";
+        $tanggal = htmlspecialchars($request->tanggal);
+        $uraian = htmlspecialchars($request->uraian);
+        $presentase = htmlspecialchars($request->presentase);
 
         //Update Data
         $data = [
             'logbook_pengabdian_id' => $pengabdian_id,
-            'logbook_original_name' => $file->getClientOriginalName(),
-            'logbook_hash_name' => $file->hashName(),
-            'logbook_base_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-            'logbook_file_size' => intval($file->getSize() / 1024),
-            'logbook_extension' => $file->getClientOriginalExtension(),
-            'logbook_date' => date('Y-m-d H:i:s'),
+            'logbook_date' => $tanggal,
+            'logbook_uraian_kegiatan' => $uraian,
+            'logbook_presentase' => $presentase,
         ];
 
         Logbook::create($data);
-
-        $file->move($destination, $file->hashName());
 
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
-            'Dokumen Ditambahkan' //Sub Alert Message
+            'Catatan Kegiatan Ditambahkan' //Sub Alert Message
         );
 
         return redirect()->route('pengusul_logbook_detail', $pengabdian_id);
@@ -119,43 +114,30 @@ class LogbookController extends Controller
         // Input Validation
         $request->validate(
             [
-                'file' => 'required|mimes:pdf,doc,docx|max:10000',
-            ],
-            [
-                'file.mimes' => 'Tipe File Harus PDF Atau Word'
+                'tanggal' => 'required',
+                'uraian' => 'required|max:60000',
+                'presentase' => 'required|numeric|min:0|max:100',
             ]
         );
 
-        $file = $request->file('file');
-        $destination = "assets/file/logbook/";
-
-        $fileOld =  Logbook::where('logbook_id', $id)
-            ->first();
-
-        $file_path = public_path($destination . $fileOld->laporan_akhir_hash_name);
-
-
-        File::delete($file_path);
+        $tanggal = htmlspecialchars($request->tanggal);
+        $uraian = htmlspecialchars($request->uraian);
+        $presentase = htmlspecialchars($request->presentase);
 
         //Update Data
         $data = [
-            'logbook_original_name' => $file->getClientOriginalName(),
-            'logbook_hash_name' => $file->hashName(),
-            'logbook_base_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-            'logbook_file_size' => intval($file->getSize() / 1024),
-            'logbook_extension' => $file->getClientOriginalExtension(),
-            'logbook_date' => date('Y-m-d H:i:s'),
+            'logbook_date' => $tanggal,
+            'logbook_uraian_kegiatan' => $uraian,
+            'logbook_presentase' => $presentase,
         ];
 
         Logbook::where('logbook_id', $id)->update($data);
-
-        $file->move($destination, $file->hashName());
 
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
-            'Dokumen Diubah' //Sub Alert Message
+            'Catatan Kegiatan Diubah' //Sub Alert Message
         );
 
         return redirect()->route('pengusul_logbook_detail', $pengabdian_id);
@@ -179,6 +161,50 @@ class LogbookController extends Controller
             __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
             'Dokumen Terhapus' //Sub Alert Message
+        );
+
+        return redirect()->route('pengusul_logbook_detail', $pengabdian_id);
+    }
+
+    // Logbook Berkas
+    public function logbook_store_berkas(Request $request, $pengabdian_id)
+    {
+        // Input Validation
+        $request->validate(
+            [
+                'keterangan' => 'required|max:255',
+                'file' => 'required|mimes:pdf,doc,docx,jpg,jpeg,png|max:10000',
+            ],
+            [
+                'file.mimes' => 'Tipe File Harus PDF, Word, JPG, JPEG, PNG'
+            ]
+        );
+
+        $file = $request->file('file');
+        $keterangan = $request->keterangan;
+        $destination = "assets/file/logbook_berkas/";
+
+        //Update Data
+        $data = [
+            'logbook_berkas_pengabdian_id' => $pengabdian_id,
+            'logbook_berkas_keterangan' => $keterangan,
+            'logbook_berkas_original_name' => $file->getClientOriginalName(),
+            'logbook_berkas_hash_name' => $file->hashName(),
+            'logbook_berkas_base_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+            'logbook_berkas_file_size' => intval($file->getSize() / 1024),
+            'logbook_berkas_extension' => $file->getClientOriginalExtension(),
+            'logbook_berkas_date' => date('Y-m-d'),
+        ];
+
+        Logbook_berkas::create($data);
+
+        $file->move($destination, $file->hashName());
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Berkas Ditambahkan' //Sub Alert Message
         );
 
         return redirect()->route('pengusul_logbook_detail', $pengabdian_id);
