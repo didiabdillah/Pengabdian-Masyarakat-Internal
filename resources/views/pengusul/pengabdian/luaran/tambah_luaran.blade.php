@@ -1,10 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Usulan Pengabdian')
-
-@section('suspend_banner')
-@include('layout.suspend_banner')
-@endsection
+@section('title', 'Tambah Usulan Luaran')
 
 @section('page')
 
@@ -73,33 +69,33 @@
                                 </div>
                             </div>
 
-                            <h4 class="text-center mt-2"><span class="badge badge-warning">TAMBAH DATA LUARAN TAMBAHAN</span></h4>
+                            <h4 class="text-center mt-2"><span class="badge badge-warning">TAMBAH LUARAN {{strtoupper($tipe)}}</span></h4>
 
                             <!-- CONTENT -->
-                            <form action="{{route('pengusul_pengabdian_store_luaran', [$id, 'tambahan', 0])}}" method="POST">
+                            <form action="{{route('pengusul_pengabdian_store_luaran', [$id, $tipe])}}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="tahun">Tahun</label>
-                                        <input type="text" class="form-control @error('tahun') is-invalid @enderror" id="tahun" name="tahun" value="1" readonly>
+                                        <label for="tahun">Tahun Luaran</label>
+                                        <select class="form-control select2 @error('tahun') is-invalid @enderror" style="width: 100%;" name="tahun">
+                                            @for($i = 1; $i <= intval($tahun_kegiatan); $i++) <!-- -->
+                                                <option value="{{$i}}" @if(old('tahun')==$i){{'selected'}}@endif>{{'Tahun ' . $i}}</option>
+                                                @endfor
+                                        </select>
                                         @error('tahun')
                                         <div class="invalid-feedback">
-                                            {{$message}}
+                                            Pilih Tahun Luaran
                                         </div>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label for="kategori">Kategori Luaran</label>
-                                        <select class="form-control select2 @error('kategori') is-invalid @enderror" style="width: 100%;" name="kategori">
-                                            <option value="Publikasi di jurnal Internasional" selected>Publikasi di jurnal Internasional</option>
-                                            <option value="Publikasi di prosiding Seminar Internasional">Publikasi di prosiding Seminar Internasional</option>
-                                            <option value="Buku cetak hasil pengabdian">Buku cetak hasil pengabdian</option>
-                                            <option value="Buku elektronik hasil pengabdian">Buku elektronik hasil pengabdian</option>
-                                            <option value="Book chapter">Book chapter</option>
-                                            <option value="Paten">Paten</option>
-                                            <option value="Paten sederhana">Paten sederhana</option>
-                                            <option value="Hak cipta">Hak cipta</option>
+                                        <select class="form-control select2 @error('kategori') is-invalid @enderror" style="width: 100%;" name="kategori" id="kategori">
+                                            <option value="">--Pilih Kategori Luaran--</option>
+                                            @foreach($kategori as $data)
+                                            <option value="{{$data->kategori_luaran_id}}" @if(old('kategori')==$data->kategori_luaran_id){{'selected'}}@endif>{{$data->kategori_luaran_label}}</option>
+                                            @endforeach
                                         </select>
                                         @error('kategori')
                                         <div class="invalid-feedback">
@@ -110,9 +106,8 @@
 
                                     <div class="form-group">
                                         <label for="jenis">Jenis Luaran</label>
-                                        <select class="form-control select2 @error('jenis') is-invalid @enderror" style="width: 100%;" name="jenis">
-                                            <option value="Artikel di jurnal internasional" selected>Artikel di jurnal internasional</option>
-                                            <option value="Artikel di jurnal internasional terindeks di pengindeks bereputasi">Artikel di jurnal internasional terindeks di pengindeks bereputasi</option>
+                                        <select class="form-control select2 @error('jenis') is-invalid @enderror" style="width: 100%;" name="jenis" id="jenis">
+                                            <option value="">--Pilih Jenis Luaran--</option>
                                         </select>
                                         @error('jenis')
                                         <div class="invalid-feedback">
@@ -122,8 +117,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="rencana">Rencana Nama ...</label>
-                                        <input type="text" class="form-control @error('rencana') is-invalid @enderror" id="rencana" name="rencana" placeholder="Rencana situs publikasi video kegiatan" value="{{old('rencana')}}">
+                                        <label for="rencana">Rencana</label>
+                                        <input type="text" class="form-control @error('rencana') is-invalid @enderror" id="rencana" name="rencana" placeholder="Rencana" value="{{old('rencana')}}">
                                         @error('rencana')
                                         <div class="invalid-feedback">
                                             {{$message}}
@@ -133,9 +128,8 @@
 
                                     <div class="form-group">
                                         <label for="status">Status</label>
-                                        <select class="form-control select2 @error('status') is-invalid @enderror" style="width: 100%;" name="status">
-                                            <option value="Accepted" selected>Accepted</option>
-                                            <option value="Published">Published</option>
+                                        <select class="form-control select2 @error('status') is-invalid @enderror" style="width: 100%;" name="status" id="status">
+                                            <option value="">--Pilih Status Luaran--</option>
                                         </select>
                                         @error('status')
                                         <div class="invalid-feedback">
@@ -147,7 +141,7 @@
 
                                     <div class="card-footer">
                                         <a href="{{route('pengusul_pengabdian_usulan', [4, $id])}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                        <button type="submit" class="btn btn-primary"><i class="fas fa-save "></i> Simpan</button>
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-pencil"></i> Tambah</button>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -172,11 +166,92 @@
 <script src="{{URL::asset('assets/js/select2/js/select2.full.min.js')}}"></script>
 
 <script>
+    $(function() {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+    });
+</script>
+
+<script>
     // Ajax setup from csrf token
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+</script>
+
+@if($errors->any())
+@if(old('kategori'))
+<script>
+    $(function() {
+        const kategori_id = "{{old('kategori')}}";
+        const jenis_id = "{{old('jenis')}}";
+        const status_id = "{{old('status')}}";
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_luaran_get_jenis')}}",
+            method: "POST",
+            data: {
+                id_kategori: kategori_id,
+                id_jenis: jenis_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#jenis').empty();
+                $('#status').empty();
+                $('#jenis').html(data);
+            }
+        });
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_luaran_get_status')}}",
+            method: "POST",
+            data: {
+                id_kategori: kategori_id,
+                id_status: status_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#status').empty();
+                $('#status').html(data);
+            }
+        });
+    });
+</script>
+@endif
+@endif
+
+<script>
+    $('select#kategori').change(function() {
+        const kategori_id = $(this).children("option:selected").val();
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_luaran_get_jenis')}}",
+            method: "POST",
+            data: {
+                id_kategori: kategori_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#jenis').empty();
+                $('#status').empty();
+                $('#jenis').html(data);
+            }
+        });
+
+        $.ajax({
+            url: "{{route('pengusul_pengabdian_luaran_get_status')}}",
+            method: "POST",
+            data: {
+                id_kategori: kategori_id
+            },
+            cache: false,
+            success: function(data) {
+                $('#status').empty();
+                $('#status').html(data);
+            }
+        });
     });
 </script>
 

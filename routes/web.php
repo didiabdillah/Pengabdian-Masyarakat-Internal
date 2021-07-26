@@ -272,11 +272,13 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                         Route::post('/usulan/mitra/get/kecamatan', 'Pengusul\PengabdianController@get_kecamatan')->name('pengusul_pengabdian_get_kecamatan');
                         Route::post('/usulan/mitra/get/desa', 'Pengusul\PengabdianController@get_desa')->name('pengusul_pengabdian_get_desa');
 
-                        Route::get('/usulan/{id}/luaran/{luaran_id}/edit', 'Pengusul\PengabdianController@edit_luaran')->name('pengusul_pengabdian_edit_luaran');
-                        Route::patch('/usulan/{id}/luaran/{luaran_id}/edit', 'Pengusul\PengabdianController@update_luaran')->name('pengusul_pengabdian_update_luaran');
-                        Route::delete('/usulan/{id}/luaran/{luaran_id}/delete', 'Pengusul\PengabdianController@destroy_luaran')->name('pengusul_pengabdian_destroy_luaran');
-                        Route::get('/usulan/{id}/luaran/{tipe}/{urutan}', 'Pengusul\PengabdianController@tambah_luaran')->name('pengusul_pengabdian_tambah_luaran');
-                        Route::post('/usulan/{id}/luaran/{tipe}/{urutan}', 'Pengusul\PengabdianController@store_luaran')->name('pengusul_pengabdian_store_luaran');
+                        Route::get('/usulan/{id}/luaran/tambah/{tipe}', 'Pengusul\PengabdianController@tambah_luaran')->name('pengusul_pengabdian_tambah_luaran');
+                        Route::post('/usulan/{id}/luaran/tambah/{tipe}', 'Pengusul\PengabdianController@store_luaran')->name('pengusul_pengabdian_store_luaran');
+                        Route::get('/usulan/{id}/luaran/{luaran_id}/edit/{tipe}', 'Pengusul\PengabdianController@edit_luaran')->name('pengusul_pengabdian_edit_luaran');
+                        Route::patch('/usulan/{id}/luaran/{luaran_id}/edit/{tipe}', 'Pengusul\PengabdianController@update_luaran')->name('pengusul_pengabdian_update_luaran');
+                        Route::delete('/usulan/{id}/luaran/{luaran_id}/destroy', 'Pengusul\PengabdianController@destroy_luaran')->name('pengusul_pengabdian_destroy_luaran');
+                        Route::post('/usulan/luaran/get/jenis', 'Pengusul\PengabdianController@get_luaran_jenis')->name('pengusul_pengabdian_luaran_get_jenis');
+                        Route::post('/usulan/luaran/get/status', 'Pengusul\PengabdianController@get_luaran_status')->name('pengusul_pengabdian_luaran_get_status');
                     });
                 });
 

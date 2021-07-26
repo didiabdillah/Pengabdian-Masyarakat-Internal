@@ -15,9 +15,13 @@ use App\Models\Usulan_pengabdian;
 use App\Models\Anggota_pengabdian;
 use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
+use App\Models\Jenis_luaran;
+use App\Models\Kategori_luaran;
+use App\Models\Status_luaran;
 use App\Models\Mitra_sasaran;
 use App\Models\Luaran_usulan;
 use App\Models\Mitra_file;
+use App\Models\Usulan_luaran;
 
 class PengabdianController extends Controller
 {
@@ -269,44 +273,19 @@ class PengabdianController extends Controller
             // HALAMAN 4
         } elseif ($page == 4) {
 
-            $luaran_wajib1 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->where('usulan_luaran_pengabdian_urutan', 1)
-                ->first();
+                ->get();
 
-            $luaran_wajib2 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
-                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->where('usulan_luaran_pengabdian_urutan', 2)
-                ->first();
-
-            $luaran_wajib3 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
-                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->where('usulan_luaran_pengabdian_urutan', 3)
-                ->first();
-
-            $luaran_wajib4 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
-                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->where('usulan_luaran_pengabdian_urutan', 4)
-                ->first();
-
-            $jumlah_luaran_wajib = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
-                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->count();
-
-            $luaran_tambahan = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
-                ->where('usulan_luaran_pengabdian_urutan', 0)
-                ->first();
+                ->get();
 
             $view_data = [
                 'id' => $id,
                 'page' => $page,
-                'wajib1' => $luaran_wajib1,
-                'wajib2' => $luaran_wajib2,
-                'wajib3' => $luaran_wajib3,
-                'wajib4' => $luaran_wajib4,
-                'tambahan' => $luaran_tambahan,
-                'jumlah_luaran_wajib' => $jumlah_luaran_wajib,
+                'luaran_wajib' => $luaran_wajib,
+                'luaran_tambahan' => $luaran_tambahan,
             ];
 
             return view('pengusul.pengabdian.usulan_4', $view_data);
@@ -362,33 +341,28 @@ class PengabdianController extends Controller
                 ->orderBy('created_at', 'asc')
                 ->get();
 
-            $luaran_wajib1 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            $luaran_wajib1 = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->where('usulan_luaran_pengabdian_urutan', 1)
                 ->first();
 
-            $luaran_wajib2 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            $luaran_wajib2 = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->where('usulan_luaran_pengabdian_urutan', 2)
                 ->first();
 
-            $luaran_wajib3 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            $luaran_wajib3 = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->where('usulan_luaran_pengabdian_urutan', 3)
                 ->first();
 
-            $luaran_wajib4 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            $luaran_wajib4 = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->where('usulan_luaran_pengabdian_urutan', 4)
                 ->first();
 
-            $jumlah_luaran_wajib = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            $jumlah_luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
                 ->count();
 
-            $luaran_tambahan = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
-                ->where('usulan_luaran_pengabdian_urutan', 0)
                 ->first();
 
             $view_data = [
@@ -1006,129 +980,23 @@ class PengabdianController extends Controller
         return view('pengusul.pengabdian.wilayah_list.list_desa', ['desa' => $desa, 'old_desa' => $old_desa]);
     }
 
-    // FILE PREVIEW AND DOWNLOAD
-    public function file_download($id, $file_name, $file_category)
-    {
-        $file_fetch = NULL;
-        $file = NULL;
-        $file_extension = NULL;
-        $file_original_name = NULL;
-
-        if ($file_category == "usulan") {
-            $file_fetch = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)
-                ->where('dokumen_usulan_hash_name', $file_name)
-                ->first();
-
-            $file = public_path("assets/file/dokumen_usulan/" . $file_fetch->dokumen_usulan_hash_name);
-
-            $file_extension = $file_fetch->dokumen_usulan_extension;
-
-            $file_original_name = $file_fetch->dokumen_usulan_original_name;
-        } elseif ($file_category == "rab") {
-            $file_fetch = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)
-                ->where('dokumen_rab_hash_name', $file_name)
-                ->first();
-
-            $file = public_path("assets/file/dokumen_rab/" . $file_fetch->dokumen_rab_hash_name);
-
-            $file_extension = $file_fetch->dokumen_rab_extension;
-
-            $file_original_name = $file_fetch->dokumen_rab_original_name;
-        } elseif ($file_category == "mitra") {
-            $file_fetch = Mitra_sasaran::join('mitra_file', 'mitra_sasaran.mitra_sasaran_id', '=', 'mitra_file.mitra_file_mitra_sasaran_id')
-                ->where('mitra_sasaran.mitra_sasaran_pengabdian_id', $id)
-                ->where('mitra_file.mitra_sasaran_file_hash_name', $file_name)
-                ->first();
-
-            $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
-
-            $file_extension = $file_fetch->mitra_sasaran_file_extension;
-
-            $file_original_name = $file_fetch->mitra_sasaran_file_original_name;
-        }
-
-        if ($file_fetch) {
-            if ($file_extension == "pdf") {
-
-                $headers = array(
-                    'Content-Type' => mime_content_type($file),
-                );
-
-                return response()->download($file, $file_original_name, $headers);
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    public function file_preview($id, $file_name, $file_category)
-    {
-        $file_fetch = NULL;
-        $file = NULL;
-        $file_extension = NULL;
-
-        if ($file_category == "usulan") {
-            $file_fetch = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)
-                ->where('dokumen_usulan_hash_name', $file_name)
-                ->first();
-
-            $file = public_path("assets/file/dokumen_usulan/" . $file_fetch->dokumen_usulan_hash_name);
-
-            $file_extension = $file_fetch->dokumen_usulan_extension;
-        } elseif ($file_category == "rab") {
-            $file_fetch = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)
-                ->where('dokumen_rab_hash_name', $file_name)
-                ->first();
-
-            $file = public_path("assets/file/dokumen_rab/" . $file_fetch->dokumen_rab_hash_name);
-
-            $file_extension = $file_fetch->dokumen_rab_extension;
-        } elseif ($file_category == "mitra") {
-            $file_fetch = Mitra_sasaran::join('mitra_file', 'mitra_sasaran.mitra_sasaran_id', '=', 'mitra_file.mitra_file_mitra_sasaran_id')
-                ->where('mitra_sasaran.mitra_sasaran_pengabdian_id', $id)
-                ->where('mitra_file.mitra_sasaran_file_hash_name', $file_name)
-                ->first();
-
-            $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
-
-            $file_extension = $file_fetch->mitra_sasaran_file_extension;
-        }
-
-        if ($file_fetch) {
-            if ($file_extension == "pdf") {
-
-                $headers = array(
-                    'Content-Type' => mime_content_type($file),
-                );
-
-                return response()->file($file, $headers);
-            }
-        }
-    }
-
     // LUARAN
-    public function tambah_luaran($id, $tipe, $page)
+    public function tambah_luaran($id, $tipe)
     {
+        $tahun_kegiatan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)->first()->usulan_pengabdian_lama_kegiatan;
+        $kategori = Kategori_luaran::where('kategori_luaran_required', $tipe)->get();
+
         $view_data = [
             'id' => $id,
+            'tahun_kegiatan' => $tahun_kegiatan,
+            'kategori' => $kategori,
+            'tipe' => $tipe,
         ];
 
-        if ($tipe == "wajib") {
-            if ($page == 1) {
-                return view('pengusul.pengabdian.luaran.tambah_luaran_wajib1', $view_data);
-            } elseif ($page == 2) {
-                return view('pengusul.pengabdian.luaran.tambah_luaran_wajib2', $view_data);
-            } elseif ($page == 3) {
-                return view('pengusul.pengabdian.luaran.tambah_luaran_wajib3', $view_data);
-            } elseif ($page == 4) {
-                return view('pengusul.pengabdian.luaran.tambah_luaran_wajib4', $view_data);
-            }
-        } elseif ($tipe == "tambahan") {
-            return view('pengusul.pengabdian.luaran.tambah_luaran_tambahan', $view_data);
-        }
+        return view('pengusul.pengabdian.luaran.tambah_luaran', $view_data);
     }
 
-    public function store_luaran(Request $request, $id, $tipe, $page)
+    public function store_luaran(Request $request, $id, $tipe)
     {
         // Input Validation
         $request->validate([
@@ -1140,37 +1008,36 @@ class PengabdianController extends Controller
         ]);
 
         $tahun = htmlspecialchars($request->tahun);
-        $kategori = htmlspecialchars($request->kategori);
-        $jenis = htmlspecialchars($request->jenis);
+        $kategori = Kategori_luaran::where('kategori_luaran_id', htmlspecialchars($request->kategori))->first();
+        $jenis = Jenis_luaran::where('jenis_luaran_id', htmlspecialchars($request->jenis))->first();
         $rencana = htmlspecialchars($request->rencana);
-        $status = htmlspecialchars($request->status);
+        $status = Status_luaran::where('status_luaran_id', htmlspecialchars($request->status))->first();
 
         $data = [
             'usulan_luaran_pengabdian_id' => $id,
-            'usulan_luaran_pengabdian_urutan' => $page,
             'usulan_luaran_pengabdian_tipe' => $tipe,
             'usulan_luaran_pengabdian_tahun' => $tahun,
-            'usulan_luaran_pengabdian_kategori' => $kategori,
-            'usulan_luaran_pengabdian_jenis' => $jenis,
+            'usulan_luaran_pengabdian_kategori' => ($kategori) ? $kategori->kategori_luaran_label : NULL,
+            'usulan_luaran_pengabdian_jenis' => ($jenis) ? $jenis->jenis_luaran_label : NULL,
             'usulan_luaran_pengabdian_rencana' => $rencana,
-            'usulan_luaran_pengabdian_status' => $status,
+            'usulan_luaran_pengabdian_status' => ($status) ? $status->status_luaran_label : NULL,
         ];
 
-        Luaran_usulan::create($data);
+        Usulan_luaran::create($data);
 
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
             'Luaran Sukses Ditambahkan', //Alert Message 
-            'Luaran ' . $tipe . " ditambahkan"  //Sub Alert Message
+            'Luaran ' . $tipe . ' ditambahkan'  //Sub Alert Message
         );
 
         return redirect()->route('pengusul_pengabdian_usulan', [4, $id]);
     }
 
-    public function edit_luaran($id, $luaran_id)
+    public function edit_luaran($id, $luaran_id, $tipe)
     {
-        $luaran = Luaran_usulan::where('usulan_luaran_id', $luaran_id)
+        $luaran = Usulan_luaran::where('usulan_luaran_id', $luaran_id)
             ->first();
 
         $tipe = $luaran->usulan_luaran_pengabdian_tipe;
@@ -1196,7 +1063,7 @@ class PengabdianController extends Controller
         }
     }
 
-    public function update_luaran(Request $request, $id, $luaran_id)
+    public function update_luaran(Request $request, $id, $luaran_id, $tipe)
     {
         // Input Validation
         $request->validate([
@@ -1221,7 +1088,7 @@ class PengabdianController extends Controller
             'usulan_luaran_pengabdian_status' => $status,
         ];
 
-        Luaran_usulan::where('usulan_luaran_id', $luaran_id)
+        Usulan_luaran::where('usulan_luaran_id', $luaran_id)
             ->update($data);
 
         //Flash Message
@@ -1236,7 +1103,7 @@ class PengabdianController extends Controller
 
     public function destroy_luaran($id, $luaran_id)
     {
-        Luaran_usulan::destroy('usulan_luaran_id', $luaran_id);
+        Usulan_luaran::destroy('usulan_luaran_id', $luaran_id);
 
         //Flash Message
         flash_alert(
@@ -1246,5 +1113,21 @@ class PengabdianController extends Controller
         );
 
         return redirect()->route('pengusul_pengabdian_usulan', [4, $id]);
+    }
+
+    public function get_luaran_jenis(Request $request)
+    {
+        $jenis = Jenis_luaran::where('jenis_luaran_kategori_id', $request->id_kategori)->get();
+        $old_jenis = ($request->id_jenis) ? $request->id_jenis : NULL;
+
+        return view('pengusul.pengabdian.luaran.list_jenis', ['jenis' => $jenis, 'old_jenis' => $old_jenis]);
+    }
+
+    public function get_luaran_status(Request $request)
+    {
+        $status = Status_luaran::where('status_luaran_kategori_id', $request->id_kategori)->get();
+        $old_status = ($request->id_status) ? $request->id_status : NULL;
+
+        return view('pengusul.pengabdian.luaran.list_status', ['status' => $status, 'old_status' => $old_status]);
     }
 }
