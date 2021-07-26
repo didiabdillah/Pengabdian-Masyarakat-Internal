@@ -15,7 +15,7 @@ class CreateLaporanKemajuanTable extends Migration
     {
         Schema::create('laporan_kemajuan', function (Blueprint $table) {
             $table->bigIncrements('laporan_kemajuan_id');
-            $table->string('laporan_kemajuan_pengabdian_id', 64);
+            $table->unsignedBigInteger('laporan_kemajuan_luaran_id');
             $table->date('laporan_kemajuan_date');
             $table->string('laporan_kemajuan_original_name', 255);
             $table->string('laporan_kemajuan_hash_name', 255);
@@ -25,7 +25,7 @@ class CreateLaporanKemajuanTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('laporan_kemajuan_pengabdian_id')->references('usulan_pengabdian_id')->on('usulan_pengabdian')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('laporan_kemajuan_luaran_id')->references('usulan_luaran_id')->on('usulan_luaran')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -37,7 +37,7 @@ class CreateLaporanKemajuanTable extends Migration
     public function down()
     {
         Schema::table('laporan_kemajuan', function (Blueprint $table) {
-            $table->dropForeign('laporan_kemajuan_laporan_kemajuan_pengabdian_id_foreign');
+            $table->dropForeign('laporan_kemajuan_laporan_kemajuan_luaran_id_foreign');
         });
         Schema::dropIfExists('laporan_kemajuan');
     }

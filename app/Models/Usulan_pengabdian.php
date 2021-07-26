@@ -30,9 +30,9 @@ class Usulan_pengabdian extends Model
         return $this->hasMany('App\Models\Anggota_pengabdian', 'anggota_pengabdian_pengabdian_id');
     }
 
-    public function luaran_usulan()
+    public function usulan_luaran()
     {
-        return $this->hasMany('App\Models\Luaran_usulan', 'usulan_luaran_pengabdian_id');
+        return $this->hasMany('App\Models\Usulan_luaran', 'usulan_luaran_pengabdian_id');
     }
 
     public function dokumen_usulan()
@@ -53,11 +53,6 @@ class Usulan_pengabdian extends Model
     public function logbook_berkas()
     {
         return $this->hasMany('App\Models\Logbook_berkas', 'logbook_berkas_pengabdian_id');
-    }
-
-    public function laporan_kemajuan()
-    {
-        return $this->hasMany('App\Models\Laporan_kemajuan', 'laporan_kemajuan_pengabdian_id');
     }
 
     public function laporan_akhir()

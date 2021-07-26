@@ -5,94 +5,130 @@ namespace App\Http\Controllers\Pengusul;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
+
+use App\Models\Usulan_pengabdian;
+use App\Models\User;
+use App\Models\Usulan_luaran;
+use App\Models\Laporan_kemajuan;
 
 class LaporanKemajuanController extends Controller
 {
     public function index()
     {
-        return view('pengusul.laporan_kemajuan.index');
+        $pengabdian = Usulan_pengabdian::whereHas('anggota_pengabdian', function ($query) {
+            $query->where('anggota_pengabdian_user_id', Session::get('user_id'))
+                ->where('anggota_pengabdian_role', "ketua");
+        })
+            ->where('usulan_pengabdian_submit', true)
+            ->where('usulan_pengabdian_status', 'diterima')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('usulan_pengabdian_tahun', 'asc')
+            ->get();
+
+        $is_suspend = User::find(Session::get('user_id'))->user_ban;
+
+        $view_data = [
+            'is_suspend' => $is_suspend,
+            'pengabdian' => $pengabdian,
+        ];
+
+        return view('pengusul.laporan_kemajuan.index', $view_data);
     }
 
-    public function insert()
+    // ==================================================================================
+
+    public function luaran($pengabdian_id)
     {
-        return view('pengusul.laporan_kemajuan.insert');
+        $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $pengabdian_id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->get();
+
+        $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $pengabdian_id)
+            ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
+            ->get();
+
+        $view_data = [
+            'luaran_wajib' => $luaran_wajib,
+            'luaran_tambahan' => $luaran_tambahan,
+            'pengabdian_id' => $pengabdian_id,
+        ];
+
+        return view('pengusul.laporan_kemajuan.luaran', $view_data);
     }
 
-    // public function store(Request $request)
-    // {
-    //     // Input Validation
-    //     $request->validate(
-    //         [
-    //             'file' => 'required',
-    //             'file.*'  => 'required|mimes:doc,docx|max:10000',
-    //         ],
-    //         [
-    //             'file.*.mimes' => 'File harus bertipe:doc, docx'
-    //         ]
-    //     );
+    public function insert($pengabdian_id, $id)
+    {
+        $view_data = [
+            'id' => $id,
+            'pengabdian_id' => $pengabdian_id,
+        ];
 
-    //     $user_id = $request->session()->get('user_id');
-    //     $destination = "assets/file/laporan_kemajuan/";
+        return view('pengusul.laporan_kemajuan.insert', $view_data);
+    }
 
-    //     //Insert Data
-    //     $data_content = [
-    //         'content_title' => $title,
-    //         'content_note' => $note,
-    //         'content_type' => $type,
-    //         'content_date' => $date,
-    //         'content_is_present' => $is_present,
-    //         'content_category' => $category,
-    //         'content_user_id' => $user_id,
-    //         'content_status' => __('content_status.content_status_process'),
-    //     ];
-    //     $query = Content::create($data_content);
+    public function store(Request $request, $pengabdian_id, $id)
+    {
+        // Input Validation
+        $request->validate(
+            [
+                'file' => 'required',
+                'file.*'  => 'required|mimes:doc,docx,pdf,xls,xlsx|max:10000',
+            ],
+            [
+                'file.*.mimes' => 'File harus bertipe:doc, docx, pdf, xls, xlsx'
+            ]
+        );
 
-    //     // insert file
-    //     foreach ($request->file() as $files) {
-    //         foreach ($files as $file) {
-    //             $hashName = $file->hashName();
-    //             $originalName = $file->getClientOriginalName();
-    //             $extension = $file->getClientOriginalExtension();
+        $file = $request->file('file');
+        $pengabdian_id = $pengabdian_id;
+        $user_id = $request->session()->get('user_id');
+        $original_name = $file->getClientOriginalName();
+        $hash_name = $file->hashName();
+        $base_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $file_size = intval($file->getSize() / 1024);
+        $extension = $file->getClientOriginalExtension();
 
-    //             $data = [
-    //                 'content_file_content_id' => $query->content_id,
-    //                 'content_file_original_name' => $file->getClientOriginalName(),
-    //                 'content_file_hash_name' => $file->hashName(),
-    //                 'content_file_base_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-    //                 'content_file_extension' => $file->getClientOriginalExtension(),
-    //             ];
+        $destination = "assets/file/laporan_kemajuan/";
 
-    //             if ($file->getClientOriginalExtension() == "docx" || $file->getClientOriginalExtension() == "doc") {
+        $is_exist = Laporan_kemajuan::where('laporan_kemajuan_luaran_id', $id)
+            ->count();
 
-    //                 $file->move($destination_word, $file->hashName());
-    //             } else {
+        if ($is_exist > 0) {
+            $fileOld =  Laporan_kemajuan::where('laporan_kemajuan_luaran_id', $id)
+                ->first();
 
-    //                 $file->move($destination_img, $file->hashName());
-    //             }
+            $file_path = public_path($destination . $fileOld->laporan_kemajuan_hash_name);
 
-    //             Content_file::create($data);
-    //         }
-    //     }
+            $file->move($destination, $file->hashName());
 
-    //     //change value From Missed Upload Data
-    //     if ($is_present == false) {
-    //         $missed_upload_total = Missed_upload::where('missed_upload_user_id', $user_id)
-    //             ->where('missed_upload_date', $request->date)->first()->missed_upload_total;
+            File::delete($file_path);
+        } else {
+            $file->move($destination, $file->hashName());
+        }
 
-    //         Missed_upload::where('missed_upload_user_id', $user_id)
-    //             ->where('missed_upload_date', $request->date)
-    //             ->update([
-    //                 'missed_upload_total' => $missed_upload_total - 1
-    //             ]);
-    //     }
+        //Insert Data
+        $data = [
+            'laporan_kemajuan_luaran_id' => $id,
+            'laporan_kemajuan_date' => date('Y-m-d'),
+            'laporan_kemajuan_original_name' => $original_name,
+            'laporan_kemajuan_hash_name' => $hash_name,
+            'laporan_kemajuan_base_name' => $base_name,
+            'laporan_kemajuan_file_size' => $file_size,
+            'laporan_kemajuan_extension' => $extension,
+        ];
+        Laporan_kemajuan::updateOrInsert(
+            ['laporan_kemajuan_luaran_id' => $id],
+            $data
+        );
 
-    //     //Flash Message
-    //     flash_alert(
-    //         __('alert.icon_success'), //Icon
-    //         'Add Success', //Alert Message 
-    //         'New Content Added' //Sub Alert Message
-    //     );
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Laporan kemajuan Terupload' //Sub Alert Message
+        );
 
-    //     return redirect()->route('content');
-    // }
+        return redirect()->route('pengusul_laporan_kemajuan_luaran', $pengabdian_id);
+    }
 }

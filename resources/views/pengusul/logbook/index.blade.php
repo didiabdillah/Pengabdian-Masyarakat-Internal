@@ -2,10 +2,6 @@
 
 @section('title', 'Logbook')
 
-@section('suspend_banner')
-@include('layout.suspend_banner')
-@endsection
-
 @section('page')
 
 @include('layout.flash_alert')

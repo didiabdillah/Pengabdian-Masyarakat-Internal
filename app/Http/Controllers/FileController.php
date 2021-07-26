@@ -15,6 +15,7 @@ use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
 use App\Models\Logbook;
 use App\Models\Logbook_berkas;
+use App\Models\Laporan_kemajuan;
 
 class FileController extends Controller
 {
@@ -85,6 +86,16 @@ class FileController extends Controller
             $file_extension = $file_fetch->logbook_berkas_extension;
 
             $file_original_name = $file_fetch->logbook_berkas_original_name;
+        } elseif ($file_category == "laporan_kemajuan") {
+            $file_fetch = Laporan_kemajuan::where('laporan_kemajuan_id', $id)
+                ->where('laporan_kemajuan_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/laporan_kemajuan/" . $file_fetch->laporan_kemajuan_hash_name);
+
+            $file_extension = $file_fetch->laporan_kemajuan_extension;
+
+            $file_original_name = $file_fetch->laporan_kemajuan_original_name;
         }
 
         if ($file_fetch) {
@@ -156,6 +167,14 @@ class FileController extends Controller
             $file = public_path("assets/file/logbook_berkas/" . $file_fetch->logbook_berkas_hash_name);
 
             $file_extension = $file_fetch->logbook_berkas_extension;
+        } elseif ($file_category == "laporan_kemajuan") {
+            $file_fetch = Laporan_kemajuan::where('laporan_kemajuan_id', $id)
+                ->where('laporan_kemajuan_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/laporan_kemajuan/" . $file_fetch->laporan_kemajuan_hash_name);
+
+            $file_extension = $file_fetch->laporan_kemajuan_extension;
         }
 
         if ($file_fetch) {

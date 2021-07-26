@@ -2,10 +2,6 @@
 
 @section('title', 'Laporan Kemajuan')
 
-@section('suspend_banner')
-@include('layout.suspend_banner')
-@endsection
-
 @section('page')
 
 @include('layout.flash_alert')
@@ -26,15 +22,17 @@
 
         </div>
 
+        {{--
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="{{route('pengusul_laporan_kemajuan_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Laporan Kemajuan</a>
+                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Logbook</a>
                 </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->
         </div>
+        --}}
 
         <!--Content -->
         <section class="content">
@@ -54,45 +52,44 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Bidang</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
-                                    <th>File</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach($pengabdian as $data)
                                 <tr>
                                     <td>
-                                        <h5>1</h5>
+                                        <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-                                        <h5>Pengabdian</h5>
+                                        <h5>{{$data->usulan_pengabdian_judul}}</h5>
                                     </td>
                                     <td>
-                                        <h5>Pengabdian Masjid Jatisawit Lor</h5>
+                                        <h5>{{$data->usulan_pengabdian_tahun}}</h5>
                                     </td>
-                                    <td>
-                                        <h5>2021</h5>
-                                    </td>
-                                    <td>
-                                        <h5>laporan_kemajuan_pengabdian.pdf</h5>
-                                    </td>
-
                                     <td>
                                         <div class="card-body">
-                                            <a class="btn btn-success btn-sm" href="">
-                                                <i class="fas fa-download">
+                                            @if($is_suspend)
+                                            <a class="btn btn-info btn-sm" style="pointer-events: none; cursor: default;">
+                                                <i class="fas fa-folder">
                                                 </i>
 
-                                                Download
+                                                Kelola Laporan Kemajuan
                                             </a>
-                                        </div>
+                                            @else
+                                            <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_luaran', $data->usulan_pengabdian_id)}}">
+                                                <i class="fas fa-folder">
+                                                </i>
 
+                                                Kelola Laporan Kemajuan
+                                            </a>
+                                            @endif
+                                        </div>
                                     </td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
