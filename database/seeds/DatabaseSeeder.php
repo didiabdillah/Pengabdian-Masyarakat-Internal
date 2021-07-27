@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JurusanSeed::class);
         $this->call(BidangSeed::class);
         $this->call(SkemaSeed::class);
+        $this->call(LuaranSeed::class);
         $this->call(UnlockFeatureSeed::class);
 
         $this->call(UnlockFeatureSeedJson::class);
