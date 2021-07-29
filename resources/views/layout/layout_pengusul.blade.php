@@ -191,7 +191,7 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block" style="margin-top: -13px;">
-                <b>Copyright &copy; {{date('Y')}} SIMTABMAS Polindra</b> All rights reserved.
+                <b>Copyright &copy; {{date('Y')}} P3M Polindra</b> All rights reserved.
             </div>
 
         </footer>
