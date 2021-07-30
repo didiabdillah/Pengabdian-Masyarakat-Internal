@@ -153,6 +153,7 @@ class FileController extends Controller
                 ->where('laporan_akhir_hash_name', $file_name)
                 ->first();
 
+            $file_url = URL::asset("assets/file/laporan_akhir/" . $file_fetch->laporan_akhir_hash_name);
             $file = public_path("assets/file/laporan_akhir/" . $file_fetch->laporan_akhir_hash_name);
 
             $file_extension = $file_fetch->laporan_akhir_extension;
@@ -170,6 +171,7 @@ class FileController extends Controller
                 ->where('logbook_berkas_hash_name', $file_name)
                 ->first();
 
+            $file_url = URL::asset("assets/file/logbook_berkas/" . $file_fetch->logbook_berkas_hash_name);
             $file = public_path("assets/file/logbook_berkas/" . $file_fetch->logbook_berkas_hash_name);
 
             $file_extension = $file_fetch->logbook_berkas_extension;
@@ -178,9 +180,12 @@ class FileController extends Controller
                 ->where('laporan_kemajuan_hash_name', $file_name)
                 ->first();
 
+            $file_url = URL::asset("assets/file/laporan_kemajuan/" . $file_fetch->laporan_kemajuan_hash_name);
             $file = public_path("assets/file/laporan_kemajuan/" . $file_fetch->laporan_kemajuan_hash_name);
 
             $file_extension = $file_fetch->laporan_kemajuan_extension;
+        } else {
+            return redirect()->route('coming_soon');
         }
 
         if ($file_fetch) {
