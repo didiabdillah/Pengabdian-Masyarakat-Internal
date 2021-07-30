@@ -182,6 +182,16 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::put('/suspend/{id}', 'Admin\PengusulController@suspend')->name('admin_pengusul_suspend');
                 });
 
+                //Lama Kegiatan
+                Route::group(['prefix' => 'lama_kegiatan'], function () {
+                    Route::get('/', 'Admin\LamaKegiatanController@index')->name('admin_lama_kegiatan');
+                    Route::get('/insert', 'Admin\LamaKegiatanController@insert')->name('admin_lama_kegiatan_insert');
+                    Route::post('/store', 'Admin\LamaKegiatanController@store')->name('admin_lama_kegiatan_store');
+                    Route::get('/{id}/edit', 'Admin\LamaKegiatanController@edit')->name('admin_lama_kegiatan_edit');
+                    Route::patch('/{id}/update', 'Admin\LamaKegiatanController@update')->name('admin_lama_kegiatan_update');
+                    Route::delete('/{id}/destroy', 'Admin\LamaKegiatanController@destroy')->name('admin_lama_kegiatan_destroy');
+                });
+
                 //Template Dokumen
                 Route::group(['prefix' => 'template_dokumen'], function () {
                     Route::get('/', 'Admin\TemplateDokumenController@index')->name('admin_template_dokumen');

@@ -256,6 +256,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('admin_lama_kegiatan')}}" class="nav-link @if(Request::segment(1) == 'lama_kegiatan' || Request::segment(2) == 'lama_kegiatan'){{'active'}}@endif">
+                                <i class="nav-icon fas fa-stopwatch"></i>
+                                <p>
+                                    Lama Kegiatan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('admin_template_dokumen')}}" class="nav-link @if(Request::segment(1) == 'template_dokumen' || Request::segment(2) == 'template_dokumen'){{'active'}}@endif">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
