@@ -77,7 +77,7 @@
                                 <div class="row m-4">
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <label for="dokumen_rab"><i class="fas fa-file-alt fa-2x"></i> Dokumen Rencana Anggaran Biaya (Excel)</label>
+                                            <label for="dokumen_rab"><i class="fas fa-file-alt fa-2x"></i> Dokumen Rencana Anggaran Biaya (Excel, Maks 9 MB)</label>
                                             <h6>File RAB : @if($dokumen_info){{$dokumen_info->dokumen_rab_original_name}}@else{{"-"}}@endif</h6>
                                             <h6>Tanggal Unggah : @if($dokumen_info){{Carbon\Carbon::parse($dokumen_info->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
                                             <h6>Ukuran File : @if($dokumen_info){{$dokumen_info->dokumen_rab_file_size . " KB"}}@else{{"-"}}@endif</h6>

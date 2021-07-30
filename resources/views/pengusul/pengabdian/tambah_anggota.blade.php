@@ -138,8 +138,12 @@ Session::forget('subalert');
                                                 <div class="col-md-10">
                                                     <p>
                                                         @if($result)
+                                                        @if($result->biodata()->first())
                                                         @if($result->biodata()->first()->biodata_institusi != NULL)
                                                         {{$result->biodata()->first()->biodata_institusi}}
+                                                        @else
+                                                        {{"-"}}
+                                                        @endif
                                                         @else
                                                         {{"-"}}
                                                         @endif
@@ -156,8 +160,12 @@ Session::forget('subalert');
                                                 <div class="col-md-10">
                                                     <p>
                                                         @if($result)
+                                                        @if($result->biodata()->first())
                                                         @if($result->biodata()->first()->biodata_program_studi != NULL)
                                                         {{$result->biodata()->first()->biodata_program_studi}}
+                                                        @else
+                                                        {{"-"}}
+                                                        @endif
                                                         @else
                                                         {{"-"}}
                                                         @endif
@@ -177,8 +185,12 @@ Session::forget('subalert');
                                         <div class="col-md-10">
                                             <p>
                                                 @if($result)
+                                                @if($result->biodata()->first())
                                                 @if($result->biodata()->first()->biodata_pendidikan != NULL)
                                                 {{$result->biodata()->first()->biodata_pendidikan}}
+                                                @else
+                                                {{"-"}}
+                                                @endif
                                                 @else
                                                 {{"-"}}
                                                 @endif

@@ -99,7 +99,7 @@
                                                     </h6>
                                                     <ul class="ml-4 mb-0 fa-ul text-muted">
                                                         <li class="small mb-1">
-                                                            <span class="fa-li"><i class="fas fa-lg fa-university"></i></span>
+                                                            <span class="fa-li"><i class="fas fa-lg fa-university"></i> </span> Institusi :
                                                             @if($row->biodata_institusi)
                                                             {{$row->biodata_institusi}}
                                                             @else
@@ -107,7 +107,7 @@
                                                             @endif
                                                         </li>
                                                         <li class="small mt-1">
-                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span>
+                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span> Jurusan :
                                                             @if($row->biodata_jurusan)
                                                             {{$row->biodata_jurusan}}
                                                             @else
@@ -115,7 +115,7 @@
                                                             @endif
                                                         </li>
                                                         <li class="small mt-1">
-                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span>
+                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span> Program Studi :
                                                             @if($row->biodata_program_studi)
                                                             {{$row->biodata_program_studi}}
                                                             @else

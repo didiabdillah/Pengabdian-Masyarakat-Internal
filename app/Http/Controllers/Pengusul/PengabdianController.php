@@ -131,7 +131,7 @@ class PengabdianController extends Controller
         // Input Validation
         $request->validate([
             'judul'  => 'required|max:255',
-            'kategori'  => 'required',
+            // 'kategori'  => 'required',
             'skema'  => 'required',
             'bidang'  => 'required',
             'lama_kegiatan'  => 'required',
@@ -140,7 +140,7 @@ class PengabdianController extends Controller
 
         $id = uniqid() . strtotime(now());
         $judul = htmlspecialchars($request->judul);
-        $kategori = htmlspecialchars($request->kategori);
+        // $kategori = htmlspecialchars($request->kategori);
         $skema = htmlspecialchars($request->skema);
         $bidang = htmlspecialchars($request->bidang);
         $lama_kegiatan = htmlspecialchars($request->lama_kegiatan);
@@ -150,7 +150,7 @@ class PengabdianController extends Controller
         $data = [
             'usulan_pengabdian_id' => $id,
             'usulan_pengabdian_judul' => $judul,
-            'usulan_pengabdian_kategori' => $kategori,
+            // 'usulan_pengabdian_kategori' => $kategori,
             'usulan_pengabdian_skema_id' => $skema,
             'usulan_pengabdian_bidang_id' => $bidang,
             'usulan_pengabdian_tahun' => date('Y'),
@@ -180,7 +180,7 @@ class PengabdianController extends Controller
         // Input Validation
         $request->validate([
             'judul'  => 'required|max:255',
-            'kategori'  => 'required',
+            // 'kategori'  => 'required',
             'skema'  => 'required',
             'bidang'  => 'required',
             'lama_kegiatan'  => 'required',
@@ -188,7 +188,7 @@ class PengabdianController extends Controller
         ]);
 
         $judul = htmlspecialchars($request->judul);
-        $kategori = htmlspecialchars($request->kategori);
+        // $kategori = htmlspecialchars($request->kategori);
         $skema = htmlspecialchars($request->skema);
         $bidang = htmlspecialchars($request->bidang);
         $lama_kegiatan = htmlspecialchars($request->lama_kegiatan);
@@ -197,7 +197,7 @@ class PengabdianController extends Controller
         //Insert Data Usulan Pengabdian
         $data = [
             'usulan_pengabdian_judul' => $judul,
-            'usulan_pengabdian_kategori' => $kategori,
+            // 'usulan_pengabdian_kategori' => $kategori,
             'usulan_pengabdian_skema_id' => $skema,
             'usulan_pengabdian_bidang_id' => $bidang,
             'usulan_pengabdian_tahun' => date('Y'),
@@ -341,29 +341,13 @@ class PengabdianController extends Controller
                 ->orderBy('created_at', 'asc')
                 ->get();
 
-            $luaran_wajib1 = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
+            $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->first();
-
-            $luaran_wajib2 = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
-                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->first();
-
-            $luaran_wajib3 = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
-                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->first();
-
-            $luaran_wajib4 = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
-                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->first();
-
-            $jumlah_luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
-                ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-                ->count();
+                ->get();
 
             $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
-                ->first();
+                ->get();
 
             $view_data = [
                 'mitra_sasaran' => $mitra_sasaran,
@@ -373,12 +357,8 @@ class PengabdianController extends Controller
                 'ketua' => $ketua,
                 'id' => $id,
                 'page' => $page,
-                'wajib1' => $luaran_wajib1,
-                'wajib2' => $luaran_wajib2,
-                'wajib3' => $luaran_wajib3,
-                'wajib4' => $luaran_wajib4,
-                'tambahan' => $luaran_tambahan,
-                'jumlah_luaran_wajib' => $jumlah_luaran_wajib,
+                'luaran_wajib' => $luaran_wajib,
+                'luaran_tambahan' => $luaran_tambahan,
             ];
 
             return view('pengusul.pengabdian.usulan_7', $view_data);
@@ -938,6 +918,51 @@ class PengabdianController extends Controller
 
     public function usulan_submit(Request $request, $id)
     {
+        $submit_pass = true;
+
+        // Cek Apakah Form Dan Dokumen Lengkap
+        // cek dokumen usulan
+        $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->count();
+        if ($dokumen_usulan <= 0) {
+            $submit_pass = false;
+        }
+        // cek dokumen rab
+        $dokumen_rab = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->count();
+        if ($dokumen_rab <= 0) {
+            $submit_pass = false;
+        }
+        // cek ada anggota
+        $anggota_pengabdian = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)->count();
+        if ($anggota_pengabdian <= 0) {
+            $submit_pass = false;
+        }
+        // cek ada mitra
+        $mitra = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)->get();
+        if ($mitra->count() <= 0) {
+            $submit_pass = false;
+        } else {
+            // cek mitra file
+            foreach ($mitra as $data) {
+                $mitra_file = Mitra_file::where('mitra_file_mitra_sasaran_id', $data->mitra_sasaran_id)->count();
+
+                if ($mitra_file <= 0) {
+                    $submit_pass = false;
+                }
+            }
+        }
+
+        // Check is submit pass false
+        if ($submit_pass == false) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Gagal Kirim Usulan', //Alert Message 
+                'Mohon Lengakpi Isian Form Usulan Dan Dokumen' //Sub Alert Message
+            );
+            return redirect()->back();
+        }
+
+        // Update
         $data = [
             'usulan_pengabdian_status' => 'dikirim',
             'usulan_pengabdian_submit' => true,

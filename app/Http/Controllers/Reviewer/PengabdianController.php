@@ -11,7 +11,7 @@ use App\Models\Anggota_pengabdian;
 use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
-use App\Models\Luaran_usulan;
+use App\Models\Usulan_luaran;
 use App\Models\Penilaian_usulan;
 
 class PengabdianController extends Controller

@@ -17,7 +17,7 @@ class CreateUsulanPengabdianTable extends Migration
             $table->string('usulan_pengabdian_id', 64)->primary()->unique();
             $table->string('usulan_pengabdian_reviewer_id', 64)->nullable();
             $table->string('usulan_pengabdian_judul');
-            $table->boolean('usulan_pengabdian_kategori'); //[Kompetitif Nasional / Desentralisasi]
+            // $table->boolean('usulan_pengabdian_kategori'); //[Kompetitif Nasional / Desentralisasi]
             $table->bigInteger('usulan_pengabdian_skema_id')->unsigned()->nullable();
             $table->bigInteger('usulan_pengabdian_bidang_id')->unsigned()->nullable();
             $table->integer('usulan_pengabdian_lama_kegiatan');

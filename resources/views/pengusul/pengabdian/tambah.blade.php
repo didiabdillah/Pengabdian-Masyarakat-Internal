@@ -87,25 +87,25 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    {{--<div class="form-group">
                                         <label for="kategori">Kategori</label>
                                         <div class="form-check">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <input class="form-check-input" type="radio" name="kategori" id="kategori1" value="0" @if(old('kategori')==0){{'checked'}}@endif>
+                                                    <input class="form-check-input" type="radio" name="kategori" id="kategori1" value="0">
                                                     <label class="form-check-label" for="kategori1">
                                                         Kompetitif Nasional
                                                     </label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input class="form-check-input" type="radio" name="kategori" id="kategori2" value="1" @if(old('kategori')==1){{'checked'}}@endif>
+                                                    <input class="form-check-input" type="radio" name="kategori" id="kategori2" value="1" >
                                                     <label class="form-check-label" for="kategori2">
                                                         Desentralisasi
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>--}}
 
                                     <div class="form-group">
                                         <label for="skema">Skema</label>

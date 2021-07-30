@@ -95,7 +95,7 @@
                                                                     <h2 class="lead"><b>{{$ketua->user_name}} ({{$ketua->user_nidn}})</b></h2>
                                                                     <ul class="ml-4 mb-0 fa-ul text-muted">
                                                                         <li class="small mb-1">
-                                                                            <span class="fa-li"><i class="fas fa-lg fa-university"></i></span>
+                                                                            <span class="fa-li"><i class="fas fa-lg fa-university"></i></span> Institusi :
                                                                             @if($ketua->biodata_institusi)
                                                                             {{$ketua->biodata_institusi}}
                                                                             @else
@@ -103,7 +103,7 @@
                                                                             @endif
                                                                         </li>
                                                                         <li class="small mt-1">
-                                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span>
+                                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span> Program Studi :
                                                                             @if($ketua->biodata_program_studi)
                                                                             {{$ketua->biodata_program_studi}}
                                                                             @else
@@ -111,7 +111,7 @@
                                                                             @endif
                                                                         </li>
                                                                         <li class="small mt-1">
-                                                                            <span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span>
+                                                                            <span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email :
                                                                             @if($ketua->user_email)
                                                                             {{$ketua->user_email}}
                                                                             @else
@@ -119,7 +119,7 @@
                                                                             @endif
                                                                         </li>
                                                                         <li class="small mt-1">
-                                                                            <span class="fa-li"><i class="fas fa-lg fa-user-graduate"></i></span>
+                                                                            <span class="fa-li"><i class="fas fa-lg fa-user-graduate"></i></span> Jenjang Pendidikan :
                                                                             @if($ketua->biodata_pendidikan)
                                                                             {{$ketua->biodata_pendidikan}}
                                                                             @else
@@ -210,7 +210,7 @@
                                                                     <h2 class="lead"><b>{{$row->user_name}} ({{$row->user_nidn}})</b></h2>
                                                                     <ul class="ml-4 mb-0 fa-ul text-muted">
                                                                         <li class="small mb-1">
-                                                                            <span class="fa-li"><i class="fas fa-lg fa-university"></i></span>
+                                                                            <span class="fa-li"><i class="fas fa-lg fa-university"></i></span> Institusi :
                                                                             @if($row->biodata_institusi)
                                                                             {{$row->biodata_institusi}}
                                                                             @else
@@ -218,7 +218,7 @@
                                                                             @endif
                                                                         </li>
                                                                         <li class="small mt-1">
-                                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span>
+                                                                            <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span> Program Studi :
                                                                             @if($row->biodata_program_studi)
                                                                             {{$row->biodata_program_studi}}
                                                                             @else
@@ -267,7 +267,7 @@
                                             <!-- LUARAN WAJIB -->
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="card m-2">
+                                                    <div class="card card-primary m-2 card-outline">
                                                         <div class="card-header">
                                                             <h3 class="card-title">
                                                                 <i class="fas fa-file-alt"></i>
@@ -279,108 +279,28 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th colspan="2">
-                                                                            @if($jumlah_luaran_wajib = 4)
-                                                                            <h5><span class="badge badge-primary">Isi Luaran Wajib Sudah Lengkap</span></h5>
-                                                                            @else
-                                                                            <h5><span class="badge badge-danger">Isi Luaran Wajib Belum Lengkap</span></h5>
-                                                                            @endif
+
                                                                         </th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                    @foreach($luaran_wajib as $data)
                                                                     <tr>
                                                                         <td>
-                                                                            <h5>Tahun 1 :</h5>
+                                                                            Tahun : {{$data->usulan_luaran_pengabdian_tahun}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{$loop->iteration}}. <b>- {{$data->usulan_luaran_pengabdian_kategori}}</b>
+                                                                            <br>
+
+                                                                            <b>{{$data->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$data->usulan_luaran_pengabdian_status}}</span>)</b>
+
+                                                                            <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
+
                                                                         </td>
 
-                                                                        <td>
-                                                                            1. <b>- Publikasi di prosiding seminar nasional ber ISBN</b>
-                                                                            <br>
-                                                                            @if($wajib1)
-                                                                            @if($wajib1->usulan_luaran_pengabdian_jenis && $wajib1->usulan_luaran_pengabdian_status)
-                                                                            <b>{{$wajib1->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib1->usulan_luaran_pengabdian_status}}</span>)</b>
-                                                                            @endif
-                                                                            @if($wajib1->usulan_luaran_pengabdian_rencana)
-                                                                            <h5>{{$wajib1->usulan_luaran_pengabdian_rencana}}</h5>
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                        </td>
                                                                     </tr>
-
-                                                                    <tr>
-                                                                        <td>
-
-                                                                        </td>
-
-                                                                        <td>
-                                                                            @if($wajib2)
-                                                                            2. <b>- {{$wajib2->usulan_luaran_pengabdian_kategori}}, ...</b>
-                                                                            <br>
-                                                                            @if($wajib2->usulan_luaran_pengabdian_jenis && $wajib2->usulan_luaran_pengabdian_status)
-                                                                            <b>{{$wajib2->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib2->usulan_luaran_pengabdian_status}}</span>)</b>
-                                                                            @endif
-                                                                            @if($wajib2->usulan_luaran_pengabdian_rencana)
-                                                                            <h5>{{$wajib2->usulan_luaran_pengabdian_rencana}}</h5>
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                            @else
-                                                                            2. <b>- Publikasi di media massa, ...</b>
-                                                                            <br>
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td>
-
-                                                                        </td>
-
-                                                                        <td>
-                                                                            3. <b>- Video pelaksanaan kegiatan</b>
-                                                                            <br>
-                                                                            @if($wajib3)
-                                                                            @if($wajib3->usulan_luaran_pengabdian_jenis && $wajib3->usulan_luaran_pengabdian_status)
-                                                                            <b>{{$wajib3->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib3->usulan_luaran_pengabdian_status}}</span>)</b>
-                                                                            @endif
-                                                                            @if($wajib3->usulan_luaran_pengabdian_rencana)
-                                                                            <h5>{{$wajib3->usulan_luaran_pengabdian_rencana}}</h5>
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td>
-
-                                                                        </td>
-
-                                                                        <td>
-                                                                            4. <b>- Peningkatan pemberdayaan mitra,...</b>
-                                                                            <br>
-                                                                            @if($wajib4)
-                                                                            @if($wajib4->usulan_luaran_pengabdian_jenis && $wajib4->usulan_luaran_pengabdian_status)
-                                                                            <b>{{$wajib4->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib4->usulan_luaran_pengabdian_status}}</span>)</b>
-                                                                            @endif
-                                                                            @if($wajib4->usulan_luaran_pengabdian_rencana)
-                                                                            <h5>{{$wajib4->usulan_luaran_pengabdian_rencana}}</h5>
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
+                                                                    @endforeach
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -394,7 +314,7 @@
                                             <!-- LUARAN TAMBAHAN -->
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="card m-2">
+                                                    <div class="card card-secondary m-2 card-outline">
                                                         <div class="card-header">
                                                             <h3 class="card-title">
                                                                 <i class="fas fa-file-alt"></i>
@@ -409,26 +329,23 @@
                                                                     </th>
                                                                 </thead>
                                                                 <tbody>
+                                                                    @foreach($luaran_tambahan as $data)
                                                                     <tr>
                                                                         <td>
-                                                                            <h5>Tahun 1 :</h5>
+                                                                            Tahun : {{$data->usulan_luaran_pengabdian_tahun}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{$loop->iteration}}. <b>- {{$data->usulan_luaran_pengabdian_kategori}}</b>
+                                                                            <br>
+
+                                                                            <b>{{$data->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$data->usulan_luaran_pengabdian_status}}</span>)</b>
+
+                                                                            <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
+
                                                                         </td>
 
-                                                                        <td>
-                                                                            @if($tambahan)
-                                                                            @if($tambahan->usulan_luaran_pengabdian_jenis && $tambahan->usulan_luaran_pengabdian_status)
-                                                                            <b>{{$tambahan->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$tambahan->usulan_luaran_pengabdian_status}}</span>)</b>
-                                                                            @endif
-                                                                            @if($tambahan->usulan_luaran_pengabdian_rencana)
-                                                                            <h5>{{$tambahan->usulan_luaran_pengabdian_rencana}}</h5>
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                            @else
-                                                                            <h5><span class="badge badge-warning">-</span></h5>
-                                                                            @endif
-                                                                        </td>
                                                                     </tr>
+                                                                    @endforeach
                                                                 </tbody>
                                                             </table>
                                                         </div>

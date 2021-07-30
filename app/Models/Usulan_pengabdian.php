@@ -14,7 +14,7 @@ class Usulan_pengabdian extends Model
         'usulan_pengabdian_id',
         'usulan_pengabdian_reviewer_id',
         'usulan_pengabdian_judul',
-        'usulan_pengabdian_kategori',
+        // 'usulan_pengabdian_kategori',
         'usulan_pengabdian_skema_id',
         'usulan_pengabdian_bidang_id',
         'usulan_pengabdian_lama_kegiatan',
