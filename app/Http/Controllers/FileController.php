@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 use App\Models\Laporan_akhir;
 use App\Models\Usulan_pengabdian;
@@ -117,12 +118,14 @@ class FileController extends Controller
         $file_fetch = NULL;
         $file = NULL;
         $file_extension = NULL;
+        $file_url = NULL;
 
         if ($file_category == "usulan") {
             $file_fetch = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)
                 ->where('dokumen_usulan_hash_name', $file_name)
                 ->first();
 
+            $file_url = URL::asset("assets/file/dokumen_usulan/" . $file_fetch->dokumen_usulan_hash_name);
             $file = public_path("assets/file/dokumen_usulan/" . $file_fetch->dokumen_usulan_hash_name);
 
             $file_extension = $file_fetch->dokumen_usulan_extension;
@@ -131,6 +134,7 @@ class FileController extends Controller
                 ->where('dokumen_rab_hash_name', $file_name)
                 ->first();
 
+            $file_url = URL::asset("assets/file/dokumen_rab/" . $file_fetch->dokumen_rab_hash_name);
             $file = public_path("assets/file/dokumen_rab/" . $file_fetch->dokumen_rab_hash_name);
 
             $file_extension = $file_fetch->dokumen_rab_extension;
@@ -140,6 +144,7 @@ class FileController extends Controller
                 ->where('mitra_file.mitra_sasaran_file_hash_name', $file_name)
                 ->first();
 
+            $file_url = URL::asset("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
             $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
 
             $file_extension = $file_fetch->mitra_sasaran_file_extension;
@@ -154,6 +159,7 @@ class FileController extends Controller
         } elseif ($file_category == "template_dokumen") {
             $file_fetch = get_where_local_db_json("template_dokumen.json", "id", $id);
 
+            $file_url = URL::asset("assets/file/template_dokumen/" . $file_fetch["hash_name"]);
             $file = public_path("assets/file/template_dokumen/" . $file_fetch["hash_name"]);
 
             $file_extension = $file_fetch["extension"];
@@ -192,6 +198,8 @@ class FileController extends Controller
                 );
 
                 return response()->file($file, $headers);
+            } elseif ($file_extension == "doc" || $file_extension == "docx" || $file_extension == "xls" || $file_extension == "xlsx") {
+                return redirect()->away('http://view.officeapps.live.com/op/view.aspx?src=' . $file_url);
             } else {
                 return redirect()->route('coming_soon');
             }
