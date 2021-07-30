@@ -78,7 +78,8 @@
                                     <div class="form-group">
                                         <label for="tahun">Tahun Luaran</label>
                                         <select class="form-control select2 @error('tahun') is-invalid @enderror" style="width: 100%;" name="tahun">
-                                            @for($i = 1; $i <= intval($tahun_kegiatan); $i++) <!-- -->
+                                            @for($i = 1; $i <= intval($lama_kegiatan->usulan_pengabdian_lama_kegiatan); $i++)
+                                                <!-- -->
                                                 <option value="{{$i}}" @if(old('tahun')==$i){{'selected'}}@endif>{{'Tahun ' . $i}}</option>
                                                 @endfor
                                         </select>

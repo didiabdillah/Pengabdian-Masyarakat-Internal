@@ -19,9 +19,9 @@ use App\Models\Jenis_luaran;
 use App\Models\Kategori_luaran;
 use App\Models\Status_luaran;
 use App\Models\Mitra_sasaran;
-use App\Models\Luaran_usulan;
 use App\Models\Mitra_file;
 use App\Models\Usulan_luaran;
+use App\Models\Lama_kegiatan;
 
 class PengabdianController extends Controller
 {
@@ -76,8 +76,9 @@ class PengabdianController extends Controller
     {
         $skema = Skema::orderBy('skema_label', 'asc')->get();
         $bidang = Bidang::orderBy('bidang_label', 'asc')->get();
+        $lama_kegiatan = Lama_kegiatan::orderBy('lama_kegiatan_tahun', 'asc')->get();
 
-        return view('pengusul.pengabdian.tambah', ['skema' => $skema, 'bidang' => $bidang]);
+        return view('pengusul.pengabdian.tambah', ['skema' => $skema, 'bidang' => $bidang, 'lama_kegiatan' => $lama_kegiatan]);
     }
 
     public function hapus($id)
@@ -228,6 +229,7 @@ class PengabdianController extends Controller
             $skema = Skema::orderBy('skema_label', 'asc')->get();
             $bidang = Bidang::orderBy('bidang_label', 'asc')->get();
             $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)->first();
+            $lama_kegiatan = Lama_kegiatan::orderBy('lama_kegiatan_tahun', 'asc')->get();
 
             $view_data = [
                 'skema' => $skema,
@@ -235,6 +237,7 @@ class PengabdianController extends Controller
                 'usulan' => $usulan,
                 'page' => $page,
                 'id' => $id,
+                'lama_kegiatan' => $lama_kegiatan,
             ];
 
             return view('pengusul.pengabdian.usulan_1', $view_data);
@@ -275,10 +278,12 @@ class PengabdianController extends Controller
 
             $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
                 ->get();
 
             $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
+                ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
                 ->get();
 
             $view_data = [
@@ -343,10 +348,12 @@ class PengabdianController extends Controller
 
             $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+                ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
                 ->get();
 
             $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
                 ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
+                ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
                 ->get();
 
             $view_data = [
@@ -1010,12 +1017,14 @@ class PengabdianController extends Controller
     {
         $tahun_kegiatan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)->first()->usulan_pengabdian_lama_kegiatan;
         $kategori = Kategori_luaran::where('kategori_luaran_required', $tipe)->get();
+        $lama_kegiatan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)->first();
 
         $view_data = [
             'id' => $id,
             'tahun_kegiatan' => $tahun_kegiatan,
             'kategori' => $kategori,
             'tipe' => $tipe,
+            'lama_kegiatan' => $lama_kegiatan,
         ];
 
         return view('pengusul.pengabdian.luaran.tambah_luaran', $view_data);

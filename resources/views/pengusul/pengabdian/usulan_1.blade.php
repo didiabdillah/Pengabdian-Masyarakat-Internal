@@ -140,7 +140,9 @@
                                         <label for="lama_kegiatan">Lama Kegiatan</label>
                                         <select class="form-control select2 @error('lama_kegiatan') is-invalid @enderror" data-placeholder="Pilih Lama Kegiatan" style="width: 100%;" name="lama_kegiatan">
                                             <option value="">--Pilih Lama Kegiatan--</option>
-                                            <option value="1" @if($usulan->usulan_pengabdian_lama_kegiatan==1){{'selected'}}@endif>1 Tahun</option>
+                                            @foreach($lama_kegiatan as $data)
+                                            <option value="{{$data->lama_kegiatan_tahun}}" @if($usulan->usulan_pengabdian_lama_kegiatan==$data->lama_kegiatan_tahun){{'selected'}}@endif>{{$data->lama_kegiatan_tahun}} Tahun</option>
+                                            @endforeach
                                         </select>
                                         @error('lama_kegiatan')
                                         <div class="invalid-feedback">
