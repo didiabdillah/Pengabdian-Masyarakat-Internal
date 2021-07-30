@@ -53,6 +53,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Judul</th>
+                                    <th>Pengusul</th>
+                                    <th>Program Studi</th>
                                     <th>Tahun</th>
                                     <th>Options</th>
                                 </tr>
@@ -65,6 +67,22 @@
                                     </td>
                                     <td>
                                         <h5>{{$data->usulan_pengabdian_judul}}</h5>
+                                    </td>
+                                    <td>
+                                        @php $ketua = $data->anggota_pengabdian()
+                                        ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                        ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                        ->where('anggota_pengabdian_pengabdian_id', $data->usulan_pengabdian_id)
+                                        ->where('anggota_pengabdian_role', 'ketua')
+                                        ->first(); @endphp
+                                        <h5>
+                                            {{$ketua->user_name}}
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            {{$ketua->biodata_program_studi}}
+                                        </h5>
                                     </td>
                                     <td>
                                         <h5>{{$data->usulan_pengabdian_tahun}}</h5>

@@ -28,7 +28,7 @@ class PengabdianController extends Controller
 
         $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_reviewer_id', Session::get('user_id'))
-            ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('usulan_pengabdian_status', '=', 'dikirim')
             ->orderBy('usulan_pengabdian_tahun', 'desc')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->get();
