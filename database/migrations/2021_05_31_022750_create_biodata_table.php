@@ -29,6 +29,8 @@ class CreateBiodataTable extends Migration
             $table->string('biodata_no_hp')->nullable();
             $table->string('biodata_no_telp')->nullable();
             $table->string('biodata_web_personal')->nullable();
+            $table->string('biodata_scopus_id')->nullable();
+            $table->string('biodata_google_schoolar_id')->nullable();
             $table->timestamps();
 
             $table->foreign('biodata_user_id')->references('user_id')->on('users')->onUpdate('cascade')->onDelete('cascade');

@@ -23,7 +23,9 @@ class Biodata extends Model
         'biodata_no_ktp',
         'biodata_no_hp',
         'biodata_no_telp',
-        'biodata_web_personal'
+        'biodata_web_personal',
+        'biodata_scopus_id',
+        'biodata_google_schoolar_id'
     ];
 
     public function user()

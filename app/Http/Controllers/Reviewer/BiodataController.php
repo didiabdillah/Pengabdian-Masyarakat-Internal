@@ -27,7 +27,6 @@ class BiodataController extends Controller
         // Input Validation
         $request->validate([
             'nama'  => 'required|max:255',
-            'nidn'  => 'required|max:16',
             'sex'  => 'required',
             'institusi'  => 'required|max:255',
             'jurusan'  => 'required|max:255',
@@ -42,19 +41,9 @@ class BiodataController extends Controller
             'no_hp'  => 'max:16',
             'email'  => 'required|email:rfc,dns|max:255',
             'web'  => 'max:255',
+            'schoolar_id'  => 'max:255',
+            'scopus_id'  => 'max:255',
         ]);
-
-        //check is NIDN exist in DB
-        if (User::where('user_nidn', htmlspecialchars($request->nidn))->where('user_id', '!=', $id)->count() > 0) {
-            //Flash Message
-            flash_alert(
-                __('alert.icon_error'), //Icon
-                'Gagal', //Alert Message 
-                'NIDN Sudah Terdaftar' //Sub Alert Message
-            );
-
-            return redirect()->back();
-        }
 
         //check is Email exist in DB
         if (User::where('user_email', htmlspecialchars($request->email))->where('user_id', '!=', $id)->count() > 0) {
@@ -72,7 +61,6 @@ class BiodataController extends Controller
         $data_user = [
             'user_email' => htmlspecialchars($request->email),
             'user_name' => htmlspecialchars($request->nama),
-            'user_nidn' => htmlspecialchars($request->nidn),
         ];
         User::where('user_id', $id)
             ->update($data_user);
@@ -92,6 +80,8 @@ class BiodataController extends Controller
             'biodata_no_hp' => htmlspecialchars($request->no_hp),
             'biodata_no_telp' => htmlspecialchars($request->no_telp),
             'biodata_web_personal' => htmlspecialchars($request->web),
+            'biodata_scopus_id' => htmlspecialchars($request->scopus_id),
+            'biodata_google_schoolar_id' => htmlspecialchars($request->schoolar_id),
         ];
 
         Biodata::updateOrInsert(

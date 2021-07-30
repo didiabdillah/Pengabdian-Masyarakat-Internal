@@ -52,6 +52,16 @@ $profile_layout = 'layout.layout_pengusul';
                                     <li class="list-group-item">
                                         <b>Role</b> <a class="float-right">{{$user->user_role}}</a>
                                     </li>
+                                    <li class="list-group-item">
+                                        <b>NIDN</b>
+                                        <a class="float-right">
+                                            @if($user->user_nidn)
+                                            {{$user->user_nidn}}
+                                            @else
+                                            {{"-"}}
+                                            @endif
+                                        </a>
+                                    </li>
                                 </ul>
                                 @if($user_id == Session::get('user_id'))
                                 <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-block"><b><i class="fas fa-camera"></i> Upload Profile Picture</b></button>
@@ -84,6 +94,18 @@ $profile_layout = 'layout.layout_pengusul';
 
                                                 <p class="text-muted">
                                                     {{$user->user_name}}
+                                                </p>
+
+                                                <hr>
+
+                                                <strong><i class="fas fa-id-card mr-1"></i>NIDN</strong>
+
+                                                <p class="text-muted">
+                                                    @if($user->user_nidn)
+                                                    {{$user->user_nidn}}
+                                                    @else
+                                                    {{"-"}}
+                                                    @endif
                                                 </p>
 
                                                 <hr>

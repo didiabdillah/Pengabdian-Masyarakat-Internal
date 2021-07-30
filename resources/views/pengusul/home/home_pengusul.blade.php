@@ -186,10 +186,6 @@
 
                                                         <hr>
 
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="card-body">
                                                         <strong><i class="fas fa-map-marker-alt mr-1"></i>Alamat</strong>
 
                                                         <p class="text-muted">
@@ -205,6 +201,10 @@
                                                         </p>
 
                                                         <hr>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="card-body">
 
                                                         <strong><i class="fas fa-birthday-cake mr-1"></i>Tempat/Tanggal Lahir</strong>
 
@@ -286,6 +286,38 @@
                                                             @if($user->biodata)
                                                             @if($user->biodata->biodata_web_personal)
                                                             {{$user->biodata->biodata_web_personal}}
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                        </p>
+
+                                                        <hr>
+
+                                                        <strong><i class="fab fa-google mr-1"></i>Google Schoolar ID</strong>
+
+                                                        <p class="text-muted">
+                                                            @if($user->biodata)
+                                                            @if($user->biodata->biodata_google_schoolar_id)
+                                                            {{$user->biodata->biodata_google_schoolar_id}}
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                        </p>
+
+                                                        <hr>
+
+                                                        <strong><i class="fab fa-stripe-s mr-1"></i>Scopus ID</strong>
+
+                                                        <p class="text-muted">
+                                                            @if($user->biodata)
+                                                            @if($user->biodata->biodata_scopus_id)
+                                                            {{$user->biodata->biodata_scopus_id}}
                                                             @else
                                                             {{"-"}}
                                                             @endif

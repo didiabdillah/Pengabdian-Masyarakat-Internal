@@ -52,6 +52,16 @@ $profile_layout = 'layout.layout_pengusul';
                                     <li class="list-group-item">
                                         <b>Role</b> <a class="float-right">{{$user->user_role}}</a>
                                     </li>
+                                    <li class="list-group-item">
+                                        <b>NIDN</b>
+                                        <a class="float-right">
+                                            @if($user->user_nidn)
+                                            {{$user->user_nidn}}
+                                            @else
+                                            {{"-"}}
+                                            @endif
+                                        </a>
+                                    </li>
                                 </ul>
 
                                 @if($user_id == Session::get('user_id'))

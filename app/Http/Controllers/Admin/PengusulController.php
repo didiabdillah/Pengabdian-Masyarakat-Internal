@@ -42,7 +42,7 @@ class PengusulController extends Controller
     {
         // Input Validation
         $request->validate([
-            'nidn'  => 'required|max:16',
+            'nidn'  => 'required|size:10',
             'name'  => 'required|max:255',
             'email'  => 'required|max:255',
             'password'  => 'required|max:100|min:8',
