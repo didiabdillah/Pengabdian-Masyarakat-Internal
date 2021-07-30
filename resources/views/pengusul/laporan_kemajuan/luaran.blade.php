@@ -279,6 +279,9 @@
             "autoWidth": false,
             "responsive": true,
             "pagingType": "simple_numbers",
+            "language": {
+                "url": "{{URL::asset('assets/js/datatables/Indonesian.json')}}"
+            },
         });
 
         $('#example3').DataTable({
@@ -290,6 +293,9 @@
             "autoWidth": false,
             "responsive": true,
             "pagingType": "simple_numbers",
+            "language": {
+                "url": "{{URL::asset('assets/js/datatables/Indonesian.json')}}"
+            },
         });
     });
 </script>
