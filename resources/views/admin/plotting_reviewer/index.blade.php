@@ -53,6 +53,7 @@
                                     <th>Judul</th>
                                     <th>Tahun</th>
                                     <th>Pengusul</th>
+                                    <th>Prodi</th>
                                     <th>Reviewer</th>
                                     <th>Status</th>
                                     <th>Options</th>
@@ -76,10 +77,16 @@
                                             @php
                                             $ketua= $usulan->anggota_pengabdian()
                                             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                                            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
                                             ->where('anggota_pengabdian_role', 'ketua')
                                             ->first();
                                             @endphp
                                             {{$ketua->user_name}}
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            {{$ketua->biodata_program_studi}}
                                         </h5>
                                     </td>
                                     <td>
