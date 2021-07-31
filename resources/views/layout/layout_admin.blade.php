@@ -129,6 +129,7 @@
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item @if(Request::segment(2) == 'pengabdian'){{'menu-is-opening menu-open'}} @endif">
                             <a href="#" class="nav-link @if(Request::segment(2) == 'pengabdian') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
@@ -146,24 +147,65 @@
                                         </p>
                                     </a>
                                 </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item @if(Request::segment(2) == 'lama_kegiatan' || Request::segment(2) == 'waktu_pelaksanaan'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'lama_kegiatan' || Request::segment(2) == 'waktu_pelaksanaan') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-clock"></i>
+                                <p>
+                                    Atur Waktu
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('admin_pengabdian_pelaksanaan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'pelaksanaan' && Request::segment(4) == NULL) {{'active'}} @endif">
+                                    <a href="{{route('admin_waktu_pelaksanaan')}}" class="nav-link @if(Request::segment(2) == 'waktu_pelaksanaan') {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Pelaksanaan Pengabdian
+                                            Waktu Pelaksanaan
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin_penilaian_pelaksanaan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'pelaksanaan' && Request::segment(4) == 'penilaian') {{'active'}} @endif">
+                                    <a href="{{route('admin_lama_kegiatan')}}" class="nav-link @if(Request::segment(2) == 'lama_kegiatan') {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Pelaksanaan Penilaian
+                                            Lama Kegiatan
                                         </p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="nav-item @if(Request::segment(2) == 'bidang' || Request::segment(2) == 'skema'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'bidang' || Request::segment(2) == 'skema') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-box"></i>
+                                <p>
+                                    Bidang & Skema
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin_bidang')}}" class="nav-link @if(Request::segment(2) == 'bidang') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Bidang
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin_skema')}}" class="nav-link @if(Request::segment(2) == 'skema') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Skema
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item">
                             <a href="{{route('admin_data_luaran')}}" class="nav-link @if(Request::segment(1) == 'data_luaran' || Request::segment(2) == 'data_luaran') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-copy"></i>
@@ -172,6 +214,7 @@
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="{{route('admin_jurusan')}}" class="nav-link @if(Request::segment(1) == 'jurusan' || Request::segment(2) == 'jurusan') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
@@ -180,22 +223,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin_bidang')}}" class="nav-link @if(Request::segment(1) == 'bidang' || Request::segment(2) == 'bidang') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-box"></i>
-                                <p>
-                                    Bidang
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin_skema')}}" class="nav-link @if(Request::segment(1) == 'skema' || Request::segment(2) == 'skema') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-box"></i>
-                                <p>
-                                    Skema
-                                </p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="{{route('admin_logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-check"></i>
@@ -204,6 +232,7 @@
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="{{route('admin_laporan_kemajuan')}}" class="nav-link @if(Request::segment(1) == 'laporan_kemajuan' || Request::segment(2) == 'laporan_kemajuan') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-file-alt"></i>
@@ -212,6 +241,7 @@
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="{{route('admin_laporan_akhir')}}" class="nav-link @if(Request::segment(1) == 'laporan_akhir' || Request::segment(2) == 'laporan_akhir') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-paste"></i>
@@ -220,6 +250,35 @@
                                 </p>
                             </a>
                         </li>
+
+                        <li class="nav-item @if(Request::segment(2) == 'plotting'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'plotting') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
+                                <p>
+                                    Plotting Reviewer
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin_plotting_reviewer')}}" class="nav-link @if(Request::segment(3) == 'usulan') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Usulan Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin_plotting_monev_reviewer')}}" class="nav-link @if(Request::segment(3) == 'monev') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Monev
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item @if(Request::segment(2) == 'reviewer'){{'menu-is-opening menu-open'}} @endif">
                             <a href="#" class="nav-link @if(Request::segment(2) == 'reviewer') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-user-friends"></i>
@@ -237,32 +296,31 @@
                                         </p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{route('admin_plotting_reviewer')}}" class="nav-link @if(Request::segment(3) == 'plotting') {{'active'}} @endif">
-                                        <i class="nav-icon far fa-circle"></i>
-                                        <p>
-                                            Plotting Reviewer
-                                        </p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin_pengusul')}}" class="nav-link @if(Request::segment(1) == 'pengusul' || Request::segment(2) == 'pengusul') {{'active'}} @endif">
+
+                        <li class="nav-item @if(Request::segment(2) == 'pengusul'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'pengusul') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Pengusul
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin_pengusul')}}" class="nav-link @if(Request::segment(2) == 'pengusul') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Daftar Pengusul
+                                        </p>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin_lama_kegiatan')}}" class="nav-link @if(Request::segment(1) == 'lama_kegiatan' || Request::segment(2) == 'lama_kegiatan'){{'active'}}@endif">
-                                <i class="nav-icon fas fa-stopwatch"></i>
-                                <p>
-                                    Lama Kegiatan
-                                </p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="{{route('admin_template_dokumen')}}" class="nav-link @if(Request::segment(1) == 'template_dokumen' || Request::segment(2) == 'template_dokumen'){{'active'}}@endif">
                                 <i class="nav-icon fas fa-file"></i>

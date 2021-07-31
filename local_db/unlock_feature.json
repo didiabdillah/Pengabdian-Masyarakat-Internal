@@ -2,22 +2,25 @@
     {
         "id": "60f5688fa32e2",
         "name": "tambah_usulan_pengabdian",
+        "label": "Pengajuan Usulan Pengabdian",
         "start_year": "2021",
-        "end_year": "2022",
+        "end_year": "2023",
         "start_time": "2021-07-20 18:55:00",
         "end_time": "2021-08-07 18:55:00"
     },
     {
         "id": "60f5688fa32ed",
         "name": "nilai_usulan_pengabdian",
+        "label": "Penilaian Usulan Pengabdian Oleh Reviewer",
         "start_year": "2021",
         "end_year": "2021",
-        "start_time": "2021-07-19 18:55:00",
-        "end_time": "2021-07-26 22:55:00"
+        "start_time": "2021-07-29 18:55:00",
+        "end_time": "2021-07-31 22:55:00"
     },
     {
         "id": "6104b2dc66bd4",
         "name": "tambah_logbook_pengabdian",
+        "label": "Pengumpulan Logbook Pengabdian",
         "start_year": "2021",
         "end_year": "2021",
         "start_time": "2021-07-19 18:55:00",
@@ -26,6 +29,7 @@
     {
         "id": "6104b32b458d0",
         "name": "tambah_laporan_akhir_pengabdian",
+        "label": "Pengumpulan Laporan Akhir Pengabdian",
         "start_year": "2021",
         "end_year": "2021",
         "start_time": "2021-07-19 18:55:00",
@@ -34,6 +38,7 @@
     {
         "id": "6104b3505d116",
         "name": "tambah_laporan_kemajuan_pengabdian",
+        "label": "Pengumpulan Laporan Kemajuan Pengabdian",
         "start_year": "2021",
         "end_year": "2021",
         "start_time": "2021-07-19 18:55:00",
@@ -42,6 +47,7 @@
     {
         "id": "6104b3617c4b4",
         "name": "monev_laporan_kemajuan_pengabdian",
+        "label": "Monev Pengabdian Oleh Reviewer",
         "start_year": "2021",
         "end_year": "2021",
         "start_time": "2021-07-19 18:55:00",

@@ -152,6 +152,20 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::get('/', 'Admin\LaporanAkhirController@index')->name('admin_laporan_akhir');
                 });
 
+                //Plotting Reviewer
+                Route::group(['prefix' => 'plotting'], function () {
+                    Route::group(['prefix' => 'usulan'], function () {
+                        Route::get('/', 'Admin\PlottingReviewerController@index')->name('admin_plotting_reviewer');
+                        Route::get('/{id}/give', 'Admin\PlottingReviewerController@give_reviewer')->name('admin_plotting_give_reviewer');
+                        Route::patch('/{id}/give', 'Admin\PlottingReviewerController@give_reviewer_update')->name('admin_plotting_give_reviewer_update');
+                    });
+                    Route::group(['prefix' => 'monev'], function () {
+                        Route::get('/', 'Admin\PlottingReviewerController@index_monev')->name('admin_plotting_monev_reviewer');
+                        Route::get('/{id}/give', 'Admin\PlottingReviewerController@give_monev_reviewer')->name('admin_plotting_monev_give_reviewer');
+                        Route::patch('/{id}/give', 'Admin\PlottingReviewerController@give_monev_reviewer_update')->name('admin_plotting_monev_give_reviewer_update');
+                    });
+                });
+
                 //Reviewer
                 Route::group(['prefix' => 'reviewer'], function () {
                     Route::group(['prefix' => 'daftar'], function () {
@@ -162,12 +176,6 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                         Route::patch('/edit/{id}', 'Admin\ReviewerController@update')->name('admin_reviewer_update');
                         Route::delete('/destroy/{id}', 'Admin\ReviewerController@destroy')->name('admin_reviewer_destroy');
                         Route::put('/suspend/{id}', 'Admin\ReviewerController@suspend')->name('admin_reviewer_suspend');
-                    });
-
-                    Route::group(['prefix' => 'plotting'], function () {
-                        Route::get('/', 'Admin\PlottingReviewerController@index')->name('admin_plotting_reviewer');
-                        Route::get('/{id}/give', 'Admin\PlottingReviewerController@give_reviewer')->name('admin_plotting_give_reviewer');
-                        Route::patch('/{id}/give', 'Admin\PlottingReviewerController@give_reviewer_update')->name('admin_plotting_give_reviewer_update');
                     });
                 });
 
@@ -180,6 +188,13 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::patch('/edit/{id}', 'Admin\PengusulController@update')->name('admin_pengusul_update');
                     Route::delete('/destroy/{id}', 'Admin\PengusulController@destroy')->name('admin_pengusul_destroy');
                     Route::put('/suspend/{id}', 'Admin\PengusulController@suspend')->name('admin_pengusul_suspend');
+                });
+
+                // Waktu Pelaksanaan
+                Route::group(['prefix' => 'waktu_pelaksanaan'], function () {
+                    Route::get('/', 'Admin\WaktuPelaksanaanController@index')->name('admin_waktu_pelaksanaan');
+                    Route::get('/{id}/edit', 'Admin\WaktuPelaksanaanController@edit')->name('admin_waktu_pelaksanaan_edit');
+                    Route::patch('/{id}/update', 'Admin\WaktuPelaksanaanController@update')->name('admin_waktu_pelaksanaan_update');
                 });
 
                 //Lama Kegiatan
