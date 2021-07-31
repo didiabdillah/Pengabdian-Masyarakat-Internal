@@ -65,7 +65,7 @@
                                     </td>
                                     <td>
                                         <div class="card-body">
-                                            <a class="btn btn-primary btn-sm" href="{{route('admin_laporan_kemajuan_luaran', $data->usulan_pengabdian_id)}}">
+                                            <a class="btn btn-primary btn-sm" href="{{route('admin_laporan_kemajuan_list', $data->usulan_pengabdian_id)}}">
                                                 <i class="fas fa-folder">
                                                 </i>
 

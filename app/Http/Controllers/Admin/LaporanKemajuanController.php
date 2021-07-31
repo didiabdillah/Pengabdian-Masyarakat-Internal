@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\Laporan_kemajuan;
 use App\Models\Usulan_pengabdian;
 use App\Models\Usulan_luaran;
 
@@ -28,8 +29,12 @@ class LaporanKemajuanController extends Controller
 
     // ==================================================================================
 
-    public function luaran($pengabdian_id)
+    public function list($pengabdian_id)
     {
+        $laporan_kemajuan = Laporan_kemajuan::where('laporan_kemajuan_pengabdian_id', $pengabdian_id)->where('laporan_kemajuan_tipe', 'kemajuan')->first();
+
+        $laporan_keuangan = Laporan_kemajuan::where('laporan_kemajuan_pengabdian_id', $pengabdian_id)->where('laporan_kemajuan_tipe', 'keuangan')->first();
+
         $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $pengabdian_id)
             ->where('usulan_luaran_pengabdian_tipe', 'wajib')
             ->get();
@@ -39,11 +44,13 @@ class LaporanKemajuanController extends Controller
             ->get();
 
         $view_data = [
+            'laporan_kemajuan' => $laporan_kemajuan,
+            'laporan_keuangan' => $laporan_keuangan,
             'luaran_wajib' => $luaran_wajib,
             'luaran_tambahan' => $luaran_tambahan,
             'pengabdian_id' => $pengabdian_id,
         ];
 
-        return view('admin.laporan_kemajuan.luaran', $view_data);
+        return view('admin.laporan_kemajuan.list', $view_data);
     }
 }

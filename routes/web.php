@@ -144,7 +144,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Laporan Kemajuan
                 Route::group(['prefix' => 'laporan_kemajuan'], function () {
                     Route::get('/', 'Admin\LaporanKemajuanController@index')->name('admin_laporan_kemajuan');
-                    Route::get('/{pengabdian_id}/luaran', 'Admin\LaporanKemajuanController@luaran')->name('admin_laporan_kemajuan_luaran');
+                    Route::get('/{pengabdian_id}/list', 'Admin\LaporanKemajuanController@list')->name('admin_laporan_kemajuan_list');
                 });
 
                 //Laporan Akhir
