@@ -14,13 +14,13 @@ use App\Models\Usulan_pengabdian;
 use App\Models\Dokumen_usulan;
 use App\Models\Dokumen_rab;
 use App\Models\Mitra_sasaran;
-use App\Models\Logbook;
+use App\Models\Laporan_luaran;
 use App\Models\Logbook_berkas;
 use App\Models\Laporan_kemajuan;
 
 class FileController extends Controller
 {
-    // FILE PREVIEW AND DOWNLOAD
+    // FILE DOWNLOAD
     public function file_download($id, $file_name, $file_category)
     {
         $file_fetch = NULL;
@@ -87,6 +87,16 @@ class FileController extends Controller
             $file_extension = $file_fetch->logbook_berkas_extension;
 
             $file_original_name = $file_fetch->logbook_berkas_original_name;
+        } elseif ($file_category == "laporan_luaran") {
+            $file_fetch = Laporan_luaran::where('laporan_luaran_id', $id)
+                ->where('laporan_luaran_hash_name', $file_name)
+                ->first();
+
+            $file = public_path("assets/file/laporan_luaran/" . $file_fetch->laporan_luaran_hash_name);
+
+            $file_extension = $file_fetch->laporan_luaran_extension;
+
+            $file_original_name = $file_fetch->laporan_luaran_original_name;
         } elseif ($file_category == "laporan_kemajuan") {
             $file_fetch = Laporan_kemajuan::where('laporan_kemajuan_id', $id)
                 ->where('laporan_kemajuan_hash_name', $file_name)
@@ -97,6 +107,8 @@ class FileController extends Controller
             $file_extension = $file_fetch->laporan_kemajuan_extension;
 
             $file_original_name = $file_fetch->laporan_kemajuan_original_name;
+        } else {
+            return redirect()->route('coming_soon');
         }
 
         if ($file_fetch) {
@@ -112,7 +124,9 @@ class FileController extends Controller
 
         return redirect()->back();
     }
+    // END FILE DOWNLOAD
 
+    //FILE PREVIEW
     public function file_preview($id, $file_name, $file_category)
     {
         $file_fetch = NULL;
@@ -175,6 +189,15 @@ class FileController extends Controller
             $file = public_path("assets/file/logbook_berkas/" . $file_fetch->logbook_berkas_hash_name);
 
             $file_extension = $file_fetch->logbook_berkas_extension;
+        } elseif ($file_category == "laporan_luaran") {
+            $file_fetch = Laporan_luaran::where('laporan_luaran_id', $id)
+                ->where('laporan_luaran_hash_name', $file_name)
+                ->first();
+
+            $file_url = URL::asset("assets/file/laporan_luaran/" . $file_fetch->laporan_luaran_hash_name);
+            $file = public_path("assets/file/laporan_luaran/" . $file_fetch->laporan_luaran_hash_name);
+
+            $file_extension = $file_fetch->laporan_luaran_extension;
         } elseif ($file_category == "laporan_kemajuan") {
             $file_fetch = Laporan_kemajuan::where('laporan_kemajuan_id', $id)
                 ->where('laporan_kemajuan_hash_name', $file_name)
@@ -210,4 +233,5 @@ class FileController extends Controller
             }
         }
     }
+    // END PREVIEW
 }

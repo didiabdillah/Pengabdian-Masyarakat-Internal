@@ -24,8 +24,8 @@ class Usulan_luaran extends Model
         return $this->belongsTo('App\Models\Usulan_pengabdian', 'usulan_luaran_pengabdian_id');
     }
 
-    public function laporan_kemajuan()
+    public function laporan_luaran()
     {
-        return $this->hasOne('App\Models\Laporan_kemajuan', 'laporan_kemajuan_luaran_id');
+        return $this->hasOne('App\Models\Laporan_luaran', 'laporan_luaran_luaran_id');
     }
 }

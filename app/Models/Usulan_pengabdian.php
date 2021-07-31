@@ -69,4 +69,9 @@ class Usulan_pengabdian extends Model
     {
         return $this->hasOne('App\Models\Penilaian_usulan', 'penilaian_usulan_pengabdian_id');
     }
+
+    public function laporan_kemajuan()
+    {
+        return $this->hasMany('App\Models\Laporan_kemajuan', 'laporan_kemajuan_pengabdian_id');
+    }
 }

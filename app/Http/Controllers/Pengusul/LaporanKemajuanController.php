@@ -11,6 +11,7 @@ use App\Models\Usulan_pengabdian;
 use App\Models\User;
 use App\Models\Usulan_luaran;
 use App\Models\Laporan_kemajuan;
+use App\Models\Laporan_luaran;
 
 class LaporanKemajuanController extends Controller
 {
@@ -38,8 +39,12 @@ class LaporanKemajuanController extends Controller
 
     // ==================================================================================
 
-    public function luaran($pengabdian_id)
+    public function list($pengabdian_id)
     {
+        $laporan_kemajuan = Laporan_kemajuan::where('laporan_kemajuan_pengabdian_id', $pengabdian_id)->where('laporan_kemajuan_tipe', 'kemajuan')->first();
+
+        $laporan_keuangan = Laporan_kemajuan::where('laporan_kemajuan_pengabdian_id', $pengabdian_id)->where('laporan_kemajuan_tipe', 'keuangan')->first();
+
         $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $pengabdian_id)
             ->where('usulan_luaran_pengabdian_tipe', 'wajib')
             ->get();
@@ -49,17 +54,20 @@ class LaporanKemajuanController extends Controller
             ->get();
 
         $view_data = [
+            'laporan_kemajuan' => $laporan_kemajuan,
+            'laporan_keuangan' => $laporan_keuangan,
             'luaran_wajib' => $luaran_wajib,
             'luaran_tambahan' => $luaran_tambahan,
             'pengabdian_id' => $pengabdian_id,
         ];
 
-        return view('pengusul.laporan_kemajuan.luaran', $view_data);
+        return view('pengusul.laporan_kemajuan.laporan_kemajuan', $view_data);
     }
 
-    public function insert($pengabdian_id, $id)
+    public function insert($pengabdian_id, $id, $tipe)
     {
         $view_data = [
+            'tipe' => $tipe,
             'id' => $id,
             'pengabdian_id' => $pengabdian_id,
         ];
@@ -67,7 +75,7 @@ class LaporanKemajuanController extends Controller
         return view('pengusul.laporan_kemajuan.insert', $view_data);
     }
 
-    public function store(Request $request, $pengabdian_id, $id)
+    public function store(Request $request, $pengabdian_id, $id, $tipe)
     {
         // Input Validation
         $request->validate(
@@ -82,53 +90,116 @@ class LaporanKemajuanController extends Controller
 
         $file = $request->file('file');
         $pengabdian_id = $pengabdian_id;
+        $tipe = $tipe;
         $user_id = $request->session()->get('user_id');
         $original_name = $file->getClientOriginalName();
         $hash_name = $file->hashName();
         $base_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $file_size = intval($file->getSize() / 1024);
         $extension = $file->getClientOriginalExtension();
+        $destination = NULL;
 
-        $destination = "assets/file/laporan_kemajuan/";
+        // ====
+        if ($tipe == 'luaran') {
+            $destination = "assets/file/laporan_luaran/";
 
-        $is_exist = Laporan_kemajuan::where('laporan_kemajuan_luaran_id', $id)
-            ->count();
+            $is_exist = Laporan_luaran::where('laporan_luaran_luaran_id', $id)
+                ->count();
 
-        if ($is_exist > 0) {
-            $fileOld =  Laporan_kemajuan::where('laporan_kemajuan_luaran_id', $id)
-                ->first();
+            if ($is_exist > 0) {
+                $fileOld =  Laporan_luaran::where('laporan_luaran_luaran_id', $id)
+                    ->first();
 
-            $file_path = public_path($destination . $fileOld->laporan_kemajuan_hash_name);
+                $file_path = public_path($destination . $fileOld->laporan_luaran_hash_name);
 
-            $file->move($destination, $file->hashName());
+                $file->move($destination, $file->hashName());
 
-            File::delete($file_path);
+                File::delete($file_path);
+            } else {
+                $file->move($destination, $file->hashName());
+            }
+
+            //Insert Data
+            $data = [
+                'laporan_luaran_luaran_id' => $id,
+                'laporan_luaran_date' => date('Y-m-d'),
+                'laporan_luaran_original_name' => $original_name,
+                'laporan_luaran_hash_name' => $hash_name,
+                'laporan_luaran_base_name' => $base_name,
+                'laporan_luaran_file_size' => $file_size,
+                'laporan_luaran_extension' => $extension,
+            ];
+            Laporan_luaran::updateOrInsert(
+                ['laporan_luaran_luaran_id' => $id],
+                $data
+            );
+        } elseif ($tipe == 'kemajuan' || $tipe == 'keuangan') {
+            $destination = "assets/file/laporan_kemajuan/";
+            $type = ($tipe == 'kemajuan') ? 'kemajuan' : 'keuangan';
+
+            if ($id == 0) {
+                $file->move($destination, $file->hashName());
+
+                //Insert Data
+                $data = [
+                    'laporan_kemajuan_pengabdian_id' => $pengabdian_id,
+                    'laporan_kemajuan_date' => date('Y-m-d'),
+                    'laporan_kemajuan_tipe' => $type,
+                    'laporan_kemajuan_original_name' => $original_name,
+                    'laporan_kemajuan_hash_name' => $hash_name,
+                    'laporan_kemajuan_base_name' => $base_name,
+                    'laporan_kemajuan_file_size' => $file_size,
+                    'laporan_kemajuan_extension' => $extension,
+                ];
+
+                Laporan_kemajuan::create(
+                    $data
+                );
+            } else {
+                $fileOld =  Laporan_kemajuan::where('laporan_kemajuan_id', $id)
+                    ->first();
+
+                $file_path = public_path($destination . $fileOld->laporan_kemajuan_hash_name);
+
+                $file->move($destination, $file->hashName());
+
+                File::delete($file_path);
+
+                //Update Data
+                $data = [
+                    'laporan_kemajuan_date' => date('Y-m-d'),
+                    'laporan_kemajuan_original_name' => $original_name,
+                    'laporan_kemajuan_hash_name' => $hash_name,
+                    'laporan_kemajuan_base_name' => $base_name,
+                    'laporan_kemajuan_file_size' => $file_size,
+                    'laporan_kemajuan_extension' => $extension,
+                ];
+
+                Laporan_kemajuan::where('laporan_kemajuan_id', $id)
+                    ->update(
+                        $data
+                    );
+            }
         } else {
-            $file->move($destination, $file->hashName());
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Galat', //Alert Message 
+                'Kelas File Salah' //Sub Alert Message
+            );
+
+            return redirect()->route('pengusul_laporan_kemajuan_list', $pengabdian_id);
         }
 
-        //Insert Data
-        $data = [
-            'laporan_kemajuan_luaran_id' => $id,
-            'laporan_kemajuan_date' => date('Y-m-d'),
-            'laporan_kemajuan_original_name' => $original_name,
-            'laporan_kemajuan_hash_name' => $hash_name,
-            'laporan_kemajuan_base_name' => $base_name,
-            'laporan_kemajuan_file_size' => $file_size,
-            'laporan_kemajuan_extension' => $extension,
-        ];
-        Laporan_kemajuan::updateOrInsert(
-            ['laporan_kemajuan_luaran_id' => $id],
-            $data
-        );
+        // ===
 
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
-            'Laporan kemajuan Terupload' //Sub Alert Message
+            'File Laporan Terunggah' //Sub Alert Message
         );
 
-        return redirect()->route('pengusul_laporan_kemajuan_luaran', $pengabdian_id);
+        return redirect()->route('pengusul_laporan_kemajuan_list', $pengabdian_id);
     }
 }

@@ -298,9 +298,9 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::get('/', 'Pengusul\LaporanKemajuanController@index')->name('pengusul_laporan_kemajuan');
 
                     Route::group(['middleware' => ['is_Suspend']], function () {
-                        Route::get('/{pengabdian_id}/luaran', 'Pengusul\LaporanKemajuanController@luaran')->name('pengusul_laporan_kemajuan_luaran');
-                        Route::get('/{id}/{pengabdian_id}/insert', 'Pengusul\LaporanKemajuanController@insert')->name('pengusul_laporan_kemajuan_insert');
-                        Route::post('/{id}/{pengabdian_id}/store', 'Pengusul\LaporanKemajuanController@store')->name('pengusul_laporan_kemajuan_store');
+                        Route::get('/{pengabdian_id}/list', 'Pengusul\LaporanKemajuanController@list')->name('pengusul_laporan_kemajuan_list');
+                        Route::get('/{pengabdian_id}/{id}/insert/{tipe}', 'Pengusul\LaporanKemajuanController@insert')->name('pengusul_laporan_kemajuan_insert');
+                        Route::post('/{pengabdian_id}/{id}/store/{tipe}', 'Pengusul\LaporanKemajuanController@store')->name('pengusul_laporan_kemajuan_store');
                     });
                 });
 
