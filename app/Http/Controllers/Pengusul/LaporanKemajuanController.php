@@ -27,11 +27,21 @@ class LaporanKemajuanController extends Controller
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 
+        $is_tambah_unlock = false;
+        $tambah_unlock = get_where_local_db_json("unlock_feature.json", "name", __('unlock.tambah_laporan_kemajuan_pengabdian'));
+        if ($tambah_unlock) {
+            if (strtotime($tambah_unlock["start_time"]) <= strtotime(date('Y-m-d H:i:s')) &&  strtotime(date('Y-m-d H:i:s')) <= strtotime($tambah_unlock["end_time"])) {
+                $is_tambah_unlock = true;
+            }
+        }
+
         $is_suspend = User::find(Session::get('user_id'))->user_ban;
 
         $view_data = [
             'is_suspend' => $is_suspend,
             'pengabdian' => $pengabdian,
+            'is_tambah_unlock' => $is_tambah_unlock,
+            'tambah_unlock' => $tambah_unlock,
         ];
 
         return view('pengusul.laporan_kemajuan.index', $view_data);

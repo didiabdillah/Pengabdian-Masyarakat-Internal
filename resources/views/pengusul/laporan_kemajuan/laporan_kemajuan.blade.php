@@ -342,6 +342,7 @@
 
             </div>
         </section>
+    </section>
 </div>
 <!-- /.content -->
 

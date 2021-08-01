@@ -26,6 +26,28 @@
 
         </div>
 
+        <div class="container-fluid">
+            @if($is_tambah_unlock == true)
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Laporan Akhir</h5>
+                        <ul class="mb-0">
+                            <li>
+                                <b>Periode</b> : {{$tambah_unlock["start_year"] . " / " . $tambah_unlock["end_year"]}}
+                            </li>
+                            <li>
+                                <b>Batas Awal</b> : {{Carbon\Carbon::parse($tambah_unlock["start_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            <li>
+                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse($tambah_unlock["end_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+
         <!--Content -->
         <section class="content">
             <div class="container-fluid">
@@ -96,7 +118,7 @@
                                     </td>
 
                                     <td>
-                                        @if($is_suspend)
+                                        @if($is_tambah_unlock == false)
                                         <button type="button" style="pointer-events: none; cursor: default;" class="btn btn-info upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
                                         @else
                                         <button type="button" data-toggle="modal" data-id="{{$data->usulan_pengabdian_id}}" data-target="#modal-default" class="btn btn-primary upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
@@ -112,10 +134,11 @@
                 <!-- /.card -->
             </div>
         </section>
+    </section>
 </div>
 <!-- /.content -->
 
-@if($is_suspend == false)
+@if($is_tambah_unlock == true)
 <!-- Upload Laporan Akhir Modal -->
 <div class="modal fade " id="modal-default">
     <div class="modal-dialog">

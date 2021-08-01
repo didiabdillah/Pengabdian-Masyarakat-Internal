@@ -317,7 +317,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'laporan_kemajuan'], function () {
                     Route::get('/', 'Pengusul\LaporanKemajuanController@index')->name('pengusul_laporan_kemajuan');
 
-                    Route::group(['middleware' => ['is_Suspend', 'is_Diterima']], function () {
+                    Route::group(['middleware' => ['is_Suspend', 'is_Diterima', 'is_Unlock_Tambah_Laporan_Kemajuan']], function () {
                         Route::get('/{pengabdian_id}/list', 'Pengusul\LaporanKemajuanController@list')->name('pengusul_laporan_kemajuan_list');
                         Route::get('/{pengabdian_id}/{id}/insert/{tipe}', 'Pengusul\LaporanKemajuanController@insert')->name('pengusul_laporan_kemajuan_insert');
                         Route::post('/{pengabdian_id}/{id}/store/{tipe}', 'Pengusul\LaporanKemajuanController@store')->name('pengusul_laporan_kemajuan_store');
@@ -328,7 +328,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'laporan_akhir'], function () {
                     Route::get('/', 'Pengusul\LaporanAkhirController@index')->name('pengusul_laporan_akhir');
 
-                    Route::group(['middleware' => ['is_Suspend']], function () {
+                    Route::group(['middleware' => ['is_Suspend', 'is_Unlock_Tambah_Laporan_Akhir']], function () {
                         // Route::get('/insert', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
                         Route::patch('/update', 'Pengusul\LaporanAkhirController@update')->name('pengusul_laporan_akhir_upload_update');
                     });
@@ -339,7 +339,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::get('/', 'Pengusul\LogbookController@index')->name('pengusul_logbook');
 
                     Route::group(['prefix' => '{pengabdian_id}'], function () {
-                        Route::group(['middleware' => ['is_Suspend', 'is_Diterima']], function () {
+                        Route::group(['middleware' => ['is_Suspend', 'is_Diterima', 'is_Unlock_Tambah_Logbook']], function () {
                             Route::get('/detail', 'Pengusul\LogbookController@logbook_index')->name('pengusul_logbook_detail');
                             Route::get('/insert', 'Pengusul\LogbookController@logbook_insert')->name('pengusul_logbook_detail_insert');
                             Route::post('/insert', 'Pengusul\LogbookController@logbook_store')->name('pengusul_logbook_detail_store');

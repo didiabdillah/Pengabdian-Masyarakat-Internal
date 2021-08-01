@@ -108,6 +108,8 @@
                                         <h5><span class="badge badge-info">Dinilai</span></h5>
                                         @elseif($usulan->usulan_pengabdian_status == "pending")
                                         <h5><span class="badge badge-warning">Pending</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "selesai")
+                                        <h5><span class="badge badge-success">Selesai</span></h5>
                                         @endif
                                     </td>
 
@@ -173,6 +175,7 @@
 
             </div>
         </section>
+    </section>
 </div>
 <!-- /.content -->
 

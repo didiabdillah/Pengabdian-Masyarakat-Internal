@@ -22,17 +22,27 @@
 
         </div>
 
-        {{--
         <div class="container-fluid">
+            @if($is_tambah_unlock == true)
             <div class="row">
-                <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Logbook</a>
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Logbook</h5>
+                        <ul class="mb-0">
+                            <li>
+                                <b>Periode</b> : {{$tambah_unlock["start_year"] . " / " . $tambah_unlock["end_year"]}}
+                            </li>
+                            <li>
+                                <b>Batas Awal</b> : {{Carbon\Carbon::parse($tambah_unlock["start_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            <li>
+                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse($tambah_unlock["end_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
+            @endif
         </div>
-        --}}
 
         <!--Content -->
         <section class="content">
@@ -71,7 +81,7 @@
                                     </td>
                                     <td>
                                         <div class="card-body">
-                                            @if($is_suspend)
+                                            @if($is_tambah_unlock == false)
                                             <a class="btn btn-info btn-sm" style="pointer-events: none; cursor: default;">
                                                 <i class="fas fa-folder">
                                                 </i>
@@ -98,6 +108,7 @@
                 <!-- /.card -->
             </div>
         </section>
+    </section>
 </div>
 <!-- /.content -->
 
