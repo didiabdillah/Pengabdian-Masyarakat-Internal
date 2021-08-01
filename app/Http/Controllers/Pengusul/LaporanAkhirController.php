@@ -35,17 +35,31 @@ class LaporanAkhirController extends Controller
         return view('pengusul.laporan_akhir.index', $view_data);
     }
 
-    public function insert()
-    {
-        return view('pengusul.laporan_akhir.insert');
-    }
-
-    public function store(Request $request)
-    {
-    }
-
     public function update(Request $request)
     {
+        $id = $request->pengabdian_id;
+        $is_diterima = Usulan_pengabdian::where('usulan_pengabdian_id', $id)->first()->usulan_pengabdian_status;
+
+        if ($is_diterima == 'selesai') {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Gagal', //Alert Message 
+                'Pengabdian Sudah Selesai' //Sub Alert Message
+            );
+
+            return redirect()->back();
+        } elseif ($is_diterima != 'diterima' && $is_diterima != 'selesai') {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Gagal', //Alert Message 
+                'Usulan Belum Diterima' //Sub Alert Message
+            );
+
+            return redirect()->back();
+        }
+
         $request->validate(
             [
                 'laporan_akhir' => 'required|mimes:pdf|max:10000',
@@ -105,4 +119,13 @@ class LaporanAkhirController extends Controller
 
         return redirect()->back();
     }
+
+    // public function insert()
+    // {
+    //     return view('pengusul.laporan_akhir.insert');
+    // }
+
+    // public function store(Request $request)
+    // {
+    // }
 }

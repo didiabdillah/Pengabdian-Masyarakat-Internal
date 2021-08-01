@@ -72,5 +72,8 @@ class Kernel extends HttpKernel
         'is_Unlock_Tambah_Usulan' => \App\Http\Middleware\Is_Unlock_Tambah_Usulan::class,
         'is_Unlock_Nilai_Usulan' => \App\Http\Middleware\Is_Unlock_Nilai_Usulan::class,
         'is_Suspend' => \App\Http\Middleware\Is_Suspend::class,
+        'is_Diterima' => \App\Http\Middleware\Is_Diterima::class,
+        'is_Not_Pending' => \App\Http\Middleware\Is_Not_Pending::class,
+        'is_Owner' => \App\Http\Middleware\Is_Owner::class,
     ];
 }
