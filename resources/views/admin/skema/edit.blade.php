@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Ubah Skema')
+@section('title', __('id.edit') . ' Skema')
 
 @section('page')
 
@@ -18,7 +18,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Ubah Skema</h3>
+                        <h3 class="card-title">{{__('id.edit')}} Skema</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -37,8 +37,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('admin_skema')}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Ubah</button>
+                                <a href="{{route('admin_skema')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.edit')}}</button>
                             </div>
                         </div>
                         <!-- /.card-body -->

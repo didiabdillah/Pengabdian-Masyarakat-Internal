@@ -26,7 +26,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('admin_logbook')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a href="{{route('admin_logbook')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -102,8 +102,8 @@
                                                 <br>
                                                 Ukuran File : {{$data->logbook_berkas_file_size . " KB"}}
                                                 <br>
-                                                <a href="{{route('file_preview', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                <a href="{{route('file_preview', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                <a href="{{route('file_download', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             </div>
                                         </div>
                                     </td>

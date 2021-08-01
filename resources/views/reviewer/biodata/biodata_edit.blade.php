@@ -1,6 +1,6 @@
 @extends('layout.layout_reviewer')
 
-@section('title', 'Edit Biodata')
+@section('title', __('id.edit') . ' Biodata')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Home</h1>
+                    <h1>{{__('id.edit')}} Biodata</h1>
                 </div>
             </div>
 
@@ -172,7 +172,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">Email</label>
+                                                <label for="email">{{__('id.email')}}</label>
                                                 <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukan Email" value="{{$user->user_email}}">
                                                 @error('email')
                                                 <div class="invalid-feedback">
@@ -219,8 +219,8 @@
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <a href="{{route('reviewer_home')}}" class="btn btn-danger">Batal</a>
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                        <a href="{{route('reviewer_home')}}" class="btn btn-danger">{{__('id.cancel')}}</a>
+                                        <button type="submit" class="btn btn-primary">{{__('id.save')}}</button>
                                     </div>
                                 </div>
                             </form>

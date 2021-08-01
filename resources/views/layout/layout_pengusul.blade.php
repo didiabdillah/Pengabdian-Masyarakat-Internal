@@ -41,7 +41,7 @@
         @php $is_suspended = App\Models\User::select('user_ban')->where('user_id', Session::get('user_id'))->first()->user_ban; @endphp
         @if($is_suspended)
         <div class="alert alert-danger main-header layout-navbar-fixed mt-5 pt-3" role="alert">
-            <b><i class="icon fas fa-ban"></i> Akses Fitur Tidak Dapat Digunakan...</b> Silahkan Menghubungi Admin
+            <b><i class="icon fas fa-ban"></i> {{__('id.suspend_banner_1')}}</b> {{__('id.suspend_banner_2')}}
         </div>
         @endif
 
@@ -88,8 +88,8 @@
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <a href="{{route('profile', 'me')}}" class="btn btn-default btn-flat">Profile</a>
-                            <a href="{{route('logout')}}" class="btn btn-default btn-flat float-right">Sign out</a>
+                            <a href="{{route('profile', 'me')}}" class="btn btn-default btn-flat">{{__('id.profile')}}</a>
+                            <a href="{{route('logout')}}" class="btn btn-default btn-flat float-right">{{__('id.sign_out')}}</a>
                         </li>
                     </ul>
                 </li>
@@ -125,7 +125,7 @@
                             <a href="{{route('pengusul_home')}}" class="nav-link @if(Request::segment(1) == 'home' || Request::segment(2) == 'home') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
-                                    Home
+                                    {{__('id.home')}}
                                 </p>
                             </a>
                         </li>
@@ -150,7 +150,7 @@
                                     <a href="{{route('pengusul_pengabdian_riwayat')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'riwayat' && Request::segment(4) == NULL) {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Riwayat Pengabdian
+                                            {{__('id.history')}} Pengabdian
                                         </p>
                                     </a>
                                 </li>
@@ -191,7 +191,7 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block" style="margin-top: -13px;">
-                <b>Copyright &copy; {{date('Y')}} P3M Polindra</b> All rights reserved.
+                <b>Copyright &copy; {{date('Y')}} {{__('id.copyright')}}</b> All rights reserved.
             </div>
 
         </footer>

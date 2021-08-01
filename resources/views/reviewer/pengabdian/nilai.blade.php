@@ -1,6 +1,6 @@
 @extends('layout.layout_reviewer')
 
-@section('title', 'Konfirmasi Usulan Pengabdian')
+@section('title', 'Penilaian Usulan Pengabdian')
 
 @section('page')
 
@@ -351,8 +351,8 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <a href="{{route('reviewer_pengabdian_detail', $id)}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
+                                <a href="{{route('reviewer_pengabdian_detail', $id)}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> {{__('id.submit')}}</button>
                             </div>
                         </form>
                     </div>

@@ -43,7 +43,7 @@
                                     <th>Nama Kegiatan</th>
                                     <th>Periode</th>
                                     <th>Batas Waktu</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

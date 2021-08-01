@@ -16,6 +16,7 @@ class CreateUsulanPengabdianTable extends Migration
         Schema::create('usulan_pengabdian', function (Blueprint $table) {
             $table->string('usulan_pengabdian_id', 64)->primary()->unique();
             $table->string('usulan_pengabdian_reviewer_id', 64)->nullable();
+            $table->string('usulan_pengabdian_reviewer_monev_id', 64)->nullable();
             $table->string('usulan_pengabdian_judul');
             // $table->boolean('usulan_pengabdian_kategori'); //[Kompetitif Nasional / Desentralisasi]
             $table->bigInteger('usulan_pengabdian_skema_id')->unsigned()->nullable();
@@ -24,7 +25,8 @@ class CreateUsulanPengabdianTable extends Migration
             $table->integer('usulan_pengabdian_mahasiswa_terlibat');
             $table->year('usulan_pengabdian_tahun');
             $table->boolean('usulan_pengabdian_submit');
-            $table->enum('usulan_pengabdian_status', ['dikirim', 'diterima', 'ditolak', 'dinilai', 'pending']);
+            $table->enum('usulan_pengabdian_status', ['dikirim', 'diterima', 'ditolak', 'dinilai', 'pending', 'selesai']);
+            $table->dateTime('usulan_pengabdian_unlock_pass');
             // $table->text('usulan_pengabdian_komentar')->nullable();
 
             $table->timestamps();

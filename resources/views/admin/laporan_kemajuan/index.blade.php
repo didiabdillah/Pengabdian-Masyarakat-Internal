@@ -48,7 +48,7 @@
                                     <th>No</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,7 +69,7 @@
                                                 <i class="fas fa-folder">
                                                 </i>
 
-                                                Lihat Laporan Kemajuan
+                                                {{__('id.preview')}} Laporan Kemajuan
                                             </a>
                                         </div>
                                     </td>

@@ -48,9 +48,9 @@
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
                     @if($is_suspend)
-                    <a style="pointer-events: none; cursor: default;" class="btn btn-info btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Usulan Pengabdian</a>
+                    <a style="pointer-events: none; cursor: default;" class="btn btn-info btn-md mb-3 btn-block"><i class="fas fa-plus"></i> {{__('id.insert')}} Usulan Pengabdian</a>
                     @else
-                    <a href="{{route('pengusul_pengabdian_tambah')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Usulan Pengabdian</a>
+                    <a href="{{route('pengusul_pengabdian_tambah')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> {{__('id.insert')}} Usulan Pengabdian</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -81,7 +81,7 @@
                                     <th>Judul</th>
                                     <th>Tahun</th>
                                     <th>Status</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,7 +123,7 @@
                                                     <i class="fas fa-folder">
                                                     </i>
 
-                                                    Detail
+                                                    {{__('id.detail')}}
                                                 </a>
 
                                                 @if($role == "ketua")
@@ -134,14 +134,14 @@
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
-                                                    Edit
+                                                    {{__('id.edit')}}
                                                 </a>
                                                 @else
                                                 <a class="btn btn-primary btn-sm ml-1" href="{{route('pengusul_pengabdian_usulan', [1, $usulan->usulan_pengabdian_id])}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
-                                                    Edit
+                                                    {{__('id.edit')}}
                                                 </a>
                                                 @endif
                                                 @endif
@@ -151,7 +151,7 @@
                                                 <button class="btn btn-danger btn-sm btn-remove ml-1" type="submit">
                                                     <i class="fas fa-trash">
                                                     </i>
-                                                    Hapus
+                                                    {{__('id.remove')}}
                                                 </button>
                                                 @endif
                                                 @endif

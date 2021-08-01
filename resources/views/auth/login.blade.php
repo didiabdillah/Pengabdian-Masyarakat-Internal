@@ -11,7 +11,7 @@
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
             <a href="{{url('/')}}" class="h1"><img src="{{URL::asset('assets/img/logo/polindra.png')}}" alt="" style="width: 100px;"></a>
-            <h3 class="mt-2">SIMTABMAS Polindra</h3>
+            <h3 class="mt-2">{{__('id.simtabmas')}}</h3>
         </div>
         <div class="card-body">
             <p class="login-box-msg">Login Untuk Menggunakan Aplikasi</p>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block" id="login_submit">Masuk</button>
+                        <button type="submit" class="btn btn-primary btn-block" id="login_submit">{{__('id.sign_in')}}</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -63,7 +63,7 @@
             </form>
 
             <p class="mt-3 mb-1 text-center">
-                <a href="{{route('forgot_password')}}">Lupa Password</a>
+                <a href="{{route('forgot_password')}}">{{__('id.forgot')}} {{__('id.password')}}</a>
             </p>
         </div>
         <!-- /.card-body -->

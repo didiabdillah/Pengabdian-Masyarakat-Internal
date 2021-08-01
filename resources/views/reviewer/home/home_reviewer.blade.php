@@ -1,6 +1,6 @@
 @extends('layout.layout_reviewer')
 
-@section('title', 'Home')
+@section('title', __('id.home'))
 
 @section('page')
 
@@ -14,7 +14,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Home</h1>
+                    <h1>{{__('id.home')}}</h1>
                 </div>
             </div>
 
@@ -67,8 +67,8 @@
                                                         </li>
                                                     </ul>
                                                     @if($user_id == Session::get('user_id'))
-                                                    <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-block"><b><i class="fas fa-camera"></i> Upload Foto</b></button>
-                                                    <a href="{{route('reviewer_biodata_edit')}}" class="btn btn-danger btn-block"><b><i class="fas fa-pencil-alt"></i> Edit Biodata</b></a>
+                                                    <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-block"><b><i class="fas fa-camera"></i> {{__('id.upload')}} Foto</b></button>
+                                                    <a href="{{route('reviewer_biodata_edit')}}" class="btn btn-danger btn-block"><b><i class="fas fa-pencil-alt"></i> {{__('id.edit')}} Biodata</b></a>
                                                     @endif
 
                                                 </div>
@@ -268,7 +268,7 @@
 
                                                         <hr>
 
-                                                        <strong><i class="fas fa-envelope mr-1"></i>Email</strong>
+                                                        <strong><i class="fas fa-envelope mr-1"></i>{{__('id.email')}}</strong>
 
                                                         <p class="text-muted">{{$user->user_email}}</p>
 
@@ -352,7 +352,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Upload Foto</h4>
+                <h4 class="modal-title">{{__('id.upload')}} Foto</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -367,7 +367,7 @@
                             <div class="input-group  @error('image') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input  @error('image') is-invalid @enderror" id="image" name="image">
-                                    <label class="custom-file-label" for="image">Choose file</label>
+                                    <label class="custom-file-label" for="image">{{__('id.choose')}} {{__('id.file')}}</label>
                                 </div>
                             </div>
                             @error('image')
@@ -381,8 +381,8 @@
 
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('id.close')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('id.save')}}</button>
             </div>
             </form>
         </div>

@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="{{route('admin_pengusul_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Pengusul</a>
+                    <a href="{{route('admin_pengusul_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> {{__('id.insert')}} Pengusul</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -50,13 +50,13 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Avatar</th>
+                                    <th>{{__('id.avatar')}}</th>
                                     <th>NIDN</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
+                                    <th>Nama</th>
+                                    <th>{{__('id.email')}}</th>
+                                    <th>{{__('id.role')}}</th>
                                     <th>Status</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,9 +89,9 @@
                                             <div class="card-body">
                                                 <h5>
                                                     @if($data->user_ban == true)
-                                                    <span class="badge badge-danger">Suspended</span>
+                                                    <span class="badge badge-danger">{{__('id.suspended')}}</span>
                                                     @else
-                                                    <span class="badge badge-success">Active</span>
+                                                    <span class="badge badge-success">{{__('id.active')}}</span>
                                                     @endif
                                                 </h5>
 
@@ -100,14 +100,14 @@
                                                     <i class="fas fa-unlock">
                                                     </i>
 
-                                                    Unsuspend
+                                                    {{__('id.unsuspend')}}
                                                 </button>
                                                 @else
                                                 <button class="btn btn-danger btn-sm btn-suspend" type="submit">
                                                     <i class="fas fa-lock">
                                                     </i>
 
-                                                    Suspend
+                                                    {{__('id.suspend')}}
                                                 </button>
                                                 @endif
                                             </div>
@@ -123,14 +123,14 @@
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
-                                                    Edit
+                                                    {{__('id.edit')}}
                                                 </a>
 
                                                 <button class="btn btn-danger btn-sm btn-remove" type="submit">
                                                     <i class="fas fa-trash">
                                                     </i>
 
-                                                    Remove
+                                                    {{__('id.remove')}}
                                                 </button>
                                             </div>
                                         </form>

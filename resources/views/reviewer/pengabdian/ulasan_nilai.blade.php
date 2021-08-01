@@ -1,6 +1,6 @@
 @extends('layout.layout_reviewer')
 
-@section('title', 'Konfirmasi Usulan Pengabdian')
+@section('title', 'Ulasan Nilai Usulan Pengabdian')
 
 @section('page')
 
@@ -42,7 +42,7 @@
                                     <i class="fas fa-arrow-left">
                                     </i>
 
-                                    Kembali
+                                    {{__('id.back')}}
                                 </a>
                                 <button class="btn btn-success btn-confirm ml-1" type="submit">
                                     <i class="fas fa-check">

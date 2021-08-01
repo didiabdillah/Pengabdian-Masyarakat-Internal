@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Usulan Pengabdian')
+@section('title', __('id.insert') . ' Usulan Pengabdian')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')
@@ -77,7 +77,7 @@
                                     <h3 class="card-title">Mitra Sasaran <span class="badge badge-warning">Wajib Ada</span></h3>
                                 </div>
                                 <div class="card-header">
-                                    <p class="mt-2">Kelompok Masyarakat / Lembaga-Instansi Pemerintahan / Lembaga - Instansi Swasta / UMKM <a href="{{route('pengusul_pengabdian_tambah_mitra', $id)}}" class="btn btn-primary btn-sm ml-auto float-right"><i class="fas fa-plus"></i> Tambah</a></p>
+                                    <p class="mt-2">Kelompok Masyarakat / Lembaga-Instansi Pemerintahan / Lembaga - Instansi Swasta / UMKM <a href="{{route('pengusul_pengabdian_tambah_mitra', $id)}}" class="btn btn-primary btn-sm ml-auto float-right"><i class="fas fa-plus"></i> {{__('id.insert')}}</a></p>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
@@ -88,7 +88,7 @@
                                                 <th>Mitra</th>
                                                 <th>Kontribusi Pendanaan</th>
                                                 <th>Dokumen</th>
-                                                <th>Options</th>
+                                                <th>{{__('id.option')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -118,8 +118,8 @@
                                                             <br>
                                                             Tanggal Unggah : {{Carbon\Carbon::parse($doc1->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
                                                             <br>
-                                                            <a href="{{route('file_preview', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                            <a href="{{route('file_download', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            <a href="{{route('file_preview', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                            <a href="{{route('file_download', [$id, $doc1->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                                             @else
                                                             Nama File : -
                                                             <br>
@@ -141,8 +141,8 @@
                                                             <br>
                                                             Tanggal Unggah : {{Carbon\Carbon::parse($doc2->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
                                                             <br>
-                                                            <a href="{{route('file_preview', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                            <a href="{{route('file_download', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            <a href="{{route('file_preview', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                            <a href="{{route('file_download', [$id, $doc2->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                                             @else
                                                             Nama File : -
                                                             <br>
@@ -159,13 +159,13 @@
                                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_pengabdian_edit_mitra', [$id, $data->mitra_sasaran_id])}}">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
-                                                            Edit
+                                                            {{__('id.edit')}}
                                                         </a>
 
                                                         <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
                                                             <i class="fas fa-trash">
                                                             </i>
-                                                            Hapus
+                                                            {{__('id.remove')}}
                                                         </button>
 
                                                     </form>
@@ -186,8 +186,8 @@
 
                         </div>
                         <div class="card-footer">
-                            <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
-                            <a href="{{route('pengusul_pengabdian_usulan', [$page+1, $id])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> Lanjut</a>
+                            <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.prev')}}</a>
+                            <a href="{{route('pengusul_pengabdian_usulan', [$page+1, $id])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> {{__('id.next')}}</a>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -205,7 +205,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Upload Dokumen Mitra</h4>
+                <h4 class="modal-title">{{__('id.upload')}} Dokumen Mitra</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -218,11 +218,11 @@
                         <input type="hidden" class="" id="mitra_id" name="mitra_id" value="">
                         <input type="hidden" name="doc_category" value="dokumen1">
                         <div class="form-group">
-                            <label for="dokumen_mitra">Dokumen Mitra Upload (PDF)</label>
+                            <label for="dokumen_mitra">Dokumen Mitra (PDF)</label>
                             <div class="input-group  @error('dokumen_mitra') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input @error('dokumen_mitra') is-invalid @enderror" id="dokumen_mitra" name="dokumen_mitra">
-                                    <label class="custom-file-label" id="dokumen_mitra_label" for="dokumen_mitra">Upload File Disini</label>
+                                    <label class="custom-file-label" id="dokumen_mitra_label" for="dokumen_mitra">{{__('id.upload')}} {{__('id.file')}} Disini</label>
                                 </div>
                             </div>
                             @error('dokumen_mitra')
@@ -234,8 +234,8 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('id.cancel')}}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> {{__('id.upload')}}</button>
                     </div>
                 </form>
             </div>
@@ -250,7 +250,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Upload Dokumen MoU</h4>
+                <h4 class="modal-title">{{__('id.upload')}} Dokumen MoU</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -263,11 +263,11 @@
                         <input type="hidden" id="mitra_id2" name="mitra_id" value="">
                         <input type="hidden" name="doc_category" value="dokumen2">
                         <div class="form-group">
-                            <label for="dokumen_mitra2">Dokumen MoU Upload (PDF)</label>
+                            <label for="dokumen_mitra2">Dokumen MoU (PDF)</label>
                             <div class="input-group  @error('dokumen_mitra2') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input @error('dokumen_mitra2') is-invalid @enderror" id="dokumen_mitra2" name="dokumen_mitra2">
-                                    <label class="custom-file-label" id="dokumen_mitra_label2" for="dokumen_mitra2">Upload File Disini</label>
+                                    <label class="custom-file-label" id="dokumen_mitra_label2" for="dokumen_mitra2">{{__('id.upload')}} {{__('id.file')}} Disini</label>
                                 </div>
                             </div>
                             @error('dokumen_mitra2')
@@ -280,8 +280,8 @@
                     <!-- /.card-body -->
 
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('id.cancel')}}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> {{__('id.upload')}}</button>
                     </div>
                 </form>
             </div>

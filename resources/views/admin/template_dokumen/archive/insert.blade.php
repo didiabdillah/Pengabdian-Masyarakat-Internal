@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Tambah Skema')
+@section('title', __('id.insert') . ' ' . {{__('id.template')}} . ' Dokumen')
 
 @section('page')
 
@@ -18,7 +18,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Skema</h3>
+                        <h3 class="card-title">{{__('id.insert')}} {{__('id.template')}} Dokumen</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->

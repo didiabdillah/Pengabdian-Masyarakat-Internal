@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="{{route('admin_bidang_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Bidang</a>
+                    <a href="{{route('admin_bidang_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> {{__('id.insert')}} Bidang</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -51,7 +51,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Bidang</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,14 +72,14 @@
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
-                                                    Edit
+                                                    {{__('id.edit')}}
                                                 </a>
 
                                                 <button class="btn btn-danger btn-sm btn-remove" type="submit">
                                                     <i class="fas fa-trash">
                                                     </i>
 
-                                                    Remove
+                                                    {{__('id.remove')}}
                                                 </button>
                                             </div>
                                         </form>
@@ -109,13 +109,14 @@
         e.preventDefault();
         var form = $(this).parents('form');
         swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Anda Yakin?',
+            text: "Tidak dapat lagi mengembalikan setelah ini!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal',
         }).then((result) => {
             if (result.isConfirmed) {
                 form.submit();

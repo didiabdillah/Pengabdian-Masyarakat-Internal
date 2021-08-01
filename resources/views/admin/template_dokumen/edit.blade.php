@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Ubah Template Dokumen')
+@section('title', __('id.edit') .' Template Dokumen')
 
 @section('page')
 
@@ -18,7 +18,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Update Template Dokumen</h3>
+                        <h3 class="card-title">{{__('id.edit')}} {{__('id.template')}} Dokumen</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -35,7 +35,7 @@
                                 <div class="input-group  @error('template') is-invalid @enderror">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('template') is-invalid @enderror" id="template" name="template">
-                                        <label class="custom-file-label" id="template_label" for="template">Upload File Disini</label>
+                                        <label class="custom-file-label" id="template_label" for="template">{{__('id.upload')}} {{__('id.file')}} Disini</label>
                                     </div>
                                 </div>
                                 @error('template')
@@ -46,8 +46,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('admin_template_dokumen')}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
+                                <a href="{{route('admin_template_dokumen')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.update')}}</button>
                             </div>
                         </div>
                         <!-- /.card-body -->

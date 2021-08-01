@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Ubah Jenis Luaran')
+@section('title', __('id.edit') . ' Jenis Luaran')
 
 @section('page')
 
@@ -18,7 +18,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Ubah Jenis Luaran</h3>
+                        <h3 class="card-title">{{__('id.edit')}} Jenis Luaran</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -35,7 +35,7 @@
                                 </select>
                                 @error('kategori')
                                 <div class="invalid-feedback">
-                                    Please Select Kategori
+                                    {{__('id.please_select')}} Kategori
                                 </div>
                                 @enderror
                             </div>
@@ -51,8 +51,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('admin_data_luaran')}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Ubah</button>
+                                <a href="{{route('admin_data_luaran')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.edit')}}</button>
                             </div>
                         </div>
                         <!-- /.card-body -->

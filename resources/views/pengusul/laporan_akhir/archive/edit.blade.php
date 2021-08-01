@@ -1,6 +1,10 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Tambah Pengusul')
+@section('title', __('id.edit') . ' Laporan Akhir')
+
+@section('suspend_banner')
+@include('layout.suspend_banner')
+@endsection
 
 @section('page')
 
@@ -18,16 +22,17 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Pengusul</h3>
+                        <h3 class="card-title">{{__('id.edit')}} Pengusul</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('proposer_store')}}" method="POST">
+                    <form action="{{route('proposer_update', $user->user_id)}}" method="POST">
                         @csrf
+                        @method('patch')
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{old('name')}}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{$user->user_name}}">
                                 @error('name')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -37,7 +42,7 @@
 
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{old('email')}}">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{$user->user_email}}">
                                 @error('email')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -46,8 +51,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                                <label for="password">Password (Optional)</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password (Optional)">
                                 @error('password')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -55,9 +60,9 @@
                                 @enderror
                             </div>
 
-                            <div class="card-footer">
+                            <div class=" card-footer">
                                 <a href="{{route('proposer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Insert</button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -70,7 +75,6 @@
     </section>
 
 </div>
-
 @endsection
 
 @push('plugin')

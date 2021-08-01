@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Usulan Pengabdian')
+@section('title', __('id.insert') . ' Usulan Pengabdian')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')
@@ -90,7 +90,7 @@
                                                             <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_tambah_luaran', [$id, 'wajib'])}}">
                                                                 <i class="fas fa-plus">
                                                                 </i>
-                                                                Tambah
+                                                                {{__('id.insert')}}
                                                             </a>
                                                         </th>
                                                     </tr>
@@ -126,7 +126,7 @@
                                                                 <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
                                                                     <i class="fas fa-trash">
                                                                     </i>
-                                                                    Hapus
+                                                                    {{__('id.remove')}}
                                                                 </button>
                                                             </form>
 
@@ -160,7 +160,7 @@
                                                         <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_tambah_luaran', [$id, 'tambahan'])}}">
                                                             <i class="fas fa-plus">
                                                             </i>
-                                                            Tambah
+                                                            {{__('id.insert')}}
                                                         </a>
                                                     </th>
                                                 </thead>
@@ -195,7 +195,7 @@
                                                                 <button class="btn btn-danger btn-sm btn-remove m-1" type="submit">
                                                                     <i class="fas fa-trash">
                                                                     </i>
-                                                                    Hapus
+                                                                    {{__('id.remove')}}
                                                                 </button>
                                                             </form>
 
@@ -213,8 +213,8 @@
                             <!-- /.row -->
                         </div>
                         <div class="card-footer">
-                            <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
-                            <a href="{{route('pengusul_pengabdian_usulan', [$page+1, $id])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> Lanjut</a>
+                            <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.prev')}}</a>
+                            <a href="{{route('pengusul_pengabdian_usulan', [$page+1, $id])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> {{__('id.next')}}</a>
                         </div>
                     </div>
                     <!-- /.card-body -->

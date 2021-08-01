@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Edit Reviewer')
+@section('title', __('id.edit') . ' Reviewer')
 
 @section('page')
 
@@ -18,7 +18,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Reviewer</h3>
+                        <h3 class="card-title">{{__('id.edit')}} Reviewer</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -60,8 +60,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{$user->user_email}}">
+                                <label for="email">{{__('id.email')}}</label>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="{{__('id.email')}}" value="{{$user->user_email}}">
                                 @error('email')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -70,8 +70,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Password (Optional)</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                                <label for="password">{{__('id.password')}} (Optional)</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="{{__('id.password')}}">
                                 @error('password')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -149,8 +149,8 @@
                 --}}
 
                 <div class=" card-footer">
-                    <a href="{{route('admin_reviewer')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
+                    <a href="{{route('admin_reviewer')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.edit')}}</button>
                 </div>
             </div>
             <!-- /.card-body -->

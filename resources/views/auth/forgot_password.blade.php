@@ -1,6 +1,6 @@
 @extends('layout.auth_main')
 
-@section('title', 'Forgot Password')
+@section('title', __('id.forgot') . ' ' . __('id.password'))
 
 @section('auth_page')
 
@@ -14,7 +14,7 @@
             <h3 class="mt-2">SIMTABMAS Polindra</h3>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Lupa password? Silahkan pulihkan disini.</p>
+            <p class="login-box-msg">{{__('id.forgot')}} {{__('id.password')}}? Silahkan pulihkan disini.</p>
             <form action="{{route('forgot_password_process')}}" method="post">
                 @csrf
                 <div class="input-group mb-3">
@@ -40,13 +40,13 @@
                 </div>
                 <div class="row ">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block">Lupa Password</button>
+                        <button type="submit" class="btn btn-primary btn-block">{{__('id.forgot')}} {{__('id.password')}}</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
             <p class="mt-3 mb-1 text-center">
-                <a href="{{route('login')}}">Kembali Ke Login</a>
+                <a href="{{route('login')}}">{{__('id.back')}} Ke Login</a>
             </p>
         </div>
         <!-- /.card-body -->

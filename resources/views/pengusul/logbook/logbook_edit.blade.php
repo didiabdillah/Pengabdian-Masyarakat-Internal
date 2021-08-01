@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Edit Logobook')
+@section('title', __('id.edit') . ' Logobook')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')
@@ -22,7 +22,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Catatan Kegiatan</h3>
+                        <h3 class="card-title">{{__('id.edit')}} Catatan Kegiatan</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -62,8 +62,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('pengusul_logbook_detail', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Ubah</button>
+                                <a href="{{route('pengusul_logbook_detail', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.edit')}}</button>
                             </div>
                         </div>
                         <!-- /.card-body -->

@@ -65,7 +65,7 @@ $profile_layout = 'layout.layout_pengusul';
                                 </ul>
 
                                 @if($user_id == Session::get('user_id'))
-                                <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-block"><b><i class="fas fa-camera"></i> Upload Profile Picture</b></button>
+                                <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-block"><b><i class="fas fa-camera"></i> {{__('id.upload')}} {{__('id.profile')}} {{__('id.picture')}}</b></button>
                                 @endif
                             </div>
                             <!-- /.card-body -->
@@ -78,9 +78,9 @@ $profile_layout = 'layout.layout_pengusul';
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link" href="{{route('profile', 'me')}}">Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('profile', 'me')}}">{{__('id.profile')}}</a></li>
                                     @if($user_id == Session::get('user_id'))
-                                    <li class="nav-item"><a class="nav-link active" href="#">Settings</a></li>
+                                    <li class="nav-item"><a class="nav-link active" href="#">{{__('id.setting')}}</a></li>
                                     @endif
                                 </ul>
                             </div><!-- /.card-header -->
@@ -96,7 +96,7 @@ $profile_layout = 'layout.layout_pengusul';
                                         <!-- general form elements -->
                                         <div class="card card-success">
                                             <div class="card-header">
-                                                <h3 class="card-title">Account</h3>
+                                                <h3 class="card-title">{{__('id.account')}}</h3>
                                             </div>
                                             <!-- /.card-header -->
                                             <!-- form start -->
@@ -105,8 +105,8 @@ $profile_layout = 'layout.layout_pengusul';
                                                 @method('patch')
                                                 <div class="card-body">
                                                     <div class="form-group">
-                                                        <label for="name">Full Name</label>
-                                                        <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter name" value="{{$user->user_name}}">
+                                                        <label for="name">Nama Lengkap</label>
+                                                        <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Masukan Nama Lengkap" value="{{$user->user_name}}">
                                                         @error('name')
                                                         <div class="invalid-feedback">
                                                             {{$message}}
@@ -114,8 +114,8 @@ $profile_layout = 'layout.layout_pengusul';
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="email">Email address</label>
-                                                        <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email" value="{{$user->user_email}}">
+                                                        <label for="email">{{__('id.email')}}</label>
+                                                        <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukan {{__('id.email')}}" value="{{$user->user_email}}">
                                                         @error('email')
                                                         <div class="invalid-feedback">
                                                             {{$message}}
@@ -126,8 +126,8 @@ $profile_layout = 'layout.layout_pengusul';
                                                 <!-- /.card-body -->
 
                                                 <div class="card-footer">
-                                                    <button type="reset" class="btn btn-danger">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <button type="reset" class="btn btn-danger">{{__('id.cancel')}}</button>
+                                                    <button type="submit" class="btn btn-primary">{{__('id.save')}}</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -136,7 +136,7 @@ $profile_layout = 'layout.layout_pengusul';
                                         <!-- general form elements -->
                                         <div class="card card-danger">
                                             <div class="card-header">
-                                                <h3 class="card-title">Change Password</h3>
+                                                <h3 class="card-title">{{__('id.change')}} {{__('id.password')}}</h3>
                                             </div>
                                             <!-- /.card-header -->
                                             <!-- form start -->
@@ -145,8 +145,8 @@ $profile_layout = 'layout.layout_pengusul';
                                                 @method('put')
                                                 <div class="card-body">
                                                     <div class="form-group">
-                                                        <label for="old_password">Old Password</label>
-                                                        <input type="password" class="form-control @error('old_password') is-invalid @enderror" name="old_password" id="old_password" placeholder="Enter old password">
+                                                        <label for="old_password">{{__('id.password')}} Lama</label>
+                                                        <input type="password" class="form-control @error('old_password') is-invalid @enderror" name="old_password" id="old_password" placeholder="{{__('id.password')}} Lama">
                                                         @error('old_password')
                                                         <div class="invalid-feedback">
                                                             {{$message}}
@@ -154,8 +154,8 @@ $profile_layout = 'layout.layout_pengusul';
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="new_password">New Password</label>
-                                                        <input type="password" class="form-control @error('new_password') is-invalid @enderror" name="new_password" id="new_password" placeholder="Enter new password">
+                                                        <label for="new_password">{{__('id.password')}} Baru</label>
+                                                        <input type="password" class="form-control @error('new_password') is-invalid @enderror" name="new_password" id="new_password" placeholder="{{__('id.password')}} Baru">
                                                         @error('new_password')
                                                         <div class="invalid-feedback">
                                                             {{$message}}
@@ -163,8 +163,8 @@ $profile_layout = 'layout.layout_pengusul';
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="confirm_password">Confirm New Password</label>
-                                                        <input type="password" class="form-control @error('confirm_password') is-invalid @enderror" name="confirm_password" id="confirm_password" placeholder="Enter confirm password">
+                                                        <label for="confirm_password">Konfirmasi {{__('id.password')}} Baru</label>
+                                                        <input type="password" class="form-control @error('confirm_password') is-invalid @enderror" name="confirm_password" id="confirm_password" placeholder="Konfirmasi {{__('id.password')}} Baru">
                                                         @error('confirm_password')
                                                         <div class="invalid-feedback">
                                                             {{$message}}
@@ -175,8 +175,8 @@ $profile_layout = 'layout.layout_pengusul';
                                                 <!-- /.card-body -->
 
                                                 <div class="card-footer">
-                                                    <button type="reset" class="btn btn-danger">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary">Change</button>
+                                                    <button type="reset" class="btn btn-danger">{{__('id.cancel')}}</button>
+                                                    <button type="submit" class="btn btn-primary">{{__('id.change')}}</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -206,7 +206,7 @@ $profile_layout = 'layout.layout_pengusul';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Change Profile Picture</h4>
+                <h4 class="modal-title">{{__('id.change')}} {{__('id.profile')}} {{__('id.picture')}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -217,11 +217,11 @@ $profile_layout = 'layout.layout_pengusul';
                     @method('patch')
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="image">Picture Upload</label>
+                            <label for="image">{{__('id.upload')}} {{__('id.picture')}}</label>
                             <div class="input-group @error('image') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input  @error('image') is-invalid @enderror" id="image" name="image">
-                                    <label class="custom-file-label" for="image">Choose file</label>
+                                    <label class="custom-file-label" for="image">{{__('id.choose')}} {{__('id.file')}}</label>
                                 </div>
                             </div>
                             @error('image')
@@ -235,8 +235,8 @@ $profile_layout = 'layout.layout_pengusul';
 
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('id.close')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('id.save')}}</button>
             </div>
             </form>
         </div>

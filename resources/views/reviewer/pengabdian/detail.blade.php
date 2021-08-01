@@ -1,6 +1,6 @@
 @extends('layout.layout_reviewer')
 
-@section('title', 'Detail Usulan Pengabdian')
+@section('title', __('id.detail') . ' Usulan Pengabdian')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Detail Usulan Pengabdian</h1>
+                    <h1>{{__('id.detail')}} Usulan Pengabdian</h1>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('reviewer_pengabdian')}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a href="{{route('reviewer_pengabdian')}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
                         <a href="{{route('reviewer_pengabdian_nilai', $id)}}" class="btn btn-success ml-auto float-right"><i class="fas fa-pencil-alt"></i> Nilai Usulan</a>
                         <!-- <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -131,13 +131,13 @@
                                     <div class="card-body">
                                         <div class="m-3">
                                             <label for="dokumen_usulan"><i class="fas fa-file-pdf fa-2x"></i> Dokumen Usulan</label>
-                                            <h6>File Usulan : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
+                                            <h6>{{__('id.file')}} Usulan : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
                                             <h6>Tanggal Unggah : @if($dokumen_usulan){{Carbon\Carbon::parse($dokumen_usulan->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
-                                            <h6>Ukuran File : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
+                                            <h6>Ukuran {{__('id.file')}} : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
 
                                             @if($dokumen_usulan)
-                                            <a href="{{route('reviewer_pengabdian_file_preview', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                            <a href="{{route('reviewer_pengabdian_file_download', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            <a href="{{route('reviewer_pengabdian_file_preview', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                            <a href="{{route('reviewer_pengabdian_file_download', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             @endif
                                         </div>
                                     </div>

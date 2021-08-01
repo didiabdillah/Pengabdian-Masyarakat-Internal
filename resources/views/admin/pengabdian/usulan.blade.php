@@ -50,7 +50,7 @@
                                     <th>Skema</th>
                                     <th>Bidang</th>
                                     <th>Status</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -98,8 +98,8 @@
                                         <h5><span class="badge badge-danger">Ditolak</span></h5>
                                         @elseif($usulan->usulan_pengabdian_status == "dinilai")
                                         <h5><span class="badge badge-info">Dinilai</span></h5>
-                                        @elseif($usulan->usulan_pengabdian_status == "revisi")
-                                        <h5><span class="badge badge-danger">Revisi</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "selesai")
+                                        <h5><span class="badge badge-success">Selesai</span></h5>
                                         @endif
                                     </td>
 
@@ -109,7 +109,7 @@
                                                 <i class="fas fa-check">
                                                 </i>
 
-                                                Konfirmasi
+                                                {{__('id.confirmation')}}
                                             </a>
                                         </div>
 

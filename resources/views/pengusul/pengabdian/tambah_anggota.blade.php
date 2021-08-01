@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Usulan Pengabdian')
+@section('title', __('id.insert') . ' Anggota Pengabdian')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')
@@ -34,7 +34,7 @@ Session::forget('subalert');
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Anggota Pengabdian</h3>
+                        <h3 class="card-title">{{__('id.insert')}} Anggota Pengabdian</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -203,7 +203,7 @@ Session::forget('subalert');
 
                                     <div class="form-group row">
                                         <div class="col-md-2">
-                                            <label>Email</label>
+                                            <label>{{__('id.email')}}</label>
                                         </div>
                                         <div class="col-md-10">
                                             <p>
@@ -226,7 +226,7 @@ Session::forget('subalert');
 
                                     <div class="form-group row">
                                         <div class="col-md-2">
-                                            <label for="peran">Peran</label>
+                                            <label for="peran">{{__('id.role')}}</label>
                                         </div>
                                         <div class="col-md-10">
                                             <select class="form-control select2 @error('peran') is-invalid @enderror" data-placeholder="Pilih Lama Kegiatan" style="width: 100%;" name="peran">
@@ -261,8 +261,8 @@ Session::forget('subalert');
                                     </div>
 
                                     <div class="card-footer">
-                                        <a href="{{route('pengusul_pengabdian_usulan', [2, $id])}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                        <button type="submit" class="btn btn-primary"><i class="fas fa-save "></i> Simpan</button>
+                                        <a href="{{route('pengusul_pengabdian_usulan', [2, $id])}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-save "></i> {{__('id.save')}}</button>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

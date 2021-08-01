@@ -92,8 +92,8 @@
                                 <!-- /.form group -->
 
                                 <div class=" card-footer">
-                                    <a href="{{route('admin_waktu_pelaksanaan')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update</button>
+                                    <a href="{{route('admin_waktu_pelaksanaan')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.update')}}</button>
                                 </div>
                             </div>
                             <!-- /.card-body -->

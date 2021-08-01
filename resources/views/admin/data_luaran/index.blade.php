@@ -58,14 +58,14 @@
                             <!-- KATEGORI TAB -->
                             <div class="active tab-pane" id="kategori">
                                 <div class="card-body">
-                                    <a href="{{route('admin_data_luaran_kategori_insert')}}" class="btn btn-primary mb-4"><i class="fas fa-plus"></i> Tambah Kategori Luaran</a>
+                                    <a href="{{route('admin_data_luaran_kategori_insert')}}" class="btn btn-primary mb-4"><i class="fas fa-plus"></i> {{__('id.insert')}} Kategori Luaran</a>
                                     <table id="example2" class="table table-bordered table-hover table-striped projects">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Kategori Luaran</th>
-                                                <th>Required</th>
-                                                <th>Options</th>
+                                                <th>Tipe</th>
+                                                <th>{{__('id.option')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -90,14 +90,14 @@
                                                                 <i class="fas fa-pencil-alt">
                                                                 </i>
 
-                                                                Edit
+                                                                {{__('id.edit')}}
                                                             </a>
 
                                                             <button class="btn btn-danger btn-sm btn-remove" type="submit">
                                                                 <i class="fas fa-trash">
                                                                 </i>
 
-                                                                Remove
+                                                                {{__('id.remove')}}
                                                             </button>
                                                         </div>
                                                     </form>
@@ -113,14 +113,14 @@
                             <!-- JENIS TAB -->
                             <div class="tab-pane" id="jenis">
                                 <div class="card-body">
-                                    <a href="{{route('admin_data_luaran_jenis_insert')}}" class="btn btn-primary mb-4"><i class="fas fa-plus"></i> Tambah Jenis Luaran</a>
+                                    <a href="{{route('admin_data_luaran_jenis_insert')}}" class="btn btn-primary mb-4"><i class="fas fa-plus"></i> {{__('id.insert')}} Jenis Luaran</a>
                                     <table id="example3" class="table table-bordered table-hover table-striped projects">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Kategori</th>
                                                 <th>Jenis Luaran</th>
-                                                <th>Options</th>
+                                                <th>{{__('id.option')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -145,14 +145,14 @@
                                                                 <i class="fas fa-pencil-alt">
                                                                 </i>
 
-                                                                Edit
+                                                                {{__('id.edit')}}
                                                             </a>
 
                                                             <button class="btn btn-danger btn-sm btn-remove" type="submit">
                                                                 <i class="fas fa-trash">
                                                                 </i>
 
-                                                                Remove
+                                                                {{__('id.remove')}}
                                                             </button>
                                                         </div>
                                                     </form>
@@ -168,14 +168,14 @@
                             <!-- STATUS TAB -->
                             <div class="tab-pane" id="status">
                                 <div class="card-body">
-                                    <a href="{{route('admin_data_luaran_status_insert')}}" class="btn btn-primary mb-4"><i class="fas fa-plus"></i> Tambah Status Luaran</a>
+                                    <a href="{{route('admin_data_luaran_status_insert')}}" class="btn btn-primary mb-4"><i class="fas fa-plus"></i> {{__('id.insert')}} Status Luaran</a>
                                     <table id="example4" class="table table-bordered table-hover table-striped projects">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Kategori</th>
                                                 <th>Status Luaran</th>
-                                                <th>Options</th>
+                                                <th>{{__('id.option')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -200,14 +200,14 @@
                                                                 <i class="fas fa-pencil-alt">
                                                                 </i>
 
-                                                                Edit
+                                                                {{__('id.edit')}}
                                                             </a>
 
                                                             <button class="btn btn-danger btn-sm btn-remove" type="submit">
                                                                 <i class="fas fa-trash">
                                                                 </i>
 
-                                                                Remove
+                                                                {{__('id.remove')}}
                                                             </button>
                                                         </div>
                                                     </form>

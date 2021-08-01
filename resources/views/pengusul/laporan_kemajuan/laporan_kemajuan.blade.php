@@ -32,7 +32,7 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('pengusul_laporan_kemajuan')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a href="{{route('pengusul_laporan_kemajuan')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -77,8 +77,8 @@
                                                                 <br>
                                                                 Tanggal Unggah : {{Carbon\Carbon::parse($laporan_kemajuan->laporan_kemajuan_date)->isoFormat('D MMMM Y')}}
                                                                 <br>
-                                                                <a href="{{route('file_preview', [$laporan_kemajuan->laporan_kemajuan_id, $laporan_kemajuan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
-                                                                <a href="{{route('file_download', [$laporan_kemajuan->laporan_kemajuan_id, $laporan_kemajuan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
+                                                                <a href="{{route('file_preview', [$laporan_kemajuan->laporan_kemajuan_id, $laporan_kemajuan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                                <a href="{{route('file_download', [$laporan_kemajuan->laporan_kemajuan_id, $laporan_kemajuan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                                             </div>
                                                         </div>
                                                         @else
@@ -98,7 +98,7 @@
                                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_insert', [$pengabdian_id, ($laporan_kemajuan) ? $laporan_kemajuan->laporan_kemajuan_id : 0, 'kemajuan'])}}">
                                                             <i class="fas fa-upload">
                                                             </i>
-                                                            Unggah Laporan
+                                                            {{__('id.upload')}} Laporan
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -120,8 +120,8 @@
                                                                 <br>
                                                                 Tanggal Unggah : {{Carbon\Carbon::parse($laporan_keuangan->laporan_kemajuan_date)->isoFormat('D MMMM Y')}}
                                                                 <br>
-                                                                <a href="{{route('file_preview', [$laporan_keuangan->laporan_kemajuan_id, $laporan_keuangan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
-                                                                <a href="{{route('file_download', [$laporan_keuangan->laporan_kemajuan_id, $laporan_keuangan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
+                                                                <a href="{{route('file_preview', [$laporan_keuangan->laporan_kemajuan_id, $laporan_keuangan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                                <a href="{{route('file_download', [$laporan_keuangan->laporan_kemajuan_id, $laporan_keuangan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                                             </div>
                                                         </div>
                                                         @else
@@ -141,7 +141,7 @@
                                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_insert', [$pengabdian_id, ($laporan_keuangan) ? $laporan_keuangan->laporan_kemajuan_id : 0, 'keuangan'])}}">
                                                             <i class="fas fa-upload">
                                                             </i>
-                                                            Unggah Laporan
+                                                            {{__('id.upload')}} Laporan
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -206,8 +206,8 @@
                                                                 <br>
                                                                 Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_luaran_date)->isoFormat('D MMMM Y')}}
                                                                 <br>
-                                                                <a href="{{route('file_preview', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
-                                                                <a href="{{route('file_download', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
+                                                                <a href="{{route('file_preview', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                                <a href="{{route('file_download', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                                             </div>
                                                         </div>
                                                         @else
@@ -227,7 +227,7 @@
                                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_insert', [$pengabdian_id, $data->usulan_luaran_id, 'luaran'])}}">
                                                             <i class="fas fa-upload">
                                                             </i>
-                                                            Upload Laporan
+                                                            {{__('id.unggah')}} Laporan
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -294,8 +294,8 @@
                                                                 <br>
                                                                 Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_luaran_date)->isoFormat('D MMMM Y')}}
                                                                 <br>
-                                                                <a href="{{route('file_preview', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                                <a href="{{route('file_download', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                                <a href="{{route('file_preview', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                                <a href="{{route('file_download', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                                             </div>
                                                         </div>
                                                         @else
@@ -315,7 +315,7 @@
                                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_insert', [$pengabdian_id, $data->usulan_luaran_id, 'luaran'])}}">
                                                             <i class="fas fa-upload">
                                                             </i>
-                                                            Upload Laporan
+                                                            {{__('id.upload')}} Laporan
                                                         </a>
 
                                                     </td>

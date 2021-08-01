@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Usulan Pengabdian')
+@section('title', __('id.insert') . ' Usulan Pengabdian')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')
@@ -74,7 +74,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="{{route('pengusul_pengabdian_tambah_anggota', $id)}}" class="btn btn-primary float-right mr-4 mb-4"><i class="fas fa-plus"></i> Tambah Anggota</a>
+                                    <a href="{{route('pengusul_pengabdian_tambah_anggota', $id)}}" class="btn btn-primary float-right mr-4 mb-4"><i class="fas fa-plus"></i> {{__('id.insert')}} Anggota</a>
                                 </div>
                             </div>
 
@@ -138,7 +138,7 @@
                                                         <i class="fas fa-trash">
                                                         </i>
 
-                                                        Hapus
+                                                        {{__('id.remove')}}
                                                     </button>
                                                 </form>
                                             </div>
@@ -152,8 +152,8 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
-                        <a href="{{route('pengusul_pengabdian_usulan', [$page+1, $id])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> Lanjut</a>
+                        <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.prev')}}</a>
+                        <a href="{{route('pengusul_pengabdian_usulan', [$page+1, $id])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> {{__('id.next')}}</a>
                     </div>
                 </div>
                 <!-- /.card-body -->

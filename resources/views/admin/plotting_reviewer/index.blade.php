@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Plotting Reviewer')
+@section('title', __('id.plotting') . ' Reviewer')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Plotting Reviewer</h1>
+                    <h1>{{__('id.plotting')}} Reviewer</h1>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                                     <th>Prodi</th>
                                     <th>Reviewer</th>
                                     <th>Status</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,14 +121,14 @@
                                                     <i class="fas fa-folder">
                                                     </i>
 
-                                                    Detail
+                                                    {{__('id.detail')}}
                                                 </a>
 
                                                 <a class="btn btn-primary btn-sm ml-1" href="{{route('admin_plotting_give_reviewer', [$usulan->usulan_pengabdian_id])}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
-                                                    Plotting
+                                                    {{__('id.plotting')}}
                                                 </a>
 
                                                 <!-- <button class="btn btn-danger btn-sm btn-remove ml-1" type="submit">

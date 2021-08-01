@@ -29,7 +29,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="{{route('pengusul_logbook_detail_insert', $pengabdian_id)}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Logbook</a>
+                    <a href="{{route('pengusul_logbook_detail_insert', $pengabdian_id)}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> {{__('id.insert')}} Logbook</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -42,7 +42,7 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('pengusul_logbook')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a href="{{route('pengusul_logbook')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -57,7 +57,7 @@
                                     <th>Tanggal</th>
                                     <th>Uraian Kegiatan</th>
                                     <th>Presentase (%)</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,14 +84,14 @@
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
-                                                    Edit
+                                                    {{__('id.edit')}}
                                                 </a>
 
                                                 <button class="btn btn-danger btn-sm btn-remove" type="submit">
                                                     <i class="fas fa-trash">
                                                     </i>
 
-                                                    Remove
+                                                    {{__('id.remove')}}
                                                 </button>
                                             </div>
                                         </form>
@@ -118,7 +118,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>File Berkas/Foto</th>
+                                    <th>{{__('id.file')}} Dokumen/Foto</th>
                                     <th>Keterangan Berkas/Foto</th>
                                 </tr>
                             </thead>
@@ -140,8 +140,8 @@
                                                 <br>
                                                 Ukuran File : {{$data->logbook_berkas_file_size . " KB"}}
                                                 <br>
-                                                <a href="{{route('file_preview', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                <a href="{{route('file_preview', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                <a href="{{route('file_download', [$data->logbook_berkas_id, $data->logbook_berkas_hash_name,'logbook_berkas'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             </div>
                                         </div>
                                     </td>
@@ -182,7 +182,7 @@
                                     <div class="input-group  @error('file') is-invalid @enderror">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file">
-                                            <label class="custom-file-label" id="file_label" for="file">Upload File Disini</label>
+                                            <label class="custom-file-label" id="file_label" for="file">{{__('id.upload')}} {{__('id.file')}} Disini</label>
                                         </div>
                                     </div>
                                     @error('file')
@@ -193,8 +193,8 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <a href="{{route('pengusul_logbook_detail', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
+                                    <a href="{{route('pengusul_logbook_detail', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> {{__('id.upload')}}</button>
                                 </div>
                             </div>
                             <!-- /.card-body -->

@@ -64,7 +64,7 @@ $profile_layout = 'layout.layout_pengusul';
                                     </li>
                                 </ul>
                                 @if($user_id == Session::get('user_id'))
-                                <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-block"><b><i class="fas fa-camera"></i> Upload Profile Picture</b></button>
+                                <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-block"><b><i class="fas fa-camera"></i> {{__('id.upload')}} {{__('id.profile')}} {{__('id.picture')}}</b></button>
                                 @endif
                             </div>
                             <!-- /.card-body -->
@@ -77,9 +77,9 @@ $profile_layout = 'layout.layout_pengusul';
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#">Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link active" href="#">{{__('id.profile')}}</a></li>
                                     @if($user_id == Session::get('user_id'))
-                                    <li class="nav-item"><a class="nav-link" href="{{route('profile_setting', 'me')}}">Settings</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('profile_setting', 'me')}}">{{__('id.setting')}}</a></li>
                                     @endif
                                 </ul>
                             </div><!-- /.card-header -->
@@ -90,7 +90,7 @@ $profile_layout = 'layout.layout_pengusul';
                                         <div class="card card-primary">
 
                                             <div class="card-body">
-                                                <strong><i class="fas fa-user mr-1"></i>Name</strong>
+                                                <strong><i class="fas fa-user mr-1"></i>Nama</strong>
 
                                                 <p class="text-muted">
                                                     {{$user->user_name}}
@@ -110,7 +110,7 @@ $profile_layout = 'layout.layout_pengusul';
 
                                                 <hr>
 
-                                                <strong><i class="fas fa-envelope mr-1"></i>Email</strong>
+                                                <strong><i class="fas fa-envelope mr-1"></i>{{__('id.email')}}</strong>
 
                                                 <p class="text-muted">{{$user->user_email}}</p>
 
@@ -146,7 +146,7 @@ $profile_layout = 'layout.layout_pengusul';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Change Profile Picture</h4>
+                <h4 class="modal-title">{{__('id.change')}} {{__('id.profile')}} {{__('id.picture')}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -157,11 +157,11 @@ $profile_layout = 'layout.layout_pengusul';
                     @method('patch')
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="image">Picture Upload</label>
+                            <label for="image">{{__('id.upload')}} {{__('id.picture')}}</label>
                             <div class="input-group  @error('image') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input  @error('image') is-invalid @enderror" id="image" name="image">
-                                    <label class="custom-file-label" for="image">Choose file</label>
+                                    <label class="custom-file-label" for="image">{{__('id.choose')}} {{__('id.file')}}</label>
                                 </div>
                             </div>
                             @error('image')
@@ -175,8 +175,8 @@ $profile_layout = 'layout.layout_pengusul';
 
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('id.close')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('id.save')}}</button>
             </div>
             </form>
         </div>

@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Home')
+@section('title', __('id.home'))
 
 @section('page')
 
@@ -14,7 +14,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Home</h1>
+                    <h1>{{__('id.home')}}</h1>
                 </div>
             </div>
 

@@ -26,18 +26,6 @@
 
         </div>
 
-        <div class="container-fluid">
-            {{--
-                <div class="row">
-                <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Laporan Akhir</a>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-            --}}
-        </div>
-
         <!--Content -->
         <section class="content">
             <div class="container-fluid">
@@ -59,7 +47,7 @@
                                     <th>Judul</th>
                                     <th>Tahun</th>
                                     <th>Laporan Akhir</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,12 +73,12 @@
                                                 <i class="fas fa-file-pdf"></i>
                                             </div>
                                             <div class="col-11">
-                                                Nama File : {{$doc->laporan_akhir_original_name}}
+                                                Nama {{__('id.file')}} : {{$doc->laporan_akhir_original_name}}
                                                 <br>
                                                 Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_akhir_file_date)->isoFormat('D MMMM Y')}}
                                                 <br>
-                                                <a href="{{route('file_preview', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                <a href="{{route('file_preview', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                <a href="{{route('file_download', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             </div>
                                         </div>
                                         @else
@@ -99,7 +87,7 @@
                                                 <i class="fas fa-file-pdf fa-2x"></i>
                                             </div>
                                             <div class="col-11">
-                                                Nama File : -
+                                                Nama {{__('id.file')}} : -
                                                 <br>
                                                 Tanggal Unggah : -
                                             </div>
@@ -109,9 +97,9 @@
 
                                     <td>
                                         @if($is_suspend)
-                                        <button type="button" style="pointer-events: none; cursor: default;" class="btn btn-info upload-laporan-akhir"><b><i class="fas fa-upload"></i> Upload</b></button>
+                                        <button type="button" style="pointer-events: none; cursor: default;" class="btn btn-info upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
                                         @else
-                                        <button type="button" data-toggle="modal" data-id="{{$data->usulan_pengabdian_id}}" data-target="#modal-default" class="btn btn-primary upload-laporan-akhir"><b><i class="fas fa-upload"></i> Upload</b></button>
+                                        <button type="button" data-toggle="modal" data-id="{{$data->usulan_pengabdian_id}}" data-target="#modal-default" class="btn btn-primary upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
                                         @endif
                                     </td>
                                 </tr>
@@ -133,7 +121,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Upload Laporan Akhir</h4>
+                <h4 class="modal-title">{{__('id.upload')}} Laporan Akhir</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -145,11 +133,11 @@
                     <div class="card-body">
                         <input type="hidden" class="" id="pengabdian_id" name="pengabdian_id" value="">
                         <div class="form-group">
-                            <label for="laporan_akhir">Laporan Akhir Upload (PDF)</label>
+                            <label for="laporan_akhir">{{__('id.upload')}} Laporan Akhir (PDF)</label>
                             <div class="input-group  @error('laporan_akhir') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input @error('laporan_akhir') is-invalid @enderror" id="laporan_akhir" name="laporan_akhir">
-                                    <label class="custom-file-label" id="laporan_akhir_label" for="laporan_akhir">Upload File Disini</label>
+                                    <label class="custom-file-label" id="laporan_akhir_label" for="laporan_akhir">{{__('id.upload')}} {{__('id.file')}} Disini</label>
                                 </div>
                             </div>
                             @error('laporan_akhir')
@@ -161,8 +149,8 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('id.cancel')}}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> {{__('id.upload')}}</button>
                     </div>
                 </form>
             </div>

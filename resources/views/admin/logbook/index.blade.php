@@ -22,17 +22,6 @@
 
         </div>
 
-        {{--
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Logbook</a>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div>
-        --}}
 
         <!--Content -->
         <section class="content">
@@ -56,7 +45,7 @@
                                     <th>Pengusul</th>
                                     <th>Program Studi</th>
                                     <th>Tahun</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Tambah Lama Kegiatan')
+@section('title', __('id.insert'). ' Lama Kegiatan')
 
 @section('page')
 
@@ -18,7 +18,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Lama Kegiatan</h3>
+                        <h3 class="card-title">{{__('id.insert')}} Lama Kegiatan</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -36,8 +36,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('admin_lama_kegiatan')}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Tambah</button>
+                                <a href="{{route('admin_lama_kegiatan')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.insert')}}</button>
                             </div>
                         </div>
                         <!-- /.card-body -->

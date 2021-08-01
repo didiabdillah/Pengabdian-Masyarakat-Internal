@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-3 col-md-3">
-                    <a href="{{route('admin_lama_kegiatan_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Lama Kegiatan</a>
+                    <a href="{{route('admin_lama_kegiatan_insert')}}" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> {{__('id.insert')}} Lama Kegiatan</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -51,7 +51,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Lama Kegiatan</th>
-                                    <th>Pilihan</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,14 +72,14 @@
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
-                                                    Ubah
+                                                    {{__('id.edit')}}
                                                 </a>
 
                                                 <button class="btn btn-danger btn-sm btn-remove" type="submit">
                                                     <i class="fas fa-trash">
                                                     </i>
 
-                                                    Hapus
+                                                    {{__('id.remove')}}
                                                 </button>
                                             </div>
                                         </form>

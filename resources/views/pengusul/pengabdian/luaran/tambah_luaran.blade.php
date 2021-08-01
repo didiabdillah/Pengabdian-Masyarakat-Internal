@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Usulan Luaran')
+@section('title', __('id.insert') . ' Usulan Luaran')
 
 @section('page')
 
@@ -24,7 +24,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Luaran Dan Target Capaian</h3>
+                        <h3 class="card-title">{{__('id.insert')}} Luaran Dan Target Capaian</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -141,8 +141,8 @@
 
 
                                     <div class="card-footer">
-                                        <a href="{{route('pengusul_pengabdian_usulan', [4, $id])}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                        <button type="submit" class="btn btn-primary"><i class="fas fa-pencil"></i> Tambah</button>
+                                        <a href="{{route('pengusul_pengabdian_usulan', [4, $id])}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-pencil"></i> {{__('id.insert')}}</button>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

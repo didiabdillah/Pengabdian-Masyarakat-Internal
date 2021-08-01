@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Usulan Pengabdian')
+@section('title', __('id.insert') . ' Usulan Pengabdian')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')
@@ -162,8 +162,8 @@
                                     </div>
 
                                     <div class="card-footer">
-                                        <a href="{{route('pengusul_pengabdian')}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                        <button type="submit" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right "></i> Lanjut</button>
+                                        <a href="{{route('pengusul_pengabdian')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                        <button type="submit" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right "></i> {{__('id.next')}}</button>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

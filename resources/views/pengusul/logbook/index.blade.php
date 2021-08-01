@@ -54,7 +54,7 @@
                                     <th>No</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

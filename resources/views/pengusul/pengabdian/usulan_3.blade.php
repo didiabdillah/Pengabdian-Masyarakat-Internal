@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Usulan Pengabdian')
+@section('title', __('id.insert') . ' Usulan Pengabdian')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')
@@ -83,8 +83,8 @@
                                             <h6>Ukuran File : @if($dokumen_info){{$dokumen_info->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
 
                                             @if($dokumen_info)
-                                            <a href="{{route('file_preview', [$id, $dokumen_info->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                            <a href="{{route('file_download', [$id, $dokumen_info->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                            <a href="{{route('file_preview', [$id, $dokumen_info->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                            <a href="{{route('file_download', [$id, $dokumen_info->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             <br>
                                             <br>
                                             @endif
@@ -92,10 +92,10 @@
                                             <div class="input-group  @error('dokumen_usulan') is-invalid @enderror">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input  @error('dokumen_usulan') is-invalid @enderror" id="dokumen_usulan" name="dokumen_usulan">
-                                                    <label class="custom-file-label" for="dokumen_usulan">Unggah File</label>
+                                                    <label class="custom-file-label" for="dokumen_usulan">{{__('id.upload')}} File</label>
                                                 </div>
                                                 <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Unggah</button>
+                                                    <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> {{__('id.upload')}}</button>
                                                 </div>
                                             </div>
                                             @error('dokumen_usulan')
@@ -107,7 +107,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <h5><b>Template Dokumen Usulan</b></h5>
+                                        <h5><b>{{__('id.template')}} Dokumen Usulan</b></h5>
                                         @if($template['hash_name'] != "" || $template['hash_name'] != NULL)
                                         <div class="row">
                                             <div class="col-1">
@@ -118,8 +118,8 @@
                                                 <br>
                                                 Tanggal Update : {{Carbon\Carbon::parse($template["datetime"])->isoFormat('D MMMM Y')}}
                                                 <br>
-                                                <a href="{{route('file_preview', [$template['id'], $template['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$template['id'], $template['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                <a href="{{route('file_preview', [$template['id'], $template['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                <a href="{{route('file_download', [$template['id'], $template['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             </div>
                                         </div>
                                         @else
@@ -141,8 +141,8 @@
 
                         </div>
                         <div class="card-footer">
-                            <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
-                            <a href="{{route('pengusul_pengabdian_usulan', [$page+1, $id])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> Lanjut</a>
+                            <a href="{{route('pengusul_pengabdian_usulan', [$page-1, $id])}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.prev')}}</a>
+                            <a href="{{route('pengusul_pengabdian_usulan', [$page+1, $id])}}" class="btn btn-primary ml-auto float-right"><i class="fas fa-arrow-right"></i> {{__('id.next')}}</a>
                         </div>
                     </div>
                     <!-- /.card-body -->

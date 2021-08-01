@@ -22,16 +22,6 @@
 
         </div>
 
-        {{-- <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah Pengusul</a>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div> --}}
-
         <!--Content -->
         <section class="content">
             <div class="container-fluid">
@@ -91,12 +81,12 @@
                                                 <i class="fas fa-file-pdf"></i>
                                             </div>
                                             <div class="col-11">
-                                                Nama File : {{$doc->laporan_akhir_original_name}}
+                                                Nama {{__('id.file')}} : {{$doc->laporan_akhir_original_name}}
                                                 <br>
-                                                Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_akhir_file_date)->isoFormat('D MMMM Y')}}
+                                                Tanggal {{__('id.upload')}} : {{Carbon\Carbon::parse($doc->laporan_akhir_file_date)->isoFormat('D MMMM Y')}}
                                                 <br>
-                                                <a href="{{route('file_preview', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                <a href="{{route('file_preview', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                <a href="{{route('file_download', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             </div>
                                         </div>
                                         @else
@@ -105,9 +95,9 @@
                                                 <i class="fas fa-file-pdf fa-2x"></i>
                                             </div>
                                             <div class="col-11">
-                                                Nama File : -
+                                                Nama {{__('id.file')}} : -
                                                 <br>
-                                                Tanggal Unggah : -
+                                                Tanggal {{__('id.upload')}} : -
                                             </div>
                                         </div>
                                         @endif

@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Konfirmasi Usulan Pengabdian')
+@section('title', __('id.confirmation') . ' Usulan Pengabdian')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Konfirmasi Usulan Pengabdian</h1>
+                    <h1>{{__('id.confirmation')}} Usulan Pengabdian</h1>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <a href="{{route('admin_pengabdian_usulan')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a href="{{route('admin_pengabdian_usulan')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -52,7 +52,7 @@
                                     </select>
                                     @error('status')
                                     <div class="invalid-feedback">
-                                        Please select status
+                                        {{__('id.please_select')}} Status
                                     </div>
                                     @enderror
                                 </div>
@@ -60,8 +60,8 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <a href="{{route('admin_pengabdian_usulan')}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Konfirmasi</button>
+                                <a href="{{route('admin_pengabdian_usulan')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> {{__('id.confirmation')}}</button>
                             </div>
                         </form>
 

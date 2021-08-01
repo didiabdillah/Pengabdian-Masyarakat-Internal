@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Template Dokumen')
+@section('title', __('id.template') . ' Dokumen')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Template Dokumen</h1>
+                    <h1>{{__('id.template')}} Dokumen</h1>
                 </div>
             </div>
 
@@ -52,9 +52,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Template Target</th>
-                                    <th>Dokumen Template</th>
-                                    <th>Options</th>
+                                    <th>{{__('id.template')}} Target</th>
+                                    <th>Dokumen {{__('id.template')}}</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,8 +78,8 @@
                                                 <br>
                                                 Tanggal Update : {{Carbon\Carbon::parse($data["datetime"])->isoFormat('D MMMM Y')}}
                                                 <br>
-                                                <a href="{{route('file_preview', [$data['id'], $data['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                <a href="{{route('file_download', [$data['id'], $data['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                <a href="{{route('file_preview', [$data['id'], $data['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                <a href="{{route('file_download', [$data['id'], $data['hash_name'], 'template_dokumen'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             </div>
                                         </div>
                                         @else
@@ -88,7 +88,7 @@
                                                 <i class="fas fa-file"></i>
                                             </div>
                                             <div class="col-11">
-                                                Nama File : -
+                                                Nama {{__('id.file')}} : -
                                                 <br>
                                                 Tanggal Update : -
                                             </div>
@@ -104,7 +104,7 @@
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
-                                                    Edit
+                                                    {{__('id.edit')}}
                                                 </a>
 
                                                 @if($data['hash_name'] != "" || $data['hash_name'] != NULL)
@@ -115,7 +115,7 @@
                                                     <i class="fas fa-trash">
                                                     </i>
 
-                                                    Remove
+                                                    {{__('id.remove')}}
                                                 </button>
                                                 @endif
                                             </div>

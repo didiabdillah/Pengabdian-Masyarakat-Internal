@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', 'Tambah Laporan Akhir')
+@section('title', __('id.insert') ' Laporan Akhir')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')
@@ -22,7 +22,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Laporan Akhir</h3>
+                        <h3 class="card-title">{{__('id.insert')}} Laporan Akhir</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -34,7 +34,7 @@
                                 <div class="input-group  @error('file') is-invalid @enderror">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file">
-                                        <label class="custom-file-label" for="file">Choose file</label>
+                                        <label class="custom-file-label" for="file">{{__('id.choose')}} {{__('id.file')}}</label>
                                     </div>
                                 </div>
                                 @error('file')
@@ -45,8 +45,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('pengusul_laporan_akhir')}}" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Insert</button>
+                                <a href="{{route('pengusul_laporan_akhir')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.upload')}}</button>
                             </div>
                         </div>
                         <!-- /.card-body -->

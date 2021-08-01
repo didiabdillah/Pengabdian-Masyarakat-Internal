@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', 'Ubah Kategori Luaran')
+@section('title', __('id.edit') . ' Kategori Luaran')
 
 @section('page')
 
@@ -18,7 +18,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Ubah Kategori Luaran</h3>
+                        <h3 class="card-title">{{__('id.edit')}} Kategori Luaran</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -37,21 +37,21 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="required">Kategori Required</label>
+                                <label for="required">Kategori Tipe</label>
                                 <select class="form-control select2 @error('required') is-invalid @enderror" data-placeholder="Select Required" style="width: 100%;" name="required">
                                     <option value="wajib" @if($kategori->kategori_luaran_required=='wajib' ){{"selected"}}@endif>Wajib</option>
                                     <option value="tambahan" @if($kategori->kategori_luaran_required=='tambahan' ){{"selected"}}@endif>Tambahan</option>
                                 </select>
                                 @error('required')
                                 <div class="invalid-feedback">
-                                    Please Select Kategori Required
+                                    {{__('id.please_select')}} Kategori Tipe
                                 </div>
                                 @enderror
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('admin_data_luaran')}}" class="btn btn-danger"><i class="fas fa-times"></i> Batal</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Ubah</button>
+                                <a href="{{route('admin_data_luaran')}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> {{__('id.edit')}}</button>
                             </div>
                         </div>
                         <!-- /.card-body -->
