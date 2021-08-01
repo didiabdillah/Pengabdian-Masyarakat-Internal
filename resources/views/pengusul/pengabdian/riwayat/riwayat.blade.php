@@ -86,7 +86,7 @@
 
                                     <td>
                                         <div class="card-body">
-                                            <a class="btn btn-success btn-sm" href="">
+                                            <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_detail', [$riwayat->usulan_pengabdian_id, 'riwayat'])}}">
                                                 <i class="fas fa-folder">
                                                 </i>
 
@@ -104,60 +104,9 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-
-                {{-- <!-- RIWAYAT -->
-                <div class="card">
-                    <div class="card-header">
-                        <b> Riwayat Pengabdian Kepada Masyarakat </b>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <table id="example3" class="table table-bordered table-hover table-striped projects">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Tahun</th>
-                                    <th>Options</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($riwayat_pengabdian as $riwayat)
-                                <tr>
-                                    <td>
-                                        <h5>{{$loop->iteration}}</h5>
-                </td>
-                <td>
-                    <h5>{{$riwayat->usulan_pengabdian_judul}}</h5>
-                </td>
-                <td>
-                    <h5>{{$riwayat->usulan_pengabdian_tahun}}</h5>
-                </td>
-
-                <td>
-                    <div class="card-body">
-                        <a class="btn btn-primary btn-sm" href="">
-                            <i class="fas fa-folder">
-                            </i>
-
-                            Detail
-                        </a>
-                    </div>
-                </td>
-                </tr>
-                @endforeach
-                </tbody>
-                </table>
             </div>
-            <!-- /.card-body -->
-</div>
-<!-- /.card --> --}}
-</div>
-</section>
+        </section>
+    </section>
 </div>
 <!-- /.content -->
 

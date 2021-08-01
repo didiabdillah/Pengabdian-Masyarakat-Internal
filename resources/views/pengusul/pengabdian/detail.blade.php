@@ -1,4 +1,4 @@
-@extends('layout.layout_reviewer')
+@extends('layout.layout_pengusul')
 
 @section('title', __('id.detail') . ' Usulan Pengabdian')
 
@@ -28,8 +28,7 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('reviewer_pengabdian')}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
-                        <a href="{{route('reviewer_pengabdian_nilai', $id)}}" class="btn btn-success ml-auto float-right"><i class="fas fa-pencil-alt"></i> Nilai Usulan</a>
+                        <a href="{{$back_url}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
                         <!-- <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>

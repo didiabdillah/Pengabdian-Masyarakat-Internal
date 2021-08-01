@@ -130,8 +130,8 @@
                             </a>
                         </li>
 
-                        <li class="nav-item @if(Request::segment(2) == 'pengabdian'){{'menu-is-opening menu-open'}} @endif">
-                            <a href="#" class="nav-link @if(Request::segment(2) == 'pengabdian') {{'active'}} @endif">
+                        <li class="nav-item @if(Request::segment(2) == 'pengabdian' && Request::segment(4) != 'detail'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(4) != 'detail') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
                                     Pengabdian
@@ -140,7 +140,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('admin_pengabdian_usulan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'usulan') {{'active'}} @endif">
+                                    <a href="{{route('admin_pengabdian_usulan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'usulan' && Request::segment(4) != 'detail') {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Usulan Pengabdian

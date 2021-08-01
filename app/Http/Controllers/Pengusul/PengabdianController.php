@@ -72,6 +72,61 @@ class PengabdianController extends Controller
         return view('pengusul.pengabdian.riwayat.riwayat', $view_data);
     }
 
+    public function detail($id, $back_param)
+    {
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', 'ketua')
+            ->first();
+
+        $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+
+        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', '!=', 'ketua')
+            ->orderBy('anggota_pengabdian_role', 'asc')
+            ->get();
+
+        $dokumen_rab = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
+
+        $mitra_sasaran = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
+            ->get();
+
+        $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
+            ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
+            ->get();
+
+        $back_url = NULL;
+        if ($back_param == 'usulan') {
+            $back_url = route('pengusul_pengabdian');
+        } elseif ($back_param == 'riwayat') {
+            $back_url = route('pengusul_pengabdian_riwayat');
+        }
+
+        $view_data = [
+            'mitra_sasaran' => $mitra_sasaran,
+            'dokumen_rab' => $dokumen_rab,
+            'anggota' => $anggota,
+            'dokumen_usulan' => $dokumen_usulan,
+            'ketua' => $ketua,
+            'id' => $id,
+            'luaran_wajib' => $luaran_wajib,
+            'luaran_tambahan' => $luaran_tambahan,
+            'back_url' => $back_url,
+        ];
+
+        return view('pengusul.pengabdian.detail', $view_data);
+    }
+
     public function tambah()
     {
         $skema = Skema::orderBy('skema_label', 'asc')->get();

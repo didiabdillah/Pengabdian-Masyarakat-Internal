@@ -61,7 +61,7 @@
                                                                 <h2 class="lead"><b>{{$ketua->user_name}} ({{$ketua->user_nidn}})</b></h2>
                                                                 <ul class="ml-4 mb-0 fa-ul text-muted">
                                                                     <li class="small mb-1">
-                                                                        <span class="fa-li"><i class="fas fa-lg fa-university"></i></span> Institusi :
+                                                                        <span class="fa-li"><i class="fas fa-lg fa-university"></i></span>
                                                                         @if($ketua->biodata_institusi)
                                                                         {{$ketua->biodata_institusi}}
                                                                         @else
@@ -69,7 +69,7 @@
                                                                         @endif
                                                                     </li>
                                                                     <li class="small mt-1">
-                                                                        <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span> Program Studi :
+                                                                        <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span>
                                                                         @if($ketua->biodata_program_studi)
                                                                         {{$ketua->biodata_program_studi}}
                                                                         @else
@@ -77,7 +77,7 @@
                                                                         @endif
                                                                     </li>
                                                                     <li class="small mt-1">
-                                                                        <span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email :
+                                                                        <span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span>
                                                                         @if($ketua->user_email)
                                                                         {{$ketua->user_email}}
                                                                         @else
@@ -85,7 +85,7 @@
                                                                         @endif
                                                                     </li>
                                                                     <li class="small mt-1">
-                                                                        <span class="fa-li"><i class="fas fa-lg fa-user-graduate"></i></span> Jenjang Pendidikan :
+                                                                        <span class="fa-li"><i class="fas fa-lg fa-user-graduate"></i></span>
                                                                         @if($ketua->biodata_pendidikan)
                                                                         {{$ketua->biodata_pendidikan}}
                                                                         @else
@@ -98,7 +98,7 @@
                                                                     @if($ketua->anggota_pengabdian_tugas)
                                                                     {{$ketua->anggota_pengabdian_tugas}}
                                                                     @else
-                                                                    {{"Leader"}}
+                                                                    {{"-"}}
                                                                     @endif
                                                                 </h6>
                                                             </div>
@@ -131,13 +131,13 @@
                                     <div class="card-body">
                                         <div class="m-3">
                                             <label for="dokumen_usulan"><i class="fas fa-file-pdf fa-2x"></i> Dokumen Usulan</label>
-                                            <h6>File Usulan : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
+                                            <h6>{{__('id.file')}} Usulan : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
                                             <h6>Tanggal Unggah : @if($dokumen_usulan){{Carbon\Carbon::parse($dokumen_usulan->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
-                                            <h6>Ukuran File : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
+                                            <h6>Ukuran {{__('id.file')}} : @if($dokumen_usulan){{$dokumen_usulan->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>
 
                                             @if($dokumen_usulan)
-                                            <a href="{{route('file_preview', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
-                                            <a href="{{route('file_download', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
+                                            <a href="{{route('reviewer_pengabdian_file_preview', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                            <a href="{{route('reviewer_pengabdian_file_download', [$id, $dokumen_usulan->dokumen_usulan_hash_name, 'usulan'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
                                             @endif
                                         </div>
                                     </div>
@@ -176,7 +176,7 @@
                                                                 <h2 class="lead"><b>{{$row->user_name}} ({{$row->user_nidn}})</b></h2>
                                                                 <ul class="ml-4 mb-0 fa-ul text-muted">
                                                                     <li class="small mb-1">
-                                                                        <span class="fa-li"><i class="fas fa-lg fa-university"></i></span> Institusi :
+                                                                        <span class="fa-li"><i class="fas fa-lg fa-university"></i></span>
                                                                         @if($row->biodata_institusi)
                                                                         {{$row->biodata_institusi}}
                                                                         @else
@@ -184,7 +184,7 @@
                                                                         @endif
                                                                     </li>
                                                                     <li class="small mt-1">
-                                                                        <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span> Program Studi :
+                                                                        <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span>
                                                                         @if($row->biodata_program_studi)
                                                                         {{$row->biodata_program_studi}}
                                                                         @else
@@ -233,7 +233,7 @@
                                         <!-- LUARAN WAJIB -->
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="card card-primary m-2 card-outline">
+                                                <div class="card m-2">
                                                     <div class="card-header">
                                                         <h3 class="card-title">
                                                             <i class="fas fa-file-alt"></i>
@@ -245,28 +245,108 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th colspan="2">
-
+                                                                        @if($jumlah_luaran_wajib = 4)
+                                                                        <h5><span class="badge badge-primary">Isi Luaran Wajib Sudah Lengkap</span></h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-danger">Isi Luaran Wajib Belum Lengkap</span></h5>
+                                                                        @endif
                                                                     </th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach($luaran_wajib as $data)
                                                                 <tr>
                                                                     <td>
-                                                                        Tahun : {{$data->usulan_luaran_pengabdian_tahun}}
+                                                                        <h5>Tahun 1 :</h5>
                                                                     </td>
+
                                                                     <td>
-                                                                        {{$loop->iteration}}. <b>- {{$data->usulan_luaran_pengabdian_kategori}}</b>
+                                                                        1. <b>- Publikasi di prosiding seminar nasional ber ISBN</b>
                                                                         <br>
+                                                                        @if($wajib1)
+                                                                        @if($wajib1->usulan_luaran_pengabdian_jenis && $wajib1->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$wajib1->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib1->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($wajib1->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$wajib1->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
 
-                                                                        <b>{{$data->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$data->usulan_luaran_pengabdian_status}}</span>)</b>
-
-                                                                        <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                <tr>
+                                                                    <td>
 
                                                                     </td>
 
+                                                                    <td>
+                                                                        @if($wajib2)
+                                                                        2. <b>- {{$wajib2->usulan_luaran_pengabdian_kategori}}, ...</b>
+                                                                        <br>
+                                                                        @if($wajib2->usulan_luaran_pengabdian_jenis && $wajib2->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$wajib2->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib2->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($wajib2->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$wajib2->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        2. <b>- Publikasi di media massa, ...</b>
+                                                                        <br>
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
                                                                 </tr>
-                                                                @endforeach
+
+                                                                <tr>
+                                                                    <td>
+
+                                                                    </td>
+
+                                                                    <td>
+                                                                        3. <b>- Video pelaksanaan kegiatan</b>
+                                                                        <br>
+                                                                        @if($wajib3)
+                                                                        @if($wajib3->usulan_luaran_pengabdian_jenis && $wajib3->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$wajib3->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib3->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($wajib3->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$wajib3->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+
+                                                                    </td>
+
+                                                                    <td>
+                                                                        4. <b>- Peningkatan pemberdayaan mitra,...</b>
+                                                                        <br>
+                                                                        @if($wajib4)
+                                                                        @if($wajib4->usulan_luaran_pengabdian_jenis && $wajib4->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$wajib4->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$wajib4->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($wajib4->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$wajib4->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -280,7 +360,7 @@
                                         <!-- LUARAN TAMBAHAN -->
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="card card-secondary m-2 card-outline">
+                                                <div class="card m-2">
                                                     <div class="card-header">
                                                         <h3 class="card-title">
                                                             <i class="fas fa-file-alt"></i>
@@ -295,23 +375,26 @@
                                                                 </th>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach($luaran_tambahan as $data)
                                                                 <tr>
                                                                     <td>
-                                                                        Tahun : {{$data->usulan_luaran_pengabdian_tahun}}
+                                                                        <h5>Tahun 1 :</h5>
                                                                     </td>
+
                                                                     <td>
-                                                                        {{$loop->iteration}}. <b>- {{$data->usulan_luaran_pengabdian_kategori}}</b>
-                                                                        <br>
-
-                                                                        <b>{{$data->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$data->usulan_luaran_pengabdian_status}}</span>)</b>
-
-                                                                        <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
-
+                                                                        @if($tambahan)
+                                                                        @if($tambahan->usulan_luaran_pengabdian_jenis && $tambahan->usulan_luaran_pengabdian_status)
+                                                                        <b>{{$tambahan->usulan_luaran_pengabdian_jenis}} (<span class="badge badge-warning">{{$tambahan->usulan_luaran_pengabdian_status}}</span>)</b>
+                                                                        @endif
+                                                                        @if($tambahan->usulan_luaran_pengabdian_rencana)
+                                                                        <h5>{{$tambahan->usulan_luaran_pengabdian_rencana}}</h5>
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
+                                                                        @else
+                                                                        <h5><span class="badge badge-warning">-</span></h5>
+                                                                        @endif
                                                                     </td>
-
                                                                 </tr>
-                                                                @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -347,8 +430,8 @@
                                             <h6>Ukuran File : @if($dokumen_rab){{$dokumen_rab->dokumen_rab_file_size . " KB"}}@else{{"-"}}@endif</h6>
 
                                             @if($dokumen_rab)
-                                            <a href="{{route('file_preview', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
-                                            <a href="{{route('file_download', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
+                                            <a href="{{route('reviewer_pengabdian_file_preview', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                            <a href="{{route('reviewer_pengabdian_file_download', [$id, $dokumen_rab->dokumen_rab_hash_name, 'rab'])}}" class="ml-1 btn btn-sm btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                             @endif
                                         </div>
                                     </div>
@@ -403,37 +486,22 @@
                                                         Rp. {{$data->mitra_sasaran_kontribusi_pendanaan_mitra}}
                                                     </td>
                                                     <td>
-                                                        @php
-                                                        $doc = $data->mitra_file()->where('mitra_file_mitra_sasaran_id', $data->mitra_sasaran_id)->get();
-                                                        @endphp
-
-                                                        @if($doc->count() > 0)
-                                                        @foreach($doc as $row)
-                                                        <div class="row">
-                                                            <div class="col-1">
-                                                                <i class="fas fa-file-pdf fa-2x"></i>
-                                                            </div>
-                                                            <div class="col-11">
-                                                                Nama File : {{$row->mitra_sasaran_file_original_name}}
-                                                                <br>
-                                                                Tanggal Unggah : {{Carbon\Carbon::parse($row->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
-                                                                <br>
-                                                                <a href="{{route('file_preview', [$id, $row->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
-                                                                <a href="{{route('file_download', [$id, $row->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
-                                                            </div>
-                                                        </div>
-                                                        @endforeach
+                                                        <i class="fas fa-file-pdf fa-2x"></i>
+                                                        <br>
+                                                        @if($data->mitra_sasaran_file_date)
+                                                        Nama File : {{$data->mitra_sasaran_file_original_name}}
+                                                        <br>
+                                                        Tanggal Unggah : {{Carbon\Carbon::parse($data->mitra_sasaran_file_date)->isoFormat('D MMMM Y')}}
                                                         @else
-                                                        <div class="row">
-                                                            <div class="col-1">
-                                                                <i class="fas fa-file-pdf fa-2x"></i>
-                                                            </div>
-                                                            <div class="col-11">
-                                                                Nama File : -
-                                                                <br>
-                                                                Tanggal Unggah : -
-                                                            </div>
-                                                        </div>
+                                                        Nama File : -
+                                                        <br>
+                                                        Tanggal Unggah : -
+                                                        @endif
+
+                                                        @if($data->mitra_sasaran_file_date)
+                                                        <br>
+                                                        <a href="{{route('reviewer_pengabdian_file_preview', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                        <a href="{{route('reviewer_pengabdian_file_download', [$id, $data->mitra_sasaran_file_hash_name, 'mitra'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -452,6 +520,7 @@
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
+
 
                     </div>
                     <!-- /.card-body -->

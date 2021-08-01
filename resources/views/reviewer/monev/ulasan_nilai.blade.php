@@ -110,7 +110,7 @@
                                     </td>
                                     <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_1]}}</td>
                                     <td>{{$nilai->penilaian_usulan_nilai_1}}</td>
-                                    <td>10</td>
+                                    <td>10%</td>
                                     <td>{{$total_nilai[1]}}</td>
                                 </tr>
                                 <tr>
@@ -122,7 +122,7 @@
                                     </td>
                                     <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_2]}}</td>
                                     <td>{{$nilai->penilaian_usulan_nilai_2}}</td>
-                                    <td>15</td>
+                                    <td>15%</td>
                                     <td>{{$total_nilai[2]}}</td>
                                 </tr>
                                 <tr>
@@ -134,7 +134,7 @@
                                     </td>
                                     <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_3]}}</td>
                                     <td>{{$nilai->penilaian_usulan_nilai_3}}</td>
-                                    <td>20</td>
+                                    <td>20%</td>
                                     <td>{{$total_nilai[3]}}</td>
                                 </tr>
                                 <tr>
@@ -146,7 +146,7 @@
                                     </td>
                                     <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_4]}}</td>
                                     <td>{{$nilai->penilaian_usulan_nilai_4}}</td>
-                                    <td>25</td>
+                                    <td>25%</td>
                                     <td>{{$total_nilai[4]}}</td>
                                 </tr>
                                 <tr>
@@ -158,7 +158,7 @@
                                     </td>
                                     <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_5]}}</td>
                                     <td>{{$nilai->penilaian_usulan_nilai_5}}</td>
-                                    <td>10</td>
+                                    <td>10%</td>
                                     <td>{{$total_nilai[5]}}</td>
                                 </tr>
                                 <tr>
@@ -170,7 +170,7 @@
                                     </td>
                                     <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_6]}}</td>
                                     <td>{{$nilai->penilaian_usulan_nilai_6}}</td>
-                                    <td>20</td>
+                                    <td>20%</td>
                                     <td>{{$total_nilai[6]}}</td>
                                 </tr>
 

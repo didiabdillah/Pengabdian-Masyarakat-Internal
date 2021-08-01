@@ -121,7 +121,7 @@
                                             <form action="{{route('pengusul_pengabdian_hapus', [$usulan->usulan_pengabdian_id])}}" method="POST" class="form-inline form-horizontal">
                                                 @csrf
                                                 @method('delete')
-                                                <a class="btn btn-success btn-sm" href="">
+                                                <a class="btn btn-success btn-sm" href="{{route('pengusul_pengabdian_detail', [$usulan->usulan_pengabdian_id, 'usulan'])}}">
                                                     <i class="fas fa-folder">
                                                     </i>
 

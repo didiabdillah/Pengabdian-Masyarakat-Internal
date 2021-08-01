@@ -122,7 +122,14 @@
 
                                             <td>
                                                 <div class="card-body">
-                                                    <a class="btn btn-success btn-sm" href="{{route('admin_pengabdian_usulan_konfirmasi', $usulan->usulan_pengabdian_id)}}">
+                                                    <a class="btn btn-success btn-sm" href="{{route('admin_pengabdian_detail', [$usulan->usulan_pengabdian_id, 'usulan'])}}">
+                                                        <i class="fas fa-folder">
+                                                        </i>
+
+                                                        {{__('id.detail')}}
+                                                    </a>
+
+                                                    <a class="btn btn-primary btn-sm" href="{{route('admin_pengabdian_usulan_konfirmasi', $usulan->usulan_pengabdian_id)}}">
                                                         <i class="fas fa-check">
                                                         </i>
 

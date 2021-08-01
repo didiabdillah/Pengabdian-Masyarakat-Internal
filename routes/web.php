@@ -52,6 +52,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::group(['prefix' => 'usulan'], function () {
                         Route::get('/', 'Admin\PengabdianController@usulan_pengabdian')->name('admin_pengabdian_usulan');
+                        Route::get('/detail/{id}/view/{back_param}', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
                         Route::get('/{jurusan_id}/jurusan', 'Admin\PengabdianController@usulan_pengabdian_jurusan')->name('admin_pengabdian_usulan_jurusan');
                         Route::get('/{id}/konfirmasi', 'Admin\PengabdianController@konfirmasi')->name('admin_pengabdian_usulan_konfirmasi');
                         Route::patch('/{id}/konfirmasi', 'Admin\PengabdianController@konfirmasi_update')->name('admin_pengabdian_usulan_konfirmasi_update');
@@ -240,10 +241,20 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                         Route::patch('/{id}/nilai', 'Reviewer\PengabdianController@nilai_update')->name('reviewer_pengabdian_nilai_update');
                         Route::get('/{id}/nilai/ulasan', 'Reviewer\PengabdianController@nilai_ulasan')->name('reviewer_pengabdian_nilai_ulasan');
                         Route::patch('/{id}/nilai/ulasan', 'Reviewer\PengabdianController@nilai_ulasan_update')->name('reviewer_pengabdian_nilai_ulasan_update');
-
-                        Route::get('/{id}/download/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_download')->name('reviewer_pengabdian_file_download');
-                        Route::get('/{id}/preview/{file_name}/{file_category}', 'Reviewer\PengabdianController@file_preview')->name('reviewer_pengabdian_file_preview');
                     });
+                });
+
+                //Monev
+                Route::group(['prefix' => 'monev'], function () {
+                    Route::get('/', 'Reviewer\MonevController@index')->name('reviewer_monev');
+
+                    // Route::group(['middleware' => ['is_Unlock_Nilai_Usulan']], function () {
+                    Route::get('/{id}/detail', 'Reviewer\MonevController@detail')->name('reviewer_monev_detail');
+                    Route::get('/{id}/nilai', 'Reviewer\MonevController@nilai')->name('reviewer_monev_nilai');
+                    Route::patch('/{id}/nilai', 'Reviewer\MonevController@nilai_update')->name('reviewer_monev_nilai_update');
+                    Route::get('/{id}/nilai/ulasan', 'Reviewer\MonevController@nilai_ulasan')->name('reviewer_monev_nilai_ulasan');
+                    Route::patch('/{id}/nilai/ulasan', 'Reviewer\MonevController@nilai_ulasan_update')->name('reviewer_monev_nilai_ulasan_update');
+                    // });
                 });
 
                 //Biodata
@@ -269,7 +280,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::get('/', 'Pengusul\PengabdianController@index')->name('pengusul_pengabdian');
                     Route::get('/riwayat', 'Pengusul\PengabdianController@riwayat')->name('pengusul_pengabdian_riwayat');
-                    // Route::get('/detail', 'Pengusul\PengabdianController@detail')->name('pengusul_pengabdian_detail');
+                    Route::get('/detail/{id}/view/{back_param}', 'Pengusul\PengabdianController@detail')->name('pengusul_pengabdian_detail');
 
                     Route::delete('/{id}/hapus', 'Pengusul\PengabdianController@hapus')->name('pengusul_pengabdian_hapus');
 

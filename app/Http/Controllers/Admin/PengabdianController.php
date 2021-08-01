@@ -10,6 +10,10 @@ use App\Models\Usulan_pengabdian;
 use App\Models\Penilaian_usulan;
 use App\Models\Anggota_pengabdian;
 use App\Models\Jurusan;
+use App\Models\Usulan_luaran;
+use App\Models\Dokumen_rab;
+use App\Models\Dokumen_usulan;
+use App\Models\Mitra_sasaran;
 
 class PengabdianController extends Controller
 {
@@ -29,6 +33,63 @@ class PengabdianController extends Controller
         ];
 
         return view('admin.pengabdian.usulan', $view_data);
+    }
+
+    public function detail($id, $back_param)
+    {
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', 'ketua')
+            ->first();
+
+        $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
+
+        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', '!=', 'ketua')
+            ->orderBy('anggota_pengabdian_role', 'asc')
+            ->get();
+
+        $dokumen_rab = Dokumen_rab::where('dokumen_rab_pengabdian_id', $id)->first();
+
+        $mitra_sasaran = Mitra_sasaran::where('mitra_sasaran_pengabdian_id', $id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
+            ->get();
+
+        $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
+            ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
+            ->get();
+
+        $back_url = NULL;
+        if ($back_param == 'usulan') {
+            $back_url = route('admin_pengabdian_usulan');
+        } elseif ($back_param == 'riwayat') {
+            // $back_url = route('admin_pengabdian_riwayat');
+        } elseif ($back_param == 'plotting') {
+            $back_url = route('admin_plotting_reviewer');
+        }
+
+        $view_data = [
+            'mitra_sasaran' => $mitra_sasaran,
+            'dokumen_rab' => $dokumen_rab,
+            'anggota' => $anggota,
+            'dokumen_usulan' => $dokumen_usulan,
+            'ketua' => $ketua,
+            'id' => $id,
+            'luaran_wajib' => $luaran_wajib,
+            'luaran_tambahan' => $luaran_tambahan,
+            'back_url' => $back_url,
+        ];
+
+        return view('admin.pengabdian.detail', $view_data);
     }
 
     public function usulan_pengabdian_jurusan($jurusan_id)

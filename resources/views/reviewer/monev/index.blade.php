@@ -1,6 +1,6 @@
-@extends('layout.layout_admin')
+@extends('layout.layout_reviewer')
 
-@section('title', __('id.plotting') . ' Reviewer')
+@section('title', 'Usulan Pengabdian')
 
 @section('page')
 
@@ -16,21 +16,33 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>{{__('id.plotting')}} Reviewer</h1>
+                    <h1>Data Usulan Yang Harus Di Review</h1>
                 </div>
             </div>
 
         </div>
 
-        {{-- <div class="container-fluid">
+        <div class="container-fluid">
+            @if($is_nilai_unlock == true)
             <div class="row">
-                <div class="col-12 col-sm-3 col-md-3">
-                    <a href="" class="btn btn-primary btn-md mb-3 btn-block"><i class="fas fa-plus"></i> Tambah</a>
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Penilaian Usulan</h5>
+                        <ul class="mb-0">
+                            <li>
+                                <b>Periode</b> : {{$nilai_unlock["start_year"] . " / " . $nilai_unlock["end_year"]}}
+                            </li>
+                            <li>
+                                <b>Batas Awal</b> : {{Carbon\Carbon::parse($nilai_unlock["start_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            <li>
+                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse($nilai_unlock["end_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div> --}}
+            @endif
+        </div>
 
         <!--Content -->
         <section class="content">
@@ -53,8 +65,8 @@
                                     <th>Judul</th>
                                     <th>Tahun</th>
                                     <th>Pengusul</th>
-                                    <th>Prodi</th>
-                                    <th>Reviewer</th>
+                                    <th>Skema</th>
+                                    <th>Bidang</th>
                                     <th>Status</th>
                                     <th>{{__('id.option')}}</th>
                                 </tr>
@@ -74,28 +86,25 @@
                                     </td>
                                     <td>
                                         <h5>
-                                            @php
-                                            $ketua= $usulan->anggota_pengabdian()
-                                            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-                                            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                            {{$ketua = $usulan->anggota_pengabdian()
+                                            ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                            ->where('anggota_pengabdian_pengabdian_id', $usulan->usulan_pengabdian_id)
                                             ->where('anggota_pengabdian_role', 'ketua')
-                                            ->first();
-                                            @endphp
-                                            {{$ketua->user_name}}
+                                            ->first()->user_name}}
                                         </h5>
                                     </td>
                                     <td>
                                         <h5>
-                                            {{$ketua->biodata_program_studi}}
+                                            {{
+                                                $usulan->join('skema_pengabdian', 'skema_pengabdian.skema_id', '=', 'usulan_pengabdian.usulan_pengabdian_skema_id')->first()->skema_label
+                                            }}
                                         </h5>
                                     </td>
                                     <td>
                                         <h5>
-                                            @if($usulan->user_name)
-                                            {{$usulan->user_name}}
-                                            @else
-                                            -
-                                            @endif
+                                            {{
+                                                $usulan->join('bidang_pengabdian', 'bidang_pengabdian.bidang_id', '=', 'usulan_pengabdian.usulan_pengabdian_bidang_id')->first()->bidang_label
+                                            }}
                                         </h5>
                                     </td>
                                     <td>
@@ -107,37 +116,19 @@
                                         <h5><span class="badge badge-danger">Ditolak</span></h5>
                                         @elseif($usulan->usulan_pengabdian_status == "dinilai")
                                         <h5><span class="badge badge-info">Dinilai</span></h5>
-                                        @elseif($usulan->usulan_pengabdian_status == "pending")
-                                        <h5><span class="badge badge-warning">Pending</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "selesai")
+                                        <h5><span class="badge badge-success">Selesai</span></h5>
                                         @endif
                                     </td>
 
                                     <td>
                                         <div class="card-body">
-                                            <form action="{{route('pengusul_pengabdian_hapus', [$usulan->usulan_pengabdian_id])}}" method="POST" class="form-inline form-horizontal">
-                                                @csrf
-                                                @method('delete')
-                                                <a class="btn btn-success btn-sm" href="{{route('admin_pengabdian_detail', [$usulan->usulan_pengabdian_id, 'plotting'])}}">
-                                                    <i class="fas fa-folder">
-                                                    </i>
+                                            <a class="btn btn-success btn-sm" href="{{route('reviewer_pengabdian_detail', $usulan->usulan_pengabdian_id)}}">
+                                                <i class="fas fa-search-plus">
+                                                </i>
 
-                                                    {{__('id.detail')}}
-                                                </a>
-
-                                                <a class="btn btn-primary btn-sm ml-1" href="{{route('admin_plotting_give_reviewer', [$usulan->usulan_pengabdian_id])}}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-
-                                                    {{__('id.plotting')}}
-                                                </a>
-
-                                                <!-- <button class="btn btn-danger btn-sm btn-remove ml-1" type="submit">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                    Hapus
-                                                </button> -->
-                                            </form>
-
+                                                {{__('id.review')}}
+                                            </a>
                                         </div>
 
                                     </td>

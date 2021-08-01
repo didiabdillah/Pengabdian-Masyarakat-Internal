@@ -77,7 +77,7 @@
                                 <div class="form-group clearfix">
                                     <label for="nilai_1">1. Analisis Situasi</label>
                                     <p>(Kondisi Eksisting Mitra, Persoalan Yang Dihadapi Mitra)</p>
-                                    <h6>Bobot : 10</h6>
+                                    <h6>Bobot : 10%</h6>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_1a" name="nilai_1" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_1a">
@@ -121,7 +121,7 @@
                                 <div class="form-group clearfix">
                                     <label for="nilai_2">2. Permasalahan Mitra</label>
                                     <p>(Kecocokan Permasalahan Dan Program Serta Kompetensi Tim)</p>
-                                    <h6>Bobot : 15</h6>
+                                    <h6>Bobot : 15%</h6>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_2a" name="nilai_2" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_2a">
@@ -165,7 +165,7 @@
                                 <div class="form-group clearfix">
                                     <label for="nilai_3">3. Solusi Yang Ditawarkan</label>
                                     <p>(Ketepatan Metode Pendekatan Untuk Mengatasi Permasalahan, Rencana Kegiatan, Kontribusi Partisipasi Mitra)</p>
-                                    <h6>Bobot : 20</h6>
+                                    <h6>Bobot : 20%</h6>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_3a" name="nilai_3" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_3a">
@@ -209,7 +209,7 @@
                                 <div class="form-group clearfix">
                                     <label for="nilai_4">4. Target Luaran</label>
                                     <p>(Jenis Luaran Dan Spesifikasinya Sesuai Kegiatan Yang Diusulkan)</p>
-                                    <h6>Bobot : 25</h6>
+                                    <h6>Bobot : 25%</h6>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_4a" name="nilai_4" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_4a">
@@ -253,7 +253,7 @@
                                 <div class="form-group clearfix">
                                     <label for="nilai_5">5. Kelayakan Usulan</label>
                                     <p>(Jadwal Kegiatan, Kualifikasi Tim Pelaksana, Kelengkapan Lampiran)</p>
-                                    <h6>Bobot : 10</h6>
+                                    <h6>Bobot : 10%</h6>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_5a" name="nilai_5" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_5a">
@@ -297,7 +297,7 @@
                                 <div class="form-group clearfix">
                                     <label for="nilai_6">6. Biaya Pekerjaan</label>
                                     <p>(Kelayakan Usulan Biaya (Honorarium (Maks 30%), Bahan Habis, Peralatan), Perjalanan, Lain-Lain Pengeluaran)</p>
-                                    <h6>Bobot : 20</h6>
+                                    <h6>Bobot : 20%</h6>
                                     <div class="icheck-primary">
                                         <input type="radio" id="nilai_6a" name="nilai_6" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 1){{"checked"}}@endif @endif>
                                         <label for="nilai_6a">

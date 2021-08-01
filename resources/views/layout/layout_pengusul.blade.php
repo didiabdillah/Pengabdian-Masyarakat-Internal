@@ -139,7 +139,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('pengusul_pengabdian')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) != 'riwayat') {{'active'}} @endif">
+                                    <a href="{{route('pengusul_pengabdian')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) != 'riwayat' && Request::segment(3) != 'detail') {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Usulan Pengabdian

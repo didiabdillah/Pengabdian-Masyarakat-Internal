@@ -14,7 +14,7 @@ use App\Models\Mitra_sasaran;
 use App\Models\Usulan_luaran;
 use App\Models\Penilaian_usulan;
 
-class PengabdianController extends Controller
+class MonevController extends Controller
 {
     public function index()
     {
@@ -39,7 +39,7 @@ class PengabdianController extends Controller
             'nilai_unlock' => $nilai_unlock,
         ];
 
-        return view('reviewer.pengabdian.index', $view_data);
+        return view('reviewer.monev.index', $view_data);
     }
 
     public function detail($id)
@@ -65,15 +65,34 @@ class PengabdianController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
-        $luaran_wajib = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
+        $luaran_wajib1 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
             ->where('usulan_luaran_pengabdian_tipe', 'wajib')
-            ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
-            ->get();
+            ->where('usulan_luaran_pengabdian_urutan', 1)
+            ->first();
 
-        $luaran_tambahan = Usulan_luaran::where('usulan_luaran_pengabdian_id', $id)
+        $luaran_wajib2 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->where('usulan_luaran_pengabdian_urutan', 2)
+            ->first();
+
+        $luaran_wajib3 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->where('usulan_luaran_pengabdian_urutan', 3)
+            ->first();
+
+        $luaran_wajib4 = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->where('usulan_luaran_pengabdian_urutan', 4)
+            ->first();
+
+        $jumlah_luaran_wajib = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
+            ->where('usulan_luaran_pengabdian_tipe', 'wajib')
+            ->count();
+
+        $luaran_tambahan = Luaran_usulan::where('usulan_luaran_pengabdian_id', $id)
             ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
-            ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
-            ->get();
+            ->where('usulan_luaran_pengabdian_urutan', 0)
+            ->first();
 
         $view_data = [
             'mitra_sasaran' => $mitra_sasaran,
@@ -82,11 +101,15 @@ class PengabdianController extends Controller
             'dokumen_usulan' => $dokumen_usulan,
             'ketua' => $ketua,
             'id' => $id,
-            'luaran_wajib' => $luaran_wajib,
-            'luaran_tambahan' => $luaran_tambahan,
+            'wajib1' => $luaran_wajib1,
+            'wajib2' => $luaran_wajib2,
+            'wajib3' => $luaran_wajib3,
+            'wajib4' => $luaran_wajib4,
+            'tambahan' => $luaran_tambahan,
+            'jumlah_luaran_wajib' => $jumlah_luaran_wajib,
         ];
 
-        return view('reviewer.pengabdian.detail', $view_data);
+        return view('reviewer.monev.detail', $view_data);
     }
 
     public function nilai($id)
@@ -136,7 +159,7 @@ class PengabdianController extends Controller
             'nilai' => $penilaian_usulan,
         ];
 
-        return view('reviewer.pengabdian.nilai', $view_data);
+        return view('reviewer.monev.nilai', $view_data);
     }
 
     public function nilai_update(Request $request, $id)
@@ -275,7 +298,7 @@ class PengabdianController extends Controller
             'total_nilai' => $total_nilai,
         ];
 
-        return view('reviewer.pengabdian.ulasan_nilai', $view_data);
+        return view('reviewer.monev.ulasan_nilai', $view_data);
     }
 
     public function nilai_ulasan_update(Request $request, $id)
