@@ -136,7 +136,7 @@ class PengabdianController extends Controller
             'skema'  => 'required',
             'bidang'  => 'required',
             'lama_kegiatan'  => 'required',
-            'jumlah_mahasiswa'  => 'required|max:3',
+            'jumlah_mahasiswa'  => 'required|max:3|numeric',
         ]);
 
         $id = uniqid() . strtotime(now());
@@ -185,7 +185,7 @@ class PengabdianController extends Controller
             'skema'  => 'required',
             'bidang'  => 'required',
             'lama_kegiatan'  => 'required',
-            'jumlah_mahasiswa'  => 'required|max:3',
+            'jumlah_mahasiswa'  => 'required|max:3|numeric',
         ]);
 
         $judul = htmlspecialchars($request->judul);
@@ -408,25 +408,34 @@ class PengabdianController extends Controller
                     );
                 }
 
-                // Cek Apakah User Sudah Terdaftar Di Usulan Lain
-                // $query = Anggota_pengabdian::join('usulan_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
-                //     ->where([['anggota_pengabdian.anggota_pengabdian_pengabdian_id', $id], ['usulan_pengabdian.usulan_pengabdian_tahun', date('Y')]])
-                //     ->where('usulan_pengabdian.usulan_pengabdian_id', '!=', $id)
-                //     ->count();
+                //Cek Apakah User Ketua Di Usulan Lain Dan Sudah Terdaftar 1x Di Usulan Lain Di tahun Ini
+                $jadi_ketua = Anggota_pengabdian::join('usulan_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
+                    ->where('usulan_pengabdian.usulan_pengabdian_tahun', date('Y'))
+                    ->where('anggota_pengabdian.anggota_pengabdian_pengabdian_id', '!=', $id)
+                    ->where('anggota_pengabdian_user_id', $user_id)
+                    ->where('anggota_pengabdian_role', 'ketua')
+                    ->count();
 
-                // if ($query > 0) {
-                //     $result = NULL;
+                $jadi_anggota = Anggota_pengabdian::join('usulan_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
+                    ->where('usulan_pengabdian.usulan_pengabdian_tahun', date('Y'))
+                    ->where('anggota_pengabdian.anggota_pengabdian_pengabdian_id', '!=', $id)
+                    ->where('anggota_pengabdian_user_id', $user_id)
+                    ->where('anggota_pengabdian_role', 'anggota')
+                    ->count();
 
-                //     //Flash Message
-                //     flash_alert(
-                //         __('alert.icon_error'), //Icon
-                //         'Gagal', //Alert Message 
-                //         'Nama Pengusul Sudah Masuk Usulan Kelompok Lain' //Sub Alert Message
-                //     );
-                // }
+                if ($jadi_ketua > 0 && $jadi_anggota > 0) {
+                    $result = NULL;
 
-                $anggota1 = Anggota_pengabdian::where([['anggota_pengabdian_pengabdian_id', $id], ['anggota_pengabdian_role', 'pengusul'], ['anggota_pengabdian_role_position', 1]])->first();
-                $anggota2 = Anggota_pengabdian::where([['anggota_pengabdian_pengabdian_id', $id], ['anggota_pengabdian_role', 'pengusul'], ['anggota_pengabdian_role_position', 2]])->first();
+                    //Flash Message
+                    flash_alert(
+                        __('alert.icon_error'), //Icon
+                        'Gagal', //Alert Message 
+                        'Nama Pengusul Sudah Mencapai Batas Masuk Usulan Kelompok Lain' //Sub Alert Message
+                    );
+                }
+
+                $anggota1 = Anggota_pengabdian::where([['anggota_pengabdian_pengabdian_id', $id], ['anggota_pengabdian_role', 'anggota'], ['anggota_pengabdian_role_position', 1]])->first();
+                $anggota2 = Anggota_pengabdian::where([['anggota_pengabdian_pengabdian_id', $id], ['anggota_pengabdian_role', 'anggota'], ['anggota_pengabdian_role_position', 2]])->first();
             } else {
                 $result = NULL;
 
