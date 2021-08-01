@@ -35,6 +35,76 @@ class PengabdianController extends Controller
         return view('admin.pengabdian.usulan', $view_data);
     }
 
+    public function riwayat()
+    {
+        $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
+            ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('usulan_pengabdian_tahun', '<', date('Y'))
+            ->orderBy('usulan_pengabdian_tahun', 'desc')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->get();
+
+        $jurusan = Jurusan::all();
+
+        $view_data = [
+            'usulan_pengabdian' => $usulan_pengabdian,
+            'jurusan' => $jurusan,
+        ];
+
+        return view('admin.pengabdian.riwayat', $view_data);
+    }
+
+    public function usulan_pengabdian_jurusan($jurusan_id)
+    {
+        $current_jurusan = Jurusan::where('jurusan_id', $jurusan_id)->first();
+
+        $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
+            ->join('anggota_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
+            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+            ->where('biodata.biodata_jurusan', '=', $current_jurusan->jurusan_nama)
+            ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('anggota_pengabdian.anggota_pengabdian_role', '=', 'ketua')
+            ->orderBy('usulan_pengabdian_tahun', 'desc')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->get();
+
+        $jurusan = Jurusan::all();
+
+        $view_data = [
+            'usulan_pengabdian' => $usulan_pengabdian,
+            'jurusan' => $jurusan,
+            'current_jurusan' => $current_jurusan->jurusan_nama,
+        ];
+
+        return view('admin.pengabdian.usulan_jurusan', $view_data);
+    }
+
+    public function riwayat_jurusan($jurusan_id)
+    {
+        $current_jurusan = Jurusan::where('jurusan_id', $jurusan_id)->first();
+
+        $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
+            ->join('anggota_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
+            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+            ->where('biodata.biodata_jurusan', '=', $current_jurusan->jurusan_nama)
+            ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('anggota_pengabdian.anggota_pengabdian_role', '=', 'ketua')
+            ->where('usulan_pengabdian_tahun', '<', date('Y'))
+            ->orderBy('usulan_pengabdian_tahun', 'desc')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->get();
+
+        $jurusan = Jurusan::all();
+
+        $view_data = [
+            'usulan_pengabdian' => $usulan_pengabdian,
+            'jurusan' => $jurusan,
+            'current_jurusan' => $current_jurusan->jurusan_nama,
+        ];
+
+        return view('admin.pengabdian.riwayat_jurusan', $view_data);
+    }
+
     public function detail($id, $back_param)
     {
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
@@ -75,6 +145,8 @@ class PengabdianController extends Controller
             // $back_url = route('admin_pengabdian_riwayat');
         } elseif ($back_param == 'plotting') {
             $back_url = route('admin_plotting_reviewer');
+        } else if ($back_param == 'riwayat') {
+            $back_url = route('admin_pengabdian_riwayat');
         }
 
         $view_data = [
@@ -92,29 +164,6 @@ class PengabdianController extends Controller
         return view('admin.pengabdian.detail', $view_data);
     }
 
-    public function usulan_pengabdian_jurusan($jurusan_id)
-    {
-        $current_jurusan = Jurusan::where('jurusan_id', $jurusan_id)->first();
-
-        $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
-            ->join('anggota_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
-            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
-            ->where('biodata.biodata_jurusan', '=', $current_jurusan->jurusan_nama)
-            ->where('usulan_pengabdian_status', '!=', 'pending')
-            ->orderBy('usulan_pengabdian_tahun', 'desc')
-            ->orderBy('usulan_pengabdian.updated_at', 'desc')
-            ->get();
-
-        $jurusan = Jurusan::all();
-
-        $view_data = [
-            'usulan_pengabdian' => $usulan_pengabdian,
-            'jurusan' => $jurusan,
-            'current_jurusan' => $current_jurusan->jurusan_nama,
-        ];
-
-        return view('admin.pengabdian.usulan_jurusan', $view_data);
-    }
 
     public function konfirmasi($id)
     {
@@ -204,87 +253,87 @@ class PengabdianController extends Controller
         return redirect()->route('admin_pengabdian_usulan');
     }
 
-    public function pelaksanaan_pengabdian()
-    {
-        $waktu = get_where_local_db_json("unlock_feature.json", "name", __('unlock.tambah_usulan_pengabdian'));
+    // public function pelaksanaan_pengabdian()
+    // {
+    //     $waktu = get_where_local_db_json("unlock_feature.json", "name", __('unlock.tambah_usulan_pengabdian'));
 
-        $view_data = [
-            'waktu' => $waktu,
-        ];
+    //     $view_data = [
+    //         'waktu' => $waktu,
+    //     ];
 
-        return view('admin.pengabdian.pelaksanaan', $view_data);
-    }
+    //     return view('admin.pengabdian.pelaksanaan', $view_data);
+    // }
 
-    public function pelaksanaan_pengabdian_update(Request $request)
-    {
-        $waktu = explode(" - ", htmlspecialchars($request->waktu));
+    // public function pelaksanaan_pengabdian_update(Request $request)
+    // {
+    //     $waktu = explode(" - ", htmlspecialchars($request->waktu));
 
-        $year_start = htmlspecialchars($request->tahun_mulai);
-        $year_end = htmlspecialchars($request->tahun_selesai);
+    //     $year_start = htmlspecialchars($request->tahun_mulai);
+    //     $year_end = htmlspecialchars($request->tahun_selesai);
 
-        $time_start = date('Y-m-d H:i:s', strtotime($waktu[0]));
-        $time_end = date('Y-m-d H:i:s', strtotime($waktu[1]));
+    //     $time_start = date('Y-m-d H:i:s', strtotime($waktu[0]));
+    //     $time_end = date('Y-m-d H:i:s', strtotime($waktu[1]));
 
-        $data = [
-            "id" => $request->id,
-            "name" => __('unlock.tambah_usulan_pengabdian'),
-            "start_year" => $year_start,
-            "end_year" => $year_end,
-            "start_time" => $time_start,
-            "end_time" => $time_end,
-        ];
+    //     $data = [
+    //         "id" => $request->id,
+    //         "name" => __('unlock.tambah_usulan_pengabdian'),
+    //         "start_year" => $year_start,
+    //         "end_year" => $year_end,
+    //         "start_time" => $time_start,
+    //         "end_time" => $time_end,
+    //     ];
 
-        update_local_db_json("unlock_feature.json", "id", $request->id, $data);
+    //     update_local_db_json("unlock_feature.json", "id", $request->id, $data);
 
-        //Flash Message
-        flash_alert(
-            __('alert.icon_success'), //Icon
-            'Sukses', //Alert Message 
-            'Waktu Pelaksanaan Diubah' //Sub Alert Message
-        );
+    //     //Flash Message
+    //     flash_alert(
+    //         __('alert.icon_success'), //Icon
+    //         'Sukses', //Alert Message 
+    //         'Waktu Pelaksanaan Diubah' //Sub Alert Message
+    //     );
 
-        return redirect()->route('admin_pengabdian_pelaksanaan');
-    }
+    //     return redirect()->route('admin_pengabdian_pelaksanaan');
+    // }
 
-    public function pelaksanaan_penilaian()
-    {
-        $waktu = get_where_local_db_json("unlock_feature.json", "name", __('unlock.nilai_usulan_pengabdian'));
+    // public function pelaksanaan_penilaian()
+    // {
+    //     $waktu = get_where_local_db_json("unlock_feature.json", "name", __('unlock.nilai_usulan_pengabdian'));
 
-        $view_data = [
-            'waktu' => $waktu,
-        ];
+    //     $view_data = [
+    //         'waktu' => $waktu,
+    //     ];
 
-        return view('admin.pengabdian.pelaksanaan_penilaian', $view_data);
-    }
+    //     return view('admin.pengabdian.pelaksanaan_penilaian', $view_data);
+    // }
 
-    public function pelaksanaan_penilaian_update(Request $request)
-    {
-        $waktu = explode(" - ", htmlspecialchars($request->waktu));
+    // public function pelaksanaan_penilaian_update(Request $request)
+    // {
+    //     $waktu = explode(" - ", htmlspecialchars($request->waktu));
 
-        $year_start = htmlspecialchars($request->tahun_mulai);
-        $year_end = htmlspecialchars($request->tahun_selesai);
+    //     $year_start = htmlspecialchars($request->tahun_mulai);
+    //     $year_end = htmlspecialchars($request->tahun_selesai);
 
-        $time_start = date('Y-m-d H:i:s', strtotime($waktu[0]));
-        $time_end = date('Y-m-d H:i:s', strtotime($waktu[1]));
+    //     $time_start = date('Y-m-d H:i:s', strtotime($waktu[0]));
+    //     $time_end = date('Y-m-d H:i:s', strtotime($waktu[1]));
 
-        $data = [
-            "id" => $request->id,
-            "name" => __('unlock.nilai_usulan_pengabdian'),
-            "start_year" => $year_start,
-            "end_year" => $year_end,
-            "start_time" => $time_start,
-            "end_time" => $time_end,
-        ];
+    //     $data = [
+    //         "id" => $request->id,
+    //         "name" => __('unlock.nilai_usulan_pengabdian'),
+    //         "start_year" => $year_start,
+    //         "end_year" => $year_end,
+    //         "start_time" => $time_start,
+    //         "end_time" => $time_end,
+    //     ];
 
-        update_local_db_json("unlock_feature.json", "id", $request->id, $data);
+    //     update_local_db_json("unlock_feature.json", "id", $request->id, $data);
 
-        //Flash Message
-        flash_alert(
-            __('alert.icon_success'), //Icon
-            'Sukses', //Alert Message 
-            'Waktu Pelaksanaan Diubah' //Sub Alert Message
-        );
+    //     //Flash Message
+    //     flash_alert(
+    //         __('alert.icon_success'), //Icon
+    //         'Sukses', //Alert Message 
+    //         'Waktu Pelaksanaan Diubah' //Sub Alert Message
+    //     );
 
-        return redirect()->route('admin_penilaian_pelaksanaan');
-    }
+    //     return redirect()->route('admin_penilaian_pelaksanaan');
+    // }
 }

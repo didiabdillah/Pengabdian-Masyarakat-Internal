@@ -14,8 +14,12 @@ class CreatePenilaianMonevTable extends Migration
     public function up()
     {
         Schema::create('penilaian_monev', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('penilaian_monev_id');
+            $table->string('penilaian_monev_pengabdian_id', 64);
+
             $table->timestamps();
+
+            $table->foreign('penilaian_monev_pengabdian_id')->references('usulan_pengabdian_id')->on('usulan_pengabdian')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -26,6 +30,9 @@ class CreatePenilaianMonevTable extends Migration
      */
     public function down()
     {
+        Schema::table('penilaian_monev', function (Blueprint $table) {
+            $table->dropForeign('penilaian_monev_penilaian_monev_pengabdian_id_foreign');
+        });
         Schema::dropIfExists('penilaian_monev');
     }
 }

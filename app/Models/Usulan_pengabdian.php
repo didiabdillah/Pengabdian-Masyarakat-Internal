@@ -22,6 +22,7 @@ class Usulan_pengabdian extends Model
         'usulan_pengabdian_submit',
         'usulan_pengabdian_status',
         'usulan_pengabdian_tahun',
+        'usulan_pengabdian_unlock_pass',
         // 'usulan_pengabdian_komentar',
     ];
 

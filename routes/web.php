@@ -52,8 +52,10 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'pengabdian'], function () {
                     Route::group(['prefix' => 'usulan'], function () {
                         Route::get('/', 'Admin\PengabdianController@usulan_pengabdian')->name('admin_pengabdian_usulan');
-                        Route::get('/detail/{id}/view/{back_param}', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
+                        Route::get('/riwayat', 'Admin\PengabdianController@riwayat')->name('admin_pengabdian_riwayat');
                         Route::get('/{jurusan_id}/jurusan', 'Admin\PengabdianController@usulan_pengabdian_jurusan')->name('admin_pengabdian_usulan_jurusan');
+                        Route::get('/riwayat/{jurusan_id}/jurusan', 'Admin\PengabdianController@riwayat_jurusan')->name('admin_pengabdian_riwayat_jurusan');
+                        Route::get('/detail/{id}/view/{back_param}', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
                         Route::get('/{id}/konfirmasi', 'Admin\PengabdianController@konfirmasi')->name('admin_pengabdian_usulan_konfirmasi');
                         Route::patch('/{id}/konfirmasi', 'Admin\PengabdianController@konfirmasi_update')->name('admin_pengabdian_usulan_konfirmasi_update');
                     });

@@ -140,7 +140,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('admin_pengabdian_usulan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'usulan' && Request::segment(4) != 'detail') {{'active'}} @endif">
+                                    <a href="{{route('admin_pengabdian_usulan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'usulan' && Request::segment(4) != 'detail' && Request::segment(4) != 'riwayat') {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Usulan Pengabdian
@@ -148,7 +148,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin_pengabdian_usulan')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(3) == 'riwayat') {{'active'}} @endif">
+                                    <a href="{{route('admin_pengabdian_riwayat')}}" class="nav-link @if(Request::segment(2) == 'pengabdian' && Request::segment(4) == 'riwayat') {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             {{__('id.history')}} Pengabdian
@@ -269,7 +269,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('admin_plotting_reviewer')}}" class="nav-link @if(Request::segment(3) == 'usulan') {{'active'}} @endif">
+                                    <a href="{{route('admin_plotting_reviewer')}}" class="nav-link @if(Request::segment(2) == 'plotting' && Request::segment(3) == 'usulan') {{'active'}} @endif">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Usulan Pengabdian
