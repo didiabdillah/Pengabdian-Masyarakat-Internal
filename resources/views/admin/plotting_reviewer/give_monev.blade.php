@@ -22,7 +22,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('admin_plotting_give_reviewer_update', $usulan_id)}}" method="POST">
+                    <form action="{{route('admin_plotting_monev_give_reviewer_update', $usulan_id)}}" method="POST">
                         @csrf
                         @method('patch')
                         <div class="card-body">

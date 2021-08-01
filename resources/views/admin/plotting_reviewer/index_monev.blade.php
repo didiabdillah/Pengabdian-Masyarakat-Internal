@@ -1,6 +1,6 @@
 @extends('layout.layout_admin')
 
-@section('title', .{{__('id.plotting')}} ' Monev Reviewer')
+@section('title', __('id.plotting') . ' Monev Reviewer')
 
 @section('page')
 
@@ -44,7 +44,7 @@
                                     <th>Tahun</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-                                    <th>Reviewer</th>
+                                    <th>Reviewer Monev</th>
                                     <th>Status</th>
                                     <th>{{__('id.option')}}</th>
                                 </tr>
@@ -109,14 +109,14 @@
                                             <form action="{{route('pengusul_pengabdian_hapus', [$usulan->usulan_pengabdian_id])}}" method="POST" class="form-inline form-horizontal">
                                                 @csrf
                                                 @method('delete')
-                                                <a class="btn btn-success btn-sm" href="">
+                                                {{-- <a class="btn btn-success btn-sm" href="">
                                                     <i class="fas fa-folder">
                                                     </i>
 
                                                     {{__('id.detail')}}
-                                                </a>
+                                                </a> --}}
 
-                                                <a class="btn btn-primary btn-sm ml-1" href="{{route('admin_plotting_give_reviewer', [$usulan->usulan_pengabdian_id])}}">
+                                                <a class="btn btn-primary btn-sm ml-1" href="{{route('admin_plotting_monev_give_reviewer', [$usulan->usulan_pengabdian_id])}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
 
@@ -144,6 +144,7 @@
                 <!-- /.card -->
             </div>
         </section>
+    </section>
 </div>
 <!-- /.content -->
 

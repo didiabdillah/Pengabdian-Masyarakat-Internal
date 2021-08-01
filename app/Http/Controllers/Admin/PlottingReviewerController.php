@@ -84,7 +84,7 @@ class PlottingReviewerController extends Controller
             ->where('user_id', '!=', Session::get('user_id'))
             ->orderBy('user_name', 'asc')->get();
 
-        $usulan_pengabdian = Usulan_pengabdian::leftjoin('users', 'usulan_pengabdian.usulan_pengabdian_reviewer_id', '=', 'users.user_id')
+        $usulan_pengabdian = Usulan_pengabdian::leftjoin('users', 'usulan_pengabdian.usulan_pengabdian_reviewer_monev_id', '=', 'users.user_id')
             ->where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_status', '=', 'diterima')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
@@ -98,7 +98,6 @@ class PlottingReviewerController extends Controller
 
         return view('admin.plotting_reviewer.index_monev', $view_data);
     }
-
 
     public function give_monev_reviewer($id)
     {
@@ -122,7 +121,7 @@ class PlottingReviewerController extends Controller
         $reviewer = htmlspecialchars($request->reviewer);
 
         $data = [
-            'usulan_pengabdian_reviewer_id' => $reviewer,
+            'usulan_pengabdian_reviewer_monev_id' => $reviewer,
         ];
 
         //Update Data
@@ -136,7 +135,7 @@ class PlottingReviewerController extends Controller
             'Reviewer Diplotting' //Sub Alert Message
         );
 
-        return redirect()->route('admin_plotting_reviewer');
+        return redirect()->route('admin_plotting_monev_reviewer');
     }
 
 
