@@ -53,7 +53,12 @@
                                         {{$data->logbook_date}}
                                     </td>
                                     <td>
-                                        {{$data->logbook_uraian_kegiatan}}
+                                        <a class="btn btn-primary btn-sm" href="{{route('admin_logbook_detail_uraian', [$pengabdian_id, $data->logbook_id])}}">
+                                            <i class="fas fa-eye">
+                                            </i>
+
+                                            Lihat Uraian
+                                        </a>
                                     </td>
                                     <td>
                                         {{intval($data->logbook_presentase)}}

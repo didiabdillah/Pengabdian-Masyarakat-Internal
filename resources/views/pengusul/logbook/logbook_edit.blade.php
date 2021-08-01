@@ -8,6 +8,11 @@
 
 @section('page')
 
+@push('style')
+<!-- summernote -->
+<link rel="stylesheet" href="{{URL::asset('assets/plugins/summernote/summernote-bs4.min.css')}}">
+@endpush
+
 @include('layout.flash_alert')
 
 <!-- Content Wrapper. Contains page content -->
@@ -81,6 +86,16 @@
 @endsection
 
 @push('plugin')
+<!-- Summernote -->
+<script src="{{URL::asset('assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
+
+<script>
+    $(function() {
+        // Summernote
+        $('#uraian').summernote()
+    })
+</script>
+
 <!-- bs-custom-file-input -->
 <script src="{{URL::asset('assets/js/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 

@@ -140,6 +140,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'logbook'], function () {
                     Route::get('/', 'Admin\LogbookController@index')->name('admin_logbook');
                     Route::get('/{pengabdian_id}/detail', 'Admin\LogbookController@logbook_index')->name('admin_logbook_detail');
+                    Route::get('/{pengabdian_id}/detail/{id}/uraian', 'Admin\LogbookController@logbook_uraian')->name('admin_logbook_detail_uraian');
                 });
 
                 //Laporan Kemajuan
@@ -341,6 +342,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                     Route::group(['prefix' => '{pengabdian_id}'], function () {
                         Route::group(['middleware' => ['is_Suspend', 'is_Diterima', 'is_Unlock_Tambah_Logbook']], function () {
                             Route::get('/detail', 'Pengusul\LogbookController@logbook_index')->name('pengusul_logbook_detail');
+                            Route::get('/detail/{id}/uraian', 'Pengusul\LogbookController@logbook_uraian')->name('pengusul_logbook_detail_uraian');
                             Route::get('/insert', 'Pengusul\LogbookController@logbook_insert')->name('pengusul_logbook_detail_insert');
                             Route::post('/insert', 'Pengusul\LogbookController@logbook_store')->name('pengusul_logbook_detail_store');
                             Route::get('/{id}/edit', 'Pengusul\LogbookController@logbook_edit')->name('pengusul_logbook_detail_edit');

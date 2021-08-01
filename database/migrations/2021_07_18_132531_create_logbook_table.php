@@ -17,7 +17,7 @@ class CreateLogbookTable extends Migration
             $table->bigIncrements('logbook_id');
             $table->string('logbook_pengabdian_id', 64);
             $table->date('logbook_date');
-            $table->text('logbook_uraian_kegiatan');
+            $table->longText('logbook_uraian_kegiatan');
             $table->unsignedFloat('logbook_presentase');
 
             $table->timestamps();

@@ -10,6 +10,11 @@
 
 @include('layout.flash_alert')
 
+@push('style')
+<!-- summernote -->
+<link rel="stylesheet" href="{{URL::asset('assets/plugins/summernote/summernote-bs4.min.css')}}">
+@endpush
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -32,7 +37,7 @@
 
                             <div class="form-group ">
                                 <label for="tanggal">Tanggal Kegiatan</label>
-                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{old('tanggal')}}">
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{old('tanggal')}}" max="{{date('Y-m-d')}}">
                                 @error('tanggal')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -52,7 +57,7 @@
 
                             <div class="form-group">
                                 <label for="presentase">Presentase Kegiatan (%)</label>
-                                <input type="text" class="form-control @error('presentase') is-invalid @enderror" id="presentase" name="presentase" placeholder="%" value="{{intval(old('presentase'))}}">
+                                <input type="text" class="form-control @error('presentase') is-invalid @enderror" id="presentase" name="presentase" placeholder="%" value="{{old('presentase')}}">
                                 @error('presentase')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -80,6 +85,16 @@
 @endsection
 
 @push('plugin')
+<!-- Summernote -->
+<script src="{{URL::asset('assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
+
+<script>
+    $(function() {
+        // Summernote
+        $('#uraian').summernote()
+    })
+</script>
+
 <!-- bs-custom-file-input -->
 <script src="{{URL::asset('assets/js/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 

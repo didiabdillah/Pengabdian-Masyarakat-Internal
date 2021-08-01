@@ -63,6 +63,18 @@ class LogbookController extends Controller
         return view('pengusul.logbook.logbook_index', $view_data);
     }
 
+    public function logbook_uraian($pengabdian_id, $id)
+    {
+        $logbook = Logbook::where('logbook_id', $id)->first();
+
+        $view_data = [
+            'pengabdian_id' => $pengabdian_id,
+            'logbook' => $logbook,
+        ];
+
+        return view('pengusul.logbook.logbook_uraian', $view_data);
+    }
+
     public function logbook_insert($pengabdian_id)
     {
         $view_data = [
@@ -78,13 +90,13 @@ class LogbookController extends Controller
         $request->validate(
             [
                 'tanggal' => 'required',
-                'uraian' => 'required|max:60000',
+                'uraian' => 'required|max:4294967200',
                 'presentase' => 'required|numeric|min:0|max:100',
             ]
         );
 
         $tanggal = htmlspecialchars($request->tanggal);
-        $uraian = htmlspecialchars($request->uraian);
+        $uraian = $request->uraian;
         $presentase = htmlspecialchars($request->presentase);
 
         //Update Data
@@ -92,7 +104,7 @@ class LogbookController extends Controller
             'logbook_pengabdian_id' => $pengabdian_id,
             'logbook_date' => $tanggal,
             'logbook_uraian_kegiatan' => $uraian,
-            'logbook_presentase' => $presentase,
+            'logbook_presentase' => intval($presentase),
         ];
 
         Logbook::create($data);
@@ -125,13 +137,13 @@ class LogbookController extends Controller
         $request->validate(
             [
                 'tanggal' => 'required',
-                'uraian' => 'required|max:60000',
+                'uraian' => 'required|max:4294967200',
                 'presentase' => 'required|numeric|min:0|max:100',
             ]
         );
 
         $tanggal = htmlspecialchars($request->tanggal);
-        $uraian = htmlspecialchars($request->uraian);
+        $uraian = $request->uraian;
         $presentase = htmlspecialchars($request->presentase);
 
         //Update Data

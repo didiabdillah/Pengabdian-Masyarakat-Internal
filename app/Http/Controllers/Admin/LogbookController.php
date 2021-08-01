@@ -43,4 +43,16 @@ class LogbookController extends Controller
 
         return view('admin.logbook.logbook_index', $view_data);
     }
+
+    public function logbook_uraian($pengabdian_id, $id)
+    {
+        $logbook = Logbook::where('logbook_id', $id)->first();
+
+        $view_data = [
+            'pengabdian_id' => $pengabdian_id,
+            'logbook' => $logbook,
+        ];
+
+        return view('admin.logbook.logbook_uraian', $view_data);
+    }
 }
