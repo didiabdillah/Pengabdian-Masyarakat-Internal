@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Usulan_pengabdian;
 use App\Models\Penilaian_usulan;
 use App\Models\Anggota_pengabdian;
+use App\Models\Jurusan;
 
 class PengabdianController extends Controller
 {
@@ -20,11 +21,38 @@ class PengabdianController extends Controller
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->get();
 
+        $jurusan = Jurusan::all();
+
         $view_data = [
             'usulan_pengabdian' => $usulan_pengabdian,
+            'jurusan' => $jurusan,
         ];
 
         return view('admin.pengabdian.usulan', $view_data);
+    }
+
+    public function usulan_pengabdian_jurusan($jurusan_id)
+    {
+        $current_jurusan = Jurusan::where('jurusan_id', $jurusan_id)->first();
+
+        $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
+            ->join('anggota_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
+            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+            ->where('biodata.biodata_jurusan', '=', $current_jurusan->jurusan_nama)
+            ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->orderBy('usulan_pengabdian_tahun', 'desc')
+            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->get();
+
+        $jurusan = Jurusan::all();
+
+        $view_data = [
+            'usulan_pengabdian' => $usulan_pengabdian,
+            'jurusan' => $jurusan,
+            'current_jurusan' => $current_jurusan->jurusan_nama,
+        ];
+
+        return view('admin.pengabdian.usulan_jurusan', $view_data);
     }
 
     public function konfirmasi($id)

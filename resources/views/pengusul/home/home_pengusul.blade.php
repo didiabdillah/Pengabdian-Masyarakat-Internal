@@ -40,6 +40,7 @@
                                     <li class="nav-item"><a class="nav-link active" href="#">Biodata</a></li>
                                 </ul>
                             </div><!-- /.card-header -->
+
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="profile">

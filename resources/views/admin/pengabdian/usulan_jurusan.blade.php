@@ -42,9 +42,9 @@
 
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link active m-1" href="{{route('admin_pengabdian_usulan')}}">Semua</a></li>
+                            <li class="nav-item"><a class="nav-link @if(Request::segment(4) == NULL){{'active'}}@endif m-1" href="{{route('admin_pengabdian_usulan')}}">Semua</a></li>
                             @foreach($jurusan as $row)
-                            <li class="nav-item"><a class="nav-link m-1" href="{{route('admin_pengabdian_usulan_jurusan', $row->jurusan_id)}}">{{$row->jurusan_nama}}</a></li>
+                            <li class="nav-item"><a class="nav-link m-1 @if($row->jurusan_nama == $current_jurusan){{'active'}}@endif" href="{{route('admin_pengabdian_usulan_jurusan', $row->jurusan_id)}}">{{$row->jurusan_nama}}</a></li>
                             @endforeach
                         </ul>
                     </div><!-- /.card-header -->
