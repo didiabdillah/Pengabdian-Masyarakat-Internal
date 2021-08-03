@@ -80,7 +80,20 @@
                                     </td>
                                     <td>
                                         <div class="card-body">
-                                            @if($is_tambah_unlock == false)
+                                            @if($data->usulan_pengabdian_unlock_pass >= strtotime(date('Y-m-d H:i:s')))
+                                            <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_list', $data->usulan_pengabdian_id)}}">
+                                                <i class="fas fa-folder">
+                                                </i>
+
+                                                Kelola Laporan Kemajuan
+                                            </a>
+                                            <br>
+                                            <h6>
+                                                <span class="badge badge-warning">
+                                                    <b>Batas Akhir</b> : {{Carbon\Carbon::parse(date('Y-m-d H:i:s', $data->usulan_pengabdian_unlock_pass))->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                                                </span>
+                                            </h6>
+                                            @elseif($is_tambah_unlock == false)
                                             <a class="btn btn-info btn-sm" style="pointer-events: none; cursor: default;">
                                                 <i class="fas fa-folder">
                                                 </i>

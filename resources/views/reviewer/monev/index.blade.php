@@ -1,6 +1,6 @@
 @extends('layout.layout_reviewer')
 
-@section('title', 'Usulan Pengabdian')
+@section('title', 'Monev Pengabdian')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Data Usulan Yang Harus Di Review</h1>
+                    <h1>Data Pengabdian Yang Harus Di Monev</h1>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="alert alert-info">
-                        <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Penilaian Usulan</h5>
+                        <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Monev Pengabdian</h5>
                         <ul class="mb-0">
                             <li>
                                 <b>Periode</b> : {{$nilai_unlock["start_year"] . " / " . $nilai_unlock["end_year"]}}
@@ -63,8 +63,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Judul</th>
-                                    <th>Tahun</th>
                                     <th>Pengusul</th>
+                                    <th>Program Studi</th>
                                     <th>Skema</th>
                                     <th>Bidang</th>
                                     <th>Status</th>
@@ -81,17 +81,21 @@
                                     <td>
                                         <h5>{{$usulan->usulan_pengabdian_judul}}</h5>
                                     </td>
+                                    @php
+                                    $ketua = $usulan->anggota_pengabdian()
+                                    ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                    ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                    ->where('anggota_pengabdian_pengabdian_id', $usulan->usulan_pengabdian_id)
+                                    ->where('anggota_pengabdian_role', 'ketua')
+                                    ->first();
+                                    @endphp
                                     <td>
-                                        <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
+                                        <h6>
+                                            {{$ketua->user_name}}
+                                        </h6>
                                     </td>
                                     <td>
-                                        <h5>
-                                            {{$ketua = $usulan->anggota_pengabdian()
-                                            ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
-                                            ->where('anggota_pengabdian_pengabdian_id', $usulan->usulan_pengabdian_id)
-                                            ->where('anggota_pengabdian_role', 'ketua')
-                                            ->first()->user_name}}
-                                        </h5>
+                                        <h6>{{$ketua->biodata_program_studi}}</h6>
                                     </td>
                                     <td>
                                         <h5>
@@ -123,7 +127,7 @@
 
                                     <td>
                                         <div class="card-body">
-                                            <a class="btn btn-success btn-sm" href="{{route('reviewer_pengabdian_detail', $usulan->usulan_pengabdian_id)}}">
+                                            <a class="btn btn-success btn-sm" href="{{route('reviewer_monev_detail', $usulan->usulan_pengabdian_id)}}">
                                                 <i class="fas fa-search-plus">
                                                 </i>
 
@@ -143,6 +147,7 @@
                 <!-- /.card -->
             </div>
         </section>
+    </section>
 </div>
 <!-- /.content -->
 

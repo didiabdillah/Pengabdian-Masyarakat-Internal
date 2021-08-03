@@ -74,9 +74,12 @@ class Kernel extends HttpKernel
         'is_Unlock_Tambah_Laporan_Akhir' => \App\Http\Middleware\Is_Unlock_Tambah_Laporan_Akhir::class,
         'is_Unlock_Tambah_Laporan_Kemajuan' => \App\Http\Middleware\Is_Unlock_Tambah_Laporan_Kemajuan::class,
         'is_Unlock_Nilai_Usulan' => \App\Http\Middleware\Is_Unlock_Nilai_Usulan::class,
+        'is_Unlock_Monev_Pengabdian' => \App\Http\Middleware\Is_Unlock_Monev_Pengabdian::class,
+        'is_Unlock_Pass' => \App\Http\Middleware\Is_Unlock_Pass::class,
         'is_Suspend' => \App\Http\Middleware\Is_Suspend::class,
         'is_Diterima' => \App\Http\Middleware\Is_Diterima::class,
         'is_Not_Pending' => \App\Http\Middleware\Is_Not_Pending::class,
         'is_Owner' => \App\Http\Middleware\Is_Owner::class,
+        'is_Api_Code' => \App\Http\Middleware\Is_Api_Code::class,
     ];
 }

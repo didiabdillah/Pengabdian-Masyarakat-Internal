@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('reviewer_pengabdian')}}" class="nav-link @if(Request::segment(1) == 'monev' || Request::segment(2) == 'monev') {{'active'}} @endif">
+                            <a href="{{route('reviewer_monev')}}" class="nav-link @if(Request::segment(1) == 'monev' || Request::segment(2) == 'monev') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
                                     Monev Pengabdian

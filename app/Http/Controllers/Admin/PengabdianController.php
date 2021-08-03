@@ -21,6 +21,7 @@ class PengabdianController extends Controller
     {
         $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('usulan_pengabdian_status', '!=', 'dikirim')
             ->orderBy('usulan_pengabdian_tahun', 'desc')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->get();
@@ -35,10 +36,68 @@ class PengabdianController extends Controller
         return view('admin.pengabdian.usulan', $view_data);
     }
 
+    public function unlock($id)
+    {
+        $waktu = Usulan_pengabdian::where('usulan_pengabdian_id', $id)->first();
+
+        $tanggal = NULL;
+        $jam = NULL;
+        $menit = NULL;
+
+        if ($waktu->usulan_pengabdian_unlock_pass) {
+            $tanggal = date('Y-m-d', $waktu->usulan_pengabdian_unlock_pass);
+            $jam = intval(date('H', $waktu->usulan_pengabdian_unlock_pass));
+            $menit = intval(date('i', $waktu->usulan_pengabdian_unlock_pass));
+        }
+
+        $view_data = [
+            'waktu' => $waktu,
+            'tanggal' => $tanggal,
+            'jam' => $jam,
+            'menit' => $menit,
+            'id' => $id,
+        ];
+
+        return view('admin.pengabdian.unlock', $view_data);
+    }
+
+    public function unlock_update(Request $request, $id)
+    {
+        // Input Validation
+        $request->validate([
+            'tanggal'  => 'required',
+            'jam'  => 'required',
+            'menit'  => 'required',
+        ]);
+
+        $tanggal = htmlspecialchars($request->tanggal);
+        $jam = htmlspecialchars($request->jam);
+        $menit = htmlspecialchars($request->menit);
+
+        $timecode =  strtotime($tanggal . ' ' . $jam . ':' . $menit);
+
+        $data = [
+            'usulan_pengabdian_unlock_pass' => $timecode
+        ];
+
+        Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->update($data);
+
+        //Flash Message
+        flash_alert(
+            __('alert.icon_success'), //Icon
+            'Sukses', //Alert Message 
+            'Akses Dibuka' //Sub Alert Message
+        );
+
+        return redirect()->route('admin_pengabdian_usulan');
+    }
+
     public function riwayat()
     {
         $usulan_pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('usulan_pengabdian_status', '!=', 'dikirim')
             ->where('usulan_pengabdian_tahun', '<', date('Y'))
             ->orderBy('usulan_pengabdian_tahun', 'desc')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
@@ -63,6 +122,7 @@ class PengabdianController extends Controller
             ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
             ->where('biodata.biodata_jurusan', '=', $current_jurusan->jurusan_nama)
             ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('usulan_pengabdian_status', '!=', 'dikirim')
             ->where('anggota_pengabdian.anggota_pengabdian_role', '=', 'ketua')
             ->orderBy('usulan_pengabdian_tahun', 'desc')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
@@ -88,6 +148,7 @@ class PengabdianController extends Controller
             ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
             ->where('biodata.biodata_jurusan', '=', $current_jurusan->jurusan_nama)
             ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('usulan_pengabdian_status', '!=', 'dikirim')
             ->where('anggota_pengabdian.anggota_pengabdian_role', '=', 'ketua')
             ->where('usulan_pengabdian_tahun', '<', date('Y'))
             ->orderBy('usulan_pengabdian_tahun', 'desc')

@@ -17,6 +17,14 @@ class CreatePenilaianMonevTable extends Migration
             $table->bigIncrements('penilaian_monev_id');
             $table->string('penilaian_monev_pengabdian_id', 64);
 
+            $table->string('penilaian_monev_kriteria');
+            $table->string('penilaian_monev_status');
+
+            $table->unsignedInteger('penilaian_monev_skor');
+            $table->unsignedInteger('penilaian_monev_nilai');
+
+            $table->text('penilaian_monev_komentar');
+
             $table->timestamps();
 
             $table->foreign('penilaian_monev_pengabdian_id')->references('usulan_pengabdian_id')->on('usulan_pengabdian')->onUpdate('cascade')->onDelete('cascade');

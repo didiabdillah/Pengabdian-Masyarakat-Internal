@@ -118,7 +118,15 @@
                                     </td>
 
                                     <td>
-                                        @if($is_tambah_unlock == false)
+                                        @if($data->usulan_pengabdian_unlock_pass >= strtotime(date('Y-m-d H:i:s')))
+                                        <button type="button" data-toggle="modal" data-id="{{$data->usulan_pengabdian_id}}" data-target="#modal-default" class="btn btn-primary upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
+                                        <br>
+                                        <h6>
+                                            <span class="badge badge-warning">
+                                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse(date('Y-m-d H:i:s', $data->usulan_pengabdian_unlock_pass))->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
+                                            </span>
+                                        </h6>
+                                        @elseif($is_tambah_unlock == false)
                                         <button type="button" style="pointer-events: none; cursor: default;" class="btn btn-info upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
                                         @else
                                         <button type="button" data-toggle="modal" data-id="{{$data->usulan_pengabdian_id}}" data-target="#modal-default" class="btn btn-primary upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
@@ -138,7 +146,7 @@
 </div>
 <!-- /.content -->
 
-@if($is_tambah_unlock == true)
+@if($is_tambah_unlock == true || $data->usulan_pengabdian_unlock_pass >= strtotime(date('Y-m-d H:i:s')))
 <!-- Upload Laporan Akhir Modal -->
 <div class="modal fade " id="modal-default">
     <div class="modal-dialog">
@@ -150,7 +158,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('pengusul_laporan_akhir_upload_update')}}" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data" id="form_upload">
                     @csrf
                     @method('patch')
                     <div class="card-body">
@@ -262,6 +270,7 @@
     $(document).on('click', '.upload-laporan-akhir', function() {
         var pengabdian_id = $(this).data("id");
 
+        $('#form_upload').attr('action', "{{route('pengusul_laporan_akhir_upload_update') . '/'}}" + pengabdian_id);
         $('#pengabdian_id').val(pengabdian_id);
         $('#laporan_akhir').val("");
         $('#laporan_akhir_label').text("Upload File Disini");

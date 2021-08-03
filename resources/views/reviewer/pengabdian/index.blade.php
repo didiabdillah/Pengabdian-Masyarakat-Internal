@@ -63,8 +63,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Judul</th>
-                                    <th>Tahun</th>
                                     <th>Pengusul</th>
+                                    <th>Program Studi</th>
                                     <th>Skema</th>
                                     <th>Bidang</th>
                                     <th>Status</th>
@@ -76,36 +76,40 @@
                                 @foreach($usulan_pengabdian as $usulan)
                                 <tr>
                                     <td>
-                                        <h5>{{$loop->iteration}}</h5>
+                                        <h6>{{$loop->iteration}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$usulan->usulan_pengabdian_judul}}</h5>
+                                        <h6>{{$usulan->usulan_pengabdian_judul}}</h6>
+                                    </td>
+                                    @php
+                                    $ketua = $usulan->anggota_pengabdian()
+                                    ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                    ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                    ->where('anggota_pengabdian_pengabdian_id', $usulan->usulan_pengabdian_id)
+                                    ->where('anggota_pengabdian_role', 'ketua')
+                                    ->first();
+                                    @endphp
+                                    <td>
+                                        <h6>
+                                            {{$ketua->user_name}}
+                                        </h6>
                                     </td>
                                     <td>
-                                        <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
+                                        <h6>{{$ketua->biodata_program_studi}}</h6>
                                     </td>
                                     <td>
-                                        <h5>
-                                            {{$ketua = $usulan->anggota_pengabdian()
-                                            ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
-                                            ->where('anggota_pengabdian_pengabdian_id', $usulan->usulan_pengabdian_id)
-                                            ->where('anggota_pengabdian_role', 'ketua')
-                                            ->first()->user_name}}
-                                        </h5>
-                                    </td>
-                                    <td>
-                                        <h5>
+                                        <h6>
                                             {{
                                                 $usulan->join('skema_pengabdian', 'skema_pengabdian.skema_id', '=', 'usulan_pengabdian.usulan_pengabdian_skema_id')->first()->skema_label
                                             }}
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <td>
-                                        <h5>
+                                        <h6>
                                             {{
                                                 $usulan->join('bidang_pengabdian', 'bidang_pengabdian.bidang_id', '=', 'usulan_pengabdian.usulan_pengabdian_bidang_id')->first()->bidang_label
                                             }}
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <td>
                                         @if($usulan->usulan_pengabdian_status == "dikirim")
@@ -143,6 +147,7 @@
                 <!-- /.card -->
             </div>
         </section>
+    </section>
 </div>
 <!-- /.content -->
 

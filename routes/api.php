@@ -14,14 +14,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/index', 'API\ApiController@index');
-Route::get('/{id}/show', 'API\ApiController@show');
-Route::get('/create', 'API\ApiController@create');
-Route::post('/store', 'API\ApiController@store');
-Route::get('/{id}/edit', 'API\ApiController@edit');
-Route::put('/{id}/update', 'API\ApiController@update');
-Route::delete('/{id}/destroy', 'API\ApiController@destroy');
+
+Route::group(['prefix' => '{api_code}'], function () {
+    Route::group(['middleware' => ['is_Api_Code']], function () {
+        Route::group(['prefix' => 'auth'], function () {
+            // Route::get('/get_login', 'API\AuthController@get_login');
+            Route::post('/post_login', 'API\AuthController@post_login')->name('api_post_login');
+            // Route::get('/{id}/show', 'API\ApiController@show');
+            // Route::get('/create', 'API\ApiController@create');
+            // Route::get('/{id}/edit', 'API\ApiController@edit');
+            // Route::put('/{id}/update', 'API\ApiController@update');
+            // Route::delete('/{id}/destroy', 'API\ApiController@destroy');
+        });
+
+        Route::group(['prefix' => 'pengabdian'], function () {
+        });
+
+        Route::group(['prefix' => 'logbook'], function () {
+        });
+
+        Route::group(['prefix' => 'user'], function () {
+        });
+
+        Route::group(['prefix' => 'unlock'], function () {
+        });
+
+        Route::group(['prefix' => 'laporan_kemajuan'], function () {
+        });
+
+        Route::group(['prefix' => 'laporan_akhir'], function () {
+        });
+    });
+});

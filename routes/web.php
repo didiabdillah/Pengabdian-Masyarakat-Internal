@@ -55,6 +55,10 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                         Route::get('/riwayat', 'Admin\PengabdianController@riwayat')->name('admin_pengabdian_riwayat');
                         Route::get('/{jurusan_id}/jurusan', 'Admin\PengabdianController@usulan_pengabdian_jurusan')->name('admin_pengabdian_usulan_jurusan');
                         Route::get('/riwayat/{jurusan_id}/jurusan', 'Admin\PengabdianController@riwayat_jurusan')->name('admin_pengabdian_riwayat_jurusan');
+
+                        Route::get('/{id}/unlock', 'Admin\PengabdianController@unlock')->name('admin_pengabdian_unlock');
+                        Route::patch('/{id}/unlock', 'Admin\PengabdianController@unlock_update')->name('admin_pengabdian_unlock_update');
+
                         Route::get('/detail/{id}/view/{back_param}', 'Admin\PengabdianController@detail')->name('admin_pengabdian_detail');
                         Route::get('/{id}/konfirmasi', 'Admin\PengabdianController@konfirmasi')->name('admin_pengabdian_usulan_konfirmasi');
                         Route::patch('/{id}/konfirmasi', 'Admin\PengabdianController@konfirmasi_update')->name('admin_pengabdian_usulan_konfirmasi_update');
@@ -344,7 +348,8 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
 
                     Route::group(['middleware' => ['is_Suspend', 'is_Unlock_Tambah_Laporan_Akhir']], function () {
                         // Route::get('/insert', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
-                        Route::patch('/update', 'Pengusul\LaporanAkhirController@update')->name('pengusul_laporan_akhir_upload_update');
+                        Route::post('/update', 'Pengusul\LaporanAkhirController@update')->name('pengusul_laporan_akhir_upload_update');
+                        Route::patch('/update/{pengabdian_id}', 'Pengusul\LaporanAkhirController@update');
                     });
                 });
 

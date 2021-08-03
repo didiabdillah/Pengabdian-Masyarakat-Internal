@@ -25,6 +25,7 @@ class PlottingReviewerController extends Controller
         $usulan_pengabdian = Usulan_pengabdian::leftjoin('users', 'usulan_pengabdian.usulan_pengabdian_reviewer_id', '=', 'users.user_id')
             ->where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_status', '!=', 'pending')
+            ->where('usulan_pengabdian_status', '=', 'dikirim')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
@@ -86,6 +87,7 @@ class PlottingReviewerController extends Controller
 
         $usulan_pengabdian = Usulan_pengabdian::leftjoin('users', 'usulan_pengabdian.usulan_pengabdian_reviewer_monev_id', '=', 'users.user_id')
             ->where('usulan_pengabdian_submit', true)
+            ->where('usulan_pengabdian_status', '!=', 'pending')
             ->where('usulan_pengabdian_status', '=', 'diterima')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')

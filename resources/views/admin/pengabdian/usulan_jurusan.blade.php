@@ -135,6 +135,15 @@
 
                                                         {{__('id.confirmation')}}
                                                     </a>
+
+                                                    @if($usulan->usulan_pengabdian_status == "diterima")
+                                                    <a class="btn btn-info btn-sm" href="{{route('admin_pengabdian_unlock', $usulan->usulan_pengabdian_id)}}">
+                                                        <i class="fas fa-unlock">
+                                                        </i>
+
+                                                        Buka Akses
+                                                    </a>
+                                                    @endif
                                                 </div>
 
                                             </td>

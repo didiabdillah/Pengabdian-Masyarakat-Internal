@@ -43,7 +43,6 @@
                         <div class="small-box bg-primary">
                             <div class="inner">
                                 <h3>{{$jumlah_reviewer}}</h3>
-
                                 <p>Reviewer</p>
                             </div>
                             <div class="icon">

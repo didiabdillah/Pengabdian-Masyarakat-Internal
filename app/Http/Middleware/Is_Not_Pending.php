@@ -18,19 +18,30 @@ class Is_Not_Pending
     {
         $pengabdian_id = $request->route('id');
 
-        $is_diterima = Usulan_pengabdian::where('usulan_pengabdian_id', $pengabdian_id)->first()->usulan_pengabdian_status;
+        $is_diterima = Usulan_pengabdian::where('usulan_pengabdian_id', $pengabdian_id)->first();
 
-        if ($is_diterima != 'pending') {
+        if ($is_diterima) {
+            if ($is_diterima->usulan_pengabdian_status != 'pending') {
+                //Flash Message
+                flash_alert(
+                    __('alert.icon_error'), //Icon
+                    'Gagal', //Alert Message 
+                    'Usulan Pengabdian Sudah Dikirim' //Sub Alert Message
+                );
+
+                return redirect()->route('pengusul_pengabdian');
+            } else {
+                return $next($request);
+            }
+        } else {
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
                 'Gagal', //Alert Message 
-                'Usulan Pengabdian Sudah Dikirim' //Sub Alert Message
+                'Usulan Pengabdian Salah' //Sub Alert Message
             );
 
-            return redirect()->back();
-        } else {
-            return $next($request);
+            return redirect()->route('pengusul_pengabdian');
         }
     }
 }

@@ -122,6 +122,7 @@
 
                                             <td>
                                                 <div class="card-body">
+
                                                     <a class="btn btn-success btn-sm" href="{{route('admin_pengabdian_detail', [$usulan->usulan_pengabdian_id, 'usulan'])}}">
                                                         <i class="fas fa-folder">
                                                         </i>
@@ -135,6 +136,15 @@
 
                                                         {{__('id.confirmation')}}
                                                     </a>
+
+                                                    @if($usulan->usulan_pengabdian_status == "diterima")
+                                                    <a class="btn btn-info btn-sm" href="{{route('admin_pengabdian_unlock', $usulan->usulan_pengabdian_id)}}">
+                                                        <i class="fas fa-unlock">
+                                                        </i>
+
+                                                        Buka Akses
+                                                    </a>
+                                                    @endif
                                                 </div>
 
                                             </td>
@@ -152,6 +162,7 @@
                 <!-- /.card -->
             </div>
         </section>
+    </section>
 </div>
 <!-- /.content -->
 

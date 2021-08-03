@@ -62,6 +62,7 @@
                                             <th>Program Studi</th>
                                             <th>Skema</th>
                                             <th>Bidang</th>
+                                            <th>Tahun</th>
                                             <th>Status</th>
                                             <th>{{__('id.option')}}</th>
                                         </tr>
@@ -107,6 +108,9 @@
                                                 </h6>
                                             </td>
                                             <td>
+                                                {{$usulan->usulan_pengabdian_tahun}}
+                                            </td>
+                                            <td>
                                                 @if($usulan->usulan_pengabdian_status == "dikirim")
                                                 <h5><span class="badge badge-primary">Dikirim</span></h5>
                                                 @elseif($usulan->usulan_pengabdian_status == "diterima")
@@ -137,6 +141,14 @@
                                                     </a>
                                                 </div>
 
+                                                @if($usulan->usulan_pengabdian_status == "diterima")
+                                                <a class="btn btn-info btn-sm" href="{{route('admin_pengabdian_unlock', $usulan->usulan_pengabdian_id)}}">
+                                                    <i class="fas fa-unlock">
+                                                    </i>
+
+                                                    Buka Akses
+                                                </a>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
