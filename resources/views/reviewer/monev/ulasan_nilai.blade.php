@@ -35,10 +35,10 @@
                     </div>
                     <div class="card-body">
                         <div class="alert alert-light">
-                            <form action="{{route('reviewer_pengabdian_nilai_ulasan_update', [$usulan->usulan_pengabdian_id])}}" method="POST" class="form-inline form-horizontal float-right">
+                            <form action="{{route('reviewer_monev_nilai_ulasan_update', [$usulan->usulan_pengabdian_id])}}" method="POST" class="form-inline form-horizontal float-right">
                                 @csrf
                                 @method('patch')
-                                <a class="btn btn-danger" href="{{route('reviewer_pengabdian_nilai', [$usulan->usulan_pengabdian_id])}}">
+                                <a class="btn btn-danger" href="{{route('reviewer_monev_nilai', [$usulan->usulan_pengabdian_id])}}">
                                     <i class="fas fa-arrow-left">
                                     </i>
 
@@ -53,7 +53,7 @@
 
                             </form>
 
-                            <h5><b>Ulasan Hasil Penilaian Usulan Pengabdian</b></h5>
+                            <h5><b>Ulasan Hasil Monev Pengabdian</b></h5>
 
                             <table class="table table-borderless table-sm">
                                 <tbody>
@@ -93,92 +93,190 @@
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col">NO</th>
-                                    <th scope="col">INDIKATOR</th>
-                                    <th scope="col">KETERANGAN</th>
-                                    <th scope="col">NILAI</th>
+                                    <th scope="col">KRITERIA</th>
+                                    <th scope="col">STATUS</th>
                                     <th scope="col">BOBOT</th>
-                                    <th scope="col">TOTAL</th>
+                                    <th scope="col">SKOR</th>
+                                    <th scope="col">NILAI</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th class="text-center" scope="row">1</th>
+                                    <th class="text-center" scope="row" rowspan="2">1</th>
                                     <td>
-                                        Analisis Situasi
-                                        <br>
-                                        (Kondisi Eksisting Mitra, Persoalan Yang Dihadapi Mitra)
+                                        Publikasi Ilmiah di jurnal/prosiding
                                     </td>
-                                    <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_1]}}</td>
-                                    <td>{{$nilai->penilaian_usulan_nilai_1}}</td>
-                                    <td>10%</td>
-                                    <td>{{$total_nilai[1]}}</td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_status_1}}
+                                    </td>
+                                    <td rowspan="2" class="text-center">20</td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_skor_1}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_1}}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-center" scope="row">2</th>
+
                                     <td>
-                                        Permasalahan Mitra
-                                        <br>
-                                        (Kecocokan Permasalahan Dan Program Serta Kompetensi Tim)
+                                        Publikasi pada media massa (cetak/elektronik)
                                     </td>
-                                    <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_2]}}</td>
-                                    <td>{{$nilai->penilaian_usulan_nilai_2}}</td>
-                                    <td>15%</td>
-                                    <td>{{$total_nilai[2]}}</td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_status_2}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_skor_2}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_2}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th class="text-center" scope="row" rowspan="4">2</th>
+                                    <td>
+                                        Peningkatan omzet pada mitra yang bergerak dalam bidang ekonomi
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_status_3}}
+                                    </td>
+                                    <td rowspan="4" class="text-center">60</td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_skor_3}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_3}}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-center" scope="row">3</th>
+
                                     <td>
-                                        Solusi Yang Ditawarkan
-                                        <br>
-                                        (Ketepatan Metode Pendekatan Untuk Mengatasi Permasalahan, Rencana Kegiatan, Kontribusi Partisipasi Mitra)
+                                        Peningkatan kualitas dan kuantitas produk
                                     </td>
-                                    <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_3]}}</td>
-                                    <td>{{$nilai->penilaian_usulan_nilai_3}}</td>
-                                    <td>20%</td>
-                                    <td>{{$total_nilai[3]}}</td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_status_4}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_skor_4}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_4}}
+                                    </td>
                                 </tr>
+                                <tr>
+
+                                    <td>
+                                        Peningkatan pemahaman dan ketrampilan masyarakat
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_status_5}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_skor_5}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_5}}
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        Peningkatan ketentraman/kesehatan masyarakat (mitra masyarakat umum)
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_status_6}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_skor_6}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_6}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th class="text-center" scope="row" rowspan="2">3</th>
+                                    <td>
+                                        Jasa, model, rekayasa social, sistem, produk/barang
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_status_7}}
+                                    </td>
+                                    <td rowspan="2" class="text-center">10</td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_skor_7}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_7}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hak kekayaan intelektual
+                                        <br>
+                                        (paten, paten sederhana, hak cipta, merek dagang, rahasia dagang,
+                                        <br>
+                                        desain produk industri, perlindungan varietas tanaman, perlindungan topografi)
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_status_8}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_skor_8}}
+                                    </td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_8}}
+                                    </td>
+                                </tr>
+
                                 <tr>
                                     <th class="text-center" scope="row">4</th>
                                     <td>
-                                        Target Luaran
-                                        <br>
-                                        (Jenis Luaran Dan Spesifikasinya Sesuai Kegiatan Yang Diusulkan)
+                                        Buku Ajar
                                     </td>
-                                    <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_4]}}</td>
-                                    <td>{{$nilai->penilaian_usulan_nilai_4}}</td>
-                                    <td>25%</td>
-                                    <td>{{$total_nilai[4]}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center" scope="row">5</th>
                                     <td>
-                                        Kelayakan Usulan
-                                        <br>
-                                        (Jadwal Kegiatan, Kualifikasi Tim Pelaksana, Kelengkapan Lampiran)
+                                        {{$nilai->penilaian_monev_status_9}}
                                     </td>
-                                    <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_5]}}</td>
-                                    <td>{{$nilai->penilaian_usulan_nilai_5}}</td>
-                                    <td>10%</td>
-                                    <td>{{$total_nilai[5]}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center" scope="row">6</th>
+                                    <td class="text-center">10</td>
                                     <td>
-                                        Biaya Pekerjaan
-                                        <br>
-                                        (Kelayakan Usulan Biaya (Honorarium (Maks 30%), Bahan Habis, Peralatan), Perjalanan, Lain-Lain Pengeluaran)
+                                        {{$nilai->penilaian_monev_skor_9}}
                                     </td>
-                                    <td>{{$ket_nilai[$nilai->penilaian_usulan_nilai_6]}}</td>
-                                    <td>{{$nilai->penilaian_usulan_nilai_6}}</td>
-                                    <td>20%</td>
-                                    <td>{{$total_nilai[6]}}</td>
+                                    <td>
+                                        {{$nilai->penilaian_monev_nilai_9}}
+                                    </td>
                                 </tr>
-
                             </tbody>
                             <tfoot>
                                 <tr class="text-center">
-                                    <th colspan="2">Total Nilai</th>
-                                    <th colspan="4">{{array_sum($total_nilai)}}</th>
+                                    <th colspan="3">Jumlah</th>
+                                    <th>100</th>
+                                    <th>
+                                        {{
+                                            $nilai->penilaian_monev_skor_1 +
+                                            $nilai->penilaian_monev_skor_2 +
+                                            $nilai->penilaian_monev_skor_3 +
+                                            $nilai->penilaian_monev_skor_4 +
+                                            $nilai->penilaian_monev_skor_5 +
+                                            $nilai->penilaian_monev_skor_6 +
+                                            $nilai->penilaian_monev_skor_7 +
+                                            $nilai->penilaian_monev_skor_8 +
+                                            $nilai->penilaian_monev_skor_9
+                                        }}
+                                    </th>
+                                    <th>
+                                        {{
+                                            $nilai->penilaian_monev_nilai_1 +
+                                            $nilai->penilaian_monev_nilai_2 +
+                                            $nilai->penilaian_monev_nilai_3 +
+                                            $nilai->penilaian_monev_nilai_4 +
+                                            $nilai->penilaian_monev_nilai_5 +
+                                            $nilai->penilaian_monev_nilai_6 +
+                                            $nilai->penilaian_monev_nilai_7 +
+                                            $nilai->penilaian_monev_nilai_8 +
+                                            $nilai->penilaian_monev_nilai_9
+                                        }}
+                                    </th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -187,8 +285,8 @@
                             <h6>
                                 <b>Komentar :</b>
                                 <br>
-                                @if($nilai->penilaian_usulan_komentar)
-                                {{$nilai->penilaian_usulan_komentar}}
+                                @if($nilai->penilaian_monev_komentar)
+                                {{$nilai->penilaian_monev_komentar}}
                                 @else
                                 {{"-"}}
                                 @endif

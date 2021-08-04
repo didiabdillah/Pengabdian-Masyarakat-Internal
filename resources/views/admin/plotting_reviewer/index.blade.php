@@ -64,16 +64,16 @@
                                 @foreach($usulan_pengabdian as $usulan)
                                 <tr>
                                     <td>
-                                        <h5>{{$loop->iteration}}</h5>
+                                        <h6>{{$loop->iteration}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$usulan->usulan_pengabdian_judul}}</h5>
+                                        <h6>{{$usulan->usulan_pengabdian_judul}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
+                                        <h6>{{$usulan->usulan_pengabdian_tahun}}</h6>
                                     </td>
                                     <td>
-                                        <h5>
+                                        <h6>
                                             @php
                                             $ketua= $usulan->anggota_pengabdian()
                                             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
@@ -82,21 +82,21 @@
                                             ->first();
                                             @endphp
                                             {{$ketua->user_name}}
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <td>
-                                        <h5>
+                                        <h6>
                                             {{$ketua->biodata_program_studi}}
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <td>
-                                        <h5>
+                                        <h6>
                                             @if($usulan->user_name)
                                             {{$usulan->user_name}}
                                             @else
                                             -
                                             @endif
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <td>
                                         @if($usulan->usulan_pengabdian_status == "dikirim")

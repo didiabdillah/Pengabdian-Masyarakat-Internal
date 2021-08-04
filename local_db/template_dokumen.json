@@ -3,22 +3,22 @@
         "id": "60f7b5afc524e1626846639",
         "name": "dokumen_usulan",
         "target": "Dokumen Usulan",
-        "original_name": "RAB(dummy).pdf",
-        "hash_name": "8UOz2RToYzaIyev8Cmlpeg8AhoF3Y6XD1hIDLwus.pdf",
-        "base_name": "RAB(dummy)",
-        "extension": "pdf",
-        "size": 272,
-        "datetime": "2021-07-21 15:00:41"
+        "original_name": "usulan.doc",
+        "hash_name": "3YT4YaqvDi1dJmHHDQwin52eTgT2pjBg8DGWaHNc.doc",
+        "base_name": "usulan",
+        "extension": "doc",
+        "size": 44,
+        "datetime": "2021-08-03 13:52:17"
     },
     {
         "id": "60f7b5afc529d1626846639",
         "name": "dokumen_rab",
         "target": "Dokumen RAB",
-        "original_name": "",
-        "hash_name": "",
-        "base_name": "",
-        "extension": "",
-        "size": "",
-        "datetime": ""
+        "original_name": "format rab.xlsx",
+        "hash_name": "1LBCwVSxVdrakgG20u4i7gh4VgloKTY5DNmydxTZ.xlsx",
+        "base_name": "format rab",
+        "extension": "xlsx",
+        "size": 20,
+        "datetime": "2021-08-03 13:56:06"
     }
 ]

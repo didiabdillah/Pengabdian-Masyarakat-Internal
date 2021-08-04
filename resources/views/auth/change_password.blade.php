@@ -1,6 +1,6 @@
 @extends('layout.auth_main')
 
-@section('title', __('id.change') . ' ' . __('id.password')')
+@section('title', __('id.change') . ' ' . __('id.password'))
 
 @section('auth_page')
 

@@ -76,10 +76,10 @@
                                 @foreach($usulan_pengabdian as $usulan)
                                 <tr>
                                     <td>
-                                        <h5>{{$loop->iteration}}</h5>
+                                        <h6>{{$loop->iteration}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$usulan->usulan_pengabdian_judul}}</h5>
+                                        <h6>{{$usulan->usulan_pengabdian_judul}}</h6>
                                     </td>
                                     @php
                                     $ketua = $usulan->anggota_pengabdian()
@@ -98,18 +98,18 @@
                                         <h6>{{$ketua->biodata_program_studi}}</h6>
                                     </td>
                                     <td>
-                                        <h5>
+                                        <h6>
                                             {{
                                                 $usulan->join('skema_pengabdian', 'skema_pengabdian.skema_id', '=', 'usulan_pengabdian.usulan_pengabdian_skema_id')->first()->skema_label
                                             }}
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <td>
-                                        <h5>
+                                        <h6>
                                             {{
                                                 $usulan->join('bidang_pengabdian', 'bidang_pengabdian.bidang_id', '=', 'usulan_pengabdian.usulan_pengabdian_bidang_id')->first()->bidang_label
                                             }}
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <td>
                                         @if($usulan->usulan_pengabdian_status == "dikirim")

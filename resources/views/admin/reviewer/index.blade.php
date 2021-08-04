@@ -64,22 +64,22 @@
                                 @if($data->user_id != Session::get('user_id'))
                                 <tr>
                                     <td>
-                                        <h5> {{$loop->iteration}}</h5>
+                                        <h6> {{$loop->iteration}}</h6>
                                     </td>
                                     <td>
                                         <img alt="Avatar" class="table-avatar" src="{{URL::asset('assets/img/profile/' . $data->user_image)}}" style="height: 40px;">
                                     </td>
                                     <td>
-                                        <h5>@if($data->user_nidn != NULL){{$data->user_nidn}}@else{{'-'}}@endif</h5>
+                                        <h6>@if($data->user_nidn != NULL){{$data->user_nidn}}@else{{'-'}}@endif</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$data->user_name}}</h5>
+                                        <h6>{{$data->user_name}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$data->user_email}}</h5>
+                                        <h6>{{$data->user_email}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$data->user_role}}</h5>
+                                        <h6>{{$data->user_role}}</h6>
                                     </td>
 
                                     {{--

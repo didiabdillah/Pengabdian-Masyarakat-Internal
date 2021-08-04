@@ -89,13 +89,13 @@
                                 @foreach($usulan_pengabdian as $usulan)
                                 <tr>
                                     <td>
-                                        <h5>{{$loop->iteration}}</h5>
+                                        <h6>{{$loop->iteration}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$usulan->usulan_pengabdian_judul}}</h5>
+                                        <h6>{{$usulan->usulan_pengabdian_judul}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$usulan->usulan_pengabdian_tahun}}</h5>
+                                        <h6>{{$usulan->usulan_pengabdian_tahun}}</h6>
                                     </td>
                                     <td>
                                         @if($usulan->usulan_pengabdian_status == "dikirim")

@@ -1,6 +1,6 @@
 @extends('layout.layout_pengusul')
 
-@section('title', __('id.edit') ' Mitra Sasaran')
+@section('title', __('id.edit') . ' Mitra Sasaran')
 
 @section('suspend_banner')
 @include('layout.suspend_banner')

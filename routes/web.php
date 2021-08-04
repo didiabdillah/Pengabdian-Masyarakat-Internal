@@ -254,13 +254,15 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'monev'], function () {
                     Route::get('/', 'Reviewer\MonevController@index')->name('reviewer_monev');
 
-                    // Route::group(['middleware' => ['is_Unlock_Nilai_Usulan']], function () {
-                    Route::get('/{id}/detail', 'Reviewer\MonevController@detail')->name('reviewer_monev_detail');
-                    Route::get('/{id}/nilai', 'Reviewer\MonevController@nilai')->name('reviewer_monev_nilai');
-                    Route::patch('/{id}/nilai', 'Reviewer\MonevController@nilai_update')->name('reviewer_monev_nilai_update');
-                    Route::get('/{id}/nilai/ulasan', 'Reviewer\MonevController@nilai_ulasan')->name('reviewer_monev_nilai_ulasan');
-                    Route::patch('/{id}/nilai/ulasan', 'Reviewer\MonevController@nilai_ulasan_update')->name('reviewer_monev_nilai_ulasan_update');
-                    // });
+                    Route::group(['middleware' => ['is_Unlock_Monev_Pengabdian']], function () {
+                        Route::get('/{id}/detail', 'Reviewer\MonevController@detail')->name('reviewer_monev_detail');
+                        Route::get('/{id}/nilai', 'Reviewer\MonevController@nilai')->name('reviewer_monev_nilai');
+                        Route::patch('/{id}/nilai', 'Reviewer\MonevController@nilai_update')->name('reviewer_monev_nilai_update');
+                        Route::get('/{id}/capaian', 'Reviewer\MonevController@capaian')->name('reviewer_monev_capaian');
+                        Route::patch('/{id}/capaian', 'Reviewer\MonevController@capaian_update')->name('reviewer_monev_capaian_update');
+                        Route::get('/{id}/nilai/ulasan', 'Reviewer\MonevController@nilai_ulasan')->name('reviewer_monev_nilai_ulasan');
+                        Route::patch('/{id}/nilai/ulasan', 'Reviewer\MonevController@nilai_ulasan_update')->name('reviewer_monev_nilai_ulasan_update');
+                    });
                 });
 
                 //Biodata

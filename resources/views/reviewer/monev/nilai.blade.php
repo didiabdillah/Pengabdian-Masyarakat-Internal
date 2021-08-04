@@ -1,6 +1,6 @@
 @extends('layout.layout_reviewer')
 
-@section('title', 'Penilaian Usulan Pengabdian')
+@section('title', 'Monev Pengabdian')
 
 @section('page')
 
@@ -16,7 +16,7 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>Penilaian Usulan Pengabdian</h1>
+                    <h1>Monev Pengabdian</h1>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                     </div>
                     <div class="card-body">
                         <div class="alert alert-light">
-                            <h5><b>Form Penilaian Usulan Pengabdian</b></h5>
+                            <h5><b>Form Monev Pengabdian</b></h5>
                             <table class="table table-borderless table-sm">
                                 <tbody>
                                     <tr style="height: 5px;">
@@ -70,288 +70,281 @@
                             </table>
                         </div>
 
-                        <form action="{{route('reviewer_pengabdian_nilai_update', $id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('reviewer_monev_nilai_update', $id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('patch')
-                            <div class="card-body">
-                                <div class="form-group clearfix">
-                                    <label for="nilai_1">1. Analisis Situasi</label>
-                                    <p>(Kondisi Eksisting Mitra, Persoalan Yang Dihadapi Mitra)</p>
-                                    <h6>Bobot : 10%</h6>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1a" name="nilai_1" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 1){{"checked"}}@endif @endif>
-                                        <label for="nilai_1a">
-                                            (1) Sangat Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1b" name="nilai_1" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 2){{"checked"}}@endif @endif>
-                                        <label for="nilai_1b">
-                                            (2) Buruk Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1c" name="nilai_1" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 3){{"checked"}}@endif @endif>
-                                        <label for="nilai_1c">
-                                            (3) Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1d" name="nilai_1" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 4){{"checked"}}@endif @endif>
-                                        <label for="nilai_1d">
-                                            (4) Baik
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1e" name="nilai_1" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 5){{"checked"}}@endif @endif>
-                                        <label for="nilai_1e">
-                                            (5) Baik Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_1f" name="nilai_1" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_1 == 6){{"checked"}}@endif @endif>
-                                        <label for="nilai_1f">
-                                            (6) Istimewa
-                                        </label>
-                                    </div>
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col">NO</th>
+                                        <th scope="col">KRITERIA</th>
+                                        <th scope="col">STATUS</th>
+                                        <th scope="col">BOBOT</th>
+                                        <th scope="col">SKOR</th>
+                                        <!-- <th scope="col">NILAI</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="text-center" scope="row" rowspan="2">1</th>
+                                        <td>
+                                            Publikasi Ilmiah di jurnal/prosiding
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-1 @error('status_1') is-invalid @enderror" style="width: 100%;" name="status_1" id="status_1">
+                                                <option value="">-Status-</option>
+                                                <option value="Draft">Draft</option>
+                                                <option value="Submitted">Submitted</option>
+                                                <option value="Reviewed">Reviewed</option>
+                                                <option value="Accepted">Accepted</option>
+                                                <option value="Published">Published</option>
+                                            </select>
+                                        </td>
+                                        <td rowspan="2" class="text-center">20</td>
+                                        <td>
+                                            <select class="form-control select2-skor-1 @error('skor_1') is-invalid @enderror" style="width: 100%;" name="skor_1" id="skor_1">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            Publikasi pada media massa (cetak/elektronik)
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-2 @error('status_2') is-invalid @enderror" style="width: 100%;" name="status_2" id="status_2">
+                                                <option value="">-Status-</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                                <option value="Draft">Draft</option>
+                                                <option value="Editting">Editting</option>
+                                                <option value="Sudah Terbit">Sudah Terbit</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-2 @error('skor_2') is-invalid @enderror" style="width: 100%;" name="skor_2" id="skor_2">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="text-center" scope="row" rowspan="4">2</th>
+                                        <td>
+                                            Peningkatan omzet pada mitra yang bergerak dalam bidang ekonomi
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-3 @error('status_3') is-invalid @enderror" style="width: 100%;" name="status_3" id="status_3">
+                                                <option value="">-Status-</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                                <option value="Draft">Ada</option>
+                                            </select>
+                                        </td>
+                                        <td rowspan="4" class="text-center">60</td>
+                                        <td>
+                                            <select class="form-control select2-skor-3 @error('skor_3') is-invalid @enderror" style="width: 100%;" name="skor_3" id="skor_3">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            Peningkatan kualitas dan kuantitas produk
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-4 @error('status_4') is-invalid @enderror" style="width: 100%;" name="status_4" id="status_4">
+                                                <option value="">-Status-</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                                <option value="Draft">Ada</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-4 @error('skor_4') is-invalid @enderror" style="width: 100%;" name="skor_4" id="skor_4">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            Peningkatan pemahaman dan ketrampilan masyarakat
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-5 @error('status_5') is-invalid @enderror" style="width: 100%;" name="status_5" id="status_5">
+                                                <option value="">-Status-</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                                <option value="Draft">Ada</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-5 @error('skor_5') is-invalid @enderror" style="width: 100%;" name="skor_5" id="skor_5">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            Peningkatan ketentraman/kesehatan masyarakat (mitra masyarakat umum)
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-6 @error('status_6') is-invalid @enderror" style="width: 100%;" name="status_6" id="status_6">
+                                                <option value="">-Status-</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                                <option value="Draft">Ada</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-6 @error('skor_6') is-invalid @enderror" style="width: 100%;" name="skor_6" id="skor_6">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="text-center" scope="row" rowspan="2">3</th>
+                                        <td>
+                                            Jasa, model, rekayasa social, sistem, produk/barang
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-7 @error('status_7') is-invalid @enderror" style="width: 100%;" name="status_7" id="status_7">
+                                                <option value="">-Status-</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                                <option value="Draft">Draft</option>
+                                                <option value="Editting">Produk</option>
+                                                <option value="Sudah Terbit">Penerapan</option>
+                                            </select>
+                                        </td>
+                                        <td rowspan="2" class="text-center">10</td>
+                                        <td>
+                                            <select class="form-control select2-skor-7 @error('skor_7') is-invalid @enderror" style="width: 100%;" name="skor_7" id="skor_7">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Hak kekayaan intelektual
+                                            <br>
+                                            (paten, paten sederhana, hak cipta, merek dagang, rahasia dagang,
+                                            <br>
+                                            desain produk industri, perlindungan varietas tanaman, perlindungan topografi)
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-8 @error('status_8') is-invalid @enderror" style="width: 100%;" name="status_8" id="status_8">
+                                                <option value="">-Status-</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                                <option value="Draft">Draft</option>
+                                                <option value="Editting">Terdaftar</option>
+                                                <option value="Sudah Terbit">Granted</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-8 @error('skor_8') is-invalid @enderror" style="width: 100%;" name="skor_8" id="skor_8">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="text-center" scope="row">4</th>
+                                        <td>
+                                            Buku Ajar
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-status-9 @error('status_9') is-invalid @enderror" style="width: 100%;" name="status_9" id="status_9">
+                                                <option value="">-Status-</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                                <option value="Draft">Draft</option>
+                                                <option value="Editting">Editting</option>
+                                                <option value="Sudah Terbit">Sudah Terbit</option>
+                                            </select>
+                                        </td>
+                                        <td class="text-center">10</td>
+                                        <td>
+                                            <select class="form-control select2-skor-9 @error('skor_9') is-invalid @enderror" style="width: 100%;" name="skor_9" id="skor_9">
+                                                <option value="">-Skor-</option>
+                                                <option value="1">(1) Buruk</option>
+                                                <option value="2">(2) Sangat Kurang</option>
+                                                <option value="3">(3) Kurang</option>
+                                                <option value="4">(4) Cukup</option>
+                                                <option value="5">(5) Baik</option>
+                                                <option value="6">(6) Sangat Baik</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="text-center">
+                                        <th colspan="3">Jumlah</th>
+                                        <th>100</th>
+                                        <th colspan="2"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <div class="form-group">
+                                <label for="komentar">Komentar</label>
+                                <textarea class="form-control @error('komentar') is-invalid @enderror" id="komentar" name="komentar" placeholder="Komentar">{{old('komentar')}}</textarea>
+                                @error('komentar')
+                                <div class=" invalid-feedback">
+                                    {{$message}}
                                 </div>
-
-                                <hr>
-
-                                <div class="form-group clearfix">
-                                    <label for="nilai_2">2. Permasalahan Mitra</label>
-                                    <p>(Kecocokan Permasalahan Dan Program Serta Kompetensi Tim)</p>
-                                    <h6>Bobot : 15%</h6>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2a" name="nilai_2" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 1){{"checked"}}@endif @endif>
-                                        <label for="nilai_2a">
-                                            (1) Sangat Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2b" name="nilai_2" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 2){{"checked"}}@endif @endif>
-                                        <label for="nilai_2b">
-                                            (2) Buruk Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2c" name="nilai_2" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 3){{"checked"}}@endif @endif>
-                                        <label for="nilai_2c">
-                                            (3) Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2d" name="nilai_2" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 4){{"checked"}}@endif @endif>
-                                        <label for="nilai_2d">
-                                            (4) Baik
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2e" name="nilai_2" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 5){{"checked"}}@endif @endif>
-                                        <label for="nilai_2e">
-                                            (5) Baik Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_2f" name="nilai_2" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_2 == 6){{"checked"}}@endif @endif>
-                                        <label for="nilai_2f">
-                                            (6) Istimewa
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <div class="form-group clearfix">
-                                    <label for="nilai_3">3. Solusi Yang Ditawarkan</label>
-                                    <p>(Ketepatan Metode Pendekatan Untuk Mengatasi Permasalahan, Rencana Kegiatan, Kontribusi Partisipasi Mitra)</p>
-                                    <h6>Bobot : 20%</h6>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3a" name="nilai_3" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 1){{"checked"}}@endif @endif>
-                                        <label for="nilai_3a">
-                                            (1) Sangat Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3b" name="nilai_3" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 2){{"checked"}}@endif @endif>
-                                        <label for="nilai_3b">
-                                            (2) Buruk Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3c" name="nilai_3" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 3){{"checked"}}@endif @endif>
-                                        <label for="nilai_3c">
-                                            (3) Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3d" name="nilai_3" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 4){{"checked"}}@endif @endif>
-                                        <label for="nilai_3d">
-                                            (4) Baik
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3e" name="nilai_3" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 5){{"checked"}}@endif @endif>
-                                        <label for="nilai_3e">
-                                            (5) Baik Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_3f" name="nilai_3" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_3 == 6){{"checked"}}@endif @endif>
-                                        <label for="nilai_3f">
-                                            (6) Istimewa
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <div class="form-group clearfix">
-                                    <label for="nilai_4">4. Target Luaran</label>
-                                    <p>(Jenis Luaran Dan Spesifikasinya Sesuai Kegiatan Yang Diusulkan)</p>
-                                    <h6>Bobot : 25%</h6>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4a" name="nilai_4" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 1){{"checked"}}@endif @endif>
-                                        <label for="nilai_4a">
-                                            (1) Sangat Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4b" name="nilai_4" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 2){{"checked"}}@endif @endif>
-                                        <label for="nilai_4b">
-                                            (2) Buruk Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4c" name="nilai_4" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 3){{"checked"}}@endif @endif>
-                                        <label for="nilai_4c">
-                                            (3) Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4d" name="nilai_4" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 4){{"checked"}}@endif @endif>
-                                        <label for="nilai_4d">
-                                            (4) Baik
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4e" name="nilai_4" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 5){{"checked"}}@endif @endif>
-                                        <label for="nilai_4e">
-                                            (5) Baik Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_4f" name="nilai_4" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_4 == 6){{"checked"}}@endif @endif>
-                                        <label for="nilai_4f">
-                                            (6) Istimewa
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <div class="form-group clearfix">
-                                    <label for="nilai_5">5. Kelayakan Usulan</label>
-                                    <p>(Jadwal Kegiatan, Kualifikasi Tim Pelaksana, Kelengkapan Lampiran)</p>
-                                    <h6>Bobot : 10%</h6>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5a" name="nilai_5" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 1){{"checked"}}@endif @endif>
-                                        <label for="nilai_5a">
-                                            (1) Sangat Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5b" name="nilai_5" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 2){{"checked"}}@endif @endif>
-                                        <label for="nilai_5b">
-                                            (2) Buruk Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5c" name="nilai_5" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 3){{"checked"}}@endif @endif>
-                                        <label for="nilai_5c">
-                                            (3) Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5d" name="nilai_5" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 4){{"checked"}}@endif @endif>
-                                        <label for="nilai_5d">
-                                            (4) Baik
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5e" name="nilai_5" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 5){{"checked"}}@endif @endif>
-                                        <label for="nilai_5e">
-                                            (5) Baik Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_5f" name="nilai_5" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_5 == 6){{"checked"}}@endif @endif>
-                                        <label for="nilai_5f">
-                                            (6) Istimewa
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <div class="form-group clearfix">
-                                    <label for="nilai_6">6. Biaya Pekerjaan</label>
-                                    <p>(Kelayakan Usulan Biaya (Honorarium (Maks 30%), Bahan Habis, Peralatan), Perjalanan, Lain-Lain Pengeluaran)</p>
-                                    <h6>Bobot : 20%</h6>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6a" name="nilai_6" value="1" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 1){{"checked"}}@endif @endif>
-                                        <label for="nilai_6a">
-                                            (1) Sangat Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6b" name="nilai_6" value="2" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 2){{"checked"}}@endif @endif>
-                                        <label for="nilai_6b">
-                                            (2) Buruk Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6c" name="nilai_6" value="3" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 3){{"checked"}}@endif @endif>
-                                        <label for="nilai_6c">
-                                            (3) Buruk
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6d" name="nilai_6" value="4" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 4){{"checked"}}@endif @endif>
-                                        <label for="nilai_6d">
-                                            (4) Baik
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6e" name="nilai_6" value="5" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 5){{"checked"}}@endif @endif>
-                                        <label for="nilai_6e">
-                                            (5) Baik Sekali
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary">
-                                        <input type="radio" id="nilai_6f" name="nilai_6" value="6" @if($nilai) @if($nilai->penilaian_usulan_nilai_6 == 6){{"checked"}}@endif @endif>
-                                        <label for="nilai_6f">
-                                            (6) Istimewa
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <div class="form-group">
-                                    <label for="komentar">Komentar</label>
-                                    <textarea class="form-control @error('komentar') is-invalid @enderror" id="komentar" name="komentar" placeholder="Komentar">{{old('komentar')}}</textarea>
-                                    @error('komentar')
-                                    <div class=" invalid-feedback">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                </div>
+                                @enderror
                             </div>
-                            <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <a href="{{route('reviewer_pengabdian_detail', $id)}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <a href="{{route('reviewer_monev_detail', $id)}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> {{__('id.submit')}}</button>
                             </div>
                         </form>
