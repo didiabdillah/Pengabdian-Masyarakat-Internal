@@ -47,6 +47,11 @@ class Penilaian_monev extends Model
         'penilaian_monev_nilai_9',
     ];
 
+    public function capaian_kegiatan()
+    {
+        return $this->hasMany('App\Models\Capaian_kegiatan', 'capaian_kegiatan_monev_id');
+    }
+
     public function usulan_pengabdian()
     {
         return $this->belongsTo('App\Models\Usulan_pengabdian', 'penilaian_monev_pengabdian_id');

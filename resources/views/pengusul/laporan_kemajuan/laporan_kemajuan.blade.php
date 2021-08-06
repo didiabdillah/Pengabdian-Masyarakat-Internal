@@ -227,7 +227,7 @@
                                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_insert', [$pengabdian_id, $data->usulan_luaran_id, 'luaran'])}}">
                                                             <i class="fas fa-upload">
                                                             </i>
-                                                            {{__('id.unggah')}} Laporan
+                                                            {{__('id.upload')}} Laporan
                                                         </a>
                                                     </td>
                                                 </tr>

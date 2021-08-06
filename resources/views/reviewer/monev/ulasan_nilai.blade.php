@@ -38,7 +38,7 @@
                             <form action="{{route('reviewer_monev_nilai_ulasan_update', [$usulan->usulan_pengabdian_id])}}" method="POST" class="form-inline form-horizontal float-right">
                                 @csrf
                                 @method('patch')
-                                <a class="btn btn-danger" href="{{route('reviewer_monev_nilai', [$usulan->usulan_pengabdian_id])}}">
+                                <a class="btn btn-danger" href="{{route('reviewer_monev_capaian', [$usulan->usulan_pengabdian_id])}}">
                                     <i class="fas fa-arrow-left">
                                     </i>
 
@@ -291,6 +291,755 @@
                                 {{"-"}}
                                 @endif
                             </h6>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-center pb-4 mt-4">
+                                <b>
+                                    Monev Capaian Kegiatan Pengabdian
+                                </b>
+                            </h4>
+
+                            <table class="table table-bordered" style="table-layout: fixed;">
+                                <thead>
+                                    <tr class="text-center">
+                                        <!-- <th scope="col">NO</th>
+                                        <th scope="col">KRITERIA</th>
+                                        <th scope="col">STATUS</th>
+                                        <th scope="col">BOBOT</th>
+                                        <th scope="col">SKOR</th>
+                                        <th scope="col">NILAI</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- CAPAIAN -->
+                                    <div>
+                                        <tr>
+                                            <td> <label>Mitra Kegiatan</label></td>
+                                            <td>
+                                                {{$capaian->mitra_kegiatan}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> <label>Jumlah Mitra</label></td>
+                                            @php
+                                            $decode_jumlah_mitra = json_decode($capaian->jumlah_mitra, true);
+                                            @endphp
+                                            <td>
+                                                <div class="form-row">
+                                                    {{$decode_jumlah_mitra['orang']}}
+                                                    <div class="col">
+                                                        <label>Orang</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_jumlah_mitra['usaha']}}
+                                                    <div class="col">
+                                                        <label>Usaha</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> <label>Pendidikan Mitra</label></td>
+                                            @php
+                                            $decode_pendidikan_mitra = json_decode($capaian->pendidikan_mitra, true);
+                                            @endphp
+                                            <td>
+                                                <div class="form-row">
+                                                    {{$decode_pendidikan_mitra['s3']}}
+                                                    <div class="col">
+                                                        <label>S-3 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_pendidikan_mitra['s2']}}
+                                                    <div class="col">
+                                                        <label>S-2 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_pendidikan_mitra['s1']}}
+                                                    <div class="col">
+                                                        <label>S-1 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_pendidikan_mitra['diploma']}}
+                                                    <div class="col">
+                                                        <label>Diploma (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_pendidikan_mitra['sma']}}
+                                                    <div class="col">
+                                                        <label>SMA (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_pendidikan_mitra['smp']}}
+                                                    <div class="col">
+                                                        <label>SMP (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_pendidikan_mitra['sd']}}
+                                                    <div class="col">
+                                                        <label>SD (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_pendidikan_mitra['tidak_berpendidikan']}}
+                                                    <div class="col">
+                                                        <label>Tidak Berpendidikan (Orang)</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Persoalan Mitra</label></td>
+                                            <td>
+                                                {{$capaian->persoalan_mitra}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Status Sosial Mitra:
+                                                </label>
+                                                <br>
+                                                <p>Pengusaha Mikro, Anggota Koperasi, Kelompok Tani/Nelayan, PKK/Karang Taruna, Lainnya (tuliskan yang sesuai)</p>
+                                            </td>
+                                            <td>
+                                                {{$capaian->status_sosial_mitra}}
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- LOKASI -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Lokasi
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Jarak PT Ke Lokasi Mitra
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="form-row">
+                                                    {{$capaian->jarak_lokasi_mitra}}
+                                                    <div class="col">
+                                                        <label>KM</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Sarana transportasi:
+                                                </label>
+                                                <br>
+                                                <p>Angkutan umum, motor, jalan kaki (tuliskan yang sesuai)</p>
+                                            </td>
+                                            <td>
+                                                {{$capaian->sarana_transportasi}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Sarana komunikasi:
+                                                </label>
+                                                <br>
+                                                <p>Telepon, Internet, Surat, Fax, Tidak ada sarana komunikasi (tuliskan yang sesuai)</p>
+                                            </td>
+                                            <td>
+                                                {{$capaian->sarana_komunikasi}}
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- IDENTITAS -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Identitas
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <!-- <h5 class="text-center"> -->
+                                                <b>
+                                                    Tim Pengabdian Masyarakat
+                                                </b>
+                                                <!-- </h5> -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Jumlah dosen
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="form-row">
+                                                    {{$capaian->jumlah_dosen}}
+                                                    <div class="col">
+                                                        <label>Orang</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Jumlah mahasiswa
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="form-row">
+                                                    {{$capaian->jumlah_mahasiswa}}
+                                                    <div class="col">
+                                                        <label>Orang</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Gelar Akademik Tim
+                                                </label>
+                                            </td>
+                                            @php
+                                            $decode_gelar_akademik_tim = json_decode($capaian->gelar_akademik_tim, true);
+                                            @endphp
+                                            <td>
+                                                <div class="form-row">
+                                                    {{$decode_gelar_akademik_tim['s3']}}
+                                                    <div class="col">
+                                                        <label>S-3 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_gelar_akademik_tim['s2']}}
+                                                    <div class="col">
+                                                        <label>S-2 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_gelar_akademik_tim['s1']}}
+                                                    <div class="col">
+                                                        <label>S-1 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_gelar_akademik_tim['gb']}}
+                                                    <div class="col">
+                                                        <label>GB (Orang)</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Gender
+                                                </label>
+                                            </td>
+                                            @php
+                                            $decode_gender = json_decode($capaian->gender, true);
+                                            @endphp
+                                            <td>
+                                                <div class="form-row">
+                                                    {{$decode_gender['pria']}}
+                                                    <div class="col">
+                                                        <label>Laki-Laki (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    {{$decode_gender['wanita']}}
+                                                    <div class="col">
+                                                        <label>Perempuan (Orang)</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <!-- <h5 class="text-center"> -->
+                                                <b>
+                                                    Aktivitas Pengabdian Masyarakat
+                                                </b>
+                                                <!-- </h5> -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Metode Pelaksanaan Kegiatan:
+                                                </label>
+                                                <br>
+                                                <p>Penyuluhan/Penyadaran , Pendampingan Pendidikan, Demplot, Rancang Bangun, Pelatihan Manajemen Usaha, Pelatihan Produksi, Pelatihan Administrasi, Pengobatan, Lainnya (tuliskan yang sesuai)</p>
+                                            </td>
+                                            <td>
+                                                {{$capaian->metode_pelaksanaan_kegiatan}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Waktu Efektif Pelaksanaan Kegiatan
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="form-row">
+                                                    {{$capaian->waktu_efektif_pelaksanaan_kegiatan}}
+                                                    <div class="col">
+                                                        <label>Bulan</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <!-- <h5 class="text-center"> -->
+                                                <b>
+                                                    Evaluasi Kegiatan
+                                                </b>
+                                                <!-- </h5> -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Keberhasilan
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->keberhasilan}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <!-- <h5 class="text-center"> -->
+                                                <b>
+                                                    Indikator Keberhasilan
+                                                </b>
+                                                <!-- </h5> -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Keberlanjutan Kegiatan Di Mitra
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->keberlanjutan_kegiatan_mitra}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Kapasitas Produksi
+                                                </label>
+                                            </td>
+                                            @php
+                                            $decode_kapasitas_produksi = json_decode($capaian->kapasitas_produksi, true);
+                                            @endphp
+                                            <td>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Sebelum PM</b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        {{$decode_kapasitas_produksi['sebelum']}}
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Setelah PM</b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        {{$decode_kapasitas_produksi['setelah']}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Omzet per bulan
+                                                </label>
+                                            </td>
+                                            @php
+                                            $decode_omzet_perbulan = json_decode($capaian->omzet_perbulan, true);
+                                            @endphp
+                                            <td>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Sebelum PM Rp.</b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        {{$decode_omzet_perbulan['sebelum']}}
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Setelah PM Rp.</b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        {{$decode_omzet_perbulan['setelah']}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Persoalan Masyarakat Mitra
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->persoalan_masyarakat_mitra}}
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- BIAYA PROGRAM -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Biaya Program
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    PNBP
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Rp. </b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        {{$capaian->biaya_pnbp}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Sumber Lain
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Rp. </b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        {{$capaian->biaya_sumber_lain}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- LIKUIDITAS DANA PROGRAM -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Likuiditas Dana Program
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    a) Tahapan pencairan dana
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->tahapan_pencairan_dana}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    b) Jumlah dana
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->jumlah_dana}}
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- KONTRIBUSI MITRA -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Kontribusi Mitra
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Peran Serta Mitra dalam Kegiatan
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->peran_serta_mitra}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Kontribusi Pendanaan
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->kontribusi_pendanaan}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Peranan Mitra
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->peranan_mitra}}
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- KEBERLANJUTAN -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Keberlanjutan
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Alasan Kelanjutan Kegiatan Mitra
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->alasan_kelanjutan_kegiatan}}
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- Usul penyempurnaan program Pengabdian Masyarakat -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Usul penyempurnaan program Pengabdian Masyarakat
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Model Usulan Kegiatan
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->model_usulan_kegiatan}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Anggaran Biaya
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Rp. </b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        {{$capaian->anggaran_biaya}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Lain-Lain
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->lain_lain}}
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- DOKUMENTASI -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Dokumentasi (Foto kegiatan dan Produk)
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Produk/kegiatan yang dinilai bermanfaat
+                                                    dari berbagai perspektif (Tuliskan)
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->kegiatan_yang_dinilai}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Potret permasalahan lain yang terekam
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->potret_permasalahan}}
+                                            </td>
+                                        </tr>
+                                    </div>
+
+                                    <!-- Luaran program Pengabdian Masyarakat berupa -->
+                                    <div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5 class="text-center">
+                                                    <b>
+                                                        Luaran program Pengabdian Masyarakat berupa
+                                                    </b>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    - Jasa
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->jasa}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    - Metode atau sistem
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->metode}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    - Produk/barang
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->produk}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    - Paten
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->paten}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    - Publikasi (artikel / proceeding)
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->publikasi_artikel}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    - Publikasi Media masa
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{$capaian->publikasi_media_massa}}
+                                            </td>
+                                        </tr>
+                                    </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

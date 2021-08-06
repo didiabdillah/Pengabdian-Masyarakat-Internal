@@ -119,6 +119,8 @@
                                                 <h5><span class="badge badge-danger">Ditolak</span></h5>
                                                 @elseif($usulan->usulan_pengabdian_status == "dinilai")
                                                 <h5><span class="badge badge-info">Dinilai</span></h5>
+                                                @elseif($usulan->usulan_pengabdian_status == "dimonev")
+                                                <h5><span class="badge badge-info">Dimonev</span></h5>
                                                 @elseif($usulan->usulan_pengabdian_status == "selesai")
                                                 <h5><span class="badge badge-success">Selesai</span></h5>
                                                 @endif

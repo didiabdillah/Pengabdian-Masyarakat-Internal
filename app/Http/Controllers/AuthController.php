@@ -172,7 +172,7 @@ class AuthController extends Controller
             $data,
             function ($message) use ($user) {
                 $message->to($user->user_email, $user->user_name)
-                    ->subject('Forgot Password');
+                    ->subject('Lupa Password');
             }
         );
 

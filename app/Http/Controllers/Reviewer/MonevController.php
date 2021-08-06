@@ -413,30 +413,140 @@ class MonevController extends Controller
             }
         }
 
-        $no = -1;
-        foreach ($request->post() as $data) {
-            if ($no > 0) {
-                //Input Data
-                $data_insert = [
-                    'capaian_kegiatan_pengabdian_id' => $id,
-                    'capaian_kegiatan_urutan' => $no,
-                    'capaian_kegiatan_jawaban' => htmlspecialchars($data),
-                ];
-
-                Capaian_kegiatan::updateOrInsert(
-                    ['capaian_kegiatan_pengabdian_id' => $id, 'capaian_kegiatan_urutan' => $no],
-                    $data_insert
-                );
-            }
-            $no++;
-        }
-
         // Input Validation
         // $request->validate(
         //     [
         //         'komentar'  => 'max:60000',
         //     ]
         // );
+
+        // PROGRESS START HERE
+
+        $mitra_kegiatan = htmlspecialchars($request->mitra_kegiatan);
+        $jumlah_mitra = json_encode([
+            'orang' => htmlspecialchars($request->jumlah_mitra_orang),
+            'usaha' => htmlspecialchars($request->jumlah_mitra_usaha)
+        ]);
+        $pendidikan_mitra = json_encode([
+            's3' => htmlspecialchars($request->pendidikan_mitra_s3),
+            's2' => htmlspecialchars($request->pendidikan_mitra_s2),
+            's1' => htmlspecialchars($request->pendidikan_mitra_s1),
+            'diploma' => htmlspecialchars($request->pendidikan_mitra_diploma),
+            'sma' => htmlspecialchars($request->pendidikan_mitra_sma),
+            'smp' => htmlspecialchars($request->pendidikan_mitra_smp),
+            'sd' => htmlspecialchars($request->pendidikan_mitra_sd),
+            'tidak_berpendidikan' => htmlspecialchars($request->pendidikan_mitra_ts)
+        ]);
+
+        $persoalan_mitra = htmlspecialchars($request->persoalan_mitra);
+        $status_sosial_mitra = htmlspecialchars($request->status_sosial_mitra);
+
+        $jarak_lokasi_mitra = htmlspecialchars($request->jarak_lokasi_mitra);
+        $sarana_transportasi = htmlspecialchars($request->sarana_transportasi);
+        $sarana_komunikasi = htmlspecialchars($request->sarana_komunikasi);
+
+        $jumlah_dosen = htmlspecialchars($request->jumlah_dosen);
+        $jumlah_mahasiswa = htmlspecialchars($request->jumlah_mahasiswa);
+        $gelar_akademik_tim = json_encode([
+            's3' => htmlspecialchars($request->gelar_akademik_tim_s3),
+            's2' => htmlspecialchars($request->gelar_akademik_tim_s2),
+            's1' => htmlspecialchars($request->gelar_akademik_tim_s1),
+            'gb' => htmlspecialchars($request->gelar_akademik_tim_gb)
+        ]);
+        $gender = json_encode([
+            'pria' => htmlspecialchars($request->gender_pria),
+            'wanita' => htmlspecialchars($request->gender_wanita)
+        ]);
+        $metode_pelaksanaan_kegiatan = htmlspecialchars($request->metode_pelaksanaan_kegiatan);
+        $waktu_efektif_pelaksanaan = htmlspecialchars($request->waktu_efektif_pelaksanaan);
+        $keberhasilan = htmlspecialchars($request->keberhasilan);
+        $keberlanjutan_kegiatan = htmlspecialchars($request->keberlanjutan_kegiatan);
+        $kapasitas_produksi = json_encode([
+            'sebelum' => htmlspecialchars($request->kapasitas_produksi_sebelum),
+            'setelah' => htmlspecialchars($request->kapasitas_produksi_setelah)
+        ]);
+        $omzet_per_bulan = json_encode([
+            'sebelum' => htmlspecialchars($request->kapasitas_produksi_sebelum),
+            'setelah' => htmlspecialchars($request->kapasitas_produksi_setelah)
+        ]);
+        $persoalan_masyarakat_mitra = htmlspecialchars($request->persoalan_masyarakat_mitra);
+
+        $biaya_pnbp = htmlspecialchars($request->biaya_pnbp);
+        $biaya_sumber_lain = htmlspecialchars($request->biaya_sumber_lain);
+
+        $tahap_pencairan_dana = htmlspecialchars($request->tahap_pencairan_dana);
+        $jumlah_dana = htmlspecialchars($request->jumlah_dana);
+
+        $peran_serta_mitra = htmlspecialchars($request->peran_serta_mitra);
+        $kontribusi_pendanaan = htmlspecialchars($request->kontribusi_pendanaan);
+        $peran_mitra = htmlspecialchars($request->peran_mitra);
+
+        $alasan_kelanjutan_kegiatan = htmlspecialchars($request->alasan_kelanjutan_kegiatan);
+
+        $model_usulan_kegiatan = htmlspecialchars($request->model_usulan_kegiatan);
+        $anggaran_biaya = htmlspecialchars($request->anggaran_biaya);
+        $usul_lain_lain = htmlspecialchars($request->usul_lain_lain);
+
+        $kegiatan_dinilai_bermanfaat = htmlspecialchars($request->kegiatan_dinilai_bermanfaat);
+        $permasalahan_lain_terekam = htmlspecialchars($request->permasalahan_lain_terekam);
+
+        $jasa = htmlspecialchars($request->jasa);
+        $metode = htmlspecialchars($request->metode);
+        $produk = htmlspecialchars($request->produk);
+        $paten = htmlspecialchars($request->paten);
+        $publikasi_artikel = htmlspecialchars($request->publikasi_artikel);
+        $publikasi_media_masa = htmlspecialchars($request->publikasi_media_masa);
+
+        $monev_id = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
+
+        //Input Data
+        $data_insert = [
+            'capaian_kegiatan_monev_id' => $monev_id->penilaian_monev_id,
+            'mitra_kegiatan' => $mitra_kegiatan,
+            'jumlah_mitra' => "$jumlah_mitra",
+            'pendidikan_mitra' => "$pendidikan_mitra",
+            'persoalan_mitra' => $persoalan_mitra,
+            'status_sosial_mitra' => $status_sosial_mitra,
+            'jarak_lokasi_mitra' => $jarak_lokasi_mitra,
+            'sarana_transportasi' => $sarana_transportasi,
+            'sarana_komunikasi' => $sarana_komunikasi,
+            'jumlah_dosen' => $jumlah_dosen,
+            'jumlah_mahasiswa' => $jumlah_mahasiswa,
+            'gelar_akademik_tim' => "$gelar_akademik_tim",
+            'gender' => "$gender",
+            'metode_pelaksanaan_kegiatan' => $metode_pelaksanaan_kegiatan,
+            'waktu_efektif_pelaksanaan_kegiatan' => $waktu_efektif_pelaksanaan,
+            'keberhasilan' => $keberhasilan,
+            'keberlanjutan_kegiatan_mitra' => $keberlanjutan_kegiatan,
+            'kapasitas_produksi' => "$kapasitas_produksi",
+            'omzet_perbulan' => "$omzet_per_bulan",
+            'persoalan_masyarakat_mitra' => $persoalan_masyarakat_mitra,
+            'biaya_pnbp' => $biaya_pnbp,
+            'biaya_sumber_lain' => $biaya_sumber_lain,
+            'tahapan_pencairan_dana' => $tahap_pencairan_dana,
+            'jumlah_dana' => $jumlah_dana,
+            'peran_serta_mitra' => $peran_serta_mitra,
+            'kontribusi_pendanaan' => $kontribusi_pendanaan,
+            'peranan_mitra' => $peran_mitra,
+            'alasan_kelanjutan_kegiatan' => $alasan_kelanjutan_kegiatan,
+            'model_usulan_kegiatan' => $model_usulan_kegiatan,
+            'anggaran_biaya' => $anggaran_biaya,
+            'lain_lain' => $usul_lain_lain,
+            'kegiatan_yang_dinilai' => $kegiatan_dinilai_bermanfaat,
+            'potret_permasalahan' => $permasalahan_lain_terekam,
+            'jasa' => $jasa,
+            'metode' => $metode,
+            'produk' => $produk,
+            'paten' => $paten,
+            'publikasi_artikel' => $publikasi_artikel,
+            'publikasi_media_massa' => $publikasi_media_masa
+        ];
+
+
+        Capaian_kegiatan::updateOrInsert(
+            ['capaian_kegiatan_monev_id' => $monev_id->penilaian_monev_id],
+            $data_insert
+        );
 
         //Flash Message
         flash_alert(
@@ -487,6 +597,8 @@ class MonevController extends Controller
 
         $nilai = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
 
+        $capaian = Capaian_kegiatan::where('capaian_kegiatan_monev_id', $nilai->penilaian_monev_id)->first();
+
         // $keterangan_nilai = [
         //     "1" => "Sangat Buruk",
         //     "2" => "Buruk Sekali",
@@ -511,7 +623,7 @@ class MonevController extends Controller
             'ketua' => $ketua,
             'nilai' => $nilai,
             'id' => $id,
-            // 'ket_nilai' => $keterangan_nilai,
+            'capaian' => $capaian,
             // 'total_nilai' => $total_nilai,
         ];
 

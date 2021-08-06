@@ -86,6 +86,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- CAPAIAN -->
                                     <div>
                                         <tr>
                                             <td> <label>Mitra Kegiatan</label></td>
@@ -101,23 +102,149 @@
                                         <tr>
                                             <td> <label>Jumlah Mitra</label></td>
                                             <td>
-                                                <input type="text" class="form-control @error('jumlah_mitra') is-invalid @enderror" id="jumlah_mitra" name="jumlah_mitra" value="{{old('jumlah_mitra')}}">
-                                                @error('jumlah_mitra')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('jumlah_mitra_orang') is-invalid @enderror" id="jumlah_mitra_orang" name="jumlah_mitra_orang" value="{{old('jumlah_mitra_orang')}}">
+                                                        @error('jumlah_mitra_orang')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Orang</label>
+                                                    </div>
                                                 </div>
-                                                @enderror
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('jumlah_mitra_usaha') is-invalid @enderror" id="jumlah_mitra_usaha" name="jumlah_mitra_usaha" value="{{old('jumlah_mitra_usaha')}}">
+                                                        @error('jumlah_mitra_usaha')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Usaha</label>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td> <label>Pendidikan Mitra</label></td>
                                             <td>
-                                                <input type="text" class="form-control @error('pendidikan_mitra') is-invalid @enderror" id="pendidikan_mitra" name="pendidikan_mitra" value="{{old('pendidikan_mitra')}}">
-                                                @error('pendidikan_mitra')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('pendidikan_mitra_s3') is-invalid @enderror" id="pendidikan_mitra_s3" name="pendidikan_mitra_s3" value="{{old('pendidikan_mitra_s3')}}">
+                                                        @error('pendidikan_mitra_s3')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>S-3 (Orang)</label>
+                                                    </div>
                                                 </div>
-                                                @enderror
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('pendidikan_mitra_s2') is-invalid @enderror" id="pendidikan_mitra_s2" name="pendidikan_mitra_s2" value="{{old('pendidikan_mitra_s2')}}">
+                                                        @error('pendidikan_mitra_s2')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>S-2 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('pendidikan_mitra_s1') is-invalid @enderror" id="pendidikan_mitra_s1" name="pendidikan_mitra_s1" value="{{old('pendidikan_mitra_s1')}}">
+                                                        @error('pendidikan_mitra_s1')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>S-1 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('pendidikan_mitra_diploma') is-invalid @enderror" id="pendidikan_mitra_diploma" name="pendidikan_mitra_diploma" value="{{old('pendidikan_mitra_diploma')}}">
+                                                        @error('pendidikan_mitra_diploma')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Diploma (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('pendidikan_mitra_sma') is-invalid @enderror" id="pendidikan_mitra_sma" name="pendidikan_mitra_sma" value="{{old('pendidikan_mitra_sma')}}">
+                                                        @error('pendidikan_mitra_sma')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>SMA (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('pendidikan_mitra_smp') is-invalid @enderror" id="pendidikan_mitra_smp" name="pendidikan_mitra_smp" value="{{old('pendidikan_mitra_smp')}}">
+                                                        @error('pendidikan_mitra_smp')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>SMP (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('pendidikan_mitra_sd') is-invalid @enderror" id="pendidikan_mitra_sd" name="pendidikan_mitra_sd" value="{{old('pendidikan_mitra_sd')}}">
+                                                        @error('pendidikan_mitra_sd')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>SD (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('pendidikan_mitra_ts') is-invalid @enderror" id="pendidikan_mitra_ts" name="pendidikan_mitra_ts" value="{{old('pendidikan_mitra_ts')}}">
+                                                        @error('pendidikan_mitra_ts')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Tidak Berpendidikan (Orang)</label>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -150,6 +277,7 @@
                                         </tr>
                                     </div>
 
+                                    <!-- LOKASI -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -167,12 +295,19 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('jarak_lokasi_mitra') is-invalid @enderror" id="jarak_lokasi_mitra" name="jarak_lokasi_mitra" value="{{old('jarak_lokasi_mitra')}}">
-                                                @error('jarak_lokasi_mitra')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('jarak_lokasi_mitra') is-invalid @enderror" id="jarak_lokasi_mitra" name="jarak_lokasi_mitra" value="{{old('jarak_lokasi_mitra')}}">
+                                                        @error('jarak_lokasi_mitra')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>KM</label>
+                                                    </div>
                                                 </div>
-                                                @enderror
                                             </td>
                                         </tr>
                                         <tr>
@@ -211,6 +346,7 @@
                                         </tr>
                                     </div>
 
+                                    <!-- IDENTITAS -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -237,12 +373,19 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('jumlah_dosen') is-invalid @enderror" id="jumlah_dosen" name="jumlah_dosen" value="{{old('jumlah_dosen')}}">
-                                                @error('jumlah_dosen')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('jumlah_dosen') is-invalid @enderror" id="jumlah_dosen" name="jumlah_dosen" value="{{old('jumlah_dosen')}}">
+                                                        @error('jumlah_dosen')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Orang</label>
+                                                    </div>
                                                 </div>
-                                                @enderror
                                             </td>
                                         </tr>
                                         <tr>
@@ -252,12 +395,19 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('jumlah_mahasiswa') is-invalid @enderror" id="jumlah_mahasiswa" name="jumlah_mahasiswa" value="{{old('jumlah_mahasiswa')}}">
-                                                @error('jumlah_mahasiswa')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('jumlah_mahasiswa') is-invalid @enderror" id="jumlah_mahasiswa" name="jumlah_mahasiswa" value="{{old('jumlah_mahasiswa')}}">
+                                                        @error('jumlah_mahasiswa')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Orang</label>
+                                                    </div>
                                                 </div>
-                                                @enderror
                                             </td>
                                         </tr>
                                         <tr>
@@ -267,12 +417,61 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('gelar_akademik_tim') is-invalid @enderror" id="gelar_akademik_tim" name="gelar_akademik_tim" value="{{old('gelar_akademik_tim')}}">
-                                                @error('gelar_akademik_tim')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('gelar_akademik_tim_s3') is-invalid @enderror" id="gelar_akademik_tim_s3" name="gelar_akademik_tim_s3" value="{{old('gelar_akademik_tim_s3')}}">
+                                                        @error('gelar_akademik_tim_s3')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>S-3 (Orang)</label>
+                                                    </div>
                                                 </div>
-                                                @enderror
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('gelar_akademik_tim_s2') is-invalid @enderror" id="gelar_akademik_tim_s2" name="gelar_akademik_tim_s2" value="{{old('gelar_akademik_tim_s2')}}">
+                                                        @error('gelar_akademik_tim_s2')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>S-2 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('gelar_akademik_tim_s1') is-invalid @enderror" id="gelar_akademik_tim_s1" name="gelar_akademik_tim_s1" value="{{old('gelar_akademik_tim_s1')}}">
+                                                        @error('gelar_akademik_tim_s1')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>S-1 (Orang)</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('gelar_akademik_tim_gb') is-invalid @enderror" id="gelar_akademik_tim_gb" name="gelar_akademik_tim_gb" value="{{old('gelar_akademik_tim_gb')}}">
+                                                        @error('gelar_akademik_tim_gb')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>GB (Orang)</label>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -282,12 +481,33 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender" value="{{old('gender')}}">
-                                                @error('gender')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('gender_pria') is-invalid @enderror" id="gender_pria" name="gender_pria" value="{{old('gender_pria')}}">
+                                                        @error('gender_pria')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Laki-Laki (Orang)</label>
+                                                    </div>
                                                 </div>
-                                                @enderror
+                                                <br>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('gender_wanita') is-invalid @enderror" id="gender_wanita" name="gender_wanita" value="{{old('gender_wanita')}}">
+                                                        @error('gender_wanita')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Perempuan (Orang)</label>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -323,12 +543,19 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('waktu_efektif_pelaksanaan') is-invalid @enderror" id="waktu_efektif_pelaksanaan" name="waktu_efektif_pelaksanaan" value="{{old('waktu_efektif_pelaksanaan')}}">
-                                                @error('waktu_efektif_pelaksanaan')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('waktu_efektif_pelaksanaan') is-invalid @enderror" id="waktu_efektif_pelaksanaan" name="waktu_efektif_pelaksanaan" value="{{old('waktu_efektif_pelaksanaan')}}">
+                                                        @error('waktu_efektif_pelaksanaan')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Bulan</label>
+                                                    </div>
                                                 </div>
-                                                @enderror
                                             </td>
                                         </tr>
                                         <tr>
@@ -347,7 +574,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('keberhasilan') is-invalid @enderror" id="keberhasilan" name="keberhasilan" value="{{old('keberhasilan')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="keberhasilan_berhasil" name="keberhasilan" value="berhasil">
+                                                    <label for="keberhasilan_berhasil">
+                                                        Berhasil
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="keberhasilan_gagal" name="keberhasilan" value="gagal">
+                                                    <label for="keberhasilan_gagal">
+                                                        Gagal
+                                                    </label>
+                                                </div>
                                                 @error('keberhasilan')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -371,7 +609,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('keberlanjutan_kegiatan') is-invalid @enderror" id="keberlanjutan_kegiatan" name="keberlanjutan_kegiatan" value="{{old('keberlanjutan_kegiatan')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="keberlanjutan_kegiatan_berlanjut" name="keberlanjutan_kegiatan" value="berlanjut">
+                                                    <label for="keberlanjutan_kegiatan_berlanjut">
+                                                        Berlanjut
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="keberlanjutan_kegiatan_berhenti" name="keberlanjutan_kegiatan" value="berhenti">
+                                                    <label for="keberlanjutan_kegiatan_berhenti">
+                                                        Berhenti
+                                                    </label>
+                                                </div>
                                                 @error('keberlanjutan_kegiatan')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -386,12 +635,33 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('kapasitas_produksi') is-invalid @enderror" id="kapasitas_produksi" name="kapasitas_produksi" value="{{old('kapasitas_produksi')}}">
-                                                @error('kapasitas_produksi')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Sebelum PM</b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('kapasitas_produksi_sebelum') is-invalid @enderror" id="kapasitas_produksi_sebelum" name="kapasitas_produksi_sebelum" value="{{old('kapasitas_produksi_sebelum')}}">
+                                                        @error('kapasitas_produksi_sebelum')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                @enderror
+                                                <br>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Setelah PM</b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('kapasitas_produksi_setelah') is-invalid @enderror" id="kapasitas_produksi_setelah" name="kapasitas_produksi_setelah" value="{{old('kapasitas_produksi_setelah')}}">
+                                                        @error('kapasitas_produksi_setelah')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -401,12 +671,33 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('omzet_per_bulan') is-invalid @enderror" id="omzet_per_bulan" name="omzet_per_bulan" value="{{old('omzet_per_bulan')}}">
-                                                @error('omzet_per_bulan')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Sebelum PM Rp.</b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('omzet_per_bulan_sebelum') is-invalid @enderror" id="omzet_per_bulan_sebelum" name="omzet_per_bulan_sebelum" value="{{old('omzet_per_bulan_sebelum')}}">
+                                                        @error('omzet_per_bulan_sebelum')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                @enderror
+                                                <br>
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Setelah PM Rp.</b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('omzet_per_bulan_setelah') is-invalid @enderror" id="omzet_per_bulan_setelah" name="omzet_per_bulan_setelah" value="{{old('omzet_per_bulan_setelah')}}">
+                                                        @error('omzet_per_bulan_setelah')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -416,7 +707,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('persoalan_masyarakat_mitra') is-invalid @enderror" id="persoalan_masyarakat_mitra" name="persoalan_masyarakat_mitra" value="{{old('persoalan_masyarakat_mitra')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="persoalan_masyarakat_mitra_terselesaikan" name="persoalan_masyarakat_mitra" value="Terselesaikan">
+                                                    <label for="persoalan_masyarakat_mitra_terselesaikan">
+                                                        Terselesaikan
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="persoalan_masyarakat_mitra_tidak_terselesaikan" name="persoalan_masyarakat_mitra" value="Tidak Terselesaikan">
+                                                    <label for="persoalan_masyarakat_mitra_tidak_terselesaikan">
+                                                        Tidak Terselesaikan
+                                                    </label>
+                                                </div>
                                                 @error('persoalan_masyarakat_mitra')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -426,6 +728,7 @@
                                         </tr>
                                     </div>
 
+                                    <!-- BIAYA PROGRAM -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -443,12 +746,19 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('biaya_pnbp') is-invalid @enderror" id="biaya_pnbp" name="biaya_pnbp" value="{{old('biaya_pnbp')}}">
-                                                @error('biaya_pnbp')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Rp. </b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('biaya_pnbp') is-invalid @enderror" id="biaya_pnbp" name="biaya_pnbp" value="{{old('biaya_pnbp')}}">
+                                                        @error('biaya_pnbp')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                @enderror
                                             </td>
                                         </tr>
                                         <tr>
@@ -458,16 +768,24 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('biaya_sumber_lain') is-invalid @enderror" id="biaya_sumber_lain" name="biaya_sumber_lain" value="{{old('biaya_sumber_lain')}}">
-                                                @error('biaya_sumber_lain')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Rp. </b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('biaya_sumber_lain') is-invalid @enderror" id="biaya_sumber_lain" name="biaya_sumber_lain" value="{{old('biaya_sumber_lain')}}">
+                                                        @error('biaya_sumber_lain')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                @enderror
                                             </td>
                                         </tr>
                                     </div>
 
+                                    <!-- LIKUIDITAS DANA PROGRAM -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -485,7 +803,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('tahap_pencairan_dana') is-invalid @enderror" id="tahap_pencairan_dana" name="tahap_pencairan_dana" value="{{old('tahap_pencairan_dana')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="tahap_pencairan_dana_mendukung" name="tahap_pencairan_dana" value="Mendukung Kegiatan">
+                                                    <label for="tahap_pencairan_dana_mendukung">
+                                                        Mendukung kegiatan
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="tahap_pencairan_dana_mengganggu" name="tahap_pencairan_dana" value="Mengganggu Kelancaran kegiatan di lapangan">
+                                                    <label for="tahap_pencairan_dana_mengganggu">
+                                                        Mengganggu Kelancaran kegiatan di lapangan
+                                                    </label>
+                                                </div>
                                                 @error('tahap_pencairan_dana')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -500,7 +829,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('jumlah_dana') is-invalid @enderror" id="jumlah_dana" name="jumlah_dana" value="{{old('jumlah_dana')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="jumlah_dana_diterima" name="jumlah_dana" value="Diterima 100%">
+                                                    <label for="jumlah_dana_diterima">
+                                                        Diterima 100%
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="jumlah_dana_tidak_diterima" name="jumlah_dana" value="Tidak Diterima 100%">
+                                                    <label for="jumlah_dana_tidak_diterima">
+                                                        Tidak Diterima 100%
+                                                    </label>
+                                                </div>
                                                 @error('jumlah_dana')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -510,6 +850,7 @@
                                         </tr>
                                     </div>
 
+                                    <!-- KONTRIBUSI MITRA -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -527,7 +868,24 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('peran_serta_mitra') is-invalid @enderror" id="peran_serta_mitra" name="peran_serta_mitra" value="{{old('peran_serta_mitra')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="peran_serta_mitra_aktif" name="peran_serta_mitra" value="Aktif">
+                                                    <label for="peran_serta_mitra_aktif">
+                                                        Aktif
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="peran_serta_mitra_pasif" name="peran_serta_mitra" value="Pasif">
+                                                    <label for="peran_serta_mitra_pasif">
+                                                        Pasif
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="peran_serta_mitra_acuh" name="peran_serta_mitra" value="Acuh Tak Acuh">
+                                                    <label for="peran_serta_mitra_acuh">
+                                                        Acuh Tak Acuh
+                                                    </label>
+                                                </div>
                                                 @error('peran_serta_mitra')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -542,7 +900,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('kontribusi_pendanaan') is-invalid @enderror" id="kontribusi_pendanaan" name="kontribusi_pendanaan" value="{{old('kontribusi_pendanaan')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="kontribusi_pendanaan_menyediakan" name="kontribusi_pendanaan" value="Menyediakan">
+                                                    <label for="kontribusi_pendanaan_menyediakan">
+                                                        Menyediakan
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="kontribusi_pendanaan_tidak_menyediakan" name="kontribusi_pendanaan" value="Tidak Menyediakan">
+                                                    <label for="kontribusi_pendanaan_tidak_menyediakan">
+                                                        Tidak Menyediakan
+                                                    </label>
+                                                </div>
                                                 @error('kontribusi_pendanaan')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -553,11 +922,22 @@
                                         <tr>
                                             <td>
                                                 <label>
-                                                    Peran Mitra
+                                                    Peranan Mitra
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('peran_mitra') is-invalid @enderror" id="peran_mitra" name="peran_mitra" value="{{old('peran_mitra')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="peran_mitra_objek" name="peran_mitra" value="Objek Kegiatan">
+                                                    <label for="peran_mitra_objek">
+                                                        Objek Kegiatan
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="peran_mitra_subjek" name="peran_mitra" value="Subjek Kegiatan">
+                                                    <label for="peran_mitra_subjek">
+                                                        Subjek Kegiatan
+                                                    </label>
+                                                </div>
                                                 @error('peran_mitra')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -567,6 +947,7 @@
                                         </tr>
                                     </div>
 
+                                    <!-- KEBERLANJUTAN -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -584,7 +965,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('alasan_kelanjutan_kegiatan') is-invalid @enderror" id="alasan_kelanjutan_kegiatan" name="alasan_kelanjutan_kegiatan" value="{{old('alasan_kelanjutan_kegiatan')}}">
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="alasan_kelanjutan_kegiatan_permintaan" name="alasan_kelanjutan_kegiatan" value="Permintaan Masyarakat">
+                                                    <label for="alasan_kelanjutan_kegiatan_permintaan">
+                                                        Permintaan Masyarakat
+                                                    </label>
+                                                </div>
+                                                <div class="icheck-primary">
+                                                    <input type="radio" id="alasan_kelanjutan_kegiatan_keputusan" name="alasan_kelanjutan_kegiatan" value="Keputusan Bersama">
+                                                    <label for="alasan_kelanjutan_kegiatan_keputusan">
+                                                        Keputusan Bersama
+                                                    </label>
+                                                </div>
                                                 @error('alasan_kelanjutan_kegiatan')
                                                 <div class="invalid-feedback">
                                                     {{$message}}
@@ -594,6 +986,7 @@
                                         </tr>
                                     </div>
 
+                                    <!-- Usul penyempurnaan program Pengabdian Masyarakat -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -626,12 +1019,19 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control @error('anggaran_biaya') is-invalid @enderror" id="anggaran_biaya" name="anggaran_biaya" value="{{old('anggaran_biaya')}}">
-                                                @error('anggaran_biaya')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
+                                                <div class="form-row">
+                                                    <!-- <div class="col"> -->
+                                                    <b>Rp. </b>
+                                                    <!-- </div> -->
+                                                    <div class="col">
+                                                        <input type="text" class="form-control @error('anggaran_biaya') is-invalid @enderror" id="anggaran_biaya" name="anggaran_biaya" value="{{old('anggaran_biaya')}}">
+                                                        @error('anggaran_biaya')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                @enderror
                                             </td>
                                         </tr>
                                         <tr>
@@ -651,6 +1051,7 @@
                                         </tr>
                                     </div>
 
+                                    <!-- DOKUMENTASI -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -694,6 +1095,7 @@
                                         </tr>
                                     </div>
 
+                                    <!-- Luaran program Pengabdian Masyarakat berupa -->
                                     <div>
                                         <tr>
                                             <td colspan="2">
@@ -799,7 +1201,7 @@
                             </table>
 
                             <div class="card-footer">
-                                <a href="{{route('reviewer_monev_detail', $id)}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <a href="{{route('reviewer_monev_nilai', $id)}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> {{__('id.submit')}}</button>
                             </div>
                         </form>
