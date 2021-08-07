@@ -33,6 +33,8 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- NILAI MONEV -->
                     <div class="card-body">
                         <div class="alert alert-light">
                             <form action="{{route('reviewer_monev_nilai_ulasan_update', [$usulan->usulan_pengabdian_id])}}" method="POST" class="form-inline form-horizontal float-right">
@@ -107,105 +109,99 @@
                                         Publikasi Ilmiah di jurnal/prosiding
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_1}}
+                                        {{($nilai->penilaian_monev_status_1) ? $nilai->penilaian_monev_status_1 : "-"}}
                                     </td>
                                     <td rowspan="2" class="text-center">20</td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_1}}
+                                        {{($nilai->penilaian_monev_skor_1) ? $nilai->penilaian_monev_skor_1 : "0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_1}}
                                     </td>
                                 </tr>
                                 <tr>
-
                                     <td>
                                         Publikasi pada media massa (cetak/elektronik)
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_2}}
+                                        {{($nilai->penilaian_monev_status_2) ? $nilai->penilaian_monev_status_2 : "-"}}
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_2}}
+                                        {{($nilai->penilaian_monev_skor_2) ? $nilai->penilaian_monev_skor_2 : "0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_2}}
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <th class="text-center" scope="row" rowspan="4">2</th>
                                     <td>
                                         Peningkatan omzet pada mitra yang bergerak dalam bidang ekonomi
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_3}}
+                                        {{($nilai->penilaian_monev_status_3) ? $nilai->penilaian_monev_status_3 : "-"}}
                                     </td>
                                     <td rowspan="4" class="text-center">60</td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_3}}
+                                        {{($nilai->penilaian_monev_skor_3) ? $nilai->penilaian_monev_skor_3 :"0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_3}}
                                     </td>
                                 </tr>
                                 <tr>
-
                                     <td>
                                         Peningkatan kualitas dan kuantitas produk
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_4}}
+                                        {{($nilai->penilaian_monev_status_4) ? $nilai->penilaian_monev_status_4 : "-"}}
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_4}}
+                                        {{($nilai->penilaian_monev_skor_4) ? $nilai->penilaian_monev_skor_4 : "0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_4}}
                                     </td>
                                 </tr>
                                 <tr>
-
                                     <td>
                                         Peningkatan pemahaman dan ketrampilan masyarakat
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_5}}
+                                        {{($nilai->penilaian_monev_status_5) ? $nilai->penilaian_monev_status_5 : "-"}}
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_5}}
+                                        {{($nilai->penilaian_monev_skor_5) ? $nilai->penilaian_monev_skor_5 : "0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_5}}
                                     </td>
                                 </tr>
                                 <tr>
-
                                     <td>
                                         Peningkatan ketentraman/kesehatan masyarakat (mitra masyarakat umum)
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_6}}
+                                        {{($nilai->penilaian_monev_status_6) ? $nilai->penilaian_monev_status_6 : "-"}}
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_6}}
+                                        {{($nilai->penilaian_monev_skor_6) ? $nilai->penilaian_monev_skor_6 : "0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_6}}
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <th class="text-center" scope="row" rowspan="2">3</th>
                                     <td>
                                         Jasa, model, rekayasa social, sistem, produk/barang
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_7}}
+                                        {{($nilai->penilaian_monev_status_7) ? $nilai->penilaian_monev_status_7 : "-"}}
                                     </td>
                                     <td rowspan="2" class="text-center">10</td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_7}}
+                                        {{($nilai->penilaian_monev_skor_7) ? $nilai->penilaian_monev_skor_7 : "0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_7}}
@@ -220,27 +216,26 @@
                                         desain produk industri, perlindungan varietas tanaman, perlindungan topografi)
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_8}}
+                                        {{($nilai->penilaian_monev_status_8) ? $nilai->penilaian_monev_status_8 : "-"}}
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_8}}
+                                        {{($nilai->penilaian_monev_skor_8) ? $nilai->penilaian_monev_skor_8 : "0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_8}}
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <th class="text-center" scope="row">4</th>
                                     <td>
                                         Buku Ajar
                                     </td>
                                     <td>
-                                        {{$nilai->penilaian_monev_status_9}}
+                                        {{($nilai->penilaian_monev_status_9) ? $nilai->penilaian_monev_status_9 : "-"}}
                                     </td>
                                     <td class="text-center">10</td>
                                     <td>
-                                        {{$nilai->penilaian_monev_skor_9}}
+                                        {{($nilai->penilaian_monev_skor_9) ? $nilai->penilaian_monev_skor_9 : "0"}}
                                     </td>
                                     <td>
                                         {{$nilai->penilaian_monev_nilai_9}}
@@ -294,6 +289,7 @@
                         </div>
                     </div>
 
+                    <!-- CAPAIAN KEGIATAN -->
                     <div class="card">
                         <div class="card-body">
                             <h4 class="text-center pb-4 mt-4">
@@ -319,7 +315,7 @@
                                         <tr>
                                             <td> <label>Mitra Kegiatan</label></td>
                                             <td>
-                                                {{$capaian->mitra_kegiatan}}
+                                                {{($capaian->mitra_kegiatan) ? $capaian->mitra_kegiatan : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -329,14 +325,14 @@
                                             @endphp
                                             <td>
                                                 <div class="form-row">
-                                                    {{$decode_jumlah_mitra['orang']}}
+                                                    {{($decode_jumlah_mitra['orang']) ? $decode_jumlah_mitra['orang'] : "0"}}
                                                     <div class="col">
                                                         <label>Orang</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_jumlah_mitra['usaha']}}
+                                                    {{($decode_jumlah_mitra['usaha']) ? $decode_jumlah_mitra['usaha'] : "0"}}
                                                     <div class="col">
                                                         <label>Usaha</label>
                                                     </div>
@@ -350,56 +346,56 @@
                                             @endphp
                                             <td>
                                                 <div class="form-row">
-                                                    {{$decode_pendidikan_mitra['s3']}}
+                                                    {{($decode_pendidikan_mitra['s3']) ? $decode_pendidikan_mitra['s3'] : "0"}}
                                                     <div class="col">
                                                         <label>S-3 (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_pendidikan_mitra['s2']}}
+                                                    {{($decode_pendidikan_mitra['s2']) ? $decode_pendidikan_mitra['s2'] : "0"}}
                                                     <div class="col">
                                                         <label>S-2 (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_pendidikan_mitra['s1']}}
+                                                    {{($decode_pendidikan_mitra['s1']) ? $decode_pendidikan_mitra['s1'] : "0"}}
                                                     <div class="col">
                                                         <label>S-1 (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_pendidikan_mitra['diploma']}}
+                                                    {{($decode_pendidikan_mitra['diploma']) ? $decode_pendidikan_mitra['diploma'] : "0"}}
                                                     <div class="col">
                                                         <label>Diploma (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_pendidikan_mitra['sma']}}
+                                                    {{($decode_pendidikan_mitra['sma']) ? $decode_pendidikan_mitra['sma'] : "0"}}
                                                     <div class="col">
                                                         <label>SMA (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_pendidikan_mitra['smp']}}
+                                                    {{($decode_pendidikan_mitra['smp']) ? $decode_pendidikan_mitra['smp'] : "0"}}
                                                     <div class="col">
                                                         <label>SMP (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_pendidikan_mitra['sd']}}
+                                                    {{($decode_pendidikan_mitra['sd']) ? $decode_pendidikan_mitra['sd'] : "0"}}
                                                     <div class="col">
                                                         <label>SD (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_pendidikan_mitra['tidak_berpendidikan']}}
+                                                    {{($decode_pendidikan_mitra['tidak_berpendidikan']) ? $decode_pendidikan_mitra['tidak_berpendidikan'] : "0"}}
                                                     <div class="col">
                                                         <label>Tidak Berpendidikan (Orang)</label>
                                                     </div>
@@ -409,7 +405,7 @@
                                         <tr>
                                             <td><label>Persoalan Mitra</label></td>
                                             <td>
-                                                {{$capaian->persoalan_mitra}}
+                                                {{($capaian->persoalan_mitra) ? $capaian->persoalan_mitra : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -421,7 +417,7 @@
                                                 <p>Pengusaha Mikro, Anggota Koperasi, Kelompok Tani/Nelayan, PKK/Karang Taruna, Lainnya (tuliskan yang sesuai)</p>
                                             </td>
                                             <td>
-                                                {{$capaian->status_sosial_mitra}}
+                                                {{($capaian->status_sosial_mitra) ? $capaian->status_sosial_mitra : "-"}}
                                             </td>
                                         </tr>
                                     </div>
@@ -445,7 +441,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-row">
-                                                    {{$capaian->jarak_lokasi_mitra}}
+                                                    {{($capaian->jarak_lokasi_mitra) ? $capaian->jarak_lokasi_mitra : "-"}}
                                                     <div class="col">
                                                         <label>KM</label>
                                                     </div>
@@ -461,7 +457,7 @@
                                                 <p>Angkutan umum, motor, jalan kaki (tuliskan yang sesuai)</p>
                                             </td>
                                             <td>
-                                                {{$capaian->sarana_transportasi}}
+                                                {{($capaian->sarana_transportasi) ? $capaian->sarana_transportasi : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -473,7 +469,7 @@
                                                 <p>Telepon, Internet, Surat, Fax, Tidak ada sarana komunikasi (tuliskan yang sesuai)</p>
                                             </td>
                                             <td>
-                                                {{$capaian->sarana_komunikasi}}
+                                                {{($capaian->sarana_komunikasi) ? $capaian->sarana_komunikasi : "-"}}
                                             </td>
                                         </tr>
                                     </div>
@@ -506,7 +502,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-row">
-                                                    {{$capaian->jumlah_dosen}}
+                                                    {{($capaian->jumlah_dosen) ? $capaian->jumlah_dosen : "0"}}
                                                     <div class="col">
                                                         <label>Orang</label>
                                                     </div>
@@ -521,7 +517,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-row">
-                                                    {{$capaian->jumlah_mahasiswa}}
+                                                    {{($capaian->jumlah_mahasiswa) ? $capaian->jumlah_mahasiswa : "0"}}
                                                     <div class="col">
                                                         <label>Orang</label>
                                                     </div>
@@ -539,28 +535,28 @@
                                             @endphp
                                             <td>
                                                 <div class="form-row">
-                                                    {{$decode_gelar_akademik_tim['s3']}}
+                                                    {{($decode_gelar_akademik_tim['s3']) ? $decode_gelar_akademik_tim['s3'] : "0"}}
                                                     <div class="col">
                                                         <label>S-3 (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_gelar_akademik_tim['s2']}}
+                                                    {{($decode_gelar_akademik_tim['s2']) ? $decode_gelar_akademik_tim['s2'] : "0"}}
                                                     <div class="col">
                                                         <label>S-2 (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_gelar_akademik_tim['s1']}}
+                                                    {{($decode_gelar_akademik_tim['s1']) ? $decode_gelar_akademik_tim['s1'] : "0"}}
                                                     <div class="col">
                                                         <label>S-1 (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_gelar_akademik_tim['gb']}}
+                                                    {{($decode_gelar_akademik_tim['gb']) ? $decode_gelar_akademik_tim['gb'] : "0"}}
                                                     <div class="col">
                                                         <label>GB (Orang)</label>
                                                     </div>
@@ -578,14 +574,14 @@
                                             @endphp
                                             <td>
                                                 <div class="form-row">
-                                                    {{$decode_gender['pria']}}
+                                                    {{($decode_gender['pria']) ? $decode_gender['pria'] : "0"}}
                                                     <div class="col">
                                                         <label>Laki-Laki (Orang)</label>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-row">
-                                                    {{$decode_gender['wanita']}}
+                                                    {{($decode_gender['wanita']) ? $decode_gender['wanita'] : "0"}}
                                                     <div class="col">
                                                         <label>Perempuan (Orang)</label>
                                                     </div>
@@ -610,7 +606,7 @@
                                                 <p>Penyuluhan/Penyadaran , Pendampingan Pendidikan, Demplot, Rancang Bangun, Pelatihan Manajemen Usaha, Pelatihan Produksi, Pelatihan Administrasi, Pengobatan, Lainnya (tuliskan yang sesuai)</p>
                                             </td>
                                             <td>
-                                                {{$capaian->metode_pelaksanaan_kegiatan}}
+                                                {{($capaian->metode_pelaksanaan_kegiatan) ? $capaian->metode_pelaksanaan_kegiatan : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -621,7 +617,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-row">
-                                                    {{$capaian->waktu_efektif_pelaksanaan_kegiatan}}
+                                                    {{($capaian->waktu_efektif_pelaksanaan_kegiatan) ? $capaian->waktu_efektif_pelaksanaan_kegiatan : "-"}}
                                                     <div class="col">
                                                         <label>Bulan</label>
                                                     </div>
@@ -644,7 +640,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->keberhasilan}}
+                                                {{($capaian->keberhasilan) ? $capaian->keberhasilan : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -663,7 +659,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->keberlanjutan_kegiatan_mitra}}
+                                                {{($capaian->keberlanjutan_kegiatan_mitra) ? $capaian->keberlanjutan_kegiatan_mitra : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -681,7 +677,7 @@
                                                     <b>Sebelum PM</b>
                                                     <!-- </div> -->
                                                     <div class="col">
-                                                        {{$decode_kapasitas_produksi['sebelum']}}
+                                                        {{($decode_kapasitas_produksi['sebelum']) ? $decode_kapasitas_produksi['sebelum'] : "-"}}
                                                     </div>
                                                 </div>
                                                 <br>
@@ -690,7 +686,7 @@
                                                     <b>Setelah PM</b>
                                                     <!-- </div> -->
                                                     <div class="col">
-                                                        {{$decode_kapasitas_produksi['setelah']}}
+                                                        {{($decode_kapasitas_produksi['setelah']) ? $decode_kapasitas_produksi['setelah'] : "-"}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -710,7 +706,7 @@
                                                     <b>Sebelum PM Rp.</b>
                                                     <!-- </div> -->
                                                     <div class="col">
-                                                        {{$decode_omzet_perbulan['sebelum']}}
+                                                        {{($decode_omzet_perbulan['sebelum']) ? $decode_omzet_perbulan['sebelum'] : "-"}}
                                                     </div>
                                                 </div>
                                                 <br>
@@ -719,7 +715,7 @@
                                                     <b>Setelah PM Rp.</b>
                                                     <!-- </div> -->
                                                     <div class="col">
-                                                        {{$decode_omzet_perbulan['setelah']}}
+                                                        {{($decode_omzet_perbulan['setelah']) ? $decode_omzet_perbulan['setelah'] : "-"}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -731,7 +727,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->persoalan_masyarakat_mitra}}
+                                                {{($capaian->persoalan_masyarakat_mitra) ? $capaian->persoalan_masyarakat_mitra : "-"}}
                                             </td>
                                         </tr>
                                     </div>
@@ -759,7 +755,7 @@
                                                     <b>Rp. </b>
                                                     <!-- </div> -->
                                                     <div class="col">
-                                                        {{$capaian->biaya_pnbp}}
+                                                        {{($capaian->biaya_pnbp) ? $capaian->biaya_pnbp : "-"}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -776,7 +772,7 @@
                                                     <b>Rp. </b>
                                                     <!-- </div> -->
                                                     <div class="col">
-                                                        {{$capaian->biaya_sumber_lain}}
+                                                        {{($capaian->biaya_sumber_lain) ? $capaian->biaya_sumber_lain : "-"}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -801,7 +797,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->tahapan_pencairan_dana}}
+                                                {{($capaian->tahapan_pencairan_dana) ? $capaian->tahapan_pencairan_dana : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -811,7 +807,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->jumlah_dana}}
+                                                {{($capaian->jumlah_dana) ? $capaian->jumlah_dana : "-"}}
                                             </td>
                                         </tr>
                                     </div>
@@ -834,7 +830,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->peran_serta_mitra}}
+                                                {{($capaian->peran_serta_mitra) ? $capaian->peran_serta_mitra : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -844,7 +840,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->kontribusi_pendanaan}}
+                                                {{($capaian->kontribusi_pendanaan) ? $capaian->kontribusi_pendanaan : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -854,7 +850,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->peranan_mitra}}
+                                                {{($capaian->peranan_mitra) ? $capaian->peranan_mitra : "-"}}
                                             </td>
                                         </tr>
                                     </div>
@@ -877,7 +873,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->alasan_kelanjutan_kegiatan}}
+                                                {{($capaian->alasan_kelanjutan_kegiatan) ? $capaian->alasan_kelanjutan_kegiatan : "-"}}
                                             </td>
                                         </tr>
                                     </div>
@@ -900,7 +896,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->model_usulan_kegiatan}}
+                                                {{($capaian->model_usulan_kegiatan) ? $capaian->model_usulan_kegiatan : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -915,7 +911,7 @@
                                                     <b>Rp. </b>
                                                     <!-- </div> -->
                                                     <div class="col">
-                                                        {{$capaian->anggaran_biaya}}
+                                                        {{($capaian->anggaran_biaya) ? $capaian->anggaran_biaya : "-"}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -927,7 +923,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->lain_lain}}
+                                                {{($capaian->lain_lain) ? $capaian->lain_lain : "-"}}
                                             </td>
                                         </tr>
                                     </div>
@@ -951,7 +947,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->kegiatan_yang_dinilai}}
+                                                {{($capaian->kegiatan_yang_dinilai) ? $capaian->kegiatan_yang_dinilai : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -961,7 +957,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->potret_permasalahan}}
+                                                {{($capaian->potret_permasalahan) ? $capaian->potret_permasalahan : "-"}}
                                             </td>
                                         </tr>
                                     </div>
@@ -984,7 +980,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->jasa}}
+                                                {{($capaian->jasa) ? $capaian->jasa : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -994,7 +990,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->metode}}
+                                                {{($capaian->metode) ? $capaian->metode : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1004,7 +1000,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->produk}}
+                                                {{($capaian->produk) ? $capaian->produk : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1014,7 +1010,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->paten}}
+                                                {{($capaian->paten) ? $capaian->paten : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1024,7 +1020,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->publikasi_artikel}}
+                                                {{($capaian->publikasi_artikel) ? $capaian->publikasi_artikel : "-"}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1034,7 +1030,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{$capaian->publikasi_media_massa}}
+                                                {{($capaian->publikasi_media_massa) ? $capaian->publikasi_media_massa : "-"}}
                                             </td>
                                         </tr>
                                     </div>

@@ -77,7 +77,6 @@ class MonevController extends Controller
         $penilaian_monev = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)
             ->first();
 
-        // $nilai = [];
 
         if ($penilaian_monev) {
             if ($penilaian_monev->penilaian_monev_lock == true) {
@@ -347,10 +346,8 @@ class MonevController extends Controller
     public function capaian($id)
     {
         // Check Is Penilaian Locked
-        $penilaian_monev = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)
-            ->first();
-
-        // $nilai = [];
+        $penilaian_monev = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
+        $capaian = NULL;
 
         if ($penilaian_monev) {
             if ($penilaian_monev->penilaian_monev_lock == true) {
@@ -363,7 +360,18 @@ class MonevController extends Controller
 
                 return redirect()->route('reviewer_monev');
             }
+            $capaian = Capaian_kegiatan::where('capaian_kegiatan_monev_id', $penilaian_monev->penilaian_monev_id)->first();
+        } elseif ($penilaian_monev == NULL) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Monev Tidak Ditemukan', //Alert Message 
+                'Mohon Isi Monev Terlebih Dahulu' //Sub Alert Message
+            );
+
+            return redirect()->route('reviewer_monev');
         }
+
 
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
             ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
@@ -388,6 +396,7 @@ class MonevController extends Controller
             'usulan' => $usulan,
             'ketua' => $ketua,
             'id' => $id,
+            'capaian' => $capaian,
             'nilai' => $penilaian_monev,
         ];
 
@@ -414,11 +423,73 @@ class MonevController extends Controller
         }
 
         // Input Validation
-        // $request->validate(
-        //     [
-        //         'komentar'  => 'max:60000',
-        //     ]
-        // );
+        $request->validate(
+            [
+                'mitra_kegiatan'  => 'max:255',
+                'jumlah_mitra_orang'  => 'numeric|max:255',
+                'jumlah_mitra_usaha'  => 'numeric|max:255',
+                'pendidikan_mitra_s3'  => 'numeric|max:255',
+                'pendidikan_mitra_s2'  => 'numeric|max:255',
+                'pendidikan_mitra_s1'  => 'numeric|max:255',
+                'pendidikan_mitra_diploma'  => 'numeric|max:255',
+                'pendidikan_mitra_sma'  => 'numeric|max:255',
+                'pendidikan_mitra_smp'  => 'numeric|max:255',
+                'pendidikan_mitra_sd'  => 'numeric|max:255',
+                'pendidikan_mitra_ts'  => 'numeric|max:255',
+
+                'persoalan_mitra'  => 'max:255',
+                'status_sosial_mitra'  => 'max:255',
+
+                'jarak_lokasi_mitra'  => 'max:255',
+                'sarana_transportasi'  => 'max:255',
+                'sarana_komunikasi'  => 'max:255',
+
+                'jumlah_dosen'  => 'numeric|max:255',
+                'jumlah_mahasiswa'  => 'numeric|max:255',
+                'gelar_akademik_tim_s3'  => 'numeric|max:255',
+                'gelar_akademik_tim_s2'  => 'numeric|max:255',
+                'gelar_akademik_tim_s1'  => 'numeric|max:255',
+                'gelar_akademik_tim_gb'  => 'numeric|max:255',
+                'gender_pria'  => 'numeric|max:255',
+                'gender_wanita'  => 'numeric|max:255',
+
+                'metode_pelaksanaan_kegiatan'  => 'max:255',
+                'waktu_efektif_pelaksanaan'  => 'max:255',
+                'keberhasilan'  => 'max:255',
+                'keberlanjutan_kegiatan'  => 'max:255',
+                'kapasitas_produksi_sebelum'  => 'max:9999999999',
+                'kapasitas_produksi_setelah'  => 'max:9999999999',
+                'omzet_per_bulan_sebelum'  => 'max:9999999999',
+                'omzet_per_bulan_setelah'  => 'max:9999999999',
+                'persoalan_masyarakat_mitra'  => 'max:255',
+
+                'biaya_pnbp'  => 'numeric|max:9999999999',
+                'biaya_sumber_lain'  => 'numeric|max:9999999999',
+
+                'tahap_pencairan_dana'  => 'max:255',
+                'jumlah_dana'  => 'max:255',
+
+                'peran_serta_mitra'  => 'max:255',
+                'kontribusi_pendanaan'  => 'max:255',
+                'peran_mitra'  => 'max:255',
+
+                'alasan_kelanjutan_kegiatan'  => 'max:255',
+
+                'model_usulan_kegiatan'  => 'max:255',
+                'anggaran_biaya'  => 'numeric|max:255',
+                'usul_lain_lain'  => 'max:255',
+
+                'kegiatan_dinilai_bermanfaat'  => 'max:255',
+                'permasalahan_lain_terekam'  => 'max:255',
+
+                'jasa'  => 'max:255',
+                'metode'  => 'max:255',
+                'produk'  => 'max:255',
+                'paten'  => 'max:255',
+                'publikasi_artikel'  => 'max:255',
+                'publikasi_media_masa'  => 'max:255',
+            ]
+        );
 
         // PROGRESS START HERE
 
@@ -466,8 +537,8 @@ class MonevController extends Controller
             'setelah' => htmlspecialchars($request->kapasitas_produksi_setelah)
         ]);
         $omzet_per_bulan = json_encode([
-            'sebelum' => htmlspecialchars($request->kapasitas_produksi_sebelum),
-            'setelah' => htmlspecialchars($request->kapasitas_produksi_setelah)
+            'sebelum' => htmlspecialchars($request->omzet_per_bulan_sebelum),
+            'setelah' => htmlspecialchars($request->omzet_per_bulan_setelah)
         ]);
         $persoalan_masyarakat_mitra = htmlspecialchars($request->persoalan_masyarakat_mitra);
 
@@ -497,7 +568,7 @@ class MonevController extends Controller
         $publikasi_artikel = htmlspecialchars($request->publikasi_artikel);
         $publikasi_media_masa = htmlspecialchars($request->publikasi_media_masa);
 
-        $monev_id = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
+        $monev_id = $is_lock;
 
         //Input Data
         $data_insert = [

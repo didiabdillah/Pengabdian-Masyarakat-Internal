@@ -94,23 +94,23 @@
                                         <td>
                                             <select class="form-control select2-status-1 @error('status_1') is-invalid @enderror" style="width: 100%;" name="status_1" id="status_1">
                                                 <option value="">-Status-</option>
-                                                <option value="Draft">Draft</option>
-                                                <option value="Submitted">Submitted</option>
-                                                <option value="Reviewed">Reviewed</option>
-                                                <option value="Accepted">Accepted</option>
-                                                <option value="Published">Published</option>
+                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Draft"){{"selected"}}@endif @endif>Draft</option>
+                                                <option value="Submitted" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Submitted"){{"selected"}}@endif @endif>Submitted</option>
+                                                <option value="Reviewed" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Reviewed"){{"selected"}}@endif @endif>Reviewed</option>
+                                                <option value="Accepted" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Accepted"){{"selected"}}@endif @endif>Accepted</option>
+                                                <option value="Published" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Published"){{"selected"}}@endif @endif>Published</option>
                                             </select>
                                         </td>
                                         <td rowspan="2" class="text-center">20</td>
                                         <td>
                                             <select class="form-control select2-skor-1 @error('skor_1') is-invalid @enderror" style="width: 100%;" name="skor_1" id="skor_1">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -122,21 +122,21 @@
                                         <td>
                                             <select class="form-control select2-status-2 @error('status_2') is-invalid @enderror" style="width: 100%;" name="status_2" id="status_2">
                                                 <option value="">-Status-</option>
-                                                <option value="Tidak Ada">Tidak Ada</option>
-                                                <option value="Draft">Draft</option>
-                                                <option value="Editting">Editting</option>
-                                                <option value="Sudah Terbit">Sudah Terbit</option>
+                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_2 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
+                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_2 == "Draft"){{"selected"}}@endif @endif>Draft</option>
+                                                <option value="Editting" @if($nilai) @if($nilai->penilaian_monev_status_2 == "Editting"){{"selected"}}@endif @endif>Editting</option>
+                                                <option value="Sudah Terbit" @if($nilai) @if($nilai->penilaian_monev_status_2 == "Sudah Terbit"){{"selected"}}@endif @endif>Sudah Terbit</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select class="form-control select2-skor-2 @error('skor_2') is-invalid @enderror" style="width: 100%;" name="skor_2" id="skor_2">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -149,20 +149,20 @@
                                         <td>
                                             <select class="form-control select2-status-3 @error('status_3') is-invalid @enderror" style="width: 100%;" name="status_3" id="status_3">
                                                 <option value="">-Status-</option>
-                                                <option value="Tidak Ada">Tidak Ada</option>
-                                                <option value="Draft">Ada</option>
+                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_3 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
+                                                <option value="Ada" @if($nilai) @if($nilai->penilaian_monev_status_3 == "Ada"){{"selected"}}@endif @endif>Ada</option>
                                             </select>
                                         </td>
                                         <td rowspan="4" class="text-center">60</td>
                                         <td>
                                             <select class="form-control select2-skor-3 @error('skor_3') is-invalid @enderror" style="width: 100%;" name="skor_3" id="skor_3">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -174,19 +174,19 @@
                                         <td>
                                             <select class="form-control select2-status-4 @error('status_4') is-invalid @enderror" style="width: 100%;" name="status_4" id="status_4">
                                                 <option value="">-Status-</option>
-                                                <option value="Tidak Ada">Tidak Ada</option>
-                                                <option value="Draft">Ada</option>
+                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_4 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
+                                                <option value="Ada" @if($nilai) @if($nilai->penilaian_monev_status_4 == "Ada"){{"selected"}}@endif @endif>Ada</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select class="form-control select2-skor-4 @error('skor_4') is-invalid @enderror" style="width: 100%;" name="skor_4" id="skor_4">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -198,19 +198,19 @@
                                         <td>
                                             <select class="form-control select2-status-5 @error('status_5') is-invalid @enderror" style="width: 100%;" name="status_5" id="status_5">
                                                 <option value="">-Status-</option>
-                                                <option value="Tidak Ada">Tidak Ada</option>
-                                                <option value="Draft">Ada</option>
+                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_5 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
+                                                <option value="Ada" @if($nilai) @if($nilai->penilaian_monev_status_5 == "Ada"){{"selected"}}@endif @endif>Ada</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select class="form-control select2-skor-5 @error('skor_5') is-invalid @enderror" style="width: 100%;" name="skor_5" id="skor_5">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -222,19 +222,19 @@
                                         <td>
                                             <select class="form-control select2-status-6 @error('status_6') is-invalid @enderror" style="width: 100%;" name="status_6" id="status_6">
                                                 <option value="">-Status-</option>
-                                                <option value="Tidak Ada">Tidak Ada</option>
-                                                <option value="Draft">Ada</option>
+                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_6 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
+                                                <option value="Ada" @if($nilai) @if($nilai->penilaian_monev_status_6 == "Ada"){{"selected"}}@endif @endif>Ada</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select class="form-control select2-skor-6 @error('skor_6') is-invalid @enderror" style="width: 100%;" name="skor_6" id="skor_6">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -247,22 +247,22 @@
                                         <td>
                                             <select class="form-control select2-status-7 @error('status_7') is-invalid @enderror" style="width: 100%;" name="status_7" id="status_7">
                                                 <option value="">-Status-</option>
-                                                <option value="Tidak Ada">Tidak Ada</option>
-                                                <option value="Draft">Draft</option>
-                                                <option value="Editting">Produk</option>
-                                                <option value="Sudah Terbit">Penerapan</option>
+                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_7 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
+                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_7 == "Draft"){{"selected"}}@endif @endif>Draft</option>
+                                                <option value="Produk" @if($nilai) @if($nilai->penilaian_monev_status_7 == "Produk"){{"selected"}}@endif @endif>Produk</option>
+                                                <option value="Penerapan" @if($nilai) @if($nilai->penilaian_monev_status_7 == "Penerapan"){{"selected"}}@endif @endif>Penerapan</option>
                                             </select>
                                         </td>
                                         <td rowspan="2" class="text-center">10</td>
                                         <td>
                                             <select class="form-control select2-skor-7 @error('skor_7') is-invalid @enderror" style="width: 100%;" name="skor_7" id="skor_7">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -277,21 +277,21 @@
                                         <td>
                                             <select class="form-control select2-status-8 @error('status_8') is-invalid @enderror" style="width: 100%;" name="status_8" id="status_8">
                                                 <option value="">-Status-</option>
-                                                <option value="Tidak Ada">Tidak Ada</option>
-                                                <option value="Draft">Draft</option>
-                                                <option value="Editting">Terdaftar</option>
-                                                <option value="Sudah Terbit">Granted</option>
+                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_8 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
+                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_8 == "Draft"){{"selected"}}@endif @endif>Draft</option>
+                                                <option value="Terdaftar" @if($nilai) @if($nilai->penilaian_monev_status_8 == "Terdaftar"){{"selected"}}@endif @endif>Terdaftar</option>
+                                                <option value="Granted" @if($nilai) @if($nilai->penilaian_monev_status_8 == "Granted"){{"selected"}}@endif @endif>Granted</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select class="form-control select2-skor-8 @error('skor_8') is-invalid @enderror" style="width: 100%;" name="skor_8" id="skor_8">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -304,22 +304,22 @@
                                         <td>
                                             <select class="form-control select2-status-9 @error('status_9') is-invalid @enderror" style="width: 100%;" name="status_9" id="status_9">
                                                 <option value="">-Status-</option>
-                                                <option value="Tidak Ada">Tidak Ada</option>
-                                                <option value="Draft">Draft</option>
-                                                <option value="Editting">Editting</option>
-                                                <option value="Sudah Terbit">Sudah Terbit</option>
+                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_9 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
+                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_9 == "Draft"){{"selected"}}@endif @endif>Draft</option>
+                                                <option value="Editting" @if($nilai) @if($nilai->penilaian_monev_status_9 == "Editting"){{"selected"}}@endif @endif>Editting</option>
+                                                <option value="Sudah Terbit" @if($nilai) @if($nilai->penilaian_monev_status_9 == "Sudah Terbit"){{"selected"}}@endif @endif>Sudah Terbit</option>
                                             </select>
                                         </td>
                                         <td class="text-center">10</td>
                                         <td>
                                             <select class="form-control select2-skor-9 @error('skor_9') is-invalid @enderror" style="width: 100%;" name="skor_9" id="skor_9">
                                                 <option value="">-Skor-</option>
-                                                <option value="1">(1) Buruk</option>
-                                                <option value="2">(2) Sangat Kurang</option>
-                                                <option value="3">(3) Kurang</option>
-                                                <option value="4">(4) Cukup</option>
-                                                <option value="5">(5) Baik</option>
-                                                <option value="6">(6) Sangat Baik</option>
+                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
+                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
+                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
+                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
+                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
+                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
                                             </select>
                                         </td>
                                     </tr>
