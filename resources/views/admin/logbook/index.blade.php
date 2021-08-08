@@ -42,9 +42,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Judul</th>
+                                    <th>Tahun</th>
                                     <th>Pengusul</th>
                                     <th>Program Studi</th>
-                                    <th>Tahun</th>
                                     <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
@@ -52,10 +52,13 @@
                                 @foreach($pengabdian as $data)
                                 <tr>
                                     <td>
-                                        <h5>{{$loop->iteration}}</h5>
+                                        <h6>{{$loop->iteration}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$data->usulan_pengabdian_judul}}</h5>
+                                        <h6>{{$data->usulan_pengabdian_judul}}</h6>
+                                    </td>
+                                    <td>
+                                        <h6>{{$data->usulan_pengabdian_tahun}}</h6>
                                     </td>
                                     <td>
                                         @php $ketua = $data->anggota_pengabdian()
@@ -64,17 +67,14 @@
                                         ->where('anggota_pengabdian_pengabdian_id', $data->usulan_pengabdian_id)
                                         ->where('anggota_pengabdian_role', 'ketua')
                                         ->first(); @endphp
-                                        <h5>
+                                        <h6>
                                             {{$ketua->user_name}}
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <td>
-                                        <h5>
+                                        <h6>
                                             {{$ketua->biodata_program_studi}}
-                                        </h5>
-                                    </td>
-                                    <td>
-                                        <h5>{{$data->usulan_pengabdian_tahun}}</h5>
+                                        </h6>
                                     </td>
                                     <td>
                                         <div class="card-body">

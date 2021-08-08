@@ -656,6 +656,15 @@ class MonevController extends Controller
 
                 return redirect()->route('reviewer_pengabdian');
             }
+        } else {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Monev Tidak Ditemukan', //Alert Message 
+                'Mohon Isi Monev Terlebih Dahulu' //Sub Alert Message
+            );
+
+            return redirect()->route('reviewer_monev');
         }
 
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)

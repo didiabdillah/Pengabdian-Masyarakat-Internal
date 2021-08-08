@@ -3,22 +3,22 @@
         "id": "60f7b5afc524e1626846639",
         "name": "dokumen_usulan",
         "target": "Dokumen Usulan",
-        "original_name": "usulan.doc",
-        "hash_name": "3YT4YaqvDi1dJmHHDQwin52eTgT2pjBg8DGWaHNc.doc",
-        "base_name": "usulan",
+        "original_name": "Template Usulan Pengabdian.doc",
+        "hash_name": "7Vn5JXpNc6B6j7JGnqpZCCfJL5HIOE4k7paWJl5V.doc",
+        "base_name": "Template Usulan Pengabdian",
         "extension": "doc",
-        "size": 44,
-        "datetime": "2021-08-03 13:52:17"
+        "size": 26,
+        "datetime": "2021-08-09 00:46:57"
     },
     {
         "id": "60f7b5afc529d1626846639",
         "name": "dokumen_rab",
         "target": "Dokumen RAB",
-        "original_name": "format rab.xlsx",
-        "hash_name": "1LBCwVSxVdrakgG20u4i7gh4VgloKTY5DNmydxTZ.xlsx",
-        "base_name": "format rab",
-        "extension": "xlsx",
-        "size": 20,
-        "datetime": "2021-08-03 13:56:06"
+        "original_name": "Template Dokumen RAB.xls",
+        "hash_name": "tsQxRDtriPX4HXkFJlAR7RMLkLD8JWh8BuLDuaNI.xls",
+        "base_name": "Template Dokumen RAB",
+        "extension": "xls",
+        "size": 24,
+        "datetime": "2021-08-09 00:47:10"
     }
 ]

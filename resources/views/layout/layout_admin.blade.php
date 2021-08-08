@@ -158,6 +158,61 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item @if(Request::segment(2) == 'plotting'){{'menu-is-opening menu-open'}} @endif">
+                            <a href="#" class="nav-link @if(Request::segment(2) == 'plotting') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
+                                <p>
+                                    {{__('id.plotting')}} Reviewer
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin_plotting_reviewer')}}" class="nav-link @if(Request::segment(2) == 'plotting' && Request::segment(3) == 'usulan') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Usulan Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin_plotting_monev_reviewer')}}" class="nav-link @if(Request::segment(3) == 'monev') {{'active'}} @endif">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Monev
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('admin_logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-clipboard-check"></i>
+                                <p>
+                                    Logbook
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('admin_laporan_kemajuan')}}" class="nav-link @if(Request::segment(1) == 'laporan_kemajuan' || Request::segment(2) == 'laporan_kemajuan') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>
+                                    Laporan Kemajuan
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('admin_laporan_akhir')}}" class="nav-link @if(Request::segment(1) == 'laporan_akhir' || Request::segment(2) == 'laporan_akhir') {{'active'}} @endif">
+                                <i class="nav-icon fas fa-paste"></i>
+                                <p>
+                                    Laporan Akhir
+                                </p>
+                            </a>
+                        </li>
+
                         <li class="nav-item @if(Request::segment(2) == 'lama_kegiatan' || Request::segment(2) == 'waktu_pelaksanaan'){{'menu-is-opening menu-open'}} @endif">
                             <a href="#" class="nav-link @if(Request::segment(2) == 'lama_kegiatan' || Request::segment(2) == 'waktu_pelaksanaan') {{'active'}} @endif">
                                 <i class="nav-icon fas fa-clock"></i>
@@ -230,61 +285,6 @@
                                     Jurusan
                                 </p>
                             </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('admin_logbook')}}" class="nav-link @if(Request::segment(1) == 'logbook' || Request::segment(2) == 'logbook') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-clipboard-check"></i>
-                                <p>
-                                    Logbook
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('admin_laporan_kemajuan')}}" class="nav-link @if(Request::segment(1) == 'laporan_kemajuan' || Request::segment(2) == 'laporan_kemajuan') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-file-alt"></i>
-                                <p>
-                                    Laporan Kemajuan
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('admin_laporan_akhir')}}" class="nav-link @if(Request::segment(1) == 'laporan_akhir' || Request::segment(2) == 'laporan_akhir') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-paste"></i>
-                                <p>
-                                    Laporan Akhir
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item @if(Request::segment(2) == 'plotting'){{'menu-is-opening menu-open'}} @endif">
-                            <a href="#" class="nav-link @if(Request::segment(2) == 'plotting') {{'active'}} @endif">
-                                <i class="nav-icon fas fa-clipboard-list"></i>
-                                <p>
-                                    {{__('id.plotting')}} Reviewer
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{route('admin_plotting_reviewer')}}" class="nav-link @if(Request::segment(2) == 'plotting' && Request::segment(3) == 'usulan') {{'active'}} @endif">
-                                        <i class="nav-icon far fa-circle"></i>
-                                        <p>
-                                            Usulan Pengabdian
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('admin_plotting_monev_reviewer')}}" class="nav-link @if(Request::segment(3) == 'monev') {{'active'}} @endif">
-                                        <i class="nav-icon far fa-circle"></i>
-                                        <p>
-                                            Monev
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
 
                         <li class="nav-item @if(Request::segment(2) == 'reviewer'){{'menu-is-opening menu-open'}} @endif">

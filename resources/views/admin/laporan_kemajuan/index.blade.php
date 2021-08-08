@@ -48,6 +48,8 @@
                                     <th>No</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
+                                    <th>Pengusul</th>
+                                    <th>Program Studi</th>
                                     <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
@@ -55,13 +57,30 @@
                                 @foreach($pengabdian as $data)
                                 <tr>
                                     <td>
-                                        <h5>{{$loop->iteration}}</h5>
+                                        <h6>{{$loop->iteration}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$data->usulan_pengabdian_judul}}</h5>
+                                        <h6>{{$data->usulan_pengabdian_judul}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$data->usulan_pengabdian_tahun}}</h5>
+                                        <h6>{{$data->usulan_pengabdian_tahun}}</h6>
+                                    </td>
+                                    <td>
+                                        <h6>
+                                            @php
+                                            $ketua= $data->anggota_pengabdian()
+                                            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                                            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                            ->where('anggota_pengabdian_role', 'ketua')
+                                            ->first();
+                                            @endphp
+                                            {{$ketua->user_name}}
+                                        </h6>
+                                    </td>
+                                    <td>
+                                        <h6>
+                                            {{$ketua->biodata_program_studi}}
+                                        </h6>
                                     </td>
                                     <td>
                                         <div class="card-body">
