@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/second', function () {
+    echo "Routing Second Test";
+});
+
 //Logout
 Route::get('/logout', 'AuthController@logout')->name('logout');
 

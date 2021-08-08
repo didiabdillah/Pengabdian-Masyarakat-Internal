@@ -1,6 +1,6 @@
 @extends('layout.layout_reviewer')
 
-@section('title', 'Ulasan Nilai Usulan Pengabdian')
+@section('title', 'Ulasan Nilai Monev Pengabdian')
 
 @section('page')
 

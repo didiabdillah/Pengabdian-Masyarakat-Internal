@@ -425,33 +425,36 @@ class MonevController extends Controller
         // Input Validation
         $request->validate(
             [
+                // CAPAIAN
                 'mitra_kegiatan'  => 'max:255',
-                'jumlah_mitra_orang'  => 'numeric|max:255',
-                'jumlah_mitra_usaha'  => 'numeric|max:255',
-                'pendidikan_mitra_s3'  => 'numeric|max:255',
-                'pendidikan_mitra_s2'  => 'numeric|max:255',
-                'pendidikan_mitra_s1'  => 'numeric|max:255',
-                'pendidikan_mitra_diploma'  => 'numeric|max:255',
-                'pendidikan_mitra_sma'  => 'numeric|max:255',
-                'pendidikan_mitra_smp'  => 'numeric|max:255',
-                'pendidikan_mitra_sd'  => 'numeric|max:255',
-                'pendidikan_mitra_ts'  => 'numeric|max:255',
+                'jumlah_mitra_orang'  => 'nullable|numeric|max:255',
+                'jumlah_mitra_usaha'  => 'nullable|numeric|max:255',
+                'pendidikan_mitra_s3'  => 'nullable|numeric|max:255',
+                'pendidikan_mitra_s2'  => 'nullable|numeric|max:255',
+                'pendidikan_mitra_s1'  => 'nullable|numeric|max:255',
+                'pendidikan_mitra_diploma'  => 'nullable|numeric|max:255',
+                'pendidikan_mitra_sma'  => 'nullable|numeric|max:255',
+                'pendidikan_mitra_smp'  => 'nullable|numeric|max:255',
+                'pendidikan_mitra_sd'  => 'nullable|numeric|max:255',
+                'pendidikan_mitra_ts'  => 'nullable|numeric|max:255',
 
                 'persoalan_mitra'  => 'max:255',
                 'status_sosial_mitra'  => 'max:255',
 
+                // LOKASI
                 'jarak_lokasi_mitra'  => 'max:255',
                 'sarana_transportasi'  => 'max:255',
                 'sarana_komunikasi'  => 'max:255',
 
-                'jumlah_dosen'  => 'numeric|max:255',
-                'jumlah_mahasiswa'  => 'numeric|max:255',
-                'gelar_akademik_tim_s3'  => 'numeric|max:255',
-                'gelar_akademik_tim_s2'  => 'numeric|max:255',
-                'gelar_akademik_tim_s1'  => 'numeric|max:255',
-                'gelar_akademik_tim_gb'  => 'numeric|max:255',
-                'gender_pria'  => 'numeric|max:255',
-                'gender_wanita'  => 'numeric|max:255',
+                // IDENTITAS
+                'jumlah_dosen'  => 'nullable|numeric|max:255',
+                'jumlah_mahasiswa'  => 'nullable|numeric|max:255',
+                'gelar_akademik_tim_s3'  => 'nullable|numeric|max:255',
+                'gelar_akademik_tim_s2'  => 'nullable|numeric|max:255',
+                'gelar_akademik_tim_s1'  => 'nullable|numeric|max:255',
+                'gelar_akademik_tim_gb'  => 'nullable|numeric|max:255',
+                'gender_pria'  => 'nullable|numeric|max:255',
+                'gender_wanita'  => 'nullable|numeric|max:255',
 
                 'metode_pelaksanaan_kegiatan'  => 'max:255',
                 'waktu_efektif_pelaksanaan'  => 'max:255',
@@ -463,25 +466,32 @@ class MonevController extends Controller
                 'omzet_per_bulan_setelah'  => 'max:9999999999',
                 'persoalan_masyarakat_mitra'  => 'max:255',
 
-                'biaya_pnbp'  => 'numeric|max:9999999999',
-                'biaya_sumber_lain'  => 'numeric|max:9999999999',
+                // BIAYA PROGRAM
+                'biaya_pnbp'  => 'nullable|numeric|max:9999999999',
+                'biaya_sumber_lain'  => 'nullable|numeric|max:9999999999',
 
+                // LIKUIDITAS DANA PROGRAM
                 'tahap_pencairan_dana'  => 'max:255',
                 'jumlah_dana'  => 'max:255',
 
+                // KONTRIBUSI MITRA
                 'peran_serta_mitra'  => 'max:255',
                 'kontribusi_pendanaan'  => 'max:255',
                 'peran_mitra'  => 'max:255',
 
+                // KEBERLANJUTAN
                 'alasan_kelanjutan_kegiatan'  => 'max:255',
 
+                // Usul penyempurnaan program Pengabdian Masyarakat
                 'model_usulan_kegiatan'  => 'max:255',
-                'anggaran_biaya'  => 'numeric|max:255',
+                'anggaran_biaya'  => 'nullable|numeric|max:9999999999',
                 'usul_lain_lain'  => 'max:255',
 
+                // DOKUMENTASI
                 'kegiatan_dinilai_bermanfaat'  => 'max:255',
                 'permasalahan_lain_terekam'  => 'max:255',
 
+                // Luaran program Pengabdian Masyarakat berupa
                 'jasa'  => 'max:255',
                 'metode'  => 'max:255',
                 'produk'  => 'max:255',
