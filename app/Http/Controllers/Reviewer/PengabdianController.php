@@ -75,6 +75,11 @@ class PengabdianController extends Controller
             ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
             ->get();
 
+        $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
+            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->first();
+
         $view_data = [
             'mitra_sasaran' => $mitra_sasaran,
             'dokumen_rab' => $dokumen_rab,
@@ -84,6 +89,7 @@ class PengabdianController extends Controller
             'id' => $id,
             'luaran_wajib' => $luaran_wajib,
             'luaran_tambahan' => $luaran_tambahan,
+            'usulan' => $usulan,
         ];
 
         return view('reviewer.pengabdian.detail', $view_data);

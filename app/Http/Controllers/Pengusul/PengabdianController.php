@@ -105,6 +105,11 @@ class PengabdianController extends Controller
             ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
             ->get();
 
+        $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
+            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->first();
+
         $back_url = NULL;
         if ($back_param == 'usulan') {
             $back_url = route('pengusul_pengabdian');
@@ -122,6 +127,7 @@ class PengabdianController extends Controller
             'luaran_wajib' => $luaran_wajib,
             'luaran_tambahan' => $luaran_tambahan,
             'back_url' => $back_url,
+            'usulan' => $usulan,
         ];
 
         return view('pengusul.pengabdian.detail', $view_data);

@@ -60,12 +60,33 @@ class MonevController extends Controller
             ->where('usulan_luaran_pengabdian_tipe', 'tambahan')
             ->get();
 
+        $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
+            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->first();
+
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', 'ketua')
+            ->first();
+
+        $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->where('anggota_pengabdian_role', '!=', 'ketua')
+            ->orderBy('anggota_pengabdian_role', 'asc')
+            ->get();
+
         $view_data = [
             'laporan_kemajuan' => $laporan_kemajuan,
             'laporan_keuangan' => $laporan_keuangan,
             'luaran_wajib' => $luaran_wajib,
             'luaran_tambahan' => $luaran_tambahan,
             'pengabdian_id' => $pengabdian_id,
+            'usulan' => $usulan,
+            'ketua' => $ketua,
+            'anggota' => $anggota,
         ];
 
         return view('reviewer.monev.detail', $view_data);

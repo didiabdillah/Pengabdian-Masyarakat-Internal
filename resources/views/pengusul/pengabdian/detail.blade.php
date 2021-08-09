@@ -36,6 +36,52 @@
                         </div> -->
                     </div>
                     <div class="card-body">
+                        <div class="alert alert-light">
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Nama Ketua Pengusul</th>
+                                        <td>: {{$ketua->user_name}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">NIDN</th>
+                                        <td>: {{$ketua->user_nidn}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Skema</th>
+                                        <td>: {{$usulan->skema_label}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Bidang</th>
+                                        <td>: {{$usulan->bidang_label}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Jurusan</th>
+                                        <td>: {{$ketua->biodata_jurusan}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Program Studi</th>
+                                        <td>: {{$ketua->biodata_program_studi}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Nama Anggota</th>
+                                        <td>: @foreach($anggota as $row){{$row->user_name . ", "}}@endforeach</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Lama Kegiatan</th>
+                                        <td>: {{$usulan->usulan_pengabdian_lama_kegiatan}} Tahun</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Jumlah Mahasiswa Terlibat</th>
+                                        <td>: {{$usulan->usulan_pengabdian_mahasiswa_terlibat}} Orang</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Tahun Usulan</th>
+                                        <td>: {{$usulan->usulan_pengabdian_tahun}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <!-- IDENTITAS KETUA -->
                         <div class="row">
