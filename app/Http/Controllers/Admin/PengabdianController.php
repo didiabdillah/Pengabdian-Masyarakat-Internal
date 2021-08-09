@@ -14,6 +14,8 @@ use App\Models\Usulan_luaran;
 use App\Models\Dokumen_rab;
 use App\Models\Dokumen_usulan;
 use App\Models\Mitra_sasaran;
+use App\Models\Penilaian_monev;
+use App\Models\Capaian_kegiatan;
 
 class PengabdianController extends Controller
 {
@@ -199,6 +201,17 @@ class PengabdianController extends Controller
             ->orderBy('usulan_luaran_pengabdian_tahun', 'asc')
             ->get();
 
+        $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
+            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
+            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->first();
+        $nilai = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
+
+        $capaian = NULL;
+        if ($nilai) {
+            $capaian = Capaian_kegiatan::where('capaian_kegiatan_monev_id', $nilai->penilaian_monev_id)->first();
+        }
+
         $back_url = NULL;
         if ($back_param == 'usulan') {
             $back_url = route('admin_pengabdian_usulan');
@@ -220,6 +233,12 @@ class PengabdianController extends Controller
             'luaran_wajib' => $luaran_wajib,
             'luaran_tambahan' => $luaran_tambahan,
             'back_url' => $back_url,
+
+            // 'anggota' => $anggota,
+            'usulan' => $usulan,
+            // 'ketua' => $ketua,
+            'nilai' => $nilai,
+            'capaian' => $capaian,
         ];
 
         return view('admin.pengabdian.detail', $view_data);
