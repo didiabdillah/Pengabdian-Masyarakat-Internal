@@ -30,6 +30,7 @@ class CreateBiodataTable extends Migration
             $table->string('biodata_no_telp')->nullable();
             $table->string('biodata_web_personal')->nullable();
             $table->string('biodata_scopus_id')->nullable();
+            $table->string('biodata_sinta_id')->nullable();
             $table->string('biodata_google_schoolar_id')->nullable();
             $table->timestamps();
 

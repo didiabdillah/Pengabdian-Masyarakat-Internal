@@ -25,6 +25,7 @@ class Biodata extends Model
         'biodata_no_telp',
         'biodata_web_personal',
         'biodata_scopus_id',
+        'biodata_sinta_id',
         'biodata_google_schoolar_id'
     ];
 

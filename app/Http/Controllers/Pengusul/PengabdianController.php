@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 use App\Models\User;
 use App\Models\Skema;
@@ -200,7 +201,7 @@ class PengabdianController extends Controller
             'jumlah_mahasiswa'  => 'required|max:3|numeric',
         ]);
 
-        $id = uniqid() . strtotime(now());
+        $id = str_replace("-", "", Str::uuid()) . dechex(strtotime(now()));
         $judul = htmlspecialchars($request->judul);
         // $kategori = htmlspecialchars($request->kategori);
         $skema = htmlspecialchars($request->skema);

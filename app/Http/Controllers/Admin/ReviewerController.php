@@ -54,7 +54,7 @@ class ReviewerController extends Controller
             'jabatan'  => 'max:255',
         ]);
 
-        $id = hexdec(uniqid()) . strtotime(now());
+        $id = str_replace("-", "", Str::uuid()) . dechex(strtotime(now()));
         $nidn = htmlspecialchars($request->nidn);
         $name = htmlspecialchars($request->name);
         $email = htmlspecialchars($request->email);
