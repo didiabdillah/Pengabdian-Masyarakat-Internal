@@ -1,0 +1,30 @@
+[
+    {
+        "nama": "Transmissia Semiawan, BSCS., MIT, Ph.D",
+        "nip": "196111091993032001",
+        "nidn": "009116105",
+        "institusi": "Politeknik Negeri Bandung",
+        "email": "",
+        "id_sinta": "",
+        "jurusan": "Teknik Informatika",
+        "prodi": "Teknik Informatika D-4",
+        "jabatan": "Lektor Kepala",
+        "id_google_scholar": "https://scholar.google.com/citations?hl=id&user=IeUj_IAAAAAJ&view_op=list_works&sortby=pubdate",
+        "id_scopus": "https://www.scopus.com/authid/detail.uri?authorId=57189243793",
+        "gender": "P"
+    },
+    {
+        "nama": "Prof. Ir. Sumeru, M.T., Ph.D.",
+        "nip": "196505181995121000",
+        "nidn": "0018056503",
+        "institusi": "Politeknik Negeri Bandung",
+        "email": "",
+        "id_sinta": "",
+        "jurusan": "Teknik Pendingin Dan Tata Udara",
+        "prodi": "Teknik Pendingin Dan Tata Udara D-3",
+        "jabatan": "Lektor Kepala",
+        "id_google_scholar": "https://scholar.google.com/citations?hl=id&user=wVj97cYAAAAJ&view_op=list_works&sortby=pubdate",
+        "id_scopus": "https://www.scopus.com/authid/detail.uri?authorId=55217813600",
+        "gender": "L"
+    }
+]
