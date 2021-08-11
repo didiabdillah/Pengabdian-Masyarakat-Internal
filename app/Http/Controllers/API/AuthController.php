@@ -63,7 +63,7 @@ class AuthController extends Controller
                             "biodata_google_schoolar_id" => $user->biodata->biodata_google_schoolar_id,
                         ]
                     ];
-                    return json_encode($api_data, JSON_UNESCAPED_SLASHES);
+                    return json_encode($api_data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
                 } else {
                     return " Password Salah";
                 }
