@@ -19,7 +19,7 @@
             <form action="{{route('login_process')}}" method="post">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control @error('login_email') is-invalid @enderror" placeholder="Email / NIDN" name="login_email" id="login_email" value="{{old('login_email')}}">
+                    <input type="text" class="form-control @error('login_email') is-invalid @enderror" placeholder="Email / NIDN" name="login_email" id="login_email" value="{{old('login_email')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
