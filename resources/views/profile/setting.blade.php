@@ -52,6 +52,7 @@ $profile_layout = 'layout.layout_pengusul';
                                     <li class="list-group-item">
                                         <b>Role</b> <a class="float-right">{{$user->user_role}}</a>
                                     </li>
+                                    @if(Session::get('user_role') != 'admin')
                                     <li class="list-group-item">
                                         <b>NIDN</b>
                                         <a class="float-right">
@@ -62,6 +63,7 @@ $profile_layout = 'layout.layout_pengusul';
                                             @endif
                                         </a>
                                     </li>
+                                    @endif
                                 </ul>
 
                                 @if($user_id == Session::get('user_id'))
