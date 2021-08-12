@@ -146,7 +146,7 @@
 </div>
 <!-- /.content -->
 
-@if($is_tambah_unlock == true || $data->usulan_pengabdian_unlock_pass >= strtotime(date('Y-m-d H:i:s')))
+{{--@if($is_tambah_unlock == true || $data->usulan_pengabdian_unlock_pass >= strtotime(date('Y-m-d H:i:s')))--}}
 <!-- Upload Laporan Akhir Modal -->
 <div class="modal fade " id="modal-default">
     <div class="modal-dialog">
@@ -190,7 +190,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-@endif
+{{--@endif--}}
 @endsection
 
 @push('plugin')
