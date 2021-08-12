@@ -100,6 +100,7 @@ $profile_layout = 'layout.layout_pengusul';
 
                                                 <hr>
 
+                                                @if(Session::get("user_role") != "admin")
                                                 <strong><i class="fas fa-id-card mr-1"></i>NIDN</strong>
 
                                                 <p class="text-muted">
@@ -111,6 +112,7 @@ $profile_layout = 'layout.layout_pengusul';
                                                 </p>
 
                                                 <hr>
+                                                @endif
 
                                                 <strong><i class="fas fa-envelope mr-1"></i>{{__('id.email')}}</strong>
 
