@@ -46,7 +46,7 @@ class AuthController extends Controller
         //Check Email Account Available
         if ($user) {
             //Check Email Match
-            if ($email == $user->user_email) {
+            if ($email == $user->user_email || $email == $user->user_nidn) {
                 //Check Password Match
                 if (Hash::check($password, $user->user_password)) {
                     //Create Session
