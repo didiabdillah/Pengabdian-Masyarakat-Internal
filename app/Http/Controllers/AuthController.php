@@ -26,21 +26,22 @@ class AuthController extends Controller
         //Validation Form
         $request->validate(
             [
-                'login_email'  => 'required|email:rfc,dns|max:255',
+                'login_email'  => 'required|max:255',
                 'login_password'  => 'required|max:100|min:8',
                 'g-recaptcha-response' => new Captcha(),
             ],
             [
-                'login_password.required' => 'The password field is required.',
-                'login_email.required' => 'The email field is required.',
-                'login_email.email' => 'The email field is wrong format.'
+                'login_password.required' => 'Password harus diisi.',
+                'login_email.required' => 'Email/NIDN harus diisi.'
             ]
         );
 
         $email = htmlspecialchars($request->login_email);
         $password = htmlspecialchars($request->login_password);
 
-        $user = User::firstWhere('user_email', $email);
+        $user = User::where('user_email', $email)
+            ->orWhere('user_nidn', $email)
+            ->first();
 
         //Check Email Account Available
         if ($user) {
@@ -54,6 +55,7 @@ class AuthController extends Controller
                         'user_name' => $user->user_name,
                         'user_email' => $user->user_email,
                         'user_role' => $user->user_role,
+                        'user_nidn' => $user->user_nidn,
                         'user_image' => $user->user_image
                     ];
                     $request->session()->put($data);

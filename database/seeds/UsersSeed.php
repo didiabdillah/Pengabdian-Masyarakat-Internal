@@ -80,8 +80,8 @@ class UsersSeed extends Seeder
 
         User::create([
             'user_id' => $user_id,
-            'user_name' => 'Igoy',
-            'user_email' => 'igoy@email.com',
+            'user_name' => 'Didi Abdillah',
+            'user_email' => 'didiabdillah@student.polindra.ac.id',
             'user_role' => 'admin',
             'user_password' => Hash::make('12345678'), // 12345678
             'user_image' => 'default.jpg',

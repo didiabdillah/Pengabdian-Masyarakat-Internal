@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\User;
+use App\Models\Usulan_pengabdian;
 
 use Closure;
 
@@ -22,7 +23,7 @@ class Is_Suspend
         if (Session::get('user_id')) {
             $user = User::where('user_id', Session::get('user_id'))
                 ->first();
-
+            // $unlock_pass = Usulan_pengabdian::where
             if ($user->user_ban == false) {
                 return $next($request);
             } else {
