@@ -39,7 +39,8 @@
 
   <!-- Own Script -->
   <script src="{{URL::asset('assets/js/ScriptSweetalert2.js')}}"></script>
-  <!-- <script src="assets/js/ScriptCheckValidEmail.js"></script> -->
+
+  {{-- <script src="assets/js/ScriptCheckValidEmail.js"></script> --}}
 
 </body>
 
