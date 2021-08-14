@@ -23,7 +23,6 @@ Route::group(['prefix' => '{api_code}'], function () {
     Route::group(['middleware' => ['is_Api_Code']], function () {
         Route::group(['prefix' => 'auth'], function () {
             Route::post('/post/login', 'API\AuthController@post_login')->name('api_post_login');
-            // Route::get('/get/login', 'API\AuthController@get_login');
             // Route::get('/{id}/show', 'API\ApiController@show');
             // Route::get('/create', 'API\ApiController@create');
             // Route::get('/{id}/edit', 'API\ApiController@edit');
@@ -32,6 +31,7 @@ Route::group(['prefix' => '{api_code}'], function () {
         });
 
         Route::group(['prefix' => 'pengabdian'], function () {
+            Route::get('/{id}/get/pengabdian', 'API\PengabdianController@get_pengabdian');
         });
 
         Route::group(['prefix' => 'logbook'], function () {
