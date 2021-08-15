@@ -529,6 +529,18 @@ class PengabdianController extends Controller
             'tugas'  => 'required|max:1024',
         ]);
 
+        $anggota = Anggota_pengabdian::where([['anggota_pengabdian_pengabdian_id', $id], ['anggota_pengabdian_role', 'anggota']])->count();
+        if ($anggota >= 2) {
+            //Flash Message
+            flash_alert(
+                __('alert.icon_error'), //Icon
+                'Gagal', //Alert Message 
+                'Batas Anggota Sudah Terpenuhi' //Sub Alert Message
+            );
+
+            return redirect()->route('pengusul_pengabdian_usulan', [2, $id]);
+        }
+
         $user_id = htmlspecialchars($request->user_id);
         $peran = 'anggota';
         $tugas = htmlspecialchars($request->tugas);
@@ -1035,7 +1047,7 @@ class PengabdianController extends Controller
             flash_alert(
                 __('alert.icon_error'), //Icon
                 'Gagal Kirim Usulan', //Alert Message 
-                'Mohon Lengakpi Isian Form Usulan Dan Dokumen' //Sub Alert Message
+                'Mohon Lengkapi Isian Form Usulan Dan File Dokumen' //Sub Alert Message
             );
             return redirect()->back();
         }
@@ -1059,6 +1071,7 @@ class PengabdianController extends Controller
         return redirect()->route('pengusul_pengabdian');
     }
 
+    // AJAX GET DATA
     public function get_kabupaten(Request $request)
     {
         $kabupaten = DB::table('wilayah_kabupaten')->where('provinsi_id', $request->id_provinsi)->get();

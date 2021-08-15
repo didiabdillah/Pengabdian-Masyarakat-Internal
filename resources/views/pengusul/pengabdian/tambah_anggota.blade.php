@@ -232,10 +232,18 @@ Session::forget('subalert');
                                             <select class="form-control select2 @error('peran') is-invalid @enderror" data-placeholder="Pilih Lama Kegiatan" style="width: 100%;" name="peran">
                                                 <option value="">--Peran--</option>
                                                 @if($result)
+                                                @if($anggota1 && $anggota2)
+                                                <!--  -->
+                                                @elseif($anggota1)
+                                                <option value="anggota2" @if(old('peran')=="anggota2" ){{'selected'}}@endif>Anggota Pengusul 2</option>
+                                                @elseif($anggota2)
+                                                <option value="anggota1" @if(old('peran')=="anggota1" ){{'selected'}}@endif>Anggota Pengusul 1</option>
+                                                @else
                                                 @for($i = 1; $i<=2; $i++) <!-- -->
                                                     <option value="anggota{{$i}}" @if(old('peran')=="anggota" . $i ){{'selected'}}@endif>Anggota Pengusul {{$i}}</option>
 
                                                     @endfor
+                                                    @endif
                                                     @endif
                                             </select>
                                             @error('peran')
