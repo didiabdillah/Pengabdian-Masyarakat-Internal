@@ -128,6 +128,8 @@
                                         </h6>
                                         @elseif($is_tambah_unlock == false)
                                         <button type="button" style="pointer-events: none; cursor: default;" class="btn btn-info upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
+                                        @elseif($is_suspend == true)
+                                        <button type="button" style="pointer-events: none; cursor: default;" class="btn btn-info upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
                                         @else
                                         <button type="button" data-toggle="modal" data-id="{{$data->usulan_pengabdian_id}}" data-target="#modal-default" class="btn btn-primary upload-laporan-akhir"><b><i class="fas fa-upload"></i> {{__('id.upload')}}</b></button>
                                         @endif

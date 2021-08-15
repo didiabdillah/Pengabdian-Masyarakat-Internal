@@ -100,6 +100,13 @@
 
                                                 Kelola Laporan Kemajuan
                                             </a>
+                                            @elseif($is_suspend == true)
+                                            <a class="btn btn-info btn-sm" style="pointer-events: none; cursor: default;">
+                                                <i class="fas fa-folder">
+                                                </i>
+
+                                                Kelola Laporan Kemajuan
+                                            </a>
                                             @else
                                             <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_list', $data->usulan_pengabdian_id)}}">
                                                 <i class="fas fa-folder">
