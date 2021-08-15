@@ -38,7 +38,6 @@ class PlottingReviewerController extends Controller
         return view('admin.plotting_reviewer.index', $view_data);
     }
 
-
     public function give_reviewer($id)
     {
         $reviewer = User::where('user_role', 'reviewer')->get();
