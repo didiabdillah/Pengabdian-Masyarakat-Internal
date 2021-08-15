@@ -69,6 +69,16 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="institusi">Institusi</label>
+                                <input name="institusi" type="text" class="form-control @error('institusi') is-invalid @enderror" id="institusi" placeholder="Masukan Institusi" value="{{old('institusi')}}">
+                                @error('institusi')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="password">{{__('id.password')}}</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
                                 @error('password')
@@ -78,19 +88,8 @@
                                 @enderror
                             </div>
 
-                            <hr>
-
                             <div class="form-group">
-                                <label for="institusi">Institusi (Optional)</label>
-                                <input name="institusi" type="text" class="form-control @error('institusi') is-invalid @enderror" id="institusi" placeholder="Masukan Institusi" value="{{old('institusi')}}">
-                                @error('institusi')
-                                <div class="invalid-feedback">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="jurusan">Jurusan (Optional)</label>
+                                <label for="jurusan">Jurusan</label>
                                 <select class="form-control select2 @error('jurusan') is-invalid @enderror" style="width: 100%;" name="jurusan">
                                     <option value="">--Pilih Jurusan--</option>
                                     @foreach($jurusan as $data)
@@ -103,6 +102,9 @@
                                 </div>
                                 @enderror
                             </div>
+
+                            <hr>
+
                             <div class="form-group">
                                 <label for="program_studi">Program Studi (Optional)</label>
                                 <select class="form-control select2 @error('program_studi') is-invalid @enderror" style="width: 100%;" name="program_studi">
