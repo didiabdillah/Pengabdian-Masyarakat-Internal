@@ -48,6 +48,7 @@ class BiodataController extends Controller
             'web'  => 'max:255',
             'schoolar_id'  => 'max:255',
             'scopus_id'  => 'max:255',
+            'sinta_id'  => 'max:255',
         ]);
 
         //check is Email exist in DB
@@ -86,6 +87,7 @@ class BiodataController extends Controller
             'biodata_no_telp' => htmlspecialchars($request->no_telp),
             'biodata_web_personal' => htmlspecialchars($request->web),
             'biodata_scopus_id' => htmlspecialchars($request->scopus_id),
+            'biodata_sinta_id' => htmlspecialchars($request->sinta_id),
             'biodata_google_schoolar_id' => htmlspecialchars($request->schoolar_id),
         ];
 

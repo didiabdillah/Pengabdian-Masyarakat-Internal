@@ -72,6 +72,18 @@
 
                                                             </a>
                                                         </li>
+                                                        <li class="list-group-item">
+                                                            <b>Email</b>
+                                                            <a class="float-right">
+
+                                                                @if($user->user_email)
+                                                                {{$user->user_email}}
+                                                                @else
+                                                                {{"-"}}
+                                                                @endif
+
+                                                            </a>
+                                                        </li>
                                                     </ul>
                                                     @if($user_id == Session::get('user_id'))
                                                     <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-block"><b><i class="fas fa-camera"></i> {{__('id.upload')}} Foto</b></button>
@@ -275,18 +287,28 @@
 
                                                         <hr>
 
-                                                        <strong><i class="fas fa-envelope mr-1"></i>{{__('id.email')}}</strong>
-
-                                                        <p class="text-muted">{{$user->user_email}}</p>
-
-                                                        <hr>
-
                                                         <strong><i class="fas fa-globe mr-1"></i>Web Personal</strong>
 
                                                         <p class="text-muted">
                                                             @if($user->biodata)
                                                             @if($user->biodata->biodata_web_personal)
                                                             {{$user->biodata->biodata_web_personal}}
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                            @else
+                                                            {{"-"}}
+                                                            @endif
+                                                        </p>
+
+                                                        <hr>
+
+                                                        <strong><i class="fas fa-journal-whills mr-1"></i>SINTA ID</strong>
+
+                                                        <p class="text-muted">
+                                                            @if($user->biodata)
+                                                            @if($user->biodata->biodata_sinta_id)
+                                                            {{$user->biodata->biodata_sinta_id}}
                                                             @else
                                                             {{"-"}}
                                                             @endif

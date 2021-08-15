@@ -52,6 +52,15 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
+                                                <label for="email">{{__('id.email')}}</label>
+                                                <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukan Email" value="{{$user->user_email}}">
+                                                @error('email')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="sex">Jenis Kelamin</label>
                                                 <select class="form-control select2 @error('sex') is-invalid @enderror" data-placeholder="Pilih jenis Kelamin" style="width: 100%;" name="sex">
                                                     <option value="0" @if($user->biodata) @if($user->biodata->biodata_sex == "0"){{"selected"}}@endif @endif>Laki-Laki</option>
@@ -171,15 +180,7 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group">
-                                                <label for="email">{{__('id.email')}}</label>
-                                                <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukan Email" value="{{$user->user_email}}">
-                                                @error('email')
-                                                <div class="invalid-feedback">
-                                                    {{$message}}
-                                                </div>
-                                                @enderror
-                                            </div>
+
                                             <div class="form-group">
                                                 <label for="web">Web Personal (Optional)</label>
                                                 <input name="web" type="text" class="form-control @error('web') is-invalid @enderror" id="web" placeholder="Masukan Web Personal" value="@if($user->biodata){{$user->biodata->biodata_web_personal}}@endif">
@@ -190,30 +191,36 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="schoolar_id">Google Schoolar ID</label>
-                                                        <input name="schoolar_id" type="text" class="form-control @error('schoolar_id') is-invalid @enderror" id="schoolar_id" placeholder="Masukan Google Schoolar ID" value="@if($user->biodata){{$user->biodata->biodata_google_schoolar_id}}@endif">
-                                                        @error('schoolar_id')
-                                                        <div class="invalid-feedback">
-                                                            {{$message}}
-                                                        </div>
-                                                        @enderror
-                                                    </div>
+                                            <div class="form-group">
+                                                <label for="sinta_id">SINTA ID</label>
+                                                <input name="sinta_id" type="text" class="form-control @error('sinta_id') is-invalid @enderror" id="sinta_id" placeholder="Masukan SINTA ID" value="@if($user->biodata){{$user->biodata->biodata_sinta_id}}@endif">
+                                                @error('sinta_id')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="scopus_id">Scopus ID</label>
-                                                        <input name="scopus_id" type="text" class="form-control @error('scopus_id') is-invalid @enderror" id="scopus_id" placeholder="Masukan Scopus ID" value="@if($user->biodata){{$user->biodata->biodata_scopus_id}}@endif">
-                                                        @error('scopus_id')
-                                                        <div class="invalid-feedback">
-                                                            {{$message}}
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
+                                                @enderror
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="schoolar_id">Google Schoolar ID</label>
+                                                <input name="schoolar_id" type="text" class="form-control @error('schoolar_id') is-invalid @enderror" id="schoolar_id" placeholder="Masukan Google Schoolar ID" value="@if($user->biodata){{$user->biodata->biodata_google_schoolar_id}}@endif">
+                                                @error('schoolar_id')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="scopus_id">Scopus ID</label>
+                                                <input name="scopus_id" type="text" class="form-control @error('scopus_id') is-invalid @enderror" id="scopus_id" placeholder="Masukan Scopus ID" value="@if($user->biodata){{$user->biodata->biodata_scopus_id}}@endif">
+                                                @error('scopus_id')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                                @enderror
+                                            </div>
+
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
