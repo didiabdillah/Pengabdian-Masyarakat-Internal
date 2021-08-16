@@ -14,6 +14,10 @@ class SkemaSeed extends Seeder
     public function run()
     {
         Skema::create([
+            'skema_label' => "Program Penerapan IPTEK Kepada Masyarakat Masyarakat"
+        ]);
+
+        Skema::create([
             'skema_label' => "Program Kemitraan Masyarakat"
         ]);
 
