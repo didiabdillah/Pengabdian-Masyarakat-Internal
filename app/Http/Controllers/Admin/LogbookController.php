@@ -16,8 +16,8 @@ class LogbookController extends Controller
     {
         $pengabdian = Usulan_pengabdian::where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_status', 'diterima')
-            ->where('usulan_pengabdian_status', 'dimonev')
-            ->where('usulan_pengabdian_status', 'selesai')
+            ->orWhere('usulan_pengabdian_status', 'dimonev')
+            ->orWhere('usulan_pengabdian_status', 'selesai')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
