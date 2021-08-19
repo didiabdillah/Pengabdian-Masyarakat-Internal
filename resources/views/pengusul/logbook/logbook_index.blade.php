@@ -67,7 +67,7 @@
                                         <h5>{{$loop->iteration}}</h5>
                                     </td>
                                     <td>
-                                        {{$data->logbook_date}}
+                                        {{Carbon\Carbon::parse($data->logbook_date)->isoFormat('D MMMM Y')}}
                                     </td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_logbook_detail_uraian', [$pengabdian_id, $data->logbook_id])}}">
