@@ -79,8 +79,11 @@ class LogbookController extends Controller
 
     public function logbook_insert($pengabdian_id)
     {
+        $pengabdian = Usulan_pengabdian::where('usulan_pengabdian_id', $pengabdian_id)->first();
+
         $view_data = [
             'pengabdian_id' => $pengabdian_id,
+            'time' => date('Y-m-d', strtotime($pengabdian->created_at)),
         ];
 
         return view('pengusul.logbook.logbook_insert', $view_data);
@@ -125,9 +128,12 @@ class LogbookController extends Controller
     {
         $logbook = Logbook::where('logbook_id', $id)->first();
 
+        $pengabdian = Usulan_pengabdian::where('usulan_pengabdian_id', $pengabdian_id)->first();
+
         $view_data = [
             'pengabdian_id' => $pengabdian_id,
             'logbook' => $logbook,
+            'time' => date('Y-m-d', strtotime($pengabdian->created_at)),
         ];
 
         return view('pengusul.logbook.logbook_edit', $view_data);

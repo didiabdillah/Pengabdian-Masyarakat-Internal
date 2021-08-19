@@ -37,7 +37,7 @@
 
                             <div class="form-group ">
                                 <label for="tanggal">Tanggal Kegiatan</label>
-                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{old('tanggal')}}" max="{{date('Y-m-d')}}">
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{old('tanggal')}}" min="{{$time}}" max="{{date('Y-m-d')}}">
                                 @error('tanggal')
                                 <div class="invalid-feedback">
                                     {{$message}}
