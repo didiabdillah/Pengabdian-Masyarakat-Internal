@@ -22,8 +22,8 @@ class LogbookController extends Controller
         })
             ->where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_status', 'diterima')
-            ->where('usulan_pengabdian_status', 'dimonev')
-            ->where('usulan_pengabdian_status', 'selesai')
+            ->orWhere('usulan_pengabdian_status', 'dimonev')
+            ->orWhere('usulan_pengabdian_status', 'selesai')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
@@ -197,10 +197,10 @@ class LogbookController extends Controller
         $request->validate(
             [
                 'keterangan' => 'required|max:255',
-                'file' => 'required|mimes:pdf,doc,docx,jpg,jpeg,png|max:10000',
+                'file' => 'required|mimes:pdf,doc,docx,xls,xlsx,jpg,jpeg,png|max:15360',
             ],
             [
-                'file.mimes' => 'Tipe File Harus PDF, Word, JPG, JPEG, PNG'
+                'file.mimes' => 'Tipe File Harus PDF, Word, Excel, JPG, JPEG, PNG'
             ]
         );
 

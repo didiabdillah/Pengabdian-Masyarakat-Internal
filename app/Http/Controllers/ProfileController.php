@@ -155,7 +155,7 @@ class ProfileController extends Controller
 
         // Input Validation
         $request->validate([
-            'image'  => 'required|mimetypes:image/png,image/jpeg,image/gif',
+            'image'  => 'required|mimetypes:image/png,image/jpeg,image/gif|max:2048',
         ], [
             'image.mimetypes' => "The image must be a file of type: png, jpeg, jpg, gif."
         ]);

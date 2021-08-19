@@ -166,7 +166,7 @@
                     <div class="card-body">
                         <input type="hidden" class="" id="pengabdian_id" name="pengabdian_id" value="">
                         <div class="form-group">
-                            <label for="laporan_akhir">{{__('id.upload')}} Laporan Akhir (PDF)</label>
+                            <label for="laporan_akhir">{{__('id.upload')}} Laporan Akhir (PDF, Max 15 MB)</label>
                             <div class="input-group  @error('laporan_akhir') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input @error('laporan_akhir') is-invalid @enderror" id="laporan_akhir" name="laporan_akhir">

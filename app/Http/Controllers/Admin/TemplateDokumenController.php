@@ -40,7 +40,7 @@ class TemplateDokumenController extends Controller
         // Input Validation
         $request->validate(
             [
-                'template' => 'required|mimes:pdf,doc,docx,xls,xlsx|max:10000'
+                'template' => 'required|mimes:pdf,doc,docx,xls,xlsx|max:15360'
             ],
             [
                 'template.mimes' => 'Tipe File Harus PDF, DOC, DOCX, XLS, XLSX'

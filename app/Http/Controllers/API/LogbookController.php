@@ -16,7 +16,7 @@ use App\Rules\Captcha;
 use App\Models\Usulan_pengabdian;
 use Illuminate\Support\Facades\URL;
 
-class PengabdianController extends Controller
+class LogbookController extends Controller
 {
     public function get_pengabdian($api_code, $id)
     {
@@ -36,5 +36,26 @@ class PengabdianController extends Controller
 
 
         return json_encode($usulan_pengabdian, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    }
+
+    public function store(Request $request, $api_code, $id)
+    {
+        $logbook_id = $request->logbook_id;
+        $tanggal = $request->tanggal;
+        $kegiatan = $request->kegiatan;
+        $presentase = $request->presentase;
+    }
+
+    public function update(Request $request, $api_code, $id)
+    {
+        $logbook_id = $request->logbook_id;
+        $tanggal = $request->tanggal;
+        $kegiatan = $request->kegiatan;
+        $presentase = $request->presentase;
+    }
+
+    public function delete(Request $request, $api_code, $id)
+    {
+        $logbook_id = $request->logbook_id;
     }
 }

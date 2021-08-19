@@ -23,8 +23,8 @@ class LaporanKemajuanController extends Controller
         })
             ->where('usulan_pengabdian_submit', true)
             ->where('usulan_pengabdian_status', 'diterima')
-            ->where('usulan_pengabdian_status', 'dimonev')
-            ->where('usulan_pengabdian_status', 'selesai')
+            ->orWhere('usulan_pengabdian_status', 'dimonev')
+            ->orWhere('usulan_pengabdian_status', 'selesai')
             ->orderBy('usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
@@ -93,7 +93,7 @@ class LaporanKemajuanController extends Controller
         $request->validate(
             [
                 'file' => 'required',
-                'file.*'  => 'required|mimes:doc,docx,pdf,xls,xlsx|max:10000',
+                'file.*'  => 'required|mimes:doc,docx,pdf,xls,xlsx|max:15360',
             ],
             [
                 'file.*.mimes' => 'File harus bertipe:doc, docx, pdf, xls, xlsx'

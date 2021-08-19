@@ -218,7 +218,7 @@
                         <input type="hidden" class="" id="mitra_id" name="mitra_id" value="">
                         <input type="hidden" name="doc_category" value="dokumen1">
                         <div class="form-group">
-                            <label for="dokumen_mitra">Dokumen Mitra (PDF)</label>
+                            <label for="dokumen_mitra">Dokumen Mitra (PDF, Max 15 MB)</label>
                             <div class="input-group  @error('dokumen_mitra') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input @error('dokumen_mitra') is-invalid @enderror" id="dokumen_mitra" name="dokumen_mitra">
@@ -263,7 +263,7 @@
                         <input type="hidden" id="mitra_id2" name="mitra_id" value="">
                         <input type="hidden" name="doc_category" value="dokumen2">
                         <div class="form-group">
-                            <label for="dokumen_mitra2">Dokumen MoU (PDF)</label>
+                            <label for="dokumen_mitra2">Dokumen MoU (PDF, Max 15 MB)</label>
                             <div class="input-group  @error('dokumen_mitra2') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input @error('dokumen_mitra2') is-invalid @enderror" id="dokumen_mitra2" name="dokumen_mitra2">

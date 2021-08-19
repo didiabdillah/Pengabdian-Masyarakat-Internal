@@ -31,7 +31,7 @@
 
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="template">Template Dokumen</label>
+                                <label for="template">Template Dokumen (PDF/WORD/EXCEL, Max 15 MB)</label>
                                 <div class="input-group  @error('template') is-invalid @enderror">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('template') is-invalid @enderror" id="template" name="template">

@@ -77,7 +77,7 @@
                                 <div class="row m-4">
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <label for="dokumen_usulan"><i class="fas fa-file-alt fa-2x"></i> Dokumen Usulan (PDF/Word, Maks 10 MB)</label>
+                                            <label for="dokumen_usulan"><i class="fas fa-file-alt fa-2x"></i> Dokumen Usulan (PDF/Word, Maks 15 MB)</label>
                                             <h6>File Usulan : @if($dokumen_info){{$dokumen_info->dokumen_usulan_original_name}}@else{{"-"}}@endif</h6>
                                             <h6>Tanggal Unggah : @if($dokumen_info){{Carbon\Carbon::parse($dokumen_info->updated_at)->isoFormat('D MMMM Y')}}@else{{"-"}}@endif</h6>
                                             <h6>Ukuran File : @if($dokumen_info){{$dokumen_info->dokumen_usulan_file_size . " KB"}}@else{{"-"}}@endif</h6>

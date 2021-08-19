@@ -651,7 +651,7 @@ class PengabdianController extends Controller
         if ($request->doc_category == 'dokumen1') {
             $request->validate(
                 [
-                    'dokumen_mitra' => 'required|mimes:pdf|max:10240',
+                    'dokumen_mitra' => 'required|mimes:pdf|max:15360',
                 ],
                 [
                     'dokumen_mitra.mimes' => 'Tipe File Harus PDF'
@@ -664,7 +664,7 @@ class PengabdianController extends Controller
         } elseif ($request->doc_category == 'dokumen2') {
             $request->validate(
                 [
-                    'dokumen_mitra2' => 'required|mimes:pdf|max:10240',
+                    'dokumen_mitra2' => 'required|mimes:pdf|max:15360',
                 ],
                 [
                     'dokumen_mitra2.mimes' => 'Tipe File Harus PDF'
@@ -859,7 +859,7 @@ class PengabdianController extends Controller
         // Input Validation
         $request->validate(
             [
-                'dokumen_usulan' => 'required|mimes:pdf,doc,docx|max:10240',
+                'dokumen_usulan' => 'required|mimes:pdf,doc,docx|max:15360',
             ],
             [
                 'dokumen_usulan.mimes' => 'Tipe File Harus PDF Atau Word'
@@ -928,7 +928,7 @@ class PengabdianController extends Controller
         // Input Validation
         $request->validate(
             [
-                'dokumen_rab' => 'required|mimes:xls,xlsx|max:10240',
+                'dokumen_rab' => 'required|mimes:xls,xlsx|max:15360',
             ],
             [
                 'dokumen_rab.mimes' => 'Tipe File Harus Excel'

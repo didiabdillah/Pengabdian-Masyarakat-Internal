@@ -183,7 +183,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="file">File Berkas</label>
+                                    <label for="file">File Berkas (PDF/WORD/EXCEL/JPEG/PNG, Max 15 MB)</label>
                                     <div class="input-group  @error('file') is-invalid @enderror">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file">

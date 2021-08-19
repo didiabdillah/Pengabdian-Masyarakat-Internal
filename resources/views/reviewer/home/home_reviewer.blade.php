@@ -385,7 +385,7 @@
                     @method('patch')
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="image">Picture Upload</label>
+                            <label for="image">Unggah Gambar (JPEG/JPG/PNG, Max 2 MB)</label>
                             <div class="input-group  @error('image') is-invalid @enderror">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input  @error('image') is-invalid @enderror" id="image" name="image">

@@ -35,18 +35,30 @@ Route::group(['prefix' => '{api_code}'], function () {
         });
 
         Route::group(['prefix' => 'logbook'], function () {
+            Route::get('/{id}/get/pengabdian', 'API\LogbookController@get_pengabdian');
+            Route::post('/{id}/store', 'API\LogbookController@store');
+            Route::post('/{id}/update', 'API\LogbookController@update');
+            Route::post('/{id}/delete', 'API\LogbookController@delete');
+        });
+
+        Route::group(['prefix' => 'laporan_kemajuan'], function () {
+            Route::get('/{id}/get/pengabdian', 'API\LaporanKemajuanController@get_pengabdian');
+            Route::post('/{id}/store', 'API\LaporanKemajuanController@store');
+            Route::post('/{id}/update', 'API\LaporanKemajuanController@update');
+            Route::post('/{id}/delete', 'API\LaporanKemajuanController@delete');
+        });
+
+        Route::group(['prefix' => 'laporan_akhir'], function () {
+            Route::get('/{id}/get/pengabdian', 'API\LaporanAkhirController@get_pengabdian');
+            Route::post('/{id}/store', 'API\LaporanAkhirController@store');
+            Route::post('/{id}/update', 'API\LaporanAkhirController@update');
+            Route::post('/{id}/delete', 'API\LaporanAkhirController@delete');
         });
 
         Route::group(['prefix' => 'user'], function () {
         });
 
         Route::group(['prefix' => 'unlock'], function () {
-        });
-
-        Route::group(['prefix' => 'laporan_kemajuan'], function () {
-        });
-
-        Route::group(['prefix' => 'laporan_akhir'], function () {
         });
     });
 });
