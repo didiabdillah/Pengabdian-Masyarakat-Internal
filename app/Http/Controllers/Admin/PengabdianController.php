@@ -323,6 +323,17 @@ class PengabdianController extends Controller
         ];
         Usulan_pengabdian::where('usulan_pengabdian_id', $id)->update($data);
 
+        $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
+            ->where('anggota_pengabdian_role', 'ketua')->first();
+
+        $user = $ketua->anggota_pengabdian_user_id;
+        $to = "/topics/" . $user;
+        $notif = array(
+            'title' => 'Status Usulan',
+            'body' => 'Ada Update Data Status Usulan Cek Sekarang!!!'
+        );
+        send_notif($to, $notif);
+
         //Flash Message
         flash_alert(
             __('alert.icon_success'), //Icon

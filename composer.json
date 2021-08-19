@@ -41,7 +41,8 @@
             "app/Helpers/Alert.php",
             "app/Helpers/Month.php",
             "app/Helpers/Time.php",
-            "app/Helpers/Json.php"
+            "app/Helpers/Json.php",
+            "app/Helpers/Notif.php"
         ],
         "classmap": [
             "database/seeds",
