@@ -47,8 +47,10 @@
                                     <label for="status">Status</label>
                                     <select class="form-control select2 @error('status') is-invalid @enderror" data-placeholder="Select Status" style="width: 100%;" name="status">
                                         <option value="">Konfirmasi Status...</option>
-                                        <option value="1" @if($konfirmasi->status == 'diterima'){{"selected"}}@endif>Terima</option>
-                                        <option value="0" @if($konfirmasi->status == 'ditolak'){{"selected"}}@endif>Tolak</option>
+                                        <option value="diterima" @if($konfirmasi->status == 'diterima'){{"selected"}}@endif>Terima</option>
+                                        <option value="ditolak" @if($konfirmasi->status == 'ditolak'){{"selected"}}@endif>Tolak</option>
+                                        <option value="error" @if($konfirmasi->status == 'error'){{"selected"}}@endif>Error</option>
+                                        <option value="undefined" @if($konfirmasi->status == 'undefined'){{"selected"}}@endif>Undefined</option>
                                     </select>
                                     @error('status')
                                     <div class="invalid-feedback">

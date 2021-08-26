@@ -109,12 +109,16 @@
                                             <td>
                                                 @if($usulan->usulan_pengabdian_status == "dikirim")
                                                 <h5><span class="badge badge-primary">Dikirim</span></h5>
+                                                @elseif($usulan->usulan_pengabdian_status == "dinilai")
+                                                <h5><span class="badge badge-info">Dinilai</span></h5>
                                                 @elseif($usulan->usulan_pengabdian_status == "diterima")
                                                 <h5><span class="badge badge-success">Diterima</span></h5>
                                                 @elseif($usulan->usulan_pengabdian_status == "ditolak")
                                                 <h5><span class="badge badge-danger">Ditolak</span></h5>
-                                                @elseif($usulan->usulan_pengabdian_status == "dinilai")
-                                                <h5><span class="badge badge-info">Dinilai</span></h5>
+                                                @elseif($usulan->usulan_pengabdian_status == "error")
+                                                <h5><span class="badge badge-danger">Error</span></h5>
+                                                @elseif($usulan->usulan_pengabdian_status == "undefined")
+                                                <h5><span class="badge badge-danger">Undefined</span></h5>
                                                 @elseif($usulan->usulan_pengabdian_status == "dimonev")
                                                 <h5><span class="badge badge-info">Dimonev</span></h5>
                                                 @elseif($usulan->usulan_pengabdian_status == "selesai")

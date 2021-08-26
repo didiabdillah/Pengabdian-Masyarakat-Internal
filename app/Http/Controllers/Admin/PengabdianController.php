@@ -315,7 +315,7 @@ class PengabdianController extends Controller
 
         $status = htmlspecialchars($request->status);
 
-        $konfirmasi = ($status == 1) ? "diterima" : "ditolak";
+        $konfirmasi = $status;
 
         //Update Data
         $data = [

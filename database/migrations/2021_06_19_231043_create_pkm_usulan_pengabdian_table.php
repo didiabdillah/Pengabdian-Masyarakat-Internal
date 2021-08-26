@@ -25,7 +25,7 @@ class CreatePkmUsulanPengabdianTable extends Migration
             $table->integer('usulan_pengabdian_mahasiswa_terlibat');
             $table->year('usulan_pengabdian_tahun');
             $table->boolean('usulan_pengabdian_submit');
-            $table->enum('usulan_pengabdian_status', ['dikirim', 'diterima', 'ditolak', 'dinilai', 'pending', 'selesai', 'dimonev']);
+            $table->enum('usulan_pengabdian_status', ['pending', 'dikirim', 'dinilai', 'diterima', 'ditolak', 'error', 'undefined', 'dimonev', 'selesai']);
             $table->string('usulan_pengabdian_unlock_pass')->nullable();
             // $table->text('usulan_pengabdian_komentar')->nullable();
 
