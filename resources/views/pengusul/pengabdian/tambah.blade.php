@@ -155,10 +155,14 @@
 
                                     <div class="form-group">
                                         <label for="jumlah_mahasiswa">Jumlah Mahasiswa Yang Terlibat</label>
-                                        <input type="text" class="form-control @error('jumlah_mahasiswa') is-invalid @enderror" id="jumlah_mahasiswa" name="jumlah_mahasiswa" placeholder="Minimal 0 Orang" value="{{old('jumlah_mahasiswa')}}">
+                                        <select class="form-control select2 @error('jumlah_mahasiswa') is-invalid @enderror" style="width: 100%;" name="jumlah_mahasiswa">
+                                            @for($i = 0; $i <= 5; $i++) <!-- -->
+                                                <option value="{{$i}}" @if(old('jumlah_mahasiswa')==$i){{'selected'}}@endif>{{$i}} Orang</option>
+                                                @endfor
+                                        </select>
                                         @error('jumlah_mahasiswa')
                                         <div class="invalid-feedback">
-                                            {{$message}}
+                                            Pilih Jumlah Mahasiswa
                                         </div>
                                         @enderror
                                     </div>

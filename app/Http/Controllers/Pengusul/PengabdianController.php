@@ -198,7 +198,7 @@ class PengabdianController extends Controller
             'skema'  => 'required',
             'bidang'  => 'required',
             'lama_kegiatan'  => 'required',
-            'jumlah_mahasiswa'  => 'required|max:3|numeric',
+            'jumlah_mahasiswa'  => 'required|max:10|numeric',
         ]);
 
         $id = str_replace("-", "", Str::uuid()) . dechex(strtotime(now()));
@@ -247,7 +247,7 @@ class PengabdianController extends Controller
             'skema'  => 'required',
             'bidang'  => 'required',
             'lama_kegiatan'  => 'required',
-            'jumlah_mahasiswa'  => 'required|max:3|numeric',
+            'jumlah_mahasiswa'  => 'required|max:10|numeric',
         ]);
 
         $judul = htmlspecialchars($request->judul);
