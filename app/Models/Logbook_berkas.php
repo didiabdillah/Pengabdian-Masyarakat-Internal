@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Logbook_berkas extends Model
 {
+    public $table = 'pkm_logbook_berkas';
     protected $primaryKey = 'logbook_berkas_id';
-    public $table = 'logbook_berkas';
 
     protected $fillable = [
         'logbook_berkas_pengabdian_id',

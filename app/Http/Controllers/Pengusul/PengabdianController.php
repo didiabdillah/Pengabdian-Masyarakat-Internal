@@ -32,7 +32,7 @@ class PengabdianController extends Controller
             $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
         })
             ->where('usulan_pengabdian_tahun', date('Y'))
-            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('pkm_usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 
@@ -62,7 +62,7 @@ class PengabdianController extends Controller
             $query->where('anggota_pengabdian_user_id', Session::get('user_id'));
         })
             ->where('usulan_pengabdian_tahun', '<', date('Y'))
-            ->orderBy('usulan_pengabdian.created_at', 'desc')
+            ->orderBy('pkm_usulan_pengabdian.created_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'desc')
             ->get();
 
@@ -76,16 +76,16 @@ class PengabdianController extends Controller
     public function detail($id, $back_param)
     {
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', 'ketua')
             ->first();
 
         $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
         $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', '!=', 'ketua')
             ->orderBy('anggota_pengabdian_role', 'asc')
             ->get();
@@ -107,8 +107,8 @@ class PengabdianController extends Controller
             ->get();
 
         $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
-            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
-            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->join('pkm_skema_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'pkm_skema_pengabdian.skema_id')
+            ->join('pkm_bidang_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'pkm_bidang_pengabdian.bidang_id')
             ->first();
 
         $back_url = NULL;
@@ -307,8 +307,8 @@ class PengabdianController extends Controller
             // HALAMAN 2
         } elseif ($page == 2) {
             $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-                ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-                ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+                ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
                 ->where('anggota_pengabdian_role', '!=', 'ketua')
                 ->orderBy('anggota_pengabdian_role_position', 'asc')
                 ->get();
@@ -388,16 +388,16 @@ class PengabdianController extends Controller
             // HALAMAN 7
         } elseif ($page == 7) {
             $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-                ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-                ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+                ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
                 ->where('anggota_pengabdian_role', 'ketua')
                 ->first();
 
             $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
             $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-                ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-                ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+                ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
                 ->where('anggota_pengabdian_role', '!=', 'ketua')
                 ->orderBy('anggota_pengabdian_role', 'asc')
                 ->get();
@@ -471,16 +471,16 @@ class PengabdianController extends Controller
                 }
 
                 //Cek Apakah User Ketua Di Usulan Lain Dan Sudah Terdaftar 1x Di Usulan Lain Di tahun Ini
-                $jadi_ketua = Anggota_pengabdian::join('usulan_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
-                    ->where('usulan_pengabdian.usulan_pengabdian_tahun', date('Y'))
-                    ->where('anggota_pengabdian.anggota_pengabdian_pengabdian_id', '!=', $id)
+                $jadi_ketua = Anggota_pengabdian::join('pkm_usulan_pengabdian', 'pkm_anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'pkm_usulan_pengabdian.usulan_pengabdian_id')
+                    ->where('pkm_usulan_pengabdian.usulan_pengabdian_tahun', date('Y'))
+                    ->where('pkm_anggota_pengabdian.anggota_pengabdian_pengabdian_id', '!=', $id)
                     ->where('anggota_pengabdian_user_id', $user_id)
                     ->where('anggota_pengabdian_role', 'ketua')
                     ->count();
 
-                $jadi_anggota = Anggota_pengabdian::join('usulan_pengabdian', 'anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'usulan_pengabdian.usulan_pengabdian_id')
-                    ->where('usulan_pengabdian.usulan_pengabdian_tahun', date('Y'))
-                    ->where('anggota_pengabdian.anggota_pengabdian_pengabdian_id', '!=', $id)
+                $jadi_anggota = Anggota_pengabdian::join('pkm_usulan_pengabdian', 'pkm_anggota_pengabdian.anggota_pengabdian_pengabdian_id', '=', 'pkm_usulan_pengabdian.usulan_pengabdian_id')
+                    ->where('pkm_usulan_pengabdian.usulan_pengabdian_tahun', date('Y'))
+                    ->where('pkm_anggota_pengabdian.anggota_pengabdian_pengabdian_id', '!=', $id)
                     ->where('anggota_pengabdian_user_id', $user_id)
                     ->where('anggota_pengabdian_role', 'anggota')
                     ->count();

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Forgot_token extends Model
 {
+    protected $table = 'pkm_forgot_token';
     protected $primaryKey = 'forgot_token_id';
 
     protected $fillable = [

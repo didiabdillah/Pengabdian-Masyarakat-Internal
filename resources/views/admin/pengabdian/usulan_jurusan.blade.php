@@ -78,8 +78,8 @@
                                             </td>
                                             @php
                                             $ketua = $usulan->anggota_pengabdian()
-                                            ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
-                                            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                            ->join('users', 'users.user_id', '=', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id')
+                                            ->join('biodata', 'biodata.biodata_user_id', '=', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id')
                                             ->where('anggota_pengabdian_pengabdian_id', $usulan->usulan_pengabdian_id)
                                             ->where('anggota_pengabdian_role', 'ketua')
                                             ->first();
@@ -95,14 +95,14 @@
                                             <td>
                                                 <h6>
                                                     {{
-                                                $usulan->join('skema_pengabdian', 'skema_pengabdian.skema_id', '=', 'usulan_pengabdian.usulan_pengabdian_skema_id')->first()->skema_label
+                                                $usulan->join('pkm_skema_pengabdian', 'pkm_skema_pengabdian.skema_id', '=', 'pkm_usulan_pengabdian.usulan_pengabdian_skema_id')->first()->skema_label
                                             }}
                                                 </h6>
                                             </td>
                                             <td>
                                                 <h6>
                                                     {{
-                                                $usulan->join('bidang_pengabdian', 'bidang_pengabdian.bidang_id', '=', 'usulan_pengabdian.usulan_pengabdian_bidang_id')->first()->bidang_label
+                                                $usulan->join('pkm_bidang_pengabdian', 'pkm_bidang_pengabdian.bidang_id', '=', 'pkm_usulan_pengabdian.usulan_pengabdian_bidang_id')->first()->bidang_label
                                             }}
                                                 </h6>
                                             </td>
@@ -124,14 +124,14 @@
 
                                             <td>
                                                 <div class="card-body">
-                                                    <a class="btn btn-success btn-sm" href="{{route('admin_pengabdian_detail', [$usulan->usulan_pengabdian_id, 'usulan'])}}">
+                                                    <a class="btn btn-success btn-sm m-1" href="{{route('admin_pengabdian_detail', [$usulan->usulan_pengabdian_id, 'usulan'])}}">
                                                         <i class="fas fa-folder">
                                                         </i>
 
                                                         {{__('id.detail')}}
                                                     </a>
 
-                                                    <a class="btn btn-primary btn-sm" href="{{route('admin_pengabdian_usulan_konfirmasi', $usulan->usulan_pengabdian_id)}}">
+                                                    <a class="btn btn-primary btn-sm m-1" href="{{route('admin_pengabdian_usulan_konfirmasi', $usulan->usulan_pengabdian_id)}}">
                                                         <i class="fas fa-check">
                                                         </i>
 
@@ -139,7 +139,7 @@
                                                     </a>
 
                                                     @if($usulan->usulan_pengabdian_status == "diterima" || $usulan->usulan_pengabdian_status == "dimonev")
-                                                    <a class="btn btn-info btn-sm" href="{{route('admin_pengabdian_unlock', $usulan->usulan_pengabdian_id)}}">
+                                                    <a class="btn btn-info btn-sm m-1" href="{{route('admin_pengabdian_unlock', $usulan->usulan_pengabdian_id)}}">
                                                         <i class="fas fa-unlock">
                                                         </i>
 

@@ -45,16 +45,16 @@ class PengabdianController extends Controller
     public function detail($id)
     {
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', 'ketua')
             ->first();
 
         $dokumen_usulan = Dokumen_usulan::where('dokumen_usulan_pengabdian_id', $id)->first();
 
         $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', '!=', 'ketua')
             ->orderBy('anggota_pengabdian_role', 'asc')
             ->get();
@@ -76,8 +76,8 @@ class PengabdianController extends Controller
             ->get();
 
         $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
-            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
-            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->join('pkm_skema_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'pkm_skema_pengabdian.skema_id')
+            ->join('pkm_bidang_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'pkm_bidang_pengabdian.bidang_id')
             ->first();
 
         $view_data = [
@@ -117,19 +117,19 @@ class PengabdianController extends Controller
         }
 
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', 'ketua')
             ->first();
 
         $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
-            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
-            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->join('pkm_skema_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'pkm_skema_pengabdian.skema_id')
+            ->join('pkm_bidang_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'pkm_bidang_pengabdian.bidang_id')
             ->first();
 
         $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', '!=', 'ketua')
             ->orderBy('anggota_pengabdian_role', 'asc')
             ->get();
@@ -234,19 +234,19 @@ class PengabdianController extends Controller
         }
 
         $ketua = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', 'ketua')
             ->first();
 
         $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
-            ->join('skema_pengabdian', 'usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'skema_pengabdian.skema_id')
-            ->join('bidang_pengabdian', 'usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'bidang_pengabdian.bidang_id')
+            ->join('pkm_skema_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'pkm_skema_pengabdian.skema_id')
+            ->join('pkm_bidang_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'pkm_bidang_pengabdian.bidang_id')
             ->first();
 
         $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)
-            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-            ->leftjoin('biodata', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
+            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+            ->leftjoin('biodata', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'biodata.biodata_user_id')
             ->where('anggota_pengabdian_role', '!=', 'ketua')
             ->orderBy('anggota_pengabdian_role', 'asc')
             ->get();

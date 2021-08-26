@@ -49,9 +49,9 @@ class FileController extends Controller
 
             $file_original_name = $file_fetch->dokumen_rab_original_name;
         } elseif ($file_category == "mitra") {
-            $file_fetch = Mitra_sasaran::join('mitra_file', 'mitra_sasaran.mitra_sasaran_id', '=', 'mitra_file.mitra_file_mitra_sasaran_id')
-                ->where('mitra_sasaran.mitra_sasaran_pengabdian_id', $id)
-                ->where('mitra_file.mitra_sasaran_file_hash_name', $file_name)
+            $file_fetch = Mitra_sasaran::join('pkm_mitra_file', 'pkm_mitra_sasaran.mitra_sasaran_id', '=', 'pkm_mitra_file.mitra_file_mitra_sasaran_id')
+                ->where('pkm_mitra_sasaran.mitra_sasaran_pengabdian_id', $id)
+                ->where('pkm_mitra_file.mitra_sasaran_file_hash_name', $file_name)
                 ->first();
 
             $file = public_path("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);
@@ -153,9 +153,9 @@ class FileController extends Controller
 
             $file_extension = $file_fetch->dokumen_rab_extension;
         } elseif ($file_category == "mitra") {
-            $file_fetch = Mitra_sasaran::join('mitra_file', 'mitra_sasaran.mitra_sasaran_id', '=', 'mitra_file.mitra_file_mitra_sasaran_id')
-                ->where('mitra_sasaran.mitra_sasaran_pengabdian_id', $id)
-                ->where('mitra_file.mitra_sasaran_file_hash_name', $file_name)
+            $file_fetch = Mitra_sasaran::join('pkm_mitra_file', 'pkm_mitra_sasaran.mitra_sasaran_id', '=', 'pkm_mitra_file.mitra_file_mitra_sasaran_id')
+                ->where('pkm_mitra_sasaran.mitra_sasaran_pengabdian_id', $id)
+                ->where('pkm_mitra_file.mitra_sasaran_file_hash_name', $file_name)
                 ->first();
 
             $file_url = URL::asset("assets/file/dokumen_mitra/" . $file_fetch->mitra_sasaran_file_hash_name);

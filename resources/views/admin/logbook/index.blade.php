@@ -62,8 +62,8 @@
                                     </td>
                                     <td>
                                         @php $ketua = $data->anggota_pengabdian()
-                                        ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
-                                        ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                        ->join('users', 'users.user_id', '=', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id')
+                                        ->join('biodata', 'biodata.biodata_user_id', '=', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id')
                                         ->where('anggota_pengabdian_pengabdian_id', $data->usulan_pengabdian_id)
                                         ->where('anggota_pengabdian_role', 'ketua')
                                         ->first(); @endphp

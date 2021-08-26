@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Laporan_akhir extends Model
 {
+    public $table = 'pkm_laporan_akhir';
     protected $primaryKey = 'laporan_akhir_pengabdian_id';
-    public $table = 'laporan_akhir';
 
     protected $fillable = [
         'laporan_akhir_pengabdian_id',

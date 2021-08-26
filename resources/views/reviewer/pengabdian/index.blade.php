@@ -83,8 +83,8 @@
                                     </td>
                                     @php
                                     $ketua = $usulan->anggota_pengabdian()
-                                    ->join('users', 'users.user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
-                                    ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                    ->join('users', 'users.user_id', '=', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id')
+                                    ->join('biodata', 'biodata.biodata_user_id', '=', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id')
                                     ->where('anggota_pengabdian_pengabdian_id', $usulan->usulan_pengabdian_id)
                                     ->where('anggota_pengabdian_role', 'ketua')
                                     ->first();
@@ -100,14 +100,14 @@
                                     <td>
                                         <h6>
                                             {{
-                                                $usulan->join('skema_pengabdian', 'skema_pengabdian.skema_id', '=', 'usulan_pengabdian.usulan_pengabdian_skema_id')->first()->skema_label
+                                                $usulan->join('pkm_skema_pengabdian', 'pkm_skema_pengabdian.skema_id', '=', 'pkm_usulan_pengabdian.usulan_pengabdian_skema_id')->first()->skema_label
                                             }}
                                         </h6>
                                     </td>
                                     <td>
                                         <h6>
                                             {{
-                                                $usulan->join('bidang_pengabdian', 'bidang_pengabdian.bidang_id', '=', 'usulan_pengabdian.usulan_pengabdian_bidang_id')->first()->bidang_label
+                                                $usulan->join('pkm_bidang_pengabdian', 'pkm_bidang_pengabdian.bidang_id', '=', 'pkm_usulan_pengabdian.usulan_pengabdian_bidang_id')->first()->bidang_label
                                             }}
                                         </h6>
                                     </td>

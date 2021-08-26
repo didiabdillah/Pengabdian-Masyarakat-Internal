@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mitra_file extends Model
 {
-    protected $table = 'mitra_file';
+    protected $table = 'pkm_mitra_file';
     protected $primaryKey = 'mitra_file_id';
 
     protected $fillable = [

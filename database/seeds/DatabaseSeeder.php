@@ -19,10 +19,11 @@ class DatabaseSeeder extends Seeder
         $this->call(SkemaSeed::class);
         $this->call(LuaranSeed::class);
         $this->call(LamaKegiatanSeed::class);
-        $this->call(UnlockFeatureSeed::class);
 
-        $this->call(UnlockFeatureSeedJson::class);
-        $this->call(TemplateDokumenSeedJson::class);
+        // $this->call(UnlockFeatureSeed::class);
+
+        // $this->call(UnlockFeatureSeedJson::class);
+        // $this->call(TemplateDokumenSeedJson::class);
 
         $this->call(WilayahIndonesiaSeed::class);
     }

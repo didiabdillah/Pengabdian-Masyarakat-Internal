@@ -76,8 +76,8 @@
                                         <h6>
                                             @php
                                             $ketua= $usulan->anggota_pengabdian()
-                                            ->join('users', 'anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
-                                            ->join('biodata', 'biodata.biodata_user_id', '=', 'anggota_pengabdian.anggota_pengabdian_user_id')
+                                            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                                            ->join('biodata', 'biodata.biodata_user_id', '=', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id')
                                             ->where('anggota_pengabdian_role', 'ketua')
                                             ->first();
                                             @endphp

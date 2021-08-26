@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Biodata extends Model
 {
-    protected $primaryKey = 'biodata_id';
     public $table = 'biodata';
+    protected $primaryKey = 'biodata_id';
 
     protected $fillable = [
         'biodata_user_id',

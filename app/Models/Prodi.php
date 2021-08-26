@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prodi extends Model
 {
-    protected $table = 'prodi';
+    protected $table = 'pkm_prodi';
     protected $primaryKey = 'prodi_id';
 
     protected $fillable = [

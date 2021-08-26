@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usulan_pengabdian extends Model
 {
-    protected $table = 'usulan_pengabdian';
+    protected $table = 'pkm_usulan_pengabdian';
     protected $primaryKey = 'usulan_pengabdian_id';
     public $incrementing = false;
 
