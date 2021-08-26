@@ -79,9 +79,18 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password">{{__('id.password')}}</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                                <label for="password">{{__('id.password')}} (Min 8 Karakter, Max 100 Karakter)</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="{{__('id.password')}}">
                                 @error('password')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="retype_password">Ketik Ulang {{__('id.password')}}</label>
+                                <input type="password" class="form-control @error('retype_password') is-invalid @enderror" id="retype_password" name="retype_password" placeholder="Ketik Ulang {{__('id.password')}}">
+                                @error('retype_password')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
