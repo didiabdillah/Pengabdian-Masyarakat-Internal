@@ -28,4 +28,9 @@ class Usulan_luaran extends Model
     {
         return $this->hasOne('App\Models\Laporan_luaran', 'laporan_luaran_luaran_id');
     }
+
+    public function laporan_akhir_luaran()
+    {
+        return $this->hasOne('App\Models\Laporan_akhir_luaran', 'laporan_akhir_luaran_luaran_id');
+    }
 }

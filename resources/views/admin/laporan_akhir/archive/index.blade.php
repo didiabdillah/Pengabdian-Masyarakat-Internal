@@ -1,4 +1,4 @@
-@extends('layout.layout_pengusul')
+@extends('layout.layout_admin')
 
 @section('title', 'Laporan Akhir')
 
@@ -19,28 +19,7 @@
                     <h1>Laporan Akhir</h1>
                 </div>
             </div>
-        </div>
 
-        <div class="container-fluid">
-            @if($is_tambah_unlock == true)
-            <div class="row">
-                <div class="col-12">
-                    <div class="alert alert-info">
-                        <h5><i class="icon fas fa-info"></i> Waktu Pelaksanaan Laporan Akhir</h5>
-                        <ul class="mb-0">
-                            <li>
-                                <b>Periode</b> : {{$tambah_unlock["start_year"] . " / " . $tambah_unlock["end_year"]}}
-                            </li>
-                            <li>
-                                <b>Batas Awal</b> : {{Carbon\Carbon::parse($tambah_unlock["start_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
-                            <li>
-                                <b>Batas Akhir</b> : {{Carbon\Carbon::parse($tambah_unlock["end_time"])->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            @endif
         </div>
 
         <!--Content -->
@@ -63,59 +42,71 @@
                                     <th>No</th>
                                     <th>Judul</th>
                                     <th>Tahun</th>
-                                    <th>{{__('id.option')}}</th>
+                                    <th>Pengusul</th>
+                                    <th>Program Studi</th>
+                                    <th>Laporan Akhir</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($pengabdian as $data)
+                                @foreach($laporan_akhir as $data)
                                 <tr>
                                     <td>
-                                        <h5>{{$loop->iteration}}</h5>
+                                        <h6>{{$loop->iteration}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$data->usulan_pengabdian_judul}}</h5>
+                                        <h6>{{$data->usulan_pengabdian_judul}}</h6>
                                     </td>
                                     <td>
-                                        <h5>{{$data->usulan_pengabdian_tahun}}</h5>
+                                        <h6>{{$data->usulan_pengabdian_tahun}}</h6>
                                     </td>
                                     <td>
-                                        <div class="card-body">
-                                            @if($data->usulan_pengabdian_unlock_pass >= strtotime(date('Y-m-d H:i:s')))
-                                            <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_akhir_list', $data->usulan_pengabdian_id)}}">
-                                                <i class="fas fa-folder">
-                                                </i>
+                                        <h6>
+                                            @php
+                                            $ketua= $data->anggota_pengabdian()
+                                            ->join('users', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id', '=', 'users.user_id')
+                                            ->join('biodata', 'biodata.biodata_user_id', '=', 'pkm_anggota_pengabdian.anggota_pengabdian_user_id')
+                                            ->where('anggota_pengabdian_role', 'ketua')
+                                            ->first();
+                                            @endphp
+                                            {{$ketua->user_name}}
+                                        </h6>
+                                    </td>
+                                    <td>
+                                        <h6>
+                                            {{$ketua->biodata_program_studi}}
+                                        </h6>
+                                    </td>
+                                    <td>
+                                        @php
+                                        $doc = $data->laporan_akhir()->where('laporan_akhir_pengabdian_id', $data->usulan_pengabdian_id)->first();
+                                        @endphp
 
-                                                Kelola Laporan Akhir
-                                            </a>
-                                            <br>
-                                            <h6>
-                                                <span class="badge badge-warning">
-                                                    <b>Batas Akhir</b> : {{Carbon\Carbon::parse(date('Y-m-d H:i:s', $data->usulan_pengabdian_unlock_pass))->isoFormat('D MMMM Y , hh:mm:ss')}} WIB
-                                                </span>
-                                            </h6>
-                                            @elseif($is_tambah_unlock == false)
-                                            <a class="btn btn-info btn-sm" style="pointer-events: none; cursor: default;">
-                                                <i class="fas fa-folder">
-                                                </i>
-
-                                                Kelola Laporan Akhir
-                                            </a>
-                                            @elseif($is_suspend == true)
-                                            <a class="btn btn-info btn-sm" style="pointer-events: none; cursor: default;">
-                                                <i class="fas fa-folder">
-                                                </i>
-
-                                                Kelola Laporan Akhir
-                                            </a>
-                                            @else
-                                            <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_akhir_list', $data->usulan_pengabdian_id)}}">
-                                                <i class="fas fa-folder">
-                                                </i>
-
-                                                Kelola Laporan Akhir
-                                            </a>
-                                            @endif
+                                        @if($doc)
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div class="col-11">
+                                                Nama {{__('id.file')}} : {{$doc->laporan_akhir_original_name}}
+                                                <br>
+                                                Tanggal {{__('id.upload')}} : {{Carbon\Carbon::parse($doc->laporan_akhir_file_date)->isoFormat('D MMMM Y')}}
+                                                <br>
+                                                <a href="{{route('file_preview', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
+                                                <a href="{{route('file_download', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
+                                            </div>
                                         </div>
+                                        @else
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="fas fa-file-pdf fa-2x"></i>
+                                            </div>
+                                            <div class="col-11">
+                                                Nama {{__('id.file')}} : -
+                                                <br>
+                                                Tanggal {{__('id.upload')}} : -
+                                            </div>
+                                        </div>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -127,7 +118,6 @@
                 <!-- /.card -->
             </div>
         </section>
-    </section>
 </div>
 <!-- /.content -->
 

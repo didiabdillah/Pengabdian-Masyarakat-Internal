@@ -22,7 +22,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('pengusul_laporan_kemajuan_store', [$pengabdian_id, $id, $tipe])}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('pengusul_laporan_akhir_store', [$pengabdian_id, $id, $tipe])}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             @if($tipe == "luaran")
@@ -73,7 +73,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{route('pengusul_laporan_kemajuan_list', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
+                                <a href="{{route('pengusul_laporan_akhir_list', $pengabdian_id)}}" class="btn btn-danger"><i class="fas fa-times"></i> {{__('id.cancel')}}</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> {{__('id.upload')}}</button>
                             </div>
                         </div>

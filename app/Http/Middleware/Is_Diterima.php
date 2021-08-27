@@ -29,7 +29,9 @@ class Is_Diterima
             );
 
             return redirect()->back();
-        } elseif ($is_diterima != 'diterima' && $is_diterima != 'selesai') {
+        } elseif ($is_diterima == 'diterima' || $is_diterima == 'dimonev') {
+            return $next($request);
+        } else {
             //Flash Message
             flash_alert(
                 __('alert.icon_error'), //Icon
@@ -38,8 +40,6 @@ class Is_Diterima
             );
 
             return redirect()->back();
-        } else {
-            return $next($request);
         }
     }
 }

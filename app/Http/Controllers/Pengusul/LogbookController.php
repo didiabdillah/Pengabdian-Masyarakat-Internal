@@ -24,7 +24,7 @@ class LogbookController extends Controller
             ->where('usulan_pengabdian_status', 'diterima')
             ->orWhere('usulan_pengabdian_status', 'dimonev')
             ->orWhere('usulan_pengabdian_status', 'selesai')
-            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('pkm_usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 

@@ -16,6 +16,9 @@ class CreatePkmLaporanLuaranTable extends Migration
         Schema::create('pkm_laporan_luaran', function (Blueprint $table) {
             $table->bigIncrements('laporan_luaran_id');
             $table->unsignedBigInteger('laporan_luaran_luaran_id');
+            $table->string('laporan_luaran_nama_publikasi');
+            $table->string('laporan_luaran_judul');
+            $table->string('laporan_luaran_link')->nullable();
             $table->date('laporan_luaran_date');
             $table->string('laporan_luaran_original_name', 255);
             $table->string('laporan_luaran_hash_name', 255);

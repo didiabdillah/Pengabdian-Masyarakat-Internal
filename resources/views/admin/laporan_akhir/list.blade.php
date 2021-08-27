@@ -1,6 +1,6 @@
-@extends('layout.layout_reviewer')
+@extends('layout.layout_admin')
 
-@section('title', __('id.detail') . ' Usulan Pengabdian')
+@section('title', 'Laporan Akhir')
 
 @section('page')
 
@@ -16,9 +16,13 @@
 
             <div class="row mb-2 content-header">
                 <div class="col-sm-12">
-                    <h1>{{__('id.detail')}} Usulan Pengabdian</h1>
+                    <h1>Laporan Akhir</h1>
                 </div>
             </div>
+
+        </div>
+
+        <div class="container-fluid">
 
         </div>
 
@@ -28,70 +32,22 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('reviewer_monev')}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
-                        <a href="{{route('reviewer_monev_nilai', $pengabdian_id)}}" class="btn btn-success ml-auto float-right"><i class="fas fa-pencil-alt"></i> Monev Usulan</a>
-                        <!-- <div class="card-tools">
+                        <a href="{{route('admin_laporan_akhir')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="card-body">
-                        <div class="alert alert-light">
-                            <table class="table table-borderless table-sm">
-                                <tbody>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Nama Ketua Pengusul</th>
-                                        <td>: {{$ketua->user_name}}</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">NIDN</th>
-                                        <td>: {{$ketua->user_nidn}}</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Skema</th>
-                                        <td>: {{$usulan->skema_label}}</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Bidang</th>
-                                        <td>: {{$usulan->bidang_label}}</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Jurusan</th>
-                                        <td>: {{$ketua->biodata_jurusan}}</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Program Studi</th>
-                                        <td>: {{$ketua->biodata_program_studi}}</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Nama Anggota</th>
-                                        <td>: @foreach($anggota as $row){{$row->user_name . ", "}}@endforeach</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Lama Kegiatan</th>
-                                        <td>: {{$usulan->usulan_pengabdian_lama_kegiatan}} Tahun</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Jumlah Mahasiswa Terlibat</th>
-                                        <td>: {{$usulan->usulan_pengabdian_mahasiswa_terlibat}} Orang</td>
-                                    </tr>
-                                    <tr style="height: 5px;">
-                                        <th scope="row" style="width: 250px;">Tahun Usulan</th>
-                                        <td>: {{$usulan->usulan_pengabdian_tahun}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- LAPORAN KEMAJUAN DAN KEUANGAN -->
+                        <!-- LAPORAN AKHIR DAN KEUANGAN -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="card card-warning m-2 card-outline">
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <i class="fas fa-file-alt"></i>
-                                            Laporan Kemajuan Dan Keuangan
+                                            Laporan Akhir Dan Keuangan
                                         </h3>
                                     </div>
                                     <div class="card-body">
@@ -104,25 +60,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- LALPORAN KEMAJUAN -->
+                                                <!-- LALPORAN AKHIR -->
                                                 <tr>
                                                     <td>
-                                                        <h5><b>Laporan Kemajuan</b></h5>
+                                                        <h5><b>Laporan Akhir</b></h5>
                                                     </td>
                                                     <td>
-
-                                                        @if($laporan_kemajuan)
+                                                        @if($laporan_akhir)
                                                         <div class="row">
                                                             <div class="col-1">
                                                                 <i class="fas fa-file"></i>
                                                             </div>
                                                             <div class="col-11">
-                                                                Nama File : {{$laporan_kemajuan->laporan_kemajuan_original_name}}
+                                                                Nama File : {{$laporan_akhir->laporan_akhir_original_name}}
                                                                 <br>
-                                                                Tanggal Unggah : {{Carbon\Carbon::parse($laporan_kemajuan->laporan_kemajuan_date)->isoFormat('D MMMM Y')}}
+                                                                Tanggal Unggah : {{Carbon\Carbon::parse($laporan_akhir->laporan_akhir_date)->isoFormat('D MMMM Y')}}
                                                                 <br>
-                                                                <a href="{{route('file_preview', [$laporan_kemajuan->laporan_kemajuan_id, $laporan_kemajuan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
-                                                                <a href="{{route('file_download', [$laporan_kemajuan->laporan_kemajuan_id, $laporan_kemajuan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
+                                                                <a href="{{route('file_preview', [$laporan_akhir->laporan_akhir_id, $laporan_akhir->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
+                                                                <a href="{{route('file_download', [$laporan_akhir->laporan_akhir_id, $laporan_akhir->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
                                                             </div>
                                                         </div>
                                                         @else
@@ -153,12 +108,12 @@
                                                                 <i class="fas fa-file"></i>
                                                             </div>
                                                             <div class="col-11">
-                                                                Nama File : {{$laporan_keuangan->laporan_kemajuan_original_name}}
+                                                                Nama File : {{$laporan_keuangan->laporan_akhir_original_name}}
                                                                 <br>
-                                                                Tanggal Unggah : {{Carbon\Carbon::parse($laporan_keuangan->laporan_kemajuan_date)->isoFormat('D MMMM Y')}}
+                                                                Tanggal Unggah : {{Carbon\Carbon::parse($laporan_keuangan->laporan_akhir_date)->isoFormat('D MMMM Y')}}
                                                                 <br>
-                                                                <a href="{{route('file_preview', [$laporan_keuangan->laporan_kemajuan_id, $laporan_keuangan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
-                                                                <a href="{{route('file_download', [$laporan_keuangan->laporan_kemajuan_id, $laporan_keuangan->laporan_kemajuan_hash_name,'laporan_kemajuan'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
+                                                                <a href="{{route('file_preview', [$laporan_keuangan->laporan_akhir_id, $laporan_keuangan->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
+                                                                <a href="{{route('file_download', [$laporan_keuangan->laporan_akhir_id, $laporan_keuangan->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
                                                             </div>
                                                         </div>
                                                         @else
@@ -222,13 +177,13 @@
 
                                                     </td>
                                                     @php
-                                                    $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
+                                                    $doc = $data->laporan_akhir_luaran()->where('laporan_akhir_luaran_luaran_id', $data->usulan_luaran_id)->first();
                                                     @endphp
                                                     <td>
                                                         @if($doc)
-                                                        <b>Nama Publikasi</b> : <p>{{($doc->laporan_luaran_nama_publikasi) ? $doc->laporan_luaran_nama_publikasi : "-"}}</p>
-                                                        <b>Judul Luaran</b> : <p>{{($doc->laporan_luaran_judul) ? $doc->laporan_luaran_judul : "-"}}</p>
-                                                        <b>Link Luaran</b> : @php echo ($doc->laporan_luaran_link) ? '<a href="' . $doc->laporan_luaran_link . '">' . $doc->laporan_luaran_link . '</a>' : "-"; @endphp
+                                                        <b>Nama Publikasi</b> : <p>{{($doc->laporan_akhir_luaran_nama_publikasi) ? $doc->laporan_akhir_luaran_nama_publikasi : "-"}}</p>
+                                                        <b>Judul Luaran</b> : <p>{{($doc->laporan_akhir_luaran_judul) ? $doc->laporan_akhir_luaran_judul : "-"}}</p>
+                                                        <b>Link Luaran</b> : @php echo ($doc->laporan_akhir_luaran_link) ? '<a href="' . $doc->laporan_akhir_luaran_link . '">' . $doc->laporan_akhir_luaran_link . '</a>' : "-"; @endphp
                                                         @else
                                                         <b>Nama Publikasi</b> : -
                                                         <br>
@@ -244,12 +199,12 @@
                                                                 <i class="fas fa-file"></i>
                                                             </div>
                                                             <div class="col-11">
-                                                                Nama File : {{$doc->laporan_luaran_original_name}}
+                                                                Nama File : {{$doc->laporan_akhir_luaran_original_name}}
                                                                 <br>
-                                                                Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_luaran_date)->isoFormat('D MMMM Y')}}
+                                                                Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_akhir_luaran_date)->isoFormat('D MMMM Y')}}
                                                                 <br>
-                                                                <a href="{{route('file_preview', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
-                                                                <a href="{{route('file_download', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
+                                                                <a href="{{route('file_preview', [$doc->laporan_akhir_luaran_id, $doc->laporan_akhir_luaran_hash_name,'laporan_akhir_luaran'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Lihat</a>
+                                                                <a href="{{route('file_download', [$doc->laporan_akhir_luaran_id, $doc->laporan_akhir_luaran_hash_name,'laporan_akhir_luaran'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Unduh</a>
                                                             </div>
                                                         </div>
                                                         @else
@@ -315,13 +270,13 @@
                                                         <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
                                                     </td>
                                                     @php
-                                                    $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
+                                                    $doc = $data->laporan_akhir_luaran()->where('laporan_akhir_luaran_luaran_id', $data->usulan_luaran_id)->first();
                                                     @endphp
                                                     <td>
                                                         @if($doc)
-                                                        <b>Nama Publikasi</b> : <p>{{($doc->laporan_luaran_nama_publikasi) ? $doc->laporan_luaran_nama_publikasi : "-"}}</p>
-                                                        <b>Judul Luaran</b> : <p>{{($doc->laporan_luaran_judul) ? $doc->laporan_luaran_judul : "-"}}</p>
-                                                        <b>Link Luaran</b> : @php echo ($doc->laporan_luaran_link) ? '<a href="' . $doc->laporan_luaran_link . '">' . $doc->laporan_luaran_link . '</a>' : "-"; @endphp
+                                                        <b>Nama Publikasi</b> : <p>{{($doc->laporan_akhir_luaran_nama_publikasi) ? $doc->laporan_akhir_luaran_nama_publikasi : "-"}}</p>
+                                                        <b>Judul Luaran</b> : <p>{{($doc->laporan_akhir_luaran_judul) ? $doc->laporan_akhir_luaran_judul : "-"}}</p>
+                                                        <b>Link Luaran</b> : @php echo ($doc->laporan_akhir_luaran_link) ? '<a href="' . $doc->laporan_akhir_luaran_link . '">' . $doc->laporan_akhir_luaran_link . '</a>' : "-"; @endphp
                                                         @else
                                                         <b>Nama Publikasi</b> : -
                                                         <br>
@@ -337,12 +292,12 @@
                                                                 <i class="fas fa-file"></i>
                                                             </div>
                                                             <div class="col-11">
-                                                                Nama File : {{$doc->laporan_luaran_original_name}}
+                                                                Nama File : {{$doc->laporan_akhir_luaran_original_name}}
                                                                 <br>
-                                                                Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_luaran_date)->isoFormat('D MMMM Y')}}
+                                                                Tanggal Unggah : {{Carbon\Carbon::parse($doc->laporan_akhir_luaran_date)->isoFormat('D MMMM Y')}}
                                                                 <br>
-                                                                <a href="{{route('file_preview', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
-                                                                <a href="{{route('file_download', [$doc->laporan_luaran_id, $doc->laporan_luaran_hash_name,'laporan_luaran'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                                <a href="{{route('file_preview', [$doc->laporan_akhir_luaran_id, $doc->laporan_akhir_luaran_hash_name,'laporan_akhir_luaran'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> Preview</a>
+                                                                <a href="{{route('file_download', [$doc->laporan_akhir_luaran_id, $doc->laporan_akhir_luaran_hash_name,'laporan_akhir_luaran'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                             </div>
                                                         </div>
                                                         @else
@@ -375,8 +330,10 @@
                         </div>
                         <!-- /.row -->
                     </div>
+                    <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
+
             </div>
         </section>
 </div>
@@ -436,6 +393,29 @@
                 "url": "{{URL::asset('assets/js/datatables/Indonesian.json')}}"
             },
         });
+
+        $('#example3').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "pagingType": "simple_numbers",
+            "language": {
+                "url": "{{URL::asset('assets/js/datatables/Indonesian.json')}}"
+            },
+        });
+    });
+</script>
+
+<!-- bs-custom-file-input -->
+<script src="{{URL::asset('assets/js/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        bsCustomFileInput.init();
     });
 </script>
 @endpush

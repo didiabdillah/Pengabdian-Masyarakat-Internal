@@ -14,8 +14,8 @@
         "label": "Penilaian Usulan Pengabdian Oleh Reviewer",
         "start_year": "2021",
         "end_year": "2021",
-        "start_time": "2021-08-04 18:55:00",
-        "end_time": "2021-08-21 22:55:00"
+        "start_time": "2021-08-18 18:55:00",
+        "end_time": "2021-09-01 22:55:00"
     },
     {
         "id": "6104b2dc66bd4",
@@ -23,8 +23,8 @@
         "label": "Pengumpulan Logbook Pengabdian",
         "start_year": "2021",
         "end_year": "2021",
-        "start_time": "2021-08-12 18:55:00",
-        "end_time": "2021-08-20 22:55:00"
+        "start_time": "2021-08-20 18:55:00",
+        "end_time": "2021-09-08 22:55:00"
     },
     {
         "id": "6104b32b458d0",
@@ -32,8 +32,8 @@
         "label": "Pengumpulan Laporan Akhir Pengabdian",
         "start_year": "2021",
         "end_year": "2021",
-        "start_time": "2021-08-07 18:55:00",
-        "end_time": "2021-08-21 22:55:00"
+        "start_time": "2021-08-21 18:55:00",
+        "end_time": "2021-09-15 22:55:00"
     },
     {
         "id": "6104b3505d116",
@@ -41,8 +41,8 @@
         "label": "Pengumpulan Laporan Kemajuan Pengabdian",
         "start_year": "2021",
         "end_year": "2021",
-        "start_time": "2021-08-07 18:55:00",
-        "end_time": "2021-08-28 22:55:00"
+        "start_time": "2021-08-11 18:55:00",
+        "end_time": "2021-09-23 22:55:00"
     },
     {
         "id": "6104b3617c4b4",
@@ -50,7 +50,7 @@
         "label": "Monev Pengabdian Oleh Reviewer",
         "start_year": "2021",
         "end_year": "2021",
-        "start_time": "2021-08-07 18:55:00",
-        "end_time": "2021-08-21 22:55:00"
+        "start_time": "2021-08-21 18:55:00",
+        "end_time": "2021-09-06 22:55:00"
     }
 ]

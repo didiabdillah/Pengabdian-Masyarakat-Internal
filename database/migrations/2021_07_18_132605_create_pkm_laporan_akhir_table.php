@@ -17,6 +17,7 @@ class CreatePkmLaporanAkhirTable extends Migration
             $table->bigIncrements('laporan_akhir_id');
             $table->string('laporan_akhir_pengabdian_id', 64);
             $table->date('laporan_akhir_date');
+            $table->enum('laporan_akhir_tipe', ['akhir', 'keuangan']);
             $table->string('laporan_akhir_original_name', 255);
             $table->string('laporan_akhir_hash_name', 255);
             $table->string('laporan_akhir_base_name', 255);

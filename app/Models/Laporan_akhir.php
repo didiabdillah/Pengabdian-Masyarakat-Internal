@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Laporan_akhir extends Model
 {
     public $table = 'pkm_laporan_akhir';
-    protected $primaryKey = 'laporan_akhir_pengabdian_id';
+    protected $primaryKey = 'laporan_akhir_id';
 
     protected $fillable = [
         'laporan_akhir_pengabdian_id',
         'laporan_akhir_date',
+        'laporan_akhir_tipe',
         'laporan_akhir_original_name',
         'laporan_akhir_hash_name',
         'laporan_akhir_base_name',

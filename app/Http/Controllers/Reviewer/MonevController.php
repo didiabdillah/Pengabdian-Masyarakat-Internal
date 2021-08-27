@@ -32,7 +32,7 @@ class MonevController extends Controller
             ->where('usulan_pengabdian_reviewer_monev_id', Session::get('user_id'))
             ->where('usulan_pengabdian_status', '=', 'diterima')
             ->orderBy('usulan_pengabdian_tahun', 'desc')
-            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('pkm_usulan_pengabdian.updated_at', 'desc')
             ->get();
 
         $view_data = [

@@ -163,6 +163,7 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 //Laporan Akhir
                 Route::group(['prefix' => 'laporan_akhir'], function () {
                     Route::get('/', 'Admin\LaporanAkhirController@index')->name('admin_laporan_akhir');
+                    Route::get('/{pengabdian_id}/list', 'Admin\LaporanAkhirController@list')->name('admin_laporan_akhir_list');
                 });
 
                 //Plotting Reviewer
@@ -352,10 +353,10 @@ Route::group(['middleware' => ['prevent_Back_Button']], function () {
                 Route::group(['prefix' => 'laporan_akhir'], function () {
                     Route::get('/', 'Pengusul\LaporanAkhirController@index')->name('pengusul_laporan_akhir');
 
-                    Route::group(['middleware' => ['is_Suspend', 'is_Unlock_Tambah_Laporan_Akhir']], function () {
-                        // Route::get('/insert', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
-                        Route::post('/update', 'Pengusul\LaporanAkhirController@update')->name('pengusul_laporan_akhir_upload_update');
-                        Route::patch('/update/{pengabdian_id}', 'Pengusul\LaporanAkhirController@update');
+                    Route::group(['middleware' => ['is_Suspend', 'is_Diterima', 'is_Unlock_Tambah_Laporan_Akhir']], function () {
+                        Route::get('/{pengabdian_id}/list', 'Pengusul\LaporanAkhirController@list')->name('pengusul_laporan_akhir_list');
+                        Route::get('/{pengabdian_id}/{id}/insert/{tipe}', 'Pengusul\LaporanAkhirController@insert')->name('pengusul_laporan_akhir_insert');
+                        Route::post('/{pengabdian_id}/{id}/store/{tipe}', 'Pengusul\LaporanAkhirController@store')->name('pengusul_laporan_akhir_store');
                     });
                 });
 

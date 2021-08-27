@@ -25,7 +25,7 @@ class PengabdianController extends Controller
             ->where('usulan_pengabdian_status', '!=', 'pending')
             ->where('usulan_pengabdian_status', '!=', 'dikirim')
             ->orderBy('usulan_pengabdian_tahun', 'desc')
-            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('pkm_usulan_pengabdian.updated_at', 'desc')
             ->get();
 
         $jurusan = Jurusan::all();
@@ -102,7 +102,7 @@ class PengabdianController extends Controller
             ->where('usulan_pengabdian_status', '!=', 'dikirim')
             ->where('usulan_pengabdian_tahun', '<', date('Y'))
             ->orderBy('usulan_pengabdian_tahun', 'desc')
-            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('pkm_usulan_pengabdian.updated_at', 'desc')
             ->get();
 
         $jurusan = Jurusan::all();

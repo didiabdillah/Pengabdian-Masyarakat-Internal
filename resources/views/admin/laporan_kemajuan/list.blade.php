@@ -32,7 +32,7 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('pengusul_laporan_kemajuan')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a href="{{route('admin_laporan_kemajuan')}}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
@@ -66,7 +66,6 @@
                                                         <h5><b>Laporan Kemajuan</b></h5>
                                                     </td>
                                                     <td>
-
                                                         @if($laporan_kemajuan)
                                                         <div class="row">
                                                             <div class="col-1">
@@ -177,11 +176,23 @@
                                                         <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
 
                                                     </td>
+                                                    @php
+                                                    $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
+                                                    @endphp
                                                     <td>
-                                                        @php
-                                                        $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
-                                                        @endphp
-
+                                                        @if($doc)
+                                                        <b>Nama Publikasi</b> : <p>{{($doc->laporan_luaran_nama_publikasi) ? $doc->laporan_luaran_nama_publikasi : "-"}}</p>
+                                                        <b>Judul Luaran</b> : <p>{{($doc->laporan_luaran_judul) ? $doc->laporan_luaran_judul : "-"}}</p>
+                                                        <b>Link Luaran</b> : @php echo ($doc->laporan_luaran_link) ? '<a href="' . $doc->laporan_luaran_link . '">' . $doc->laporan_luaran_link . '</a>' : "-"; @endphp
+                                                        @else
+                                                        <b>Nama Publikasi</b> : -
+                                                        <br>
+                                                        <b>Judul Luaran</b> : -
+                                                        <br>
+                                                        <b>Link Luaran</b> : -
+                                                        @endif
+                                                    </td>
+                                                    <td>
                                                         @if($doc)
                                                         <div class="row">
                                                             <div class="col-1">
@@ -258,11 +269,23 @@
 
                                                         <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
                                                     </td>
+                                                    @php
+                                                    $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
+                                                    @endphp
                                                     <td>
-                                                        @php
-                                                        $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
-                                                        @endphp
-
+                                                        @if($doc)
+                                                        <b>Nama Publikasi</b> : <p>{{($doc->laporan_luaran_nama_publikasi) ? $doc->laporan_luaran_nama_publikasi : "-"}}</p>
+                                                        <b>Judul Luaran</b> : <p>{{($doc->laporan_luaran_judul) ? $doc->laporan_luaran_judul : "-"}}</p>
+                                                        <b>Link Luaran</b> : @php echo ($doc->laporan_luaran_link) ? '<a href="' . $doc->laporan_luaran_link . '">' . $doc->laporan_luaran_link . '</a>' : "-"; @endphp
+                                                        @else
+                                                        <b>Nama Publikasi</b> : -
+                                                        <br>
+                                                        <b>Judul Luaran</b> : -
+                                                        <br>
+                                                        <b>Link Luaran</b> : -
+                                                        @endif
+                                                    </td>
+                                                    <td>
                                                         @if($doc)
                                                         <div class="row">
                                                             <div class="col-1">

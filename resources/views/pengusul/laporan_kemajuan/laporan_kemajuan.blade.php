@@ -191,11 +191,23 @@
                                                         <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
 
                                                     </td>
+                                                    @php
+                                                    $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
+                                                    @endphp
                                                     <td>
-                                                        @php
-                                                        $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
-                                                        @endphp
-
+                                                        @if($doc)
+                                                        <b>Nama Publikasi</b> : <p>{{($doc->laporan_luaran_nama_publikasi) ? $doc->laporan_luaran_nama_publikasi : "-"}}</p>
+                                                        <b>Judul Luaran</b> : <p>{{($doc->laporan_luaran_judul) ? $doc->laporan_luaran_judul : "-"}}</p>
+                                                        <b>Link Luaran</b> : @php echo ($doc->laporan_luaran_link) ? '<a href="' . $doc->laporan_luaran_link . '">' . $doc->laporan_luaran_link . '</a>' : "-"; @endphp
+                                                        @else
+                                                        <b>Nama Publikasi</b> : -
+                                                        <br>
+                                                        <b>Judul Luaran</b> : -
+                                                        <br>
+                                                        <b>Link Luaran</b> : -
+                                                        @endif
+                                                    </td>
+                                                    <td>
                                                         @if($doc)
                                                         <div class="row">
                                                             <div class="col-1">
@@ -225,9 +237,9 @@
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_insert', [$pengabdian_id, $data->usulan_luaran_id, 'luaran'])}}">
-                                                            <i class="fas fa-upload">
+                                                            <i class="fas fa-pencil-alt">
                                                             </i>
-                                                            {{__('id.upload')}} Laporan
+                                                            Tambah Laporan
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -279,11 +291,23 @@
 
                                                         <h5>{{$data->usulan_luaran_pengabdian_rencana}}</h5>
                                                     </td>
+                                                    @php
+                                                    $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
+                                                    @endphp
                                                     <td>
-                                                        @php
-                                                        $doc = $data->laporan_luaran()->where('laporan_luaran_luaran_id', $data->usulan_luaran_id)->first();
-                                                        @endphp
-
+                                                        @if($doc)
+                                                        <b>Nama Publikasi</b> : <p>{{($doc->laporan_luaran_nama_publikasi) ? $doc->laporan_luaran_nama_publikasi : "-"}}</p>
+                                                        <b>Judul Luaran</b> : <p>{{($doc->laporan_luaran_judul) ? $doc->laporan_luaran_judul : "-"}}</p>
+                                                        <b>Link Luaran</b> : @php echo ($doc->laporan_luaran_link) ? '<a href="' . $doc->laporan_luaran_link . '">' . $doc->laporan_luaran_link . '</a>' : "-"; @endphp
+                                                        @else
+                                                        <b>Nama Publikasi</b> : -
+                                                        <br>
+                                                        <b>Judul Luaran</b> : -
+                                                        <br>
+                                                        <b>Link Luaran</b> : -
+                                                        @endif
+                                                    </td>
+                                                    <td>
                                                         @if($doc)
                                                         <div class="row">
                                                             <div class="col-1">
@@ -313,9 +337,9 @@
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="{{route('pengusul_laporan_kemajuan_insert', [$pengabdian_id, $data->usulan_luaran_id, 'luaran'])}}">
-                                                            <i class="fas fa-upload">
+                                                            <i class="fas fa-pencil-alt">
                                                             </i>
-                                                            {{__('id.upload')}} Laporan
+                                                            {{__('id.insert')}} Laporan
                                                         </a>
 
                                                     </td>

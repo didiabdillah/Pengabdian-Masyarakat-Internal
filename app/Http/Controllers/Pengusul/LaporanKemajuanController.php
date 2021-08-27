@@ -25,7 +25,7 @@ class LaporanKemajuanController extends Controller
             ->where('usulan_pengabdian_status', 'diterima')
             ->orWhere('usulan_pengabdian_status', 'dimonev')
             ->orWhere('usulan_pengabdian_status', 'selesai')
-            ->orderBy('usulan_pengabdian.updated_at', 'desc')
+            ->orderBy('pkm_usulan_pengabdian.updated_at', 'desc')
             ->orderBy('usulan_pengabdian_tahun', 'asc')
             ->get();
 
@@ -90,15 +90,30 @@ class LaporanKemajuanController extends Controller
     public function store(Request $request, $pengabdian_id, $id, $tipe)
     {
         // Input Validation
-        $request->validate(
-            [
-                'file' => 'required',
-                'file.*'  => 'required|mimes:doc,docx,pdf,xls,xlsx|max:15360',
-            ],
-            [
-                'file.*.mimes' => 'File harus bertipe:doc, docx, pdf, xls, xlsx'
-            ]
-        );
+        if ($tipe == 'luaran') {
+            $request->validate(
+                [
+                    'nama_publikasi' => 'required|max:255',
+                    'judul' => 'required|max:255',
+                    'link' => 'max:255',
+                    'file' => 'required',
+                    'file.*'  => 'required|mimes:doc,docx,pdf,xls,xlsx|max:15360',
+                ],
+                [
+                    'file.*.mimes' => 'File harus bertipe:doc, docx, pdf, xls, xlsx'
+                ]
+            );
+        } elseif ($tipe == 'kemajuan' || $tipe == 'keuangan') {
+            $request->validate(
+                [
+                    'file' => 'required',
+                    'file.*'  => 'required|mimes:doc,docx,pdf,xls,xlsx|max:15360',
+                ],
+                [
+                    'file.*.mimes' => 'File harus bertipe:doc, docx, pdf, xls, xlsx'
+                ]
+            );
+        }
 
         $file = $request->file('file');
         $pengabdian_id = $pengabdian_id;
@@ -113,6 +128,10 @@ class LaporanKemajuanController extends Controller
 
         // ====
         if ($tipe == 'luaran') {
+            $nama_publikasi = htmlspecialchars($request->nama_publikasi);
+            $judul = htmlspecialchars($request->judul);
+            $link = htmlspecialchars($request->link);
+
             $destination = "assets/file/laporan_luaran/";
 
             $is_exist = Laporan_luaran::where('laporan_luaran_luaran_id', $id)
@@ -135,6 +154,9 @@ class LaporanKemajuanController extends Controller
             $data = [
                 'laporan_luaran_luaran_id' => $id,
                 'laporan_luaran_date' => date('Y-m-d'),
+                'laporan_luaran_nama_publikasi' => $nama_publikasi,
+                'laporan_luaran_judul' => $judul,
+                'laporan_luaran_link' => $link,
                 'laporan_luaran_original_name' => $original_name,
                 'laporan_luaran_hash_name' => $hash_name,
                 'laporan_luaran_base_name' => $base_name,
@@ -197,7 +219,7 @@ class LaporanKemajuanController extends Controller
             flash_alert(
                 __('alert.icon_error'), //Icon
                 'Galat', //Alert Message 
-                'Kelas File Salah' //Sub Alert Message
+                'Kelas Laporan Salah' //Sub Alert Message
             );
 
             return redirect()->route('pengusul_laporan_kemajuan_list', $pengabdian_id);
@@ -209,7 +231,7 @@ class LaporanKemajuanController extends Controller
         flash_alert(
             __('alert.icon_success'), //Icon
             'Sukses', //Alert Message 
-            'File Laporan Terunggah' //Sub Alert Message
+            'Laporan Ditambahkan' //Sub Alert Message
         );
 
         return redirect()->route('pengusul_laporan_kemajuan_list', $pengabdian_id);

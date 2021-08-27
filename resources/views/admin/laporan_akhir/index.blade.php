@@ -22,6 +22,12 @@
 
         </div>
 
+        {{--
+        <div class="container-fluid">
+      
+        </div>
+        --}}
+
         <!--Content -->
         <section class="content">
             <div class="container-fluid">
@@ -44,11 +50,11 @@
                                     <th>Tahun</th>
                                     <th>Pengusul</th>
                                     <th>Program Studi</th>
-                                    <th>Laporan Akhir</th>
+                                    <th>{{__('id.option')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($laporan_akhir as $data)
+                                @foreach($pengabdian as $data)
                                 <tr>
                                     <td>
                                         <h6>{{$loop->iteration}}</h6>
@@ -77,36 +83,14 @@
                                         </h6>
                                     </td>
                                     <td>
-                                        @php
-                                        $doc = $data->laporan_akhir()->where('laporan_akhir_pengabdian_id', $data->usulan_pengabdian_id)->first();
-                                        @endphp
+                                        <div class="card-body">
+                                            <a class="btn btn-primary btn-sm" href="{{route('admin_laporan_akhir_list', $data->usulan_pengabdian_id)}}">
+                                                <i class="fas fa-folder">
+                                                </i>
 
-                                        @if($doc)
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <i class="fas fa-file-pdf"></i>
-                                            </div>
-                                            <div class="col-11">
-                                                Nama {{__('id.file')}} : {{$doc->laporan_akhir_original_name}}
-                                                <br>
-                                                Tanggal {{__('id.upload')}} : {{Carbon\Carbon::parse($doc->laporan_akhir_file_date)->isoFormat('D MMMM Y')}}
-                                                <br>
-                                                <a href="{{route('file_preview', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-primary" target="__blank"><i class="fas fa-eye"></i> {{__('id.preview')}}</a>
-                                                <a href="{{route('file_download', [$doc->laporan_akhir_id, $doc->laporan_akhir_hash_name,'laporan_akhir'])}}" class="ml-1 btn btn-xs btn-success"><i class="fas fa-cloud-download-alt"></i> {{__('id.download')}}</a>
-                                            </div>
+                                                {{__('id.preview')}} Laporan Akhir
+                                            </a>
                                         </div>
-                                        @else
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <i class="fas fa-file-pdf fa-2x"></i>
-                                            </div>
-                                            <div class="col-11">
-                                                Nama {{__('id.file')}} : -
-                                                <br>
-                                                Tanggal {{__('id.upload')}} : -
-                                            </div>
-                                        </div>
-                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
