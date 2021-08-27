@@ -4,7 +4,7 @@ $profile_layout = NULL;
 
 if(Session::get('user_role') == "admin"){
 $profile_layout = 'layout.layout_admin';
-}elseif(Session::get('user_role') == "reviewer"){
+}elseif(Session::get('user_role') == "reviewer_pengabdian"){
 $profile_layout = 'layout.layout_reviewer';
 }elseif(Session::get('user_role') == "pengusul"){
 $profile_layout = 'layout.layout_pengusul';
@@ -50,7 +50,7 @@ $profile_layout = 'layout.layout_pengusul';
 
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
-                                        <b>Role</b> <a class="float-right">{{$user->user_role}}</a>
+                                        <b>Role</b> <a class="float-right">{{($user->user_role == "reviewer_pengabdian") ? "reviewer" : $user->user_role}}</a>
                                     </li>
                                     @if(Session::get('user_role') != 'admin')
                                     <li class="list-group-item">

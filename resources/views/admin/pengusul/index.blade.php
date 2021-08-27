@@ -88,14 +88,14 @@
                                             @method('put')
                                             <div class="card-body">
                                                 <h5>
-                                                    @if($data->user_ban == true)
+                                                    @if($data->user_pengabdian_ban == true)
                                                     <span class="badge badge-danger">{{__('id.suspended')}}</span>
                                                     @else
                                                     <span class="badge badge-success">{{__('id.active')}}</span>
                                                     @endif
                                                 </h5>
 
-                                                @if($data->user_ban == true)
+                                                @if($data->user_pengabdian_ban == true)
                                                 <button class="btn btn-success btn-sm btn-suspend" type="submit">
                                                     <i class="fas fa-unlock">
                                                     </i>

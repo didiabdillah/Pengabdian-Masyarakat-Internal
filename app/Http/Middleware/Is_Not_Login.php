@@ -22,7 +22,7 @@ class Is_Not_Login
             if (Session::get('user_role') == "admin") {
                 //Goto Admin Home
                 return redirect()->route('admin_home');
-            } else if (Session::get('user_role') == "reviewer") {
+            } else if (Session::get('user_role') == "reviewer_pengabdian") {
                 //Goto Reviewer Home
                 return redirect()->route('reviewer_home');
             } else if (Session::get('user_role') == "pengusul") {

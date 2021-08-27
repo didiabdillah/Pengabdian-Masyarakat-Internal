@@ -155,7 +155,7 @@
                             </label>
                         </div>
                         <div class="icheck-danger">
-                            <input type="checkbox" id="checkboxPrimary2" name="suspend" @if($user->user_ban == true){{"checked"}}@endif>
+                            <input type="checkbox" id="checkboxPrimary2" name="suspend" @if($user->user_pengabdian_ban == true){{"checked"}}@endif>
                             <label for="checkboxPrimary2">
                                 Suspend
                             </label>

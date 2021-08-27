@@ -111,7 +111,7 @@ class UsersSeed extends Seeder
             'user_id' => $user_id,
             'user_name' => 'Alex',
             'user_email' => 'alex@email.com',
-            'user_role' => 'reviewer',
+            'user_role' => 'reviewer_pengabdian',
             'user_password' => Hash::make('12345678'), // 12345678
             'user_image' => 'default.jpg',
             'user_nidn' => rand(1000000000, 9999999999),

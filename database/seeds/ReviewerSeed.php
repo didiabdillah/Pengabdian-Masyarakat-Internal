@@ -26,7 +26,7 @@ class ReviewerSeed extends Seeder
                     'user_id' => $user_id,
                     'user_name' => $data["nama"],
                     'user_email' => $data["email"],
-                    'user_role' => 'reviewer',
+                    'user_role' => 'reviewer_pengabdian',
                     'user_password' => Hash::make($data["nidn"]),
                     'user_image' => 'default.jpg',
                     'user_nidn' => $data["nidn"],

@@ -18,7 +18,7 @@ class ReviewerController extends Controller
 {
     public function index()
     {
-        $user = User::where('user_role', '=', 'reviewer')
+        $user = User::where('user_role', '=', 'reviewer_pengabdian')
             ->where('user_id', '!=', Session::get('user_id'))
             ->orderBy('user_name', 'asc')->get();
 
@@ -93,7 +93,7 @@ class ReviewerController extends Controller
             'user_nidn' => $nidn,
             'user_name' => $name,
             'user_email' => $email,
-            'user_role' => 'reviewer',
+            'user_role' => 'reviewer_pengabdian',
             'user_image' => $image,
         ];
 
@@ -252,10 +252,10 @@ class ReviewerController extends Controller
     {
         $user = User::where('user_id', $id)->first();
 
-        $suspend = ($user->user_ban == false) ? true : false;
+        $suspend = ($user->user_pengabdian_ban == false) ? true : false;
 
         $data = [
-            'user_ban' => $suspend,
+            'user_pengabdian_ban' => $suspend,
         ];
 
         //Update Data

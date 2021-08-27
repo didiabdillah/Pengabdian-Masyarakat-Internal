@@ -51,7 +51,7 @@
 
                                                     <ul class="list-group list-group-unbordered mb-3">
                                                         <li class="list-group-item">
-                                                            <b>Role</b> <a class="float-right">{{$user->user_role}}</a>
+                                                            <b>Role</b> <a class="float-right">{{($user->user_role == "reviewer_pengabdian") ? "reviewer" : $user->user_role}}</a>
                                                         </li>
                                                         <li class="list-group-item">
                                                             <b>NIDN</b>

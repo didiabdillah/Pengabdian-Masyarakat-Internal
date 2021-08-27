@@ -18,7 +18,7 @@ class PlottingReviewerController extends Controller
     // USULAN
     public function index()
     {
-        $user = User::where('user_role', '=', 'reviewer')
+        $user = User::where('user_role', '=', 'reviewer_pengabdian')
             ->where('user_id', '!=', Session::get('user_id'))
             ->orderBy('user_name', 'asc')->get();
 
@@ -40,7 +40,7 @@ class PlottingReviewerController extends Controller
 
     public function give_reviewer($id)
     {
-        $reviewer = User::where('user_role', 'reviewer')->get();
+        $reviewer = User::where('user_role', 'reviewer_pengabdian')->get();
 
         $view_data = [
             'usulan_id' => $id,
@@ -80,7 +80,7 @@ class PlottingReviewerController extends Controller
     // MONEV
     public function index_monev()
     {
-        $user = User::where('user_role', '=', 'reviewer')
+        $user = User::where('user_role', '=', 'reviewer_pengabdian')
             ->where('user_id', '!=', Session::get('user_id'))
             ->orderBy('user_name', 'asc')->get();
 
@@ -102,7 +102,7 @@ class PlottingReviewerController extends Controller
 
     public function give_monev_reviewer($id)
     {
-        $reviewer = User::where('user_role', 'reviewer')->get();
+        $reviewer = User::where('user_role', 'reviewer_pengabdian')->get();
 
         $view_data = [
             'usulan_id' => $id,

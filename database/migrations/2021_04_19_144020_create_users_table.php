@@ -19,9 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('user_nidn', 10)->nullable()->unique();
             $table->string('user_name', 255);
             $table->string('user_password', 255);
-            $table->boolean('user_ban')->default(false);
+            $table->boolean('user_pengabdian_ban')->default(false);
+            $table->boolean('user_penelitian_ban')->default(false);
 
-            $table->enum('user_role', ['pengusul', 'admin', 'reviewer']);
+            $table->enum('user_role', ['pengusul', 'admin', 'reviewer_penelitian', 'reviewer_pengabdian']);
 
             $table->string('user_image', 255);
 

@@ -32,7 +32,7 @@ class Is_Suspend
             $user = User::where('user_id', Session::get('user_id'))
                 ->first();
             // $unlock_pass = Usulan_pengabdian::where
-            if ($user->user_ban == false) {
+            if ($user->user_pengabdian_ban == false) {
                 return $next($request);
             } else {
                 return redirect()->route('suspend');

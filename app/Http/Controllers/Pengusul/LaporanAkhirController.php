@@ -37,10 +37,10 @@ class LaporanAkhirController extends Controller
             }
         }
 
-        $is_suspend = User::find(Session::get('user_id'))->user_ban;
+        $is_suspend = User::find(Session::get('user_id'));
 
         $view_data = [
-            'is_suspend' => $is_suspend,
+            'is_suspend' => $is_suspend->user_pengabdian_ban,
             'pengabdian' => $pengabdian,
             'is_tambah_unlock' => $is_tambah_unlock,
             'tambah_unlock' => $tambah_unlock,

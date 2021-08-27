@@ -260,10 +260,10 @@ class PengusulController extends Controller
     {
         $user = User::where('user_id', $id)->first();
 
-        $suspend = ($user->user_ban == false) ? true : false;
+        $suspend = ($user->user_pengabdian_ban == false) ? true : false;
 
         $data = [
-            'user_ban' => $suspend,
+            'user_pengabdian_ban' => $suspend,
         ];
 
         //Update Data

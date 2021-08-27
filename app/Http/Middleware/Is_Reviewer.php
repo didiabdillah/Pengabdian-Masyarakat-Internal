@@ -20,7 +20,7 @@ class Is_Reviewer
     public function handle($request, Closure $next)
     {
         $role = User::where('user_id', Session::get('user_id'))->first()->user_role;
-        if ($role == "reviewer") {
+        if ($role == "reviewer_pengabdian") {
             return $next($request);
         } else {
             return redirect()->route('forbidden');

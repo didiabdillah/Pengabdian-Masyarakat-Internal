@@ -22,37 +22,13 @@ class CreatePkmPenilaianMonevTable extends Migration
             // $table->integer('penilaian_monev_urutan')->nullable();
             // $table->string('penilaian_monev_kriteria');
 
-            $table->string('penilaian_monev_status_1')->nullable();
-            $table->string('penilaian_monev_status_2')->nullable();
-            $table->string('penilaian_monev_status_3')->nullable();
-            $table->string('penilaian_monev_status_4')->nullable();
-            $table->string('penilaian_monev_status_5')->nullable();
-            $table->string('penilaian_monev_status_6')->nullable();
-            $table->string('penilaian_monev_status_7')->nullable();
-            $table->string('penilaian_monev_status_8')->nullable();
-            $table->string('penilaian_monev_status_9')->nullable();
+            $table->text('penilaian_monev_skor')->nullable();
+            $table->text('penilaian_monev_nilai')->nullable();
+            $table->text('penilaian_monev_justifikasi')->nullable();
 
-            $table->unsignedFloat('penilaian_monev_skor_1')->nullable();
-            $table->unsignedFloat('penilaian_monev_skor_2')->nullable();
-            $table->unsignedFloat('penilaian_monev_skor_3')->nullable();
-            $table->unsignedFloat('penilaian_monev_skor_4')->nullable();
-            $table->unsignedFloat('penilaian_monev_skor_5')->nullable();
-            $table->unsignedFloat('penilaian_monev_skor_6')->nullable();
-            $table->unsignedFloat('penilaian_monev_skor_7')->nullable();
-            $table->unsignedFloat('penilaian_monev_skor_8')->nullable();
-            $table->unsignedFloat('penilaian_monev_skor_9')->nullable();
+            $table->text('penilaian_monev_catatan')->nullable();
 
-            $table->unsignedFloat('penilaian_monev_nilai_1')->nullable();
-            $table->unsignedFloat('penilaian_monev_nilai_2')->nullable();
-            $table->unsignedFloat('penilaian_monev_nilai_3')->nullable();
-            $table->unsignedFloat('penilaian_monev_nilai_4')->nullable();
-            $table->unsignedFloat('penilaian_monev_nilai_5')->nullable();
-            $table->unsignedFloat('penilaian_monev_nilai_6')->nullable();
-            $table->unsignedFloat('penilaian_monev_nilai_7')->nullable();
-            $table->unsignedFloat('penilaian_monev_nilai_8')->nullable();
-            $table->unsignedFloat('penilaian_monev_nilai_9')->nullable();
-
-            $table->text('penilaian_monev_komentar')->nullable();
+            $table->mediumText('penilaian_monev_tanda_tangan')->nullable();
 
             $table->timestamps();
 

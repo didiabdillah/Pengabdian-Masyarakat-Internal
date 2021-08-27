@@ -16,7 +16,7 @@ class CreatePkmMitraSasaranTable extends Migration
         Schema::create('pkm_mitra_sasaran', function (Blueprint $table) {
             $table->bigIncrements('mitra_sasaran_id');
             $table->string('mitra_sasaran_pengabdian_id', 64);
-            $table->enum('mitra_sasaran_tipe_mitra', ['kelompok_masyarakat', 'umkm']);
+            $table->string('mitra_sasaran_tipe_mitra');
             $table->string('mitra_sasaran_jenis_mitra');
             $table->string('mitra_sasaran_nama_pimpinan_mitra');
             $table->string('mitra_sasaran_jabatan_pimpinan_mitra');

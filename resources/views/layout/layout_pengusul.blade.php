@@ -38,7 +38,7 @@
     <div class="wrapper">
         <!-- Navbar -->
 
-        @php $is_suspended = App\Models\User::select('user_ban')->where('user_id', Session::get('user_id'))->first()->user_ban; @endphp
+        @php $is_suspended = App\Models\User::select('user_pengabdian_ban')->where('user_id', Session::get('user_id'))->first()->user_pengabdian_ban; @endphp
         @if($is_suspended)
         <div class="alert alert-danger main-header layout-navbar-fixed mt-5 pt-3" role="alert">
             <b><i class="icon fas fa-ban"></i> {{__('id.suspend_banner_1')}}</b> {{__('id.suspend_banner_2')}}
