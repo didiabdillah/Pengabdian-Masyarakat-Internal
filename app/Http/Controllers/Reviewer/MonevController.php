@@ -130,12 +130,19 @@ class MonevController extends Controller
             ->orderBy('anggota_pengabdian_role', 'asc')
             ->get();
 
+        $penilaian_monev = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
+
+        $skor = ($penilaian_monev) ? json_decode($penilaian_monev->penilaian_monev_skor, true) : NULL;
+        $justifikasi = ($penilaian_monev) ? json_decode($penilaian_monev->penilaian_monev_justifikasi, true) : NULL;
+
         $view_data = [
             'anggota' => $anggota,
             'usulan' => $usulan,
             'ketua' => $ketua,
+            'penilaian_monev' => $penilaian_monev,
             'id' => $id,
-            'nilai' => $penilaian_monev,
+            'skor' => $skor,
+            'justifikasi' => $justifikasi,
         ];
 
         return view('reviewer.monev.nilai', $view_data);
@@ -163,188 +170,129 @@ class MonevController extends Controller
         // Input Validation
         $request->validate(
             [
-                'komentar'  => 'max:60000',
+                'catatan'  => 'max:60000',
+                'justifikasi_1'  => 'max:255',
+                'justifikasi_2a'  => 'max:255',
+                'justifikasi_2b'  => 'max:255',
+                'justifikasi_2c'  => 'max:255',
+                'justifikasi_2d'  => 'max:255',
+                'justifikasi_2e'  => 'max:255',
+                'justifikasi_2f'  => 'max:255',
+                'justifikasi_3'  => 'max:255',
+                'justifikasi_4'  => 'max:255',
+                'justifikasi_5'  => 'max:255',
+                'justifikasi_6'  => 'max:255',
             ]
         );
 
-        $status[1] = $request->status_1;
-        $status[2] = $request->status_2;
-        $status[3] = $request->status_3;
-        $status[4] = $request->status_4;
-        $status[5] = $request->status_5;
-        $status[6] = $request->status_6;
-        $status[7] = $request->status_7;
-        $status[8] = $request->status_8;
-        $status[9] = $request->status_9;
+        $catatan = htmlspecialchars($request->catatan);
 
-        $skor[1] = $request->skor_1;
-        $skor[2] = $request->skor_2;
-        $skor[3] = $request->skor_3;
-        $skor[4] = $request->skor_4;
-        $skor[5] = $request->skor_5;
-        $skor[6] = $request->skor_6;
-        $skor[7] = $request->skor_7;
-        $skor[8] = $request->skor_8;
-        $skor[9] = $request->skor_9;
+        $justifikasi["1"] = htmlspecialchars($request->justifikasi_1);
+        $justifikasi["2a"] = htmlspecialchars($request->justifikasi_2a);
+        $justifikasi["2b"] = htmlspecialchars($request->justifikasi_2b);
+        $justifikasi["2c"] = htmlspecialchars($request->justifikasi_2c);
+        $justifikasi["2d"] = htmlspecialchars($request->justifikasi_2d);
+        $justifikasi["2e"] = htmlspecialchars($request->justifikasi_2e);
+        $justifikasi["2f"] = htmlspecialchars($request->justifikasi_2f);
+        $justifikasi["3"] = htmlspecialchars($request->justifikasi_3);
+        $justifikasi["4"] = htmlspecialchars($request->justifikasi_4);
+        $justifikasi["5"] = htmlspecialchars($request->justifikasi_5);
+        $justifikasi["6"] = htmlspecialchars($request->justifikasi_6);
 
-        $komentar = htmlspecialchars($request->komentar);
+        $skor["1"] = ($request->skor_1 != NULL || $request->skor_1 != 0) ? $request->skor_1 : 0;
+        $skor["2a"] = ($request->skor_2a != NULL || $request->skor_2a != 0) ? $request->skor_2a : 0;
+        $skor["2b"] = ($request->skor_2b != NULL || $request->skor_2b != 0) ? $request->skor_2b : 0;
+        $skor["2c"] = ($request->skor_2c != NULL || $request->skor_2c != 0) ? $request->skor_2c : 0;
+        $skor["2d"] = ($request->skor_2d != NULL || $request->skor_2d != 0) ? $request->skor_2d : 0;
+        $skor["2e"] = ($request->skor_2e != NULL || $request->skor_2e != 0) ? $request->skor_2e : 0;
+        $skor["2f"] = ($request->skor_2f != NULL || $request->skor_2f != 0) ? $request->skor_2f : 0;
+        $skor["3"] = ($request->skor_3 != NULL || $request->skor_3 != 0) ? $request->skor_3 : 0;
+        $skor["4"] = ($request->skor_4 != NULL || $request->skor_4 != 0) ? $request->skor_4 : 0;
+        $skor["5"] = ($request->skor_5 != NULL || $request->skor_5 != 0) ? $request->skor_5 : 0;
+        $skor["6"] = ($request->skor_6 != NULL || $request->skor_6 != 0) ? $request->skor_6 : 0;
 
-        $nilai[1] = 0;
-        $nilai[2] = 0;
-        $nilai[3] = 0;
-        $nilai[4] = 0;
-        $nilai[5] = 0;
-        $nilai[6] = 0;
-        $nilai[7] = 0;
-        $nilai[8] = 0;
-        $nilai[9] = 0;
+        $skor_2 = [
+            1 => ($skor["2a"] != NULL || $skor["2a"] != 0) ? $skor["2a"] : 0,
+            2 => ($skor["2b"] != NULL || $skor["2b"] != 0) ? $skor["2b"] : 0,
+            3 => ($skor["2c"] != NULL || $skor["2c"] != 0) ? $skor["2c"] : 0,
+            4 => ($skor["2d"] != NULL || $skor["2d"] != 0) ? $skor["2d"] : 0,
+            5 => ($skor["2e"] != NULL || $skor["2e"] != 0) ? $skor["2e"] : 0,
+            6 => ($skor["2f"] != NULL || $skor["2f"] != 0) ? $skor["2f"] : 0,
+        ];
 
-        if ($skor[1] != NULL && $skor[2] != NULL) {
-            $nilai_avg = ($skor[1] + $skor[2]) / 2;
-            $nilai[1] = $nilai_avg * 20;
-            $nilai[2] = $nilai_avg * 20;
-        } else if ($skor[1] != NULL) {
-            $nilai_avg = ($skor[1]) / 1;
-            $nilai[1] = $nilai_avg * 20;
-        } else if ($skor[2] != NULL) {
-            $nilai_avg = ($skor[2]) / 1;
-            $nilai[2] = $nilai_avg * 20;
-        } else {
-            $nilai[1] = 0;
-            $nilai[2] = 0;
+        $is_skor2_not_null = 0;
+
+        foreach ($skor_2 as $skor2) {
+            if ($skor2 != NULL || $skor2 != 0) {
+                $is_skor2_not_null++;
+            }
         }
+        $var_skor2_not_empty = ($is_skor2_not_null == 0) ? 1 : $is_skor2_not_null;
 
-        if ($skor[3] != NULL && $skor[4] != NULL && $skor[5] != NULL && $skor[6] != NULL) {
-            $nilai_avg = ($skor[3] + $skor[4] + $skor[5] + $skor[6]) / 4;
-            $nilai[3] = $nilai_avg * 60;
-            $nilai[4] = $nilai_avg * 60;
-            $nilai[5] = $nilai_avg * 60;
-            $nilai[6] = $nilai_avg * 60;
-        } elseif ($skor[3] != NULL && $skor[4] != NULL && $skor[5] != NULL) {
-            $nilai_avg = ($skor[3] + $skor[4] + $skor[5]) / 3;
-            $nilai[3] = $nilai_avg * 60;
-            $nilai[4] = $nilai_avg * 60;
-            $nilai[5] = $nilai_avg * 60;
-        } elseif ($skor[3] != NULL && $skor[5] != NULL && $skor[6] != NULL) {
-            $nilai_avg = ($skor[3] + $skor[5] + $skor[6]) / 3;
-            $nilai[3] = $nilai_avg * 60;
-            $nilai[5] = $nilai_avg * 60;
-            $nilai[6] = $nilai_avg * 60;
-        } elseif ($skor[3] != NULL && $skor[4] != NULL && $skor[6] != NULL) {
-            $nilai_avg = ($skor[3] + $skor[4] + $skor[6]) / 3;
-            $nilai[3] = $nilai_avg * 60;
-            $nilai[4] = $nilai_avg * 60;
-            $nilai[6] = $nilai_avg * 60;
-            // 
-        } elseif ($skor[4] != NULL && $skor[5] != NULL && $skor[6] != NULL) {
-            $nilai_avg = ($skor[4] + $skor[5] + $skor[6]) / 3;
-            $nilai[4] = $nilai_avg * 60;
-            $nilai[5] = $nilai_avg * 60;
-            $nilai[6] = $nilai_avg * 60;
-        } elseif ($skor[3] != NULL && $skor[4] != NULL) {
-            $nilai_avg = ($skor[3] + $skor[4]) / 2;
-            $nilai[3] = $nilai_avg * 60;
-            $nilai[4] = $nilai_avg * 60;
-        } elseif ($skor[3] != NULL && $skor[5] != NULL) {
-            $nilai_avg = ($skor[3] + $skor[5]) / 2;
-            $nilai[3] = $nilai_avg * 60;
-            $nilai[5] = $nilai_avg * 60;
-        } elseif ($skor[3] != NULL && $skor[6] != NULL) {
-            $nilai_avg = ($skor[3] + $skor[6]) / 2;
-            $nilai[3] = $nilai_avg * 60;
-            $nilai[6] = $nilai_avg * 60;
-            // 
-        } elseif ($skor[4] != NULL && $skor[5] != NULL) {
-            $nilai_avg = ($skor[4] + $skor[5]) / 2;
-            $nilai[4] = $nilai_avg * 60;
-            $nilai[5] = $nilai_avg * 60;
-        } elseif ($skor[4] != NULL && $skor[6] != NULL) {
-            $nilai_avg = ($skor[4] + $skor[6]) / 2;
-            $nilai[4] = $nilai_avg * 60;
-            $nilai[6] = $nilai_avg * 60;
-            // 
-        } elseif ($skor[5] != NULL && $skor[6] != NULL) {
-            $nilai_avg = ($skor[5] + $skor[6]) / 2;
-            $nilai[5] = $nilai_avg * 60;
-            $nilai[6] = $nilai_avg * 60;
-            // 
-        } elseif ($skor[3] != NULL) {
-            $nilai_avg = ($skor[3]) / 1;
-            $nilai[3] = $nilai_avg * 60;
-        } elseif ($skor[4] != NULL) {
-            $nilai_avg = ($skor[4]) / 1;
-            $nilai[4] = $nilai_avg * 60;
-        } elseif ($skor[5] != NULL) {
-            $nilai_avg = ($skor[5]) / 1;
-            $nilai[5] = $nilai_avg * 60;
-        } elseif ($skor[6] != NULL) {
-            $nilai_avg = ($skor[6]) / 1;
-            $nilai[6] = $nilai_avg * 60;
-            // 
-        } else {
-            $nilai[3] = 0;
-            $nilai[4] = 0;
-            $nilai[5] = 0;
-            $nilai[6] = 0;
-        }
+        $skor_avg = ($skor_2[1] + $skor_2[2] + $skor_2[3] + $skor_2[4] + $skor_2[5] + $skor_2[6]) / $var_skor2_not_empty;
 
-        if ($skor[7] != NULL && $skor[8] != NULL) {
-            $nilai_avg = ($skor[7] + $skor[8]) / 2;
-            $nilai[7] = $nilai_avg * 20;
-            $nilai[8] = $nilai_avg * 20;
-        } elseif ($skor[7] != NULL) {
-            $nilai_avg = ($skor[7]) / 1;
-            $nilai[7] = $nilai_avg * 20;
-        } elseif ($skor[8] != NULL) {
-            $nilai_avg = ($skor[8]) / 1;
-            $nilai[8] = $nilai_avg * 20;
-        } else {
-            $nilai[7] = 0;
-            $nilai[8] = 0;
-        }
+        $nilai["1"] = ($skor["1"]) ? $skor["1"] * 10 : 0 * 10;
+        $nilai["2a"] = ($skor_2[1] != 0) ? $skor_avg * 15 : 0;
+        $nilai["2b"] = ($skor_2[2] != 0) ? $skor_avg * 15 : 0;
+        $nilai["2c"] = ($skor_2[3] != 0) ? $skor_avg * 15 : 0;
+        $nilai["2d"] = ($skor_2[4] != 0) ? $skor_avg * 15 : 0;
+        $nilai["2e"] = ($skor_2[5] != 0) ? $skor_avg * 15 : 0;
+        $nilai["2f"] = ($skor_2[6] != 0) ? $skor_avg * 15 : 0;
+        $nilai["3"] = ($skor["3"]) ? $skor["3"] * 25 : 0 * 25;
+        $nilai["4"] = ($skor["4"]) ? $skor["4"] * 25 : 0 * 25;
+        $nilai["5"] = ($skor["5"]) ? $skor["5"] * 15 : 0 * 15;
+        $nilai["6"] = ($skor["6"]) ? $skor["6"] * 10 : 0 * 10;
 
-        if ($skor[9] != NULL) {
-            $nilai_avg = ($skor[9]) / 1;
-            $nilai[9] = $nilai_avg * 10;
-        } else {
-            $nilai[9] = 0;
-        }
+        $json_skor = json_encode([
+            "1" => $skor["1"],
+            "2a" => $skor["2a"],
+            "2b" => $skor["2b"],
+            "2c" => $skor["2c"],
+            "2d" => $skor["2d"],
+            "2e" => $skor["2e"],
+            "2f" => $skor["2f"],
+            "3" => $skor["3"],
+            "4" => $skor["4"],
+            "5" => $skor["5"],
+            "6" => $skor["6"],
+        ]);
+
+        $json_nilai = json_encode([
+            "1" => $nilai["1"],
+            "2a" => $nilai["2a"],
+            "2b" => $nilai["2b"],
+            "2c" => $nilai["2c"],
+            "2d" => $nilai["2d"],
+            "2e" => $nilai["2e"],
+            "2f" => $nilai["2f"],
+            "3" => $nilai["3"],
+            "4" => $nilai["4"],
+            "5" => $nilai["5"],
+            "6" => $nilai["6"],
+        ]);
+
+        $json_justifikasi = json_encode([
+            "1" => $justifikasi["1"],
+            "2a" => $justifikasi["2a"],
+            "2b" => $justifikasi["2b"],
+            "2c" => $justifikasi["2c"],
+            "2d" => $justifikasi["2d"],
+            "2e" => $justifikasi["2e"],
+            "2f" => $justifikasi["2f"],
+            "3" => $justifikasi["3"],
+            "4" => $justifikasi["4"],
+            "5" => $justifikasi["5"],
+            "6" => $justifikasi["6"],
+        ]);
 
         //Input Data
         $data = [
             'penilaian_monev_pengabdian_id' => $id,
-            'penilaian_monev_komentar' => $komentar,
-
-            'penilaian_monev_status_1' => $status[1],
-            'penilaian_monev_status_2' => $status[2],
-            'penilaian_monev_status_3' => $status[3],
-            'penilaian_monev_status_4' => $status[4],
-            'penilaian_monev_status_5' => $status[5],
-            'penilaian_monev_status_6' => $status[6],
-            'penilaian_monev_status_7' => $status[7],
-            'penilaian_monev_status_8' => $status[8],
-            'penilaian_monev_status_9' => $status[9],
-
-            'penilaian_monev_skor_1' => $skor[1],
-            'penilaian_monev_skor_2' => $skor[2],
-            'penilaian_monev_skor_3' => $skor[3],
-            'penilaian_monev_skor_4' => $skor[4],
-            'penilaian_monev_skor_5' => $skor[5],
-            'penilaian_monev_skor_6' => $skor[6],
-            'penilaian_monev_skor_7' => $skor[7],
-            'penilaian_monev_skor_8' => $skor[8],
-            'penilaian_monev_skor_9' => $skor[9],
-
-            'penilaian_monev_nilai_1' => $nilai[1],
-            'penilaian_monev_nilai_2' => $nilai[2],
-            'penilaian_monev_nilai_3' => $nilai[3],
-            'penilaian_monev_nilai_4' => $nilai[4],
-            'penilaian_monev_nilai_5' => $nilai[5],
-            'penilaian_monev_nilai_6' => $nilai[6],
-            'penilaian_monev_nilai_7' => $nilai[7],
-            'penilaian_monev_nilai_8' => $nilai[8],
-            'penilaian_monev_nilai_9' => $nilai[9],
-
+            'penilaian_monev_skor' => "$json_skor",
+            'penilaian_monev_nilai' =>    "$json_nilai",
+            'penilaian_monev_justifikasi' => "$json_justifikasi",
+            'penilaian_monev_catatan' => $catatan,
+            // 'penilaian_monev_tanda_tangan' =>
             'created_at' =>  date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -361,7 +309,7 @@ class MonevController extends Controller
             'Nilai Monev Ditambah' //Sub Alert Message
         );
 
-        return redirect()->route('reviewer_monev_capaian', $id);
+        return redirect()->route('reviewer_monev_nilai_ulasan', $id);
     }
 
     public function capaian($id)
@@ -706,9 +654,11 @@ class MonevController extends Controller
             ->orderBy('anggota_pengabdian_role', 'asc')
             ->get();
 
-        $nilai = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
+        $penilaian_monev = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
 
-        $capaian = Capaian_kegiatan::where('capaian_kegiatan_monev_id', $nilai->penilaian_monev_id)->first();
+        $skor = json_decode($penilaian_monev->penilaian_monev_skor, true);
+        $nilai = json_decode($penilaian_monev->penilaian_monev_nilai, true);
+        $justifikasi = json_decode($penilaian_monev->penilaian_monev_justifikasi, true);
 
         // $keterangan_nilai = [
         //     "1" => "Sangat Buruk",
@@ -732,9 +682,11 @@ class MonevController extends Controller
             'anggota' => $anggota,
             'usulan' => $usulan,
             'ketua' => $ketua,
-            'nilai' => $nilai,
+            'penilaian_monev' => $penilaian_monev,
             'id' => $id,
-            'capaian' => $capaian,
+            'skor' => $skor,
+            'justifikasi' => $justifikasi,
+            'nilai' => $nilai,
             // 'total_nilai' => $total_nilai,
         ];
 

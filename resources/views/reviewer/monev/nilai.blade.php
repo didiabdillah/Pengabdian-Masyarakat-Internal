@@ -39,6 +39,10 @@
                             <table class="table table-borderless table-sm">
                                 <tbody>
                                     <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Judul</th>
+                                        <td>: {{$usulan->usulan_pengabdian_judul}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
                                         <th scope="row" style="width: 250px;">Nama Ketua Pengusul</th>
                                         <td>: {{$ketua->user_name}}</td>
                                     </tr>
@@ -79,264 +83,297 @@
                                     <tr class="text-center">
                                         <th scope="col">NO</th>
                                         <th scope="col">KRITERIA</th>
-                                        <th scope="col">STATUS</th>
                                         <th scope="col">BOBOT</th>
                                         <th scope="col">SKOR</th>
-                                        <!-- <th scope="col">NILAI</th> -->
+                                        <th scope="col">JUSTIFIKASI PENILAIAN</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- NO 1 -->
                                     <tr>
-                                        <th class="text-center" scope="row" rowspan="2">1</th>
+                                        <th class="text-center" scope="row">1</th>
                                         <td>
-                                            Publikasi Ilmiah di jurnal/prosiding
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-1 @error('status_1') is-invalid @enderror" style="width: 100%;" name="status_1" id="status_1">
-                                                <option value="">-Status-</option>
-                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Draft"){{"selected"}}@endif @endif>Draft</option>
-                                                <option value="Submitted" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Submitted"){{"selected"}}@endif @endif>Submitted</option>
-                                                <option value="Reviewed" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Reviewed"){{"selected"}}@endif @endif>Reviewed</option>
-                                                <option value="Accepted" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Accepted"){{"selected"}}@endif @endif>Accepted</option>
-                                                <option value="Published" @if($nilai) @if($nilai->penilaian_monev_status_1 == "Published"){{"selected"}}@endif @endif>Published</option>
-                                            </select>
-                                        </td>
-                                        <td rowspan="2" class="text-center">20</td>
-                                        <td>
-                                            <select class="form-control select2-skor-1 @error('skor_1') is-invalid @enderror" style="width: 100%;" name="skor_1" id="skor_1">
-                                                <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_1 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            Publikasi pada media massa (cetak/elektronik)
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-2 @error('status_2') is-invalid @enderror" style="width: 100%;" name="status_2" id="status_2">
-                                                <option value="">-Status-</option>
-                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_2 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
-                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_2 == "Draft"){{"selected"}}@endif @endif>Draft</option>
-                                                <option value="Editting" @if($nilai) @if($nilai->penilaian_monev_status_2 == "Editting"){{"selected"}}@endif @endif>Editting</option>
-                                                <option value="Sudah Terbit" @if($nilai) @if($nilai->penilaian_monev_status_2 == "Sudah Terbit"){{"selected"}}@endif @endif>Sudah Terbit</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-skor-2 @error('skor_2') is-invalid @enderror" style="width: 100%;" name="skor_2" id="skor_2">
-                                                <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_2 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th class="text-center" scope="row" rowspan="4">2</th>
-                                        <td>
-                                            Peningkatan omzet pada mitra yang bergerak dalam bidang ekonomi
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-3 @error('status_3') is-invalid @enderror" style="width: 100%;" name="status_3" id="status_3">
-                                                <option value="">-Status-</option>
-                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_3 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
-                                                <option value="Ada" @if($nilai) @if($nilai->penilaian_monev_status_3 == "Ada"){{"selected"}}@endif @endif>Ada</option>
-                                            </select>
-                                        </td>
-                                        <td rowspan="4" class="text-center">60</td>
-                                        <td>
-                                            <select class="form-control select2-skor-3 @error('skor_3') is-invalid @enderror" style="width: 100%;" name="skor_3" id="skor_3">
-                                                <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_3 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            Peningkatan kualitas dan kuantitas produk
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-4 @error('status_4') is-invalid @enderror" style="width: 100%;" name="status_4" id="status_4">
-                                                <option value="">-Status-</option>
-                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_4 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
-                                                <option value="Ada" @if($nilai) @if($nilai->penilaian_monev_status_4 == "Ada"){{"selected"}}@endif @endif>Ada</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-skor-4 @error('skor_4') is-invalid @enderror" style="width: 100%;" name="skor_4" id="skor_4">
-                                                <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_4 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            Peningkatan pemahaman dan ketrampilan masyarakat
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-5 @error('status_5') is-invalid @enderror" style="width: 100%;" name="status_5" id="status_5">
-                                                <option value="">-Status-</option>
-                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_5 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
-                                                <option value="Ada" @if($nilai) @if($nilai->penilaian_monev_status_5 == "Ada"){{"selected"}}@endif @endif>Ada</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-skor-5 @error('skor_5') is-invalid @enderror" style="width: 100%;" name="skor_5" id="skor_5">
-                                                <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_5 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            Peningkatan ketentraman/kesehatan masyarakat (mitra masyarakat umum)
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-6 @error('status_6') is-invalid @enderror" style="width: 100%;" name="status_6" id="status_6">
-                                                <option value="">-Status-</option>
-                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_6 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
-                                                <option value="Ada" @if($nilai) @if($nilai->penilaian_monev_status_6 == "Ada"){{"selected"}}@endif @endif>Ada</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-skor-6 @error('skor_6') is-invalid @enderror" style="width: 100%;" name="skor_6" id="skor_6">
-                                                <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_6 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th class="text-center" scope="row" rowspan="2">3</th>
-                                        <td>
-                                            Jasa, model, rekayasa social, sistem, produk/barang
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-7 @error('status_7') is-invalid @enderror" style="width: 100%;" name="status_7" id="status_7">
-                                                <option value="">-Status-</option>
-                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_7 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
-                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_7 == "Draft"){{"selected"}}@endif @endif>Draft</option>
-                                                <option value="Produk" @if($nilai) @if($nilai->penilaian_monev_status_7 == "Produk"){{"selected"}}@endif @endif>Produk</option>
-                                                <option value="Penerapan" @if($nilai) @if($nilai->penilaian_monev_status_7 == "Penerapan"){{"selected"}}@endif @endif>Penerapan</option>
-                                            </select>
-                                        </td>
-                                        <td rowspan="2" class="text-center">10</td>
-                                        <td>
-                                            <select class="form-control select2-skor-7 @error('skor_7') is-invalid @enderror" style="width: 100%;" name="skor_7" id="skor_7">
-                                                <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_7 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Hak kekayaan intelektual
+                                            <b>Kontribusi Pihak Ketiga</b>
                                             <br>
-                                            (paten, paten sederhana, hak cipta, merek dagang, rahasia dagang,
-                                            <br>
-                                            desain produk industri, perlindungan varietas tanaman, perlindungan topografi)
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-8 @error('status_8') is-invalid @enderror" style="width: 100%;" name="status_8" id="status_8">
-                                                <option value="">-Status-</option>
-                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_8 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
-                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_8 == "Draft"){{"selected"}}@endif @endif>Draft</option>
-                                                <option value="Terdaftar" @if($nilai) @if($nilai->penilaian_monev_status_8 == "Terdaftar"){{"selected"}}@endif @endif>Terdaftar</option>
-                                                <option value="Granted" @if($nilai) @if($nilai->penilaian_monev_status_8 == "Granted"){{"selected"}}@endif @endif>Granted</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-skor-8 @error('skor_8') is-invalid @enderror" style="width: 100%;" name="skor_8" id="skor_8">
-                                                <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_8 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th class="text-center" scope="row">4</th>
-                                        <td>
-                                            Buku Ajar
-                                        </td>
-                                        <td>
-                                            <select class="form-control select2-status-9 @error('status_9') is-invalid @enderror" style="width: 100%;" name="status_9" id="status_9">
-                                                <option value="">-Status-</option>
-                                                <option value="Tidak Ada" @if($nilai) @if($nilai->penilaian_monev_status_9 == "Tidak Ada"){{"selected"}}@endif @endif>Tidak Ada</option>
-                                                <option value="Draft" @if($nilai) @if($nilai->penilaian_monev_status_9 == "Draft"){{"selected"}}@endif @endif>Draft</option>
-                                                <option value="Editting" @if($nilai) @if($nilai->penilaian_monev_status_9 == "Editting"){{"selected"}}@endif @endif>Editting</option>
-                                                <option value="Sudah Terbit" @if($nilai) @if($nilai->penilaian_monev_status_9 == "Sudah Terbit"){{"selected"}}@endif @endif>Sudah Terbit</option>
-                                            </select>
+                                            (Dukungan dana dan/atau sarana dan prasarana)
                                         </td>
                                         <td class="text-center">10</td>
                                         <td>
-                                            <select class="form-control select2-skor-9 @error('skor_9') is-invalid @enderror" style="width: 100%;" name="skor_9" id="skor_9">
+                                            <select class="form-control select2-skor-1 @error('skor_1') is-invalid @enderror" style="width: 100%;" name="skor_1" id="skor_1">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "1"){{"selected"}}@endif @endif>(1) Buruk</option>
-                                                <option value="2" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "2"){{"selected"}}@endif @endif>(2) Sangat Kurang</option>
-                                                <option value="3" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "3"){{"selected"}}@endif @endif>(3) Kurang</option>
-                                                <option value="4" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "4"){{"selected"}}@endif @endif>(4) Cukup</option>
-                                                <option value="5" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "5"){{"selected"}}@endif @endif>(5) Baik</option>
-                                                <option value="6" @if($nilai) @if($nilai->penilaian_monev_skor_9 == "6"){{"selected"}}@endif @endif>(6) Sangat Baik</option>
+                                                <option value="1" @if($skor) @if($skor["1"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["1"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["1"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["1"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["1"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["1"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
+                                        <td>
+                                            <input name="justifikasi_1" type="text" class="form-control @error('justifikasi_1') is-invalid @enderror" id="justifikasi_1" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['1']}}@endif">
+                                        </td>
                                     </tr>
+
+                                    <!-- NO 2A -->
+                                    <tr>
+                                        <th class="text-center" scope="row" rowspan="6">2</th>
+                                        <td>
+                                            <b>Kegiatan PM</b>
+                                            (Pilih butir-butir yang sesuai dengan kegiatan)
+                                            <br>
+                                            a. Program Capacity Building
+                                        </td>
+                                        <td rowspan="6" class="text-center">15</td>
+                                        <td>
+                                            <select class="form-control select2-skor-2a @error('skor_2a') is-invalid @enderror" style="width: 100%;" name="skor_2a" id="skor_2a">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["2a"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["2a"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["2a"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["2a"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["2a"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["2a"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_2a" type="text" class="form-control @error('justifikasi_2a') is-invalid @enderror" id="justifikasi_2a" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2a']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 2B -->
+                                    <tr>
+                                        <td>
+                                            b. Penerapan teknologi tepat guna
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-2b @error('skor_2b') is-invalid @enderror" style="width: 100%;" name="skor_2b" id="skor_2b">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["2b"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["2b"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["2b"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["2b"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["2b"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["2b"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_2b" type="text" class="form-control @error('justifikasi_2b') is-invalid @enderror" id="justifikasi_2b" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2b']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 2C -->
+                                    <tr>
+                                        <td>
+                                            c. Problem Solving
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-2c @error('skor_2c') is-invalid @enderror" style="width: 100%;" name="skor_2c" id="skor_2c">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["2c"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["2c"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["2c"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["2c"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["2c"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["2c"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_2c" type="text" class="form-control @error('justifikasi_2c') is-invalid @enderror" id="justifikasi_2c" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2c']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 2D -->
+                                    <tr>
+                                        <td>
+                                            d. Difusi hasil-hasil penelitian
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-2d @error('skor_2d') is-invalid @enderror" style="width: 100%;" name="skor_2d" id="skor_2d">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["2d"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["2d"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["2d"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["2d"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["2d"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["2d"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_2d" type="text" class="form-control @error('justifikasi_2d') is-invalid @enderror" id="justifikasi_2d" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2d']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 2E -->
+                                    <tr>
+                                        <td>
+                                            e. Peningkatan daya saing UKM
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-2e @error('skor_2e') is-invalid @enderror" style="width: 100%;" name="skor_2e" id="skor_2e">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["2e"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["2e"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["2e"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["2e"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["2e"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["2e"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_2e" type="text" class="form-control @error('justifikasi_2e') is-invalid @enderror" id="justifikasi_2e" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2e']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 2F -->
+                                    <tr>
+                                        <td>
+                                            f. Komersialisasi hasil-hasil penelitian
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2-skor-2f @error('skor_2f') is-invalid @enderror" style="width: 100%;" name="skor_2f" id="skor_2f">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["2f"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["2f"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["2f"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["2f"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["2f"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["2f"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_2f" type="text" class="form-control @error('justifikasi_2f') is-invalid @enderror" id="justifikasi_2f" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2f']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 3 -->
+                                    <tr>
+                                        <th class="text-center" scope="row">3</th>
+                                        <td>
+                                            <b>Peningkatan Potensi Daerah/Mitra</b>
+                                            <br>
+                                            (Keberhasilan program dalam memanfaatkan potensi daerah,
+                                            <br>
+                                            keserasian potensi daerah dan aktivitas program,
+                                            <br>
+                                            ketepatan program terhadap persoalan yang dihadapi mitra)
+                                        </td>
+                                        <td class="text-center">25</td>
+                                        <td>
+                                            <select class="form-control select2-skor-3 @error('skor_3') is-invalid @enderror" style="width: 100%;" name="skor_3" id="skor_3">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["3"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["3"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["3"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["3"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["3"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["3"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_3" type="text" class="form-control @error('justifikasi_3') is-invalid @enderror" id="justifikasi_3" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['3']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 4 -->
+                                    <tr>
+                                        <th class="text-center" scope="row">4</th>
+                                        <td>
+                                            <b>Partisipasi Masyarakat</b>
+                                            <br>
+                                            (Tingkat partisipasi masyarakat/mitra dalam pelaksanaan program,
+                                            <br>
+                                            posisi strategis masyarakat sebagai mitra, keterpaduan dan kebersamaan
+                                            <br>
+                                            dengan PT dengan Lembaga Pemerintah atau institusi setempat)
+                                        </td>
+                                        <td class="text-center">25</td>
+                                        <td>
+                                            <select class="form-control select2-skor-4 @error('skor_4') is-invalid @enderror" style="width: 100%;" name="skor_4" id="skor_4">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["4"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["4"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["4"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["4"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["4"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["4"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_4" type="text" class="form-control @error('justifikasi_4') is-invalid @enderror" id="justifikasi_4" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['4']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 5 -->
+                                    <tr>
+                                        <th class="text-center" scope="row">5</th>
+                                        <td>
+                                            <b>Mutu Pelaksanaan Program</b>
+                                            <br>
+                                            (Integritas, dedikasi dan kekompakan tim,
+                                            <br>
+                                            level penerimaan masyarakat, keberlanjutan)
+                                        </td>
+                                        <td class="text-center">15</td>
+                                        <td>
+                                            <select class="form-control select2-skor-5 @error('skor_5') is-invalid @enderror" style="width: 100%;" name="skor_5" id="skor_5">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["5"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["5"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["5"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["5"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["5"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["5"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_5" type="text" class="form-control @error('justifikasi_5') is-invalid @enderror" id="justifikasi_5" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['5']}}@endif">
+                                        </td>
+                                    </tr>
+
+                                    <!-- NO 6 -->
+                                    <tr>
+                                        <th class="text-center" scope="row">6</th>
+                                        <td>
+                                            <b>Lokasi Kegiatan</b>
+                                            <br>
+                                            (kemudahan pencapaian, intensitas kebersamaan di kawasan)
+                                        </td>
+                                        <td class="text-center">10</td>
+                                        <td>
+                                            <select class="form-control select2-skor-6 @error('skor_6') is-invalid @enderror" style="width: 100%;" name="skor_6" id="skor_6">
+                                                <option value="">-Skor-</option>
+                                                <option value="1" @if($skor) @if($skor["6"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if($skor) @if($skor["6"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if($skor) @if($skor["6"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if($skor) @if($skor["6"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if($skor) @if($skor["6"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if($skor) @if($skor["6"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name="justifikasi_6" type="text" class="form-control @error('justifikasi_6') is-invalid @enderror" id="justifikasi_6" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['6']}}@endif">
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                                 <tfoot>
                                     <tr class="text-center">
-                                        <th colspan="3">Jumlah</th>
+                                        <th colspan="2">Total</th>
                                         <th>100</th>
                                         <th colspan="2"></th>
                                     </tr>
                                 </tfoot>
                             </table>
 
+                            <!-- <div class="form-group">
+                                <label>Tanda Tangan</label>
+                                <div id="canvasDiv"></div>
+                            </div> -->
+
                             <div class="form-group">
-                                <label for="komentar">Komentar</label>
-                                <textarea class="form-control @error('komentar') is-invalid @enderror" id="komentar" name="komentar" placeholder="Komentar">{{old('komentar')}}</textarea>
-                                @error('komentar')
+                                <label for="catatan">Catatan Selama Peninjauan</label>
+                                <textarea class="form-control @error('catatan') is-invalid @enderror" id="catatan" name="catatan" placeholder="Catatan...">{{old('catatan')}}</textarea>
+                                @error('catatan')
                                 <div class=" invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -412,4 +449,145 @@
         });
     });
 </script>
+
+{{--<script>
+    $(document).ready(() => {
+        var canvasDiv = document.getElementById('canvasDiv');
+        var canvas = document.createElement('canvas');
+        canvas.setAttribute('id', 'canvas');
+        canvasDiv.appendChild(canvas);
+        $("#canvas").attr('height', $("#canvasDiv").outerHeight());
+        $("#canvas").attr('width', $("#canvasDiv").width());
+        if (typeof G_vmlCanvasManager != 'undefined') {
+            canvas = G_vmlCanvasManager.initElement(canvas);
+        }
+
+        context = canvas.getContext("2d");
+        $('#canvas').mousedown(function(e) {
+            var offset = $(this).offset()
+            var mouseX = e.pageX - this.offsetLeft;
+            var mouseY = e.pageY - this.offsetTop;
+
+            paint = true;
+            addClick(e.pageX - offset.left, e.pageY - offset.top);
+            redraw();
+        });
+
+        $('#canvas').mousemove(function(e) {
+            if (paint) {
+                var offset = $(this).offset()
+                //addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+                addClick(e.pageX - offset.left, e.pageY - offset.top, true);
+                console.log(e.pageX, offset.left, e.pageY, offset.top);
+                redraw();
+            }
+        });
+
+        $('#canvas').mouseup(function(e) {
+            paint = false;
+        });
+
+        $('#canvas').mouseleave(function(e) {
+            paint = false;
+        });
+
+        var clickX = new Array();
+        var clickY = new Array();
+        var clickDrag = new Array();
+        var paint;
+
+        function addClick(x, y, dragging) {
+            clickX.push(x);
+            clickY.push(y);
+            clickDrag.push(dragging);
+        }
+
+        $("#reset-btn").click(function() {
+            context.clearRect(0, 0, window.innerWidth, window.innerWidth);
+            clickX = [];
+            clickY = [];
+            clickDrag = [];
+        });
+
+        $(document).on('click', '#btn-save', function() {
+            var mycanvas = document.getElementById('canvas');
+            var img = mycanvas.toDataURL("image/png");
+            anchor = $("#signature");
+            anchor.val(img);
+            $("#signatureform").submit();
+        });
+
+        var drawing = false;
+        var mousePos = {
+            x: 0,
+            y: 0
+        };
+        var lastPos = mousePos;
+
+        canvas.addEventListener("touchstart", function(e) {
+            mousePos = getTouchPos(canvas, e);
+            var touch = e.touches[0];
+            var mouseEvent = new MouseEvent("mousedown", {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+
+
+        canvas.addEventListener("touchend", function(e) {
+            var mouseEvent = new MouseEvent("mouseup", {});
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+
+
+        canvas.addEventListener("touchmove", function(e) {
+
+            var touch = e.touches[0];
+            var offset = $('#canvas').offset();
+            var mouseEvent = new MouseEvent("mousemove", {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+
+
+
+        // Get the position of a touch relative to the canvas
+        function getTouchPos(canvasDiv, touchEvent) {
+            var rect = canvasDiv.getBoundingClientRect();
+            return {
+                x: touchEvent.touches[0].clientX - rect.left,
+                y: touchEvent.touches[0].clientY - rect.top
+            };
+        }
+
+
+        var elem = document.getElementById("canvas");
+
+        var defaultPrevent = function(e) {
+            e.preventDefault();
+        }
+        elem.addEventListener("touchstart", defaultPrevent);
+        elem.addEventListener("touchmove", defaultPrevent);
+
+
+        function redraw() {
+            //
+            lastPos = mousePos;
+            for (var i = 0; i < clickX.length; i++) {
+                context.beginPath();
+                if (clickDrag[i] && i) {
+                    context.moveTo(clickX[i - 1], clickY[i - 1]);
+                } else {
+                    context.moveTo(clickX[i] - 1, clickY[i]);
+                }
+                context.lineTo(clickX[i], clickY[i]);
+                context.closePath();
+                context.stroke();
+            }
+        }
+    })
+</script>--}}
 @endpush
