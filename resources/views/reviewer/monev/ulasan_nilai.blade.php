@@ -331,7 +331,7 @@
 
                         <div class="row mt-5 mx-2">
                             <h6>
-                                <b>Catatan :</b>
+                                <b>Catatan Selama Peninjauan :</b>
                                 <br>
                                 @if($penilaian_monev->penilaian_monev_catatan)
                                 {{$penilaian_monev->penilaian_monev_catatan}}
@@ -339,6 +339,24 @@
                                 {{"-"}}
                                 @endif
                             </h6>
+                        </div>
+
+                        <div class="row mx-2 mt-3">
+                            <div class="col align-self-start"></div>
+                            <div class="col align-self-center"></div>
+                            <div class="col align-self-end">
+                                <h6>
+                                    Indramayu, {{Carbon\Carbon::parse($penilaian_monev->updated_at)->isoFormat('D MMMM Y')}}
+                                    <br>
+                                    Pemantau,
+                                    <br>
+                                    <img src="{{URL::asset('assets/file/tanda_tangan/' . $penilaian_monev->penilaian_monev_tanda_tangan)}}" alt="" style="width: 300px;">
+                                    <br>
+                                    <b>{{$usulan->user_name}}</b>
+                                    <br>
+                                    NIDN {{$usulan->user_nidn}}
+                                </h6>
+                            </div>
                         </div>
                     </div>
 

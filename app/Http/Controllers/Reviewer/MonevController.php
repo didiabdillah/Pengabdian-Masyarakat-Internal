@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reviewer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
 
 use App\Models\Usulan_pengabdian;
 use App\Models\Anggota_pengabdian;
@@ -14,7 +15,6 @@ use App\Models\Mitra_sasaran;
 use App\Models\Usulan_luaran;
 use App\Models\Laporan_kemajuan;
 use App\Models\Penilaian_monev;
-use App\Models\Capaian_kegiatan;
 
 class MonevController extends Controller
 {
@@ -171,6 +171,7 @@ class MonevController extends Controller
         $request->validate(
             [
                 'catatan'  => 'max:60000',
+                'signature'  => 'required',
                 'justifikasi_1'  => 'max:255',
                 'justifikasi_2a'  => 'max:255',
                 'justifikasi_2b'  => 'max:255',
@@ -184,6 +185,8 @@ class MonevController extends Controller
                 'justifikasi_6'  => 'max:255',
             ]
         );
+
+        $tanda_tangan = $request->signature;
 
         $catatan = htmlspecialchars($request->catatan);
 
@@ -285,6 +288,20 @@ class MonevController extends Controller
             "6" => $justifikasi["6"],
         ]);
 
+        // Signature
+        $signatureFileName = uniqid() . '_' . date('Y-m-d-H-i-s') . '.png';
+        $signature = str_replace('data:image/png;base64,', '', $tanda_tangan);
+        $signature = str_replace(' ', '+', $signature);
+        $data = base64_decode($signature);
+        $file = public_path('assets/file/tanda_tangan/' . $signatureFileName);
+        file_put_contents($file, $data);
+        $old = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
+        if ($old) {
+            if ($old->penilaian_monev_tanda_tangan) {
+                File::delete(public_path('assets/file/tanda_tangan/' . $old->penilaian_monev_tanda_tangan));
+            }
+        }
+
         //Input Data
         $data = [
             'penilaian_monev_pengabdian_id' => $id,
@@ -292,8 +309,8 @@ class MonevController extends Controller
             'penilaian_monev_nilai' =>    "$json_nilai",
             'penilaian_monev_justifikasi' => "$json_justifikasi",
             'penilaian_monev_catatan' => $catatan,
-            // 'penilaian_monev_tanda_tangan' =>
-            'created_at' =>  date('Y-m-d H:i:s'),
+            'penilaian_monev_tanda_tangan' => $signatureFileName,
+            'created_at' => ($old) ? $old->created_at : date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
@@ -329,7 +346,7 @@ class MonevController extends Controller
 
                 return redirect()->route('reviewer_monev');
             }
-            $capaian = Capaian_kegiatan::where('capaian_kegiatan_monev_id', $penilaian_monev->penilaian_monev_id)->first();
+            // $capaian = Capaian_kegiatan::where('capaian_kegiatan_monev_id', $penilaian_monev->penilaian_monev_id)->first();
         } elseif ($penilaian_monev == NULL) {
             //Flash Message
             flash_alert(
@@ -593,10 +610,10 @@ class MonevController extends Controller
         ];
 
 
-        Capaian_kegiatan::updateOrInsert(
-            ['capaian_kegiatan_monev_id' => $monev_id->penilaian_monev_id],
-            $data_insert
-        );
+        // Capaian_kegiatan::updateOrInsert(
+        //     ['capaian_kegiatan_monev_id' => $monev_id->penilaian_monev_id],
+        //     $data_insert
+        // );
 
         //Flash Message
         flash_alert(
@@ -645,6 +662,7 @@ class MonevController extends Controller
         $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
             ->join('pkm_skema_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'pkm_skema_pengabdian.skema_id')
             ->join('pkm_bidang_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'pkm_bidang_pengabdian.bidang_id')
+            ->join('users', 'pkm_usulan_pengabdian.usulan_pengabdian_reviewer_monev_id', '=', 'users.user_id')
             ->first();
 
         $anggota = Anggota_pengabdian::where('anggota_pengabdian_pengabdian_id', $id)

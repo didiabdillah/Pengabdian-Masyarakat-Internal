@@ -74,7 +74,7 @@
                             </table>
                         </div>
 
-                        <form action="{{route('reviewer_monev_nilai_update', $id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('reviewer_monev_nilai_update', $id)}}" method="POST" enctype="multipart/form-data" id="form_monev">
                             @csrf
                             @method('patch')
 
@@ -365,14 +365,21 @@
                                 </tfoot>
                             </table>
 
-                            <!-- <div class="form-group">
-                                <label>Tanda Tangan</label>
-                                <div id="canvasDiv"></div>
-                            </div> -->
+                            <div class="form-group">
+                                <label>Tanda Tangan (Wajib)</label>
+                                <div id="canvasDiv" style="border-style: dashed;"></div>
+                                <input type="hidden" id="signature" name="signature" class="@error('signature') is-invalid @enderror">
+                                @error('signature')
+                                <div class=" invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                                <button type="button" class="btn btn-danger mt-2" id="reset-btn">Ulangi Tanda Tangan</button>
+                            </div>
 
                             <div class="form-group">
-                                <label for="catatan">Catatan Selama Peninjauan</label>
-                                <textarea class="form-control @error('catatan') is-invalid @enderror" id="catatan" name="catatan" placeholder="Catatan...">{{old('catatan')}}</textarea>
+                                <label for="catatan">Catatan Selama Peninjauan (Opsional)</label>
+                                <textarea class="form-control @error('catatan') is-invalid @enderror" id="catatan" name="catatan" placeholder="Catatan..." rows="5">{{old('catatan')}}</textarea>
                                 @error('catatan')
                                 <div class=" invalid-feedback">
                                     {{$message}}
@@ -382,7 +389,7 @@
 
                             <div class="card-footer">
                                 <a href="{{route('reviewer_monev_detail', $id)}}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> {{__('id.back')}}</a>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> {{__('id.submit')}}</button>
+                                <button type="submit" class="btn btn-primary btn-submit"><i class="fas fa-check"></i> {{__('id.submit')}}</button>
                             </div>
                         </form>
                     </div>
@@ -450,13 +457,14 @@
     });
 </script>
 
-{{--<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script>
     $(document).ready(() => {
         var canvasDiv = document.getElementById('canvasDiv');
         var canvas = document.createElement('canvas');
         canvas.setAttribute('id', 'canvas');
         canvasDiv.appendChild(canvas);
-        $("#canvas").attr('height', $("#canvasDiv").outerHeight());
+        $("#canvas").attr('height', $("#canvasDiv").outerHeight() + 500);
         $("#canvas").attr('width', $("#canvasDiv").width());
         if (typeof G_vmlCanvasManager != 'undefined') {
             canvas = G_vmlCanvasManager.initElement(canvas);
@@ -509,12 +517,13 @@
             clickDrag = [];
         });
 
-        $(document).on('click', '#btn-save', function() {
+        $(document).on('click', '.btn-submit', function(e) {
+            e.preventDefault();
             var mycanvas = document.getElementById('canvas');
             var img = mycanvas.toDataURL("image/png");
             anchor = $("#signature");
             anchor.val(img);
-            $("#signatureform").submit();
+            $("#form_monev").submit();
         });
 
         var drawing = false;
@@ -589,5 +598,5 @@
             }
         }
     })
-</script>--}}
+</script>
 @endpush

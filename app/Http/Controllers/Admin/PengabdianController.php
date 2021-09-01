@@ -15,7 +15,6 @@ use App\Models\Dokumen_rab;
 use App\Models\Dokumen_usulan;
 use App\Models\Mitra_sasaran;
 use App\Models\Penilaian_monev;
-use App\Models\Capaian_kegiatan;
 
 class PengabdianController extends Controller
 {
@@ -204,13 +203,13 @@ class PengabdianController extends Controller
         $usulan = Usulan_pengabdian::where('usulan_pengabdian_id', $id)
             ->join('pkm_skema_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_skema_id', '=', 'pkm_skema_pengabdian.skema_id')
             ->join('pkm_bidang_pengabdian', 'pkm_usulan_pengabdian.usulan_pengabdian_bidang_id', '=', 'pkm_bidang_pengabdian.bidang_id')
+            ->join('users', 'pkm_usulan_pengabdian.usulan_pengabdian_reviewer_monev_id', '=', 'users.user_id')
             ->first();
-        $nilai = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
+        $penilaian_monev = Penilaian_monev::where('penilaian_monev_pengabdian_id', $id)->first();
 
-        $capaian = NULL;
-        if ($nilai) {
-            $capaian = Capaian_kegiatan::where('capaian_kegiatan_monev_id', $nilai->penilaian_monev_id)->first();
-        }
+        $skor = json_decode($penilaian_monev->penilaian_monev_skor, true);
+        $nilai = json_decode($penilaian_monev->penilaian_monev_nilai, true);
+        $justifikasi = json_decode($penilaian_monev->penilaian_monev_justifikasi, true);
 
         $back_url = NULL;
         if ($back_param == 'usulan') {
@@ -237,8 +236,10 @@ class PengabdianController extends Controller
             // 'anggota' => $anggota,
             'usulan' => $usulan,
             // 'ketua' => $ketua,
+            'penilaian_monev' => $penilaian_monev,
+            'skor' => $skor,
+            'justifikasi' => $justifikasi,
             'nilai' => $nilai,
-            'capaian' => $capaian,
         ];
 
         return view('admin.pengabdian.detail', $view_data);
