@@ -101,16 +101,16 @@
                                         <td>
                                             <select class="form-control select2-skor-1 @error('skor_1') is-invalid @enderror" style="width: 100%;" name="skor_1" id="skor_1">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["1"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["1"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["1"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["1"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["1"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["1"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_1')=="1" ){{"selected"}}@elseif($skor)@if($skor["1"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_1')=="2" ){{"selected"}}@elseif($skor)@if($skor["1"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_1')=="3" ){{"selected"}}@elseif($skor)@if($skor["1"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_1')=="4" ){{"selected"}}@elseif($skor)@if($skor["1"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_1')=="5" ){{"selected"}}@elseif($skor)@if($skor["1"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_1')=="6" ){{"selected"}}@elseif($skor)@if($skor["1"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_1" type="text" class="form-control @error('justifikasi_1') is-invalid @enderror" id="justifikasi_1" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['1']}}@endif">
+                                            <input name="justifikasi_1" type="text" class="form-control @error('justifikasi_1') is-invalid @enderror" id="justifikasi_1" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_1')){{old('justifikasi_1')}}@elseif($justifikasi){{$justifikasi['1']}}@endif">
                                         </td>
                                     </tr>
 
@@ -127,16 +127,16 @@
                                         <td>
                                             <select class="form-control select2-skor-2a @error('skor_2a') is-invalid @enderror" style="width: 100%;" name="skor_2a" id="skor_2a">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["2a"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["2a"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["2a"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["2a"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["2a"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["2a"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_2a')=="1" ){{"selected"}}@elseif($skor) @if($skor["2a"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_2a')=="2" ){{"selected"}}@elseif($skor) @if($skor["2a"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_2a')=="3" ){{"selected"}}@elseif($skor) @if($skor["2a"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_2a')=="4" ){{"selected"}}@elseif($skor) @if($skor["2a"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_2a')=="5" ){{"selected"}}@elseif($skor) @if($skor["2a"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_2a')=="6" ){{"selected"}}@elseif($skor) @if($skor["2a"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_2a" type="text" class="form-control @error('justifikasi_2a') is-invalid @enderror" id="justifikasi_2a" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2a']}}@endif">
+                                            <input name="justifikasi_2a" type="text" class="form-control @error('justifikasi_2a') is-invalid @enderror" id="justifikasi_2a" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_2a')){{old('justifikasi_2a')}}@elseif($justifikasi){{$justifikasi['2a']}}@endif">
                                         </td>
                                     </tr>
 
@@ -148,16 +148,16 @@
                                         <td>
                                             <select class="form-control select2-skor-2b @error('skor_2b') is-invalid @enderror" style="width: 100%;" name="skor_2b" id="skor_2b">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["2b"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["2b"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["2b"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["2b"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["2b"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["2b"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_2b')=="1" ){{"selected"}}@elseif($skor) @if($skor["2b"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_2b')=="2" ){{"selected"}}@elseif($skor) @if($skor["2b"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_2b')=="3" ){{"selected"}}@elseif($skor) @if($skor["2b"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_2b')=="4" ){{"selected"}}@elseif($skor) @if($skor["2b"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_2b')=="5" ){{"selected"}}@elseif($skor) @if($skor["2b"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_2b')=="6" ){{"selected"}}@elseif($skor) @if($skor["2b"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_2b" type="text" class="form-control @error('justifikasi_2b') is-invalid @enderror" id="justifikasi_2b" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2b']}}@endif">
+                                            <input name="justifikasi_2b" type="text" class="form-control @error('justifikasi_2b') is-invalid @enderror" id="justifikasi_2b" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_2b')){{old('justifikasi_2b')}}@elseif($justifikasi){{$justifikasi['2b']}}@endif">
                                         </td>
                                     </tr>
 
@@ -169,16 +169,16 @@
                                         <td>
                                             <select class="form-control select2-skor-2c @error('skor_2c') is-invalid @enderror" style="width: 100%;" name="skor_2c" id="skor_2c">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["2c"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["2c"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["2c"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["2c"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["2c"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["2c"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_2c')=="1" ){{"selected"}}@elseif($skor) @if($skor["2c"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_2c')=="2" ){{"selected"}}@elseif($skor) @if($skor["2c"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_2c')=="3" ){{"selected"}}@elseif($skor) @if($skor["2c"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_2c')=="4" ){{"selected"}}@elseif($skor) @if($skor["2c"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_2c')=="5" ){{"selected"}}@elseif($skor) @if($skor["2c"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_2c')=="6" ){{"selected"}}@elseif($skor) @if($skor["2c"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_2c" type="text" class="form-control @error('justifikasi_2c') is-invalid @enderror" id="justifikasi_2c" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2c']}}@endif">
+                                            <input name="justifikasi_2c" type="text" class="form-control @error('justifikasi_2c') is-invalid @enderror" id="justifikasi_2c" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_2c')){{old('justifikasi_2c')}}@elseif($justifikasi){{$justifikasi['2c']}}@endif">
                                         </td>
                                     </tr>
 
@@ -190,16 +190,16 @@
                                         <td>
                                             <select class="form-control select2-skor-2d @error('skor_2d') is-invalid @enderror" style="width: 100%;" name="skor_2d" id="skor_2d">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["2d"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["2d"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["2d"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["2d"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["2d"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["2d"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_2d')=="1" ){{"selected"}}@elseif($skor) @if($skor["2d"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_2d')=="2" ){{"selected"}}@elseif($skor) @if($skor["2d"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_2d')=="3" ){{"selected"}}@elseif($skor) @if($skor["2d"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_2d')=="4" ){{"selected"}}@elseif($skor) @if($skor["2d"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_2d')=="5" ){{"selected"}}@elseif($skor) @if($skor["2d"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_2d')=="6" ){{"selected"}}@elseif($skor) @if($skor["2d"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_2d" type="text" class="form-control @error('justifikasi_2d') is-invalid @enderror" id="justifikasi_2d" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2d']}}@endif">
+                                            <input name="justifikasi_2d" type="text" class="form-control @error('justifikasi_2d') is-invalid @enderror" id="justifikasi_2d" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_2d')){{old('justifikasi_2d')}}@elseif($justifikasi){{$justifikasi['2d']}}@endif">
                                         </td>
                                     </tr>
 
@@ -211,16 +211,16 @@
                                         <td>
                                             <select class="form-control select2-skor-2e @error('skor_2e') is-invalid @enderror" style="width: 100%;" name="skor_2e" id="skor_2e">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["2e"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["2e"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["2e"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["2e"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["2e"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["2e"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_2e')=="1" ){{"selected"}}@elseif($skor) @if($skor["2e"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_2e')=="2" ){{"selected"}}@elseif($skor) @if($skor["2e"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_2e')=="3" ){{"selected"}}@elseif($skor) @if($skor["2e"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_2e')=="4" ){{"selected"}}@elseif($skor) @if($skor["2e"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_2e')=="5" ){{"selected"}}@elseif($skor) @if($skor["2e"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_2e')=="6" ){{"selected"}}@elseif($skor) @if($skor["2e"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_2e" type="text" class="form-control @error('justifikasi_2e') is-invalid @enderror" id="justifikasi_2e" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2e']}}@endif">
+                                            <input name="justifikasi_2e" type="text" class="form-control @error('justifikasi_2e') is-invalid @enderror" id="justifikasi_2e" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_2e')){{old('justifikasi_2e')}}@elseif($justifikasi){{$justifikasi['2e']}}@endif">
                                         </td>
                                     </tr>
 
@@ -232,16 +232,16 @@
                                         <td>
                                             <select class="form-control select2-skor-2f @error('skor_2f') is-invalid @enderror" style="width: 100%;" name="skor_2f" id="skor_2f">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["2f"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["2f"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["2f"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["2f"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["2f"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["2f"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_2f')=="1" ){{"selected"}}@elseif($skor) @if($skor["2f"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_2f')=="2" ){{"selected"}}@elseif($skor) @if($skor["2f"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_2f')=="3" ){{"selected"}}@elseif($skor) @if($skor["2f"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_2f')=="4" ){{"selected"}}@elseif($skor) @if($skor["2f"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_2f')=="5" ){{"selected"}}@elseif($skor) @if($skor["2f"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_2f')=="6" ){{"selected"}}@elseif($skor) @if($skor["2f"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_2f" type="text" class="form-control @error('justifikasi_2f') is-invalid @enderror" id="justifikasi_2f" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['2f']}}@endif">
+                                            <input name="justifikasi_2f" type="text" class="form-control @error('justifikasi_2f') is-invalid @enderror" id="justifikasi_2f" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_2f')){{old('justifikasi_2f')}}@elseif($justifikasi){{$justifikasi['2f']}}@endif">
                                         </td>
                                     </tr>
 
@@ -261,16 +261,16 @@
                                         <td>
                                             <select class="form-control select2-skor-3 @error('skor_3') is-invalid @enderror" style="width: 100%;" name="skor_3" id="skor_3">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["3"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["3"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["3"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["3"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["3"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["3"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_3')=="1" ){{"selected"}}@elseif($skor) @if($skor["3"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_3')=="2" ){{"selected"}}@elseif($skor) @if($skor["3"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_3')=="3" ){{"selected"}}@elseif($skor) @if($skor["3"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_3')=="4" ){{"selected"}}@elseif($skor) @if($skor["3"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_3')=="5" ){{"selected"}}@elseif($skor) @if($skor["3"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_3')=="6" ){{"selected"}}@elseif($skor) @if($skor["3"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_3" type="text" class="form-control @error('justifikasi_3') is-invalid @enderror" id="justifikasi_3" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['3']}}@endif">
+                                            <input name="justifikasi_3" type="text" class="form-control @error('justifikasi_3') is-invalid @enderror" id="justifikasi_3" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_3')){{old('justifikasi_3')}}@elseif($justifikasi){{$justifikasi['3']}}@endif">
                                         </td>
                                     </tr>
 
@@ -290,16 +290,16 @@
                                         <td>
                                             <select class="form-control select2-skor-4 @error('skor_4') is-invalid @enderror" style="width: 100%;" name="skor_4" id="skor_4">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["4"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["4"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["4"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["4"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["4"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["4"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_4')=="1" ){{"selected"}}@elseif($skor) @if($skor["4"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_4')=="2" ){{"selected"}}@elseif($skor) @if($skor["4"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_4')=="3" ){{"selected"}}@elseif($skor) @if($skor["4"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_4')=="4" ){{"selected"}}@elseif($skor) @if($skor["4"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_4')=="5" ){{"selected"}}@elseif($skor) @if($skor["4"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_4')=="6" ){{"selected"}}@elseif($skor) @if($skor["4"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_4" type="text" class="form-control @error('justifikasi_4') is-invalid @enderror" id="justifikasi_4" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['4']}}@endif">
+                                            <input name="justifikasi_4" type="text" class="form-control @error('justifikasi_4') is-invalid @enderror" id="justifikasi_4" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_4')){{old('justifikasi_4')}}@elseif($justifikasi){{$justifikasi['4']}}@endif">
                                         </td>
                                     </tr>
 
@@ -317,16 +317,16 @@
                                         <td>
                                             <select class="form-control select2-skor-5 @error('skor_5') is-invalid @enderror" style="width: 100%;" name="skor_5" id="skor_5">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["5"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["5"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["5"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["5"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["5"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["5"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_5')=="1" ){{"selected"}}@elseif($skor) @if($skor["5"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_5')=="2" ){{"selected"}}@elseif($skor) @if($skor["5"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_5')=="3" ){{"selected"}}@elseif($skor) @if($skor["5"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_5')=="4" ){{"selected"}}@elseif($skor) @if($skor["5"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_5')=="5" ){{"selected"}}@elseif($skor) @if($skor["5"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_5')=="6" ){{"selected"}}@elseif($skor) @if($skor["5"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_5" type="text" class="form-control @error('justifikasi_5') is-invalid @enderror" id="justifikasi_5" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['5']}}@endif">
+                                            <input name="justifikasi_5" type="text" class="form-control @error('justifikasi_5') is-invalid @enderror" id="justifikasi_5" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_5')){{old('justifikasi_5')}}@elseif($justifikasi){{$justifikasi['5']}}@endif">
                                         </td>
                                     </tr>
 
@@ -342,16 +342,16 @@
                                         <td>
                                             <select class="form-control select2-skor-6 @error('skor_6') is-invalid @enderror" style="width: 100%;" name="skor_6" id="skor_6">
                                                 <option value="">-Skor-</option>
-                                                <option value="1" @if($skor) @if($skor["6"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
-                                                <option value="2" @if($skor) @if($skor["6"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
-                                                <option value="3" @if($skor) @if($skor["6"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
-                                                <option value="4" @if($skor) @if($skor["6"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
-                                                <option value="5" @if($skor) @if($skor["6"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
-                                                <option value="6" @if($skor) @if($skor["6"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
+                                                <option value="1" @if(old('skor_6')=="1" ){{"selected"}}@elseif($skor) @if($skor["6"]=="1" ){{"selected"}}@endif @endif>(1) Sangat Buruk Sekali</option>
+                                                <option value="2" @if(old('skor_6')=="2" ){{"selected"}}@elseif($skor) @if($skor["6"]=="2" ){{"selected"}}@endif @endif>(2) Buruk Sekali</option>
+                                                <option value="3" @if(old('skor_6')=="3" ){{"selected"}}@elseif($skor) @if($skor["6"]=="3" ){{"selected"}}@endif @endif>(3) Buruk</option>
+                                                <option value="4" @if(old('skor_6')=="4" ){{"selected"}}@elseif($skor) @if($skor["6"]=="4" ){{"selected"}}@endif @endif>(4) Baik</option>
+                                                <option value="5" @if(old('skor_6')=="5" ){{"selected"}}@elseif($skor) @if($skor["6"]=="5" ){{"selected"}}@endif @endif>(5) Baik Sekali</option>
+                                                <option value="6" @if(old('skor_6')=="6" ){{"selected"}}@elseif($skor) @if($skor["6"]=="6" ){{"selected"}}@endif @endif>(6) Istimewa</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input name="justifikasi_6" type="text" class="form-control @error('justifikasi_6') is-invalid @enderror" id="justifikasi_6" placeholder="Justifikasi Penilaian" value="@if($justifikasi){{$justifikasi['6']}}@endif">
+                                            <input name="justifikasi_6" type="text" class="form-control @error('justifikasi_6') is-invalid @enderror" id="justifikasi_6" placeholder="Justifikasi Penilaian" value="@if(old('justifikasi_6')){{old('justifikasi_6')}}@elseif($justifikasi){{$justifikasi['6']}}@endif">
                                         </td>
                                     </tr>
 
@@ -366,6 +366,16 @@
                             </table>
 
                             <div class="form-group">
+                                <label for="catatan">Catatan Selama Peninjauan (Opsional)</label>
+                                <textarea class="form-control @error('catatan') is-invalid @enderror" id="catatan" name="catatan" placeholder="Catatan..." rows="5">@if(old('catatan')){{old('catatan')}}@elseif($penilaian_monev){{$penilaian_monev->penilaian_monev_catatan}}@endif</textarea>
+                                @error('catatan')
+                                <div class=" invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label>Tanda Tangan (Wajib)</label>
                                 <div id="canvasDiv" style="border-style: dashed;"></div>
                                 <input type="hidden" id="signature" name="signature" class="@error('signature') is-invalid @enderror">
@@ -378,9 +388,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="catatan">Catatan Selama Peninjauan (Opsional)</label>
-                                <textarea class="form-control @error('catatan') is-invalid @enderror" id="catatan" name="catatan" placeholder="Catatan..." rows="5">{{old('catatan')}}</textarea>
-                                @error('catatan')
+                                <label for="kota_penilaian">Ditandatangani Di Kota (Nama Kota Titimangsa)</label>
+                                <input class="form-control @error('kota_penilaian') is-invalid @enderror" id="kota_penilaian" name="kota_penilaian" placeholder="Tuliskan Nama Kota..." value="@if(old('kota_penilaian')){{old('kota_penilaian')}}@elseif($penilaian_monev){{$penilaian_monev->penilaian_monev_kota_penilaian}}@endif">
+                                @error('kota_penilaian')
                                 <div class=" invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -457,7 +467,7 @@
     });
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script src="{{URL::asset('assets/js/html2canvas/html2canvas.min.js')}}"></script>
 <script>
     $(document).ready(() => {
         var canvasDiv = document.getElementById('canvasDiv');

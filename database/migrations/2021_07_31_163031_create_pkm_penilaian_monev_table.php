@@ -17,6 +17,10 @@ class CreatePkmPenilaianMonevTable extends Migration
             $table->bigIncrements('penilaian_monev_id');
             $table->string('penilaian_monev_pengabdian_id', 64);
 
+            $table->string('penilaian_monev_nama_reviewer');
+            $table->string('penilaian_monev_nidn_reviewer');
+            $table->string('penilaian_monev_kota_penilaian');
+
             $table->boolean('penilaian_monev_lock')->default(false);
 
             // $table->integer('penilaian_monev_urutan')->nullable();

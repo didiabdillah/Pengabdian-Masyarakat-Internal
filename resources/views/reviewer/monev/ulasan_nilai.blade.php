@@ -346,15 +346,15 @@
                             <div class="col align-self-center"></div>
                             <div class="col align-self-end">
                                 <h6>
-                                    Indramayu, {{Carbon\Carbon::parse($penilaian_monev->updated_at)->isoFormat('D MMMM Y')}}
+                                    {{$penilaian_monev->penilaian_monev_kota_penilaian}}, {{Carbon\Carbon::parse($penilaian_monev->updated_at)->isoFormat('D MMMM Y')}}
                                     <br>
                                     Pemantau,
                                     <br>
                                     <img src="{{URL::asset('assets/file/tanda_tangan/' . $penilaian_monev->penilaian_monev_tanda_tangan)}}" alt="" style="width: 300px;">
                                     <br>
-                                    <b>{{$usulan->user_name}}</b>
+                                    <b>{{$penilaian_monev->penilaian_monev_nama_reviewer}}</b>
                                     <br>
-                                    NIDN {{$usulan->user_nidn}}
+                                    NIDN {{$penilaian_monev->penilaian_monev_nidn_reviewer}}
                                 </h6>
                             </div>
                         </div>

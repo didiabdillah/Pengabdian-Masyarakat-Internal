@@ -15,6 +15,7 @@ use App\Models\Mitra_sasaran;
 use App\Models\Usulan_luaran;
 use App\Models\Laporan_kemajuan;
 use App\Models\Penilaian_monev;
+use App\Models\User;
 
 class MonevController extends Controller
 {
@@ -172,6 +173,7 @@ class MonevController extends Controller
             [
                 'catatan'  => 'max:60000',
                 'signature'  => 'required',
+                'kota_penilaian'  => 'required|max:255',
                 'justifikasi_1'  => 'max:255',
                 'justifikasi_2a'  => 'max:255',
                 'justifikasi_2b'  => 'max:255',
@@ -187,6 +189,7 @@ class MonevController extends Controller
         );
 
         $tanda_tangan = $request->signature;
+
 
         $catatan = htmlspecialchars($request->catatan);
 
@@ -302,9 +305,18 @@ class MonevController extends Controller
             }
         }
 
+        // Data Pelengkap 
+        $user = User::find(Session::get('user_id'));
+        $kota_penilaian = htmlspecialchars($request->kota_penilaian);
+        $nama_reviewer = $user->user_name;
+        $nidn_reviewer = $user->user_nidn;
+
         //Input Data
         $data = [
             'penilaian_monev_pengabdian_id' => $id,
+            'penilaian_monev_nama_reviewer' => $nama_reviewer,
+            'penilaian_monev_nidn_reviewer' => $nidn_reviewer,
+            'penilaian_monev_kota_penilaian' => $kota_penilaian,
             'penilaian_monev_skor' => "$json_skor",
             'penilaian_monev_nilai' =>    "$json_nilai",
             'penilaian_monev_justifikasi' => "$json_justifikasi",

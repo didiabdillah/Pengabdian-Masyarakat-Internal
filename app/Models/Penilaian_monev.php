@@ -12,6 +12,9 @@ class Penilaian_monev extends Model
     protected $fillable = [
         'penilaian_monev_pengabdian_id',
         'penilaian_monev_lock',
+        'penilaian_monev_nama_reviewer',
+        'penilaian_monev_nidn_reviewer',
+        'penilaian_monev_kota_penilaian',
         'penilaian_monev_catatan',
         'penilaian_monev_skor',
         'penilaian_monev_nilai',

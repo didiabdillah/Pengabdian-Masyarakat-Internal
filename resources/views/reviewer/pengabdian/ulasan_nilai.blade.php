@@ -58,6 +58,10 @@
                             <table class="table table-borderless table-sm">
                                 <tbody>
                                     <tr style="height: 5px;">
+                                        <th scope="row" style="width: 250px;">Judul</th>
+                                        <td>: {{$usulan->usulan_pengabdian_judul}}</td>
+                                    </tr>
+                                    <tr style="height: 5px;">
                                         <th scope="row" style="width: 250px;">Nama Ketua Pengusul</th>
                                         <td>: {{$ketua->user_name}}</td>
                                     </tr>
