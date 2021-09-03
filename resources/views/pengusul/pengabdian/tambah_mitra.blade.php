@@ -80,29 +80,45 @@
 
                                     <div class="form-group">
                                         <label for="tipe_mitra">Tipe Mitra</label>
-                                        <select class="form-control select2 @error('tipe_mitra') is-invalid @enderror" style="width: 100%;" name="tipe_mitra">
+                                        <select class="form-control select2 @error('tipe_mitra') is-invalid @enderror" style="width: 100%;" name="tipe_mitra" id="tipe_mitra">
                                             <option value="">--Tipe Mitra--</option>
-                                            <option value="kelompok_masyarakat" @if(old('tipe_mitra')=="kelompok_masyarakat" ){{'selected'}}@endif>Kelompok Masyarakat</option>
-                                            <option value="umkm" @if(old('tipe_mitra')=="umkm" ){{'selected'}}@endif>UMKM</option>
+                                            <option value="Kelompok Masyarakat" @if(old('tipe_mitra')=="Kelompok Masyarakat" ){{'selected'}}@endif>Kelompok Masyarakat</option>
+                                            <option value="UMKM" @if(old('tipe_mitra')=="UMKM" ){{'selected'}}@endif>UMKM</option>
+                                            <option value="Lain-Lain" @if(old('tipe_mitra')=="Lain-Lain" ){{'selected'}}@endif>Lain-Lain</option>
                                         </select>
                                         @error('tipe_mitra')
                                         <div class="invalid-feedback">
                                             Pilih Tipe Mitra
                                         </div>
                                         @enderror
+
+                                        <input type="text" class="mt-3 form-control @error('tipe_mitra_lain') is-invalid @enderror" id="tipe_mitra_lain" name="tipe_mitra_lain" placeholder="Tuliskan Tipe Mitra" value="{{old('tipe_mitra_lain')}}" hidden>
+                                        @error('tipe_mitra_lain')
+                                        <div class="invalid-feedback">
+                                            {{$message}}
+                                        </div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label for="jenis_mitra">Jenis Mitra</label>
-                                        <select class="form-control select2 @error('jenis_mitra') is-invalid @enderror" style="width: 100%;" name="jenis_mitra">
+                                        <select class="form-control select2 @error('jenis_mitra') is-invalid @enderror" style="width: 100%;" name="jenis_mitra" id="jenis_mitra">
                                             <option value="">--Jenis Mitra--</option>
                                             <option value="Produktif Ekonomi/Wirausahawan" @if(old('jenis_mitra')=="Produktif Ekonomi/Wirausahawan" ){{'selected'}}@endif>Produktif Ekonomi/Wirausahawan</option>
                                             <option value="Non Produktif Ekonomi" @if(old('jenis_mitra')=="Non Produktif Ekonomi" ){{'selected'}}@endif>Non Produktif Ekonomi</option>
                                             <option value="Calon Wirausahawan" @if(old('jenis_mitra')=="Calon Wirausahawan" ){{'selected'}}@endif>Calon Wirausahawan</option>
+                                            <option value="Lain-Lain" @if(old('jenis_mitra')=="Lain-Lain" ){{'selected'}}@endif>Lain-Lain</option>
                                         </select>
                                         @error('jenis_mitra')
                                         <div class="invalid-feedback">
                                             Pilih Jenis Mitra
+                                        </div>
+                                        @enderror
+
+                                        <input type="text" class="mt-3 form-control @error('jenis_mitra_lain') is-invalid @enderror" id="jenis_mitra_lain" name="jenis_mitra_lain" placeholder="Tuliskan Jenis Mitra" value="{{old('jenis_mitra_lain')}}" hidden>
+                                        @error('jenis_mitra_lain')
+                                        <div class="invalid-feedback">
+                                            {{$message}}
                                         </div>
                                         @enderror
                                     </div>
@@ -256,6 +272,37 @@
 @endsection
 
 @push('plugin')
+@if(old('tipe_mitra')=="Lain-Lain")
+<script>
+    $('#tipe_mitra_lain').prop('hidden', false);
+</script>
+@endif
+@if(old('jenis_mitra')=="Lain-Lain")
+<script>
+    $('#jenis_mitra_lain').prop('hidden', false);
+</script>
+@endif
+
+<script>
+    $("#tipe_mitra").change(function() {
+        var tipe_mitra = $(this).children("option:selected").val();
+        if (tipe_mitra == 'Lain-Lain') {
+            $('#tipe_mitra_lain').prop('hidden', false);
+        } else {
+            $('#tipe_mitra_lain').prop('hidden', true);
+        }
+    });
+
+    $("#jenis_mitra").change(function() {
+        var jenis_mitra = $(this).children("option:selected").val();
+        if (jenis_mitra == 'Lain-Lain') {
+            $('#jenis_mitra_lain').prop('hidden', false);
+        } else {
+            $('#jenis_mitra_lain').prop('hidden', true);
+        }
+    });
+</script>
+
 <!-- Select2 -->
 <script src="{{URL::asset('assets/js/select2/js/select2.full.min.js')}}"></script>
 

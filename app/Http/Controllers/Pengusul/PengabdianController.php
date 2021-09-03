@@ -582,24 +582,78 @@ class PengabdianController extends Controller
     public function store_tambah_mitra(Request $request, $id)
     {
         // Input Validation
-        $request->validate([
-            'tipe_mitra'  => 'required',
-            'jenis_mitra'  => 'required',
-            'nama_pimpinan'  => 'required|max:255',
-            'jabatan_pimpinan'  => 'required|max:255',
-            'nama_mitra'  => 'required|max:255',
-            'alamat_mitra'  => 'required|max:255',
-            'provinsi'  => 'required',
-            'kabupaten'  => 'required',
-            'kecamatan'  => 'required',
-            'desa'  => 'required',
-            'jarak_mitra'  => 'required|max:11',
-            'bidang_masalah'  => 'required|max:60000',
-            'kontribusi_pendanaan'  => 'required|max:20',
-        ]);
+        if ($request->tipe_mitra == "Lain-Lain" && $request->jenis_mitra == "Lain-Lain") {
+            $request->validate([
+                'tipe_mitra'  => 'required',
+                'tipe_mitra_lain'  => 'required|max:255',
+                'jenis_mitra'  => 'required',
+                'jenis_mitra_lain'  => 'required|max:255',
+                'nama_pimpinan'  => 'required|max:255',
+                'jabatan_pimpinan'  => 'required|max:255',
+                'nama_mitra'  => 'required|max:255',
+                'alamat_mitra'  => 'required|max:255',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'desa'  => 'required',
+                'jarak_mitra'  => 'required|max:11',
+                'bidang_masalah'  => 'required|max:60000',
+                'kontribusi_pendanaan'  => 'required|max:20',
+            ]);
+        } elseif ($request->tipe_mitra == "Lain-Lain") {
+            $request->validate([
+                'tipe_mitra'  => 'required',
+                'tipe_mitra_lain'  => 'required|max:255',
+                'jenis_mitra'  => 'required',
+                'nama_pimpinan'  => 'required|max:255',
+                'jabatan_pimpinan'  => 'required|max:255',
+                'nama_mitra'  => 'required|max:255',
+                'alamat_mitra'  => 'required|max:255',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'desa'  => 'required',
+                'jarak_mitra'  => 'required|max:11',
+                'bidang_masalah'  => 'required|max:60000',
+                'kontribusi_pendanaan'  => 'required|max:20',
+            ]);
+        } elseif ($request->jenis_mitra == "Lain-Lain") {
+            $request->validate([
+                'tipe_mitra'  => 'required',
+                'jenis_mitra'  => 'required',
+                'jenis_mitra_lain'  => 'required|max:255',
+                'nama_pimpinan'  => 'required|max:255',
+                'jabatan_pimpinan'  => 'required|max:255',
+                'nama_mitra'  => 'required|max:255',
+                'alamat_mitra'  => 'required|max:255',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'desa'  => 'required',
+                'jarak_mitra'  => 'required|max:11',
+                'bidang_masalah'  => 'required|max:60000',
+                'kontribusi_pendanaan'  => 'required|max:20',
+            ]);
+        } else {
+            $request->validate([
+                'tipe_mitra'  => 'required',
+                'jenis_mitra'  => 'required',
+                'nama_pimpinan'  => 'required|max:255',
+                'jabatan_pimpinan'  => 'required|max:255',
+                'nama_mitra'  => 'required|max:255',
+                'alamat_mitra'  => 'required|max:255',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'desa'  => 'required',
+                'jarak_mitra'  => 'required|max:11',
+                'bidang_masalah'  => 'required|max:60000',
+                'kontribusi_pendanaan'  => 'required|max:20',
+            ]);
+        }
 
-        $tipe_mitra = htmlspecialchars($request->tipe_mitra);
-        $jenis_mitra = htmlspecialchars($request->jenis_mitra);
+        $tipe_mitra = ($request->tipe_mitra == "Lain-Lain") ? htmlspecialchars($request->tipe_mitra_lain) : $request->tipe_mitra;
+        $jenis_mitra = ($request->jenis_mitra == "Lain-Lain") ? htmlspecialchars($request->jenis_mitra_lain) : $request->jenis_mitra;
         $nama_pimpinan = htmlspecialchars($request->nama_pimpinan);
         $jabatan_pimpinan = htmlspecialchars($request->jabatan_pimpinan);
         $nama_mitra = htmlspecialchars($request->nama_mitra);
@@ -771,24 +825,78 @@ class PengabdianController extends Controller
     public function update_mitra(Request $request, $id, $editid)
     {
         // Input Validation
-        $request->validate([
-            'tipe_mitra'  => 'required',
-            'jenis_mitra'  => 'required',
-            'nama_pimpinan'  => 'required|max:255',
-            'jabatan_pimpinan'  => 'required|max:255',
-            'nama_mitra'  => 'required|max:255',
-            'alamat_mitra'  => 'required|max:255',
-            'provinsi'  => 'required',
-            'kabupaten'  => 'required',
-            'kecamatan'  => 'required',
-            'desa'  => 'required',
-            'jarak_mitra'  => 'required|max:11',
-            'bidang_masalah'  => 'required|max:60000',
-            'kontribusi_pendanaan'  => 'required|max:20',
-        ]);
+        if ($request->tipe_mitra == "Lain-Lain" && $request->jenis_mitra == "Lain-Lain") {
+            $request->validate([
+                'tipe_mitra'  => 'required',
+                'tipe_mitra_lain'  => 'required|max:255',
+                'jenis_mitra'  => 'required',
+                'jenis_mitra_lain'  => 'required|max:255',
+                'nama_pimpinan'  => 'required|max:255',
+                'jabatan_pimpinan'  => 'required|max:255',
+                'nama_mitra'  => 'required|max:255',
+                'alamat_mitra'  => 'required|max:255',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'desa'  => 'required',
+                'jarak_mitra'  => 'required|max:11',
+                'bidang_masalah'  => 'required|max:60000',
+                'kontribusi_pendanaan'  => 'required|max:20',
+            ]);
+        } elseif ($request->tipe_mitra == "Lain-Lain") {
+            $request->validate([
+                'tipe_mitra'  => 'required',
+                'tipe_mitra_lain'  => 'required|max:255',
+                'jenis_mitra'  => 'required',
+                'nama_pimpinan'  => 'required|max:255',
+                'jabatan_pimpinan'  => 'required|max:255',
+                'nama_mitra'  => 'required|max:255',
+                'alamat_mitra'  => 'required|max:255',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'desa'  => 'required',
+                'jarak_mitra'  => 'required|max:11',
+                'bidang_masalah'  => 'required|max:60000',
+                'kontribusi_pendanaan'  => 'required|max:20',
+            ]);
+        } elseif ($request->jenis_mitra == "Lain-Lain") {
+            $request->validate([
+                'tipe_mitra'  => 'required',
+                'jenis_mitra'  => 'required',
+                'jenis_mitra_lain'  => 'required|max:255',
+                'nama_pimpinan'  => 'required|max:255',
+                'jabatan_pimpinan'  => 'required|max:255',
+                'nama_mitra'  => 'required|max:255',
+                'alamat_mitra'  => 'required|max:255',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'desa'  => 'required',
+                'jarak_mitra'  => 'required|max:11',
+                'bidang_masalah'  => 'required|max:60000',
+                'kontribusi_pendanaan'  => 'required|max:20',
+            ]);
+        } else {
+            $request->validate([
+                'tipe_mitra'  => 'required',
+                'jenis_mitra'  => 'required',
+                'nama_pimpinan'  => 'required|max:255',
+                'jabatan_pimpinan'  => 'required|max:255',
+                'nama_mitra'  => 'required|max:255',
+                'alamat_mitra'  => 'required|max:255',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'desa'  => 'required',
+                'jarak_mitra'  => 'required|max:11',
+                'bidang_masalah'  => 'required|max:60000',
+                'kontribusi_pendanaan'  => 'required|max:20',
+            ]);
+        }
 
-        $tipe_mitra = htmlspecialchars($request->tipe_mitra);
-        $jenis_mitra = htmlspecialchars($request->jenis_mitra);
+        $tipe_mitra = ($request->tipe_mitra == "Lain-Lain") ? htmlspecialchars($request->tipe_mitra_lain) : $request->tipe_mitra;
+        $jenis_mitra = ($request->jenis_mitra == "Lain-Lain") ? htmlspecialchars($request->jenis_mitra_lain) : $request->jenis_mitra;
         $nama_pimpinan = htmlspecialchars($request->nama_pimpinan);
         $jabatan_pimpinan = htmlspecialchars($request->jabatan_pimpinan);
         $nama_mitra = htmlspecialchars($request->nama_mitra);

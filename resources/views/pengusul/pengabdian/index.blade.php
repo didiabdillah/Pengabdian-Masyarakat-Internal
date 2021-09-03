@@ -98,7 +98,9 @@
                                         <h6>{{$usulan->usulan_pengabdian_tahun}}</h6>
                                     </td>
                                     <td>
-                                        @if($usulan->usulan_pengabdian_status == "dikirim")
+                                        @if($usulan->usulan_pengabdian_status == "pending")
+                                        <h5><span class="badge badge-warning">Pending</span></h5>
+                                        @elseif($usulan->usulan_pengabdian_status == "dikirim")
                                         <h5><span class="badge badge-primary">Dikirim</span></h5>
                                         @elseif($usulan->usulan_pengabdian_status == "dinilai")
                                         <h5><span class="badge badge-info">Dinilai</span></h5>
