@@ -15,8 +15,8 @@ class DataLuaranController extends Controller
     public function index()
     {
         $kategori = Kategori_luaran::orderBy('kategori_luaran_required', 'desc')->get();
-        $jenis = Jenis_luaran::join('kategori_luaran', 'pkm.jenis_luaran.jenis_luaran_kategori_id', '=', 'pkm.kategori_luaran.kategori_luaran_id')->orderBy('pkm_kategori_luaran.kategori_luaran_required', 'desc')->get();
-        $status = Status_luaran::join('kategori_luaran', 'pkm.status_luaran.status_luaran_kategori_id', '=', 'pkm.kategori_luaran.kategori_luaran_id')->orderBy('pkm_kategori_luaran.kategori_luaran_required', 'desc')->get();
+        $jenis = Jenis_luaran::join('pkm.kategori_luaran', 'pkm.jenis_luaran.jenis_luaran_kategori_id', '=', 'pkm.kategori_luaran.kategori_luaran_id')->orderBy('pkm_kategori_luaran.kategori_luaran_required', 'desc')->get();
+        $status = Status_luaran::join('pkm.kategori_luaran', 'pkm.status_luaran.status_luaran_kategori_id', '=', 'pkm.kategori_luaran.kategori_luaran_id')->orderBy('pkm_kategori_luaran.kategori_luaran_required', 'desc')->get();
 
         $view_data = [
             'kategori' => $kategori,
